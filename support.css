@@ -1,0 +1,116 @@
+/* ── Support the project: header mega-panel (Apple-style) ─────────────────────
+   Shared by index.html and about.html. Desktop/tablet: hover or click on the
+   header button expands a full-width panel under the header. Mobile (≤480):
+   the options live in the burger menu instead (see support.js). */
+
+.support-wrap { position: relative; display: flex; }
+.support-btn { display: flex; align-items: center; gap: 3px; background: none; border: none; padding: 0; cursor: pointer;
+               font-family: 'Inter', sans-serif; color: var(--text); }
+
+/* header must stay above the panel and the backdrop */
+header { position: relative; z-index: 901; background: var(--bg); }
+header.support-open { border-bottom-color: transparent; }   /* no line between header and the open panel */
+
+.support-backdrop { position: fixed; left: 0; right: 0; bottom: 0; top: 0; background: rgba(20,20,20,0.45);
+                    opacity: 0; pointer-events: none; transition: opacity .28s cubic-bezier(.4,0,.6,1); z-index: 899; }
+.support-backdrop.open { opacity: 1; pointer-events: auto; transition: opacity .4s cubic-bezier(.32,.08,.24,1); }
+
+.support-panel { position: fixed; left: 0; right: 0; top: 0; z-index: 900; background: var(--bg);
+                 border-bottom: 1px solid var(--border);   /* same line the header has; the header's own line hides while open */
+                 display: grid; grid-template-rows: 0fr;
+                 /* Apple-style: slow, soft landing on open; quicker, plainer close */
+                 transition: grid-template-rows .28s cubic-bezier(.4,0,.6,1);
+                 visibility: hidden; }
+.support-panel.open, .support-panel.closing { visibility: visible; }
+.support-panel.open { grid-template-rows: 1fr; transition: grid-template-rows .4s cubic-bezier(.32,.08,.24,1); }
+.support-inner { overflow: hidden; min-height: 0; }
+.support-grid { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(0, 3fr); gap: 80px;
+                padding: 40px var(--panel-pad, 20px) 20px; }
+/* wide screens: the copy grows with the viewport instead of shrinking into a corner */
+.support-intro { max-width: clamp(420px, 34vw, 640px); }
+.support-intro p { font-size: clamp(19px, 1.35vw, 26px); line-height: 1.4; letter-spacing: -.2px; color: var(--text); margin: 0; }
+
+.support-cards { display: grid; gap: 12px; container-type: inline-size;
+  max-width: clamp(1000px, 60vw, 1300px); width: 100%; justify-self: end;   /* wide screens: cards grow gently, sit under the nav */
+  /* three equal columns, except the pill (third, Crypto) is 20px wider; the 2 gaps are subtracted first */
+  --col: calc((100% - 24px - 20px) / 3);
+  grid-template-columns: var(--col) var(--col) calc(var(--col) + 20px); }
+.support-card { background: var(--ui-surface); border-radius: var(--r-md); padding: clamp(20px, 1.4vw, 28px); display: flex; flex-direction: column; gap: 8px; min-width: 0;
+                /* 16:9 of a column as a MINIMUM, so grid can still equalise heights and content is never squeezed */
+                min-height: calc((100cqw - 34px) / 3 * 9 / 16); }
+.support-card h4 { font-size: clamp(19px, 1.3vw, 24px); font-weight: 700; letter-spacing: -.3px; margin: 0; color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.support-card h4 small { font-size: 11px; font-weight: 600; letter-spacing: .4px; text-transform: uppercase; color: var(--text-dim); }
+.support-card p { font-size: clamp(13px, 0.9vw, 16px); line-height: 1.5; color: var(--text-muted); margin: 0 0 auto; }
+.support-card h4 + p { margin-top: 0; }   /* title → text = the 8px flex gap */
+.support-cta { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 32px; min-height: 32px; flex: none; box-sizing: border-box; padding: 0 14px; margin-top: 16px;
+               border-radius: var(--r-sm); background: var(--text); color: var(--bg); font-family: inherit; font-size: 14px; font-weight: 500; line-height: 1; letter-spacing: .01em; text-decoration: none;
+               border: none; cursor: pointer; transition: opacity var(--t-fast); align-self: flex-start; white-space: nowrap; }   /* the About page's button style one size down (user "make them smaller"): 32px, 14px sides, 6px radius, 14px/500 in the page's font */   /* flex: none + min-height: the card is a column flex container, and Safari shrinks a flex item below its height where Chrome does not -- without this the pill collapses to about 20px */
+.support-cta:hover { opacity: .85; }
+.support-addr { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.support-addr button { height: 32px; padding: 0 14px; border-radius: var(--r-sm); border: none; background: var(--ui-surface);
+                       color: var(--text); font-family: inherit; font-size: 14px; font-weight: 500; line-height: 1; letter-spacing: .01em; cursor: pointer; transition: background var(--t-fast), color var(--t-fast); }   /* same button, no stroke */
+.support-addr button:hover { background: var(--text); color: var(--bg); }
+
+/* Progressive rounding: first card 10px, centre card a full pill, last card 20px.
+   The pill's curve reaches ~25px into the corners at the title line, so it gets wider side padding. */
+.support-card[data-way="patreon"] { border-radius: 14px; }
+.support-card[data-way="crypto"]  { border-radius: 999px; padding-left: clamp(40px, 2.8vw, 56px); padding-right: clamp(40px, 2.8vw, 56px); margin-left: -3px; }   /* always a pill; 3px closer to Ko-fi */
+/* centre card: everything centred, tag sits under the title instead of beside it */
+.support-card[data-way="crypto"] { align-items: center; text-align: center; }
+.support-card[data-way="crypto"] h4 { justify-content: center; }
+.support-card[data-way="crypto"] .support-cta, .support-card[data-way="crypto"] .support-addr { align-self: center; justify-content: center; }
+.support-card[data-way="kofi"]    { border-radius: 14px; }
+
+/* Brand-coloured cards. All three backgrounds carry a WHITE logo mark in the brand file,
+   so every foreground on them is white (rule: the card's logo mark = the allowed foreground). */
+.support-card[data-way="patreon"] { background: #1e39c9; }   /* Blue */
+.support-card[data-way="kofi"]    { background: #673726; }   /* Warm Sepia */
+.support-card[data-way="crypto"]  { background: #4f5900; }   /* Dark Olive Green */
+.support-card[data-way] h4, .support-card[data-way] p { color: #ffffff; }
+.support-card[data-way] h4 small { color: #ffffff; }
+.support-card[data-way] p { color: #ffffff; }
+/* buttons: outlined at rest, filled white on hover */
+/* on the coloured cards the buttons are translucent white with white text; hover = solid white with black text (user); no stroke.
+   A copied address turns brand pink */
+.support-card[data-way] .support-cta { background: rgba(255, 255, 255, .16); color: #ffffff; transition: background var(--t-fast), color var(--t-fast); }
+.support-card[data-way] .support-cta:hover { background: #ffffff; color: #141414; opacity: 1; }
+.support-card[data-way] .support-addr button { background: rgba(255, 255, 255, .16); color: #ffffff; }
+.support-card[data-way] .support-addr button:hover { background: #ffffff; color: #141414; }
+.support-card[data-way] .support-addr button.copied { background: var(--brand); color: #141414; }
+
+/* wide desktop: cards keep their 1000px cap, the intro gets the rest (up to its 640px max) */
+@media (min-width: 1600px) {
+  .support-grid { grid-template-columns: minmax(220px, 1fr) clamp(1000px, 60vw, 1300px); }
+}
+/* narrow desktop: intro above the cards so three cards keep their width */
+@media (max-width: 1100px) {
+  .support-grid { grid-template-columns: 1fr; gap: 28px; }
+  .support-intro p { max-width: 60ch; }
+}
+@media (max-width: 860px) {
+  .support-grid { grid-template-columns: 1fr; gap: 22px; padding: 24px var(--panel-pad, 20px) 28px; }
+  .support-intro p { max-width: none; }
+  .support-cards { grid-template-columns: 1fr 1fr; }
+  .support-card:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  .support-panel, .support-backdrop { display: none; }   /* tablet + mobile use the burger's Donate group */
+}
+
+/* "Copied" feedback: label swap + white fill, no motion */
+.support-addr button { transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast); }
+
+/* burger-menu group (mobile) */
+.burger-sep { border: none; border-top: 1px solid var(--border); margin: 4px -8px; height: 0; }
+.burger-group { display: flex; flex-direction: column; gap: 2px; }
+.burger-label { font-size: 12px; font-weight: 500; color: var(--text-dim); padding: 10px 12px 2px; }
+.burger-group .burger-link { background: none; border: none; width: 100%; text-align: left; font-family: 'Inter', sans-serif; cursor: pointer; }
+.burger-crypto { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: default; }
+.burger-crypto:hover { background: none; }
+.burger-crypto-word { padding: 14px 6px; margin: -14px -6px; border: none; background: none; color: var(--text); font: 600 14px 'Inter', sans-serif; cursor: pointer; }
+.burger-networks { display: flex; gap: 16px; }
+/* text buttons keep their look but get a ~45px-tall, 12px-wider hit area (padding cancelled by margins) */
+.burger-networks button { padding: 14px 6px; margin: -14px -6px; border: none; background: none; color: var(--text-muted); font: 600 14px 'Inter', sans-serif; cursor: pointer; transition: color var(--t-fast); }
+.burger-networks button:hover, .burger-networks button.copied { color: var(--text); }
+/* pressed state (2026-09-06) */
+.support-cta:active, .support-addr button:active, .burger-networks button:active, .burger-crypto-word:active, .burger-group .burger-link:active { opacity: .6; }

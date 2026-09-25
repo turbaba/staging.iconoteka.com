@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>[staging] Iconoteka Press Kit</title>
+<meta name="description" content="Press kit for Iconoteka: descriptions in three lengths, a fact sheet, logo, images and video, free to reproduce in articles about the library."/>
+<meta property="og:title" content="Iconoteka Press Kit"/>
+<meta property="og:description" content="Descriptions, facts and images for writing about Iconoteka."/>
+<meta property="og:image" content="https://iconoteka.com/iconoteka-preview.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:type" content="image/png"/>
+<meta property="og:image:alt" content="Iconoteka icons on a grid"/>
+<meta property="og:url" content="https://iconoteka.com/press.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Iconoteka"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Iconoteka Press Kit"/>
+<meta name="twitter:description" content="Descriptions, facts and images for writing about Iconoteka."/>
+<meta name="twitter:image" content="https://iconoteka.com/iconoteka-preview.png"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/websans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="support.css?v=11">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f7f7f7;
+  --surface2: #f4f4f4;   /* grey cards (Packages, Support), lightened from #efefef (user 2026-09-15) */
+  --border: #ededed;
+  --text: #141414;
+  --text-muted: #63626d;
+  --text-dim: #8b8a94;
+  --brand: #ffc3dc;
+  --radius: 6px;
+  --panel-w: 270px;
+  --pad: 24px;
+  --panel-pad: 20px;
+  --sb: 11px;   /* native scrollbar width inside the category list */
+  /* radius scale */
+  --r-xs: 3px;      /* scrollbar thumbs, slider track */
+  --r-sm: 6px;      /* small controls: buttons, segmented, options */
+  --r-md: 10px;     /* surfaces: cards, dropdown menus */
+  --r-pill: 999px;  /* badges, tags, search */
+  /* motion */
+  --t-fast: .12s;   /* hover/colour */
+  --t-base: .2s;    /* size/position */
+  --t-slow: .28s;   /* panel + large moves */
+  /* elevation */
+  --shadow-md: 0 4px 16px rgba(20,20,20,0.12);
+  --shadow-lg: 0 8px 30px rgba(20,20,20,0.18);
+  --panel-margin: 0px;
+  --ui-surface: #f2f2f3;
+  --ui-surface-hover: #e8e8e8;
+  --ui-input: #f3f3f4;
+  --ui-input-hover: #eeeeef;
+  --ui-seg-on: #ffffff;
+  --ui-panel: #ffffff;
+  --ui-dropdown: #ffffff;
+  --ui-card-hover: rgba(242,242,243,0.7);
+  --ui-card-active: #f2f2f3;
+  --ui-slider-track: #efefef;
+  --ui-slider-stop: #cecece;
+  --logomark-color: #141414;
+}
+[data-theme="dark"] {
+  --shadow-md: 0 4px 16px rgba(20,20,20,0.45);
+  --shadow-lg: 0 8px 30px rgba(20,20,20,0.55);
+  --bg: #191919;
+  --surface: #222222;
+  --surface2: #2a2a2a;
+  --border: #333333;
+  --text: #ffffff;
+  --text-muted: #a2a2a2;
+  --text-dim: #8a8a8a;
+  --brand: #ffc3dc;
+  --ui-surface: #2a2a2a;
+  --ui-surface-hover: #363636;
+  --ui-input: #252525;
+  --ui-input-hover: #2e2e2e;
+  --ui-seg-on: #3a3a3a;
+  --ui-panel: #202020;
+  --ui-dropdown: #242424;
+  --ui-card-hover: rgba(50,50,50,0.49);
+  --ui-card-active: #232323;
+  --ui-slider-track: #2e2e2e;
+  --ui-slider-stop: #444444;
+  --logomark-color: #ffffff;
+}
+
+@font-face { font-family: 'WebSans'; src: url('fonts/websans.woff2') format('woff2'); font-weight: 400 600; font-display: swap; }   /* the page's text face: a 122-glyph subset (ASCII + the punctuation the page uses), weights 400–600 only, kern + tnum only, neutral names, no glyph names, no hinting — 11 KB */
+* { box-sizing: border-box; }
+:root { --rule: color-mix(in srgb, var(--text) 20%, transparent); --rule-solid: #d0d0d0; --bar-track: #e4e4e4; --text-soft: #75747d; }   /* every page rule: the text colour at 30%. --rule-solid is that same value FLATTENED against the page background — opaque, so lines can never double where two of them meet (user) */
+[data-theme="dark"] { --rule: color-mix(in srgb, var(--text) 30%, transparent); --rule-solid: #5e5e5e; --bar-track: #5e5e5e; --text-soft: var(--text-muted); }   /* light theme (user 2026-09-15): lines at 20% (#d0d0d0 flattened), a paler progress-bar track, and --text-soft #75747d for the small grey labels (4.6:1 on white, still AA); dark keeps its values */
+/* vertical spacing system — an 8px scale with four roles; only these tokens are used for vertical space
+   --major  hero → headline, stat rows → weight grid          130 / 96 / 64
+   --sec    section padding (top and bottom), footer padding   65 / 48 / 32  (= --major / 2)
+   --block  between blocks inside a section, text → media      48 / 40 / 32
+   --stack  label → content, title → text, text → buttons      24 / 24 / 16
+   plus two fixed steps: --sp-1 8px (small title → text, list gaps) and --sp-2 16px (large title → text, icon → title, row padding) */
+:root { --sp-1: 8px; --sp-2: 16px; --stack: 24px; --block: 48px; --sec: 65px; --major: 130px; --gut: 22px; --exc: 100px; --display: clamp(30px, 4.2vw, 60px); }   /* --display: headline statement and the stat numbers */   /* --exc: the one exception — the gap above and below the Missing-an-icon block */   /* --sec is half of --major, so every block-to-block gap is --major (130, per user) */
+@media (max-width: 860px) { :root { --stack: 24px; --block: 40px; --sec: 38px; --major: 76px; --gut: 12px; --exc: 74px; } }   /* tablet: section gaps 20px tighter than before (76 / 38, user) */
+@media (max-width: 480px) { :root { --stack: 16px; --block: 32px; --sec: 32px; --major: 64px; --gut: 8px; --exc: 50px; } }
+html { scroll-behavior: smooth; }
+/* no ligatures or contextual alternates in running text */
+html, body { margin: 0; font-family: 'WebSans', 'Inter', sans-serif; font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; font-size: 16px; line-height: 24px; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+html, body { overflow-x: clip; }   /* the flying hero tiles must never widen the page. clip, NOT hidden: overflow-x:hidden on html/body turns them into scroll containers in iOS Safari and the sticky header scrolls away for good */
+a { color: inherit; }
+
+/* ── header: same bar as the library ─────────────────────────────────────── */
+/* 500px header: the 78px bar (logo + navigation, same as the library) and a 422px band with the icon wall, on the page colour */
+header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; column-gap: 8px;
+         padding: 0 var(--panel-pad); height: 78px; border-bottom: 1px solid var(--border);
+         position: sticky; top: 0; background: var(--bg); color: var(--text); z-index: 10; transition: transform var(--t-slow) ease; }
+header.hidden { transform: translateY(-100%); }   /* slides away while scrolling down, comes back on the first scroll up (user, all breakpoints) */
+header .header-nav { grid-column: 3; }
+/* the bar is set in Inter with the library's line-height so it matches the homepage header exactly */
+header { font-family: 'Inter', sans-serif; font-size: 14px; line-height: normal; font-variant-ligatures: normal; font-feature-settings: normal; }   /* the library's body context */
+header .support-btn { font: inherit; font-size: 14px; font-weight: 600; }
+.hero-band { background: var(--bg); color: var(--text); --band-h: 422px; padding: 20px 20px 0; }   /* 20px inset left, right, top; as many full rows as fit --band-h, height follows the rows */
+/* headline under the hero */
+.row.headline { padding-top: var(--major); padding-bottom: 0; }   /* .row.headline so the generic .row padding below cannot override it */
+.headline .g { padding-bottom: var(--block); border-bottom: 1px solid var(--rule); }   /* rule under the headline, layout width only */
+.row.headline + .row { padding-top: calc(var(--major) - var(--block)); }   /* rule-terminated blocks keep a --major (128) gap to the next content, like License */
+.nobr { white-space: nowrap; }
+.ver { grid-column: 10 / 13; justify-self: end; align-self: start; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; line-height: 16px; font-weight: 500; margin-top: 4px; font-feature-settings: normal; color: var(--text-soft); }   /* small mono library version, same size as the weight-grid labels, top aligned with the headline's caps */
+.statement { grid-column: 1 / 10; margin: 0; font-size: var(--display); line-height: 1.1; letter-spacing: -.02em; font-weight: 400; }
+/* the wall: as many colour tiles as fit the band, each a random icon on a random brand colour and shape.
+   Tiles change one by one on their own, change under the pointer, and open the icon in the library on click */
+.wall { display: grid; grid-template-columns: repeat(var(--cols), var(--tile)); grid-auto-rows: var(--tile); row-gap: var(--wgap); justify-content: space-between; --tile: 76px; --wgap: 16px; }   /* columns spread edge to edge */
+.tile-w { width: var(--tile); height: var(--tile); border-radius: 10%;   /* three containers, per the blueprint: rounded 10%, soft 22%, circle 6% larger (optical) */ background: var(--c); color: var(--fg); display: flex; align-items: center; justify-content: center; }
+.tile-w { will-change: transform; position: relative; }   /* z-index during the parallax */
+.tile-w.round { border-radius: 50%; width: calc(var(--tile) * 1.06); height: calc(var(--tile) * 1.06); margin: calc(var(--tile) * -0.03); }
+.tile-w.soft { border-radius: 22%; }
+.tile-w svg { width: 66%; height: 66%; fill: currentColor; display: block; }
+.tile-w.round svg { width: calc(66% / 1.06); height: calc(66% / 1.06); }
+.tile-chip { position: fixed; z-index: 40; pointer-events: none; color: var(--text); font-size: 12px; line-height: 16px; font-weight: 500; white-space: nowrap; text-shadow: 0 1px 3px var(--bg), 0 0 8px var(--bg); opacity: 0; transform: translate(-50%, -100%); transition: opacity var(--t-fast); }   /* plain text, no pill (user): a shadow in the page colour keeps it readable over anything */
+.tile-chip.on { opacity: 1; }
+.slider-nav button { position: relative; }   /* the circle tile is 6% wider so it does not read smaller than a square one -- that is compensation for the CONTAINER, so undo it for the glyph, which must be the same size in every shape */
+/* no clipping: flying tiles pass behind the page content (main sits above the band), under the sticky bar */
+.hero-band { position: relative; z-index: 0; }
+main, footer { position: relative; z-index: 1; }
+
+.logo-wrap { display: flex; align-items: center; gap: 8px; position: relative; top: -1px; }   /* flex like the homepage: the link is only as wide as the logo, not the whole grid column (the hover area was huge) */
+.logo-wrap a { display: flex; align-items: center; gap: 5px; text-decoration: none; color: var(--text); transition: opacity var(--t-fast); }
+.logo-wrap a:hover { opacity: .8; }
+#logomark { color: var(--logomark-color); }
+.logo { font-weight: 550; font-size: 23px; letter-spacing: -0.3px; }
+.beta-badge { font-size: 8.5px; font-weight: 700; background: var(--brand); color: #141414; height: 14px; padding: 0 6px 0 6.6px; line-height: 1;
+              border-radius: var(--r-pill); letter-spacing: .6px; text-transform: uppercase; display: inline-flex; align-items: center; position: relative; top: -2px; }
+.header-nav { display: flex; align-items: center; gap: 32px; justify-content: flex-end; position: relative; top: -1px; }
+.header-link { font-size: 14px; font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+.header-link:hover { opacity: .8; }
+/* hit area ≈ 38×(text+24)px without moving the text: padding cancelled by negative margins */
+.header-link { padding: 10px 12px; margin: -10px -12px; border-radius: var(--r-sm); }
+.header-link.current { color: var(--text-dim); }
+.burger-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; margin-right: -4px; color: var(--text); }
+.burger-btn { transition: opacity var(--t-fast); } .burger-btn:hover { opacity: .8; }
+/* pressed state for every control on the page: a deeper dim than the hover (the wall tiles have no hover by design and stay as they are) */
+.header-link:active, .logo-wrap a:active, .burger-btn:active, .burger-link:active, .button:active, .links a:active, .handle:active,
+.slider-nav button:active:not(:disabled), button.primary:active:not(:disabled), footer a:active, footer button:active, .footer-icon:active { opacity: .6; }
+.burger-menu { display: none; position: fixed; background: var(--ui-panel); border-radius: var(--r-md); box-shadow: var(--shadow-md); padding: 8px; z-index: 1000; flex-direction: column; gap: 2px; width: 272px; }
+.burger-menu.open { display: flex; }
+.burger-link { font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; padding: 14px 12px; border-radius: var(--r-sm); }
+.burger-link:hover { background: var(--surface); }
+.burger-ver { font-size: 12px; color: var(--text-muted); padding: 12px 12px 8px; line-height: 1.6; }
+.ver-num { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; font-weight: 500; }
+#toast { position: fixed; top: 92px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #141414; font-size: 12px; padding: 4px 14px; border-radius: var(--r-pill); pointer-events: none; opacity: 0; transition: opacity var(--t-base); z-index: 2100; white-space: nowrap; }
+#toast.visible { opacity: 1; }
+/* BETA badge shown again (user 2026-09-06) */
+
+/* ── page grid ────────────────────────────────────────────────────────────── */
+/* Every block is a full-width row; content sits on a 12-column grid, 22px gutters, 1252px max */
+.row { padding: var(--sec) var(--pad); }
+.row:focus, .row:focus-visible, .row:target, main:focus, main:focus-visible { outline: none; }   /* landing on #section must not draw a focus ring round the whole block: a row is a container, never something you interact with. Interactive controls keep their own rings */
+.g   { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); row-gap: 0; max-width: 1252px; margin: 0 auto; }   /* 1152 + 100: 50px off each side margin (user took half of the 100 back) */
+.g > * { min-width: 0; }
+.full { grid-column: 1 / -1; }
+.half-a { grid-column: 1 / 7; }
+.half-b { grid-column: 7 / 13; }
+.half-a p, .half-b p { margin-bottom: var(--stack); }
+/* License and Repository: larger title and text than the feature items */
+.license .half-a, .license .half-b { padding-bottom: var(--block); border-bottom: 1px solid var(--rule); }   /* two rules, one under each half; the halves stretch to one height so the lines align */
+#privacy { padding-top: 0; color: var(--text-soft); }   /* the quiet legal block: grey like the section labels, and half the usual gap above (--major down to --sec) */
+#privacy h3 { font-size: 14px; line-height: 21px; margin-bottom: var(--stack); display: flex; justify-content: space-between; align-items: baseline; }   /* section number at the right edge, like the .label rows above */   /* one title over both halves, so the two columns start at the same line */
+#privacy strong { font-weight: 600; }   /* lead-ins take the site's heading weight, not the browser's 700 */
+#privacy p { font-size: 14px; line-height: 21px; }   /* no width cap: each half fills its column, so equal copy gives equal height */
+#privacy .half-a p { padding-right: var(--gut); }   /* two gutters between the columns: at 14px one gutter reads as a word space, not a column break. Left edges stay on the grid */
+.license h3, .request h3, .support-title { font-size: 28px; line-height: 34px; margin-bottom: var(--sp-2); }   /* Support Project title = the License title (no section number, not counted) */
+.license p, .request p { font-size: 20px; line-height: 30px; max-width: 46ch; }
+/* request: a brand-Blue box, white text (the Blue card's logo-mark rule), input white at 10%, white pill button.
+   Exception to the spacing system: 100px above and below (neighbour padding --sec + own padding = --exc) */
+.row.request { padding-top: calc(var(--exc) - var(--sec)); padding-bottom: var(--exc); }   /* 100 above the box, 100 from the box to the footer rule */
+.request-box { grid-column: 1 / -1; background: #673726; color: #ffffff; padding: clamp(17px, 2vw, 28px); border-radius: var(--r-md);   /* 30% less than the first cut (24/2.8vw/40) — user */
+               display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gut); row-gap: var(--block); }   /* full width; title on the left half, text and form on the right half */
+.request-box h3 { margin: 0; }
+.request-box .request-body p { max-width: none; margin-bottom: var(--stack); }
+.request-box input[type=text] { background: rgba(255, 255, 255, .1); color: #ffffff; border: none; padding-top: 2px; }   /* white at 10% on the blue (user); the text sits 2px down (optical, user: 1px, then 1px more) */
+.request-box input[type=text]:focus { background: rgba(255, 255, 255, .16); }
+.request-box input[type=text]::placeholder { color: #ffffff; opacity: .6; }
+.request-box button.primary { background: #ffffff; color: #141414; border-radius: 999px; }   /* white pill (user) */
+
+p { margin: 0 0 var(--stack); }
+p:last-child { margin-bottom: 0; }
+.label { font-size: 14px; line-height: 21px; font-weight: 500; color: var(--text-soft); margin: 0 0 var(--stack); }   /* small captions are grey (user): section labels, their numbers, the version, the grid-cell texts — same grey as the footer titles */
+.label.full { display: flex; justify-content: space-between; align-items: baseline; }   /* section number at the right edge */
+.no { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; line-height: 16px; font-weight: 500; font-feature-settings: normal; color: var(--text-soft); }   /* section numbers 01–04: the version's mono style */
+.ver .no { margin-left: 16px; }   /* 01 sits after the version, at the right edge */
+h2.huge { font-size: var(--display); line-height: 1; letter-spacing: -.02em; font-weight: 600; margin: 0 0 var(--block) -0.04em; }   /* same size as the headline statement */
+h3 { font-size: 19px; line-height: 28px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 var(--sp-1); }
+
+/* universal reveal on scroll: every content block starts faded and 24px low, and eases in the first time it
+   enters the viewport; siblings inside one row follow each other with a short delay (set inline by JS) */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal.now { transition: none; }   /* shown at once: blocks that are already above the viewport, or come in from the top while scrolling up */
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* layout-grid overlay, toggled with the G key: the same .g columns, tinted */
+.grid-overlay { position: fixed; inset: 0; padding: 0 var(--pad); pointer-events: none; z-index: 5000; }
+.grid-overlay .g { height: 100%; }
+.grid-overlay span { display: block; height: 100vh; background: rgba(255, 195, 220, .18); }
+
+/* buttons (Inter-style: plain filled block, no chrome) */
+.button, .links a { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 2px 18px 0; border-radius: var(--r-sm);   /* 18px sides; 2px top padding moves the centred label down by 1px (optical) */
+          background: var(--text); color: var(--bg); text-decoration: none; font-size: 15px; font-weight: 500; letter-spacing: .01em;
+          transition: opacity var(--t-fast); white-space: nowrap; }
+.button:hover, .links a:hover { opacity: .82; }
+.links { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
+.links a.ghost { background: var(--ui-surface); color: var(--text); }
+.links a.ghost:hover { background: var(--text); color: var(--bg); opacity: 1; }   /* hover = inverted: white on the dark theme, black on light */
+
+
+/* stat blocks: one row each — title on the left half, text on the right half */
+.stat-block { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); align-items: start; margin-bottom: var(--block); }
+.stat-block:nth-of-type(4) { margin-bottom: var(--major); }   /* the weight grid gets a major gap */
+.stat-block h2 { grid-column: 1 / 7; margin: 0; white-space: nowrap; }   /* size comes from h2.huge (--display, same as the headline); no font-size here or it would win by source order */
+.stat-block h2, .stat-block p { grid-row: 1; }
+/* right half: a 1px rule aligned with the cap height of the number on the left, the small text below it
+   (measured in the render: the caps of the 66px title start 3px below its box top) */
+.stat-block p { grid-column: 7 / 13; align-self: start; margin: 3px 0 0; padding-top: var(--sp-2); border-top: 1px solid var(--rule); font-size: 20px; line-height: 30px; }   /* same large body size as License / Repository */
+
+/* weight grid: 7×2 stroked cells (1px lines, shared): number top-left, code (TS, RF…) top-right, name bottom-left, icon in a dealt palette colour */
+.cards { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }   /* no border on the grid itself: when a row is short (4-3-4-3 on narrow screens) a container border would box in the empty cells and read as one big rectangle. Each cell closes itself instead. */
+.card { position: relative; aspect-ratio: 1; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; border: 1px solid var(--rule-solid); margin: 0 -1px -1px 0; }   /* every cell is a complete square; the -1px margins overlap neighbouring borders so shared lines stay 1px and are drawn once, and an empty grid area is simply empty */
+.card svg { width: 54%; height: 54%; fill: var(--ic, currentColor); display: block; position: relative; top: -3px; }   /* was -5px; moved 2px down (user) */   /* --ic: a brand colour dealt at random (light palette), re-dealt on hover with the icon; switches instantly, no fade (user) */
+.card small { position: absolute; font-size: 12px; line-height: 16px; font-weight: 500; }   /* text colour (the grey try was reverted for the grid — user) */
+.card .n { left: 10px; top: 8px; font-feature-settings: "liga" 0, "calt" 0, "tnum" 1; }
+.card .code { right: 10px; top: 8px; }
+.card .cap { left: 10px; bottom: 8px; }
+
+/* support section: the menu's intro (large body) on the left half, the three brand cards full width; reachable at about.html#support */
+/* Support sits after Author now (user 2026-09-09); the License/Support grouping is gone */
+.row[id] { scroll-margin-top: 90px; }   /* anchors land below the sticky header */
+#gallery { scroll-margin-top: 138px; }   /* /gallery/ and #gallery land on the slider itself (its row has no label), with the same 48px of air a section label gets */
+.support-title { grid-column: 1 / 5; margin: 0; }   /* title in the left third … */
+.support-lead { grid-column: 5 / 13; font-size: 20px; line-height: 30px; margin: 0 0 calc(var(--block) - 10px); max-width: none; }   /* … text in the right two thirds (user); cards 38px below (--block − 10, user) */
+#supportCards { max-width: none; justify-self: stretch; gap: var(--gut); --col: calc((100% - 2 * var(--gut)) / 3); grid-template-columns: repeat(3, minmax(0, 1fr)); }   /* three equal cards on the page grid (the panel's pill-width trick is not used here) */
+#supportCards .support-card { border-radius: var(--r-md); padding: 24px; gap: 0; min-height: 0; align-items: stretch; text-align: left; margin: 0; }   /* compact (user) */
+/* on the page the three cards are DARK GREY, the same surface as the framework package cards (user); the header
+   panel keeps its brand colours. --line/--line-hover mirror the .pkg tints so buttons and rules match. */
+#supportCards .support-card[data-way] { --line: color-mix(in srgb, var(--text) 12%, transparent); --line-hover: color-mix(in srgb, var(--text) 20%, transparent); background: var(--surface2); }
+#supportCards .support-card[data-way] h4, #supportCards .support-card[data-way] h4 small, #supportCards .support-card[data-way] p { color: var(--text); }
+#supportCards .support-card[data-way] .support-cta, #supportCards .support-list button { background: var(--line); color: var(--text); }
+#supportCards .support-card[data-way] .support-cta:hover, #supportCards .support-list button:hover { background: var(--text); color: var(--bg); }
+@media (min-width: 1280px) { #supportCards .support-card { aspect-ratio: 4 / 5; } }   /* 4:5 portrait cards (user). Measured floor: at 1200 and below the content no longer fits a 4:5 box */
+@media (min-width: 1400px) { #supportCards .support-card { aspect-ratio: 1; } }   /* once the column is wide enough that a square still holds the content, stop growing taller -- a 4:5 card reaches ~700px of mostly empty space on a big screen (user). max-height cannot do this: with an aspect-ratio set, capping the height just makes the card narrower */
+#supportCards .support-card h4 { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -.01em; justify-content: flex-start; margin: 0 0 var(--sp-1); }
+#supportCards .support-card p { font-size: 16px; line-height: 24px; margin: 0 0 var(--block); }   /* the page's body text; a block gap down to the tier / address table (user) */
+#supportCards .support-cta { margin-top: auto; padding-top: 0; }
+#supportCards .support-card[data-way="patreon"] .support-cta { margin-top: 0; }   /* the button follows its table (whose own 16px bottom margin is the gap) instead of being pushed to the floor on its own */
+#supportCards .support-tiers, #supportCards .support-list { list-style: none; margin: auto 0 var(--stack); padding: 0; font-size: 16px; line-height: 24px; }   /* margin-top auto: the table sits at the BOTTOM, so the card's spare height falls between the description and the table (user); 24px down to the button */   /* margin-top auto: the table sits at the BOTTOM, so the card's spare height falls between the description and the table (user) */
+#supportCards .support-tiers li { display: grid; grid-template-columns: 1fr auto; column-gap: var(--sp-2); padding: 6px 0; border-top: 1px solid var(--rule); }   /* the page's rule colour, as on the timeline and stat rows (white 25% belonged to the panel's coloured cards) */
+#supportCards .support-tiers li:last-child { border-bottom: 1px solid var(--rule); }
+#supportCards .support-tiers .t-price { white-space: nowrap; }   /* no tnum: it widens the spaces around the slash in this face */
+#supportCards .support-tiers .t-note { grid-column: 1 / -1; font-size: 14px; line-height: 21px; opacity: .8; }
+#supportCards .support-list { margin-bottom: 0; }
+#supportCards .support-list li { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "net btn" "addr btn"; column-gap: var(--sp-2); align-items: center; padding: 8px 0; border-top: 1px solid var(--rule); }
+#supportCards .support-list li:last-child { border-bottom: 1px solid var(--rule); }
+#supportCards .support-list .a-net { grid-area: net; } #supportCards .support-list .a-net b { font-weight: 600; }
+#supportCards .support-list .a-addr { grid-area: addr; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 20px; opacity: .6; }   /* semi-transparent (user) */
+#supportCards .support-list button { grid-area: btn; height: 32px; padding: 0 14px; border: none; border-radius: var(--r-sm); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: background var(--t-fast), color var(--t-fast); }
+#supportCards .p-short, #supportCards .a-short { display: none; }   /* the narrow-column forms ("$1/mo", 5…4 address) switch on ≤1100 */
+#supportCards .support-list button.copied { background: var(--brand); color: #141414; }   /* copied still flashes brand pink here (the support panel's own signal) */
+/* packages: MCP card dark blue, three grey cards, install command with Copy, npm + GitHub links */
+.packages .support-title { grid-column: 1 / 7; } .packages .support-lead { grid-column: 7 / 13; margin-bottom: calc(var(--block) - 10px); }
+.packages .support-title, .packages .support-lead { align-self: baseline; }   /* "Packages" and the first line of the text share one baseline (user) */   /* title over the MCP card, text over the Components card: each half the width, like the cards (user) */
+.packages-cards { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gut); }   /* two cards side by side, MCP and Components, the same structure (user) */
+.pkg { --ink: var(--text); --field: color-mix(in srgb, var(--text) 3.5%, transparent); --line: color-mix(in srgb, var(--text) 6%, transparent); --line-hover: color-mix(in srgb, var(--text) 10%, transparent); --btn: color-mix(in srgb, var(--text) 12%, transparent); background: var(--surface2); color: var(--text); border-radius: var(--r-md); padding: 24px; display: flex; flex-direction: column; min-width: 0; }   /* grey cards (user) */
+.pkg.pkg-dark { --ink: #ffffff; --field: rgba(255, 255, 255, .045); --line: rgba(255, 255, 255, .08); --line-hover: rgba(255, 255, 255, .13); --btn: rgba(255, 255, 255, .16); background: #061584; color: #ffffff; }   /* the MCP card, first: brand Dark Blue (user: a dark colour, MCP is the priority) */
+.mcp-mark { display: flex; align-items: center; }   /* hidden source marks, cloned into the tabs */
+/* MCP section: a tab per assistant (mark + name), then three steps on the card grid — copy, where it goes, what to ask */
+.mcp-card { grid-column: span 6; scroll-margin-top: 110px; }   /* /mcp/ and #mcp land on the card */
+.mcp-card { display: flex; flex-direction: column; gap: var(--stack); }
+.mcp-head { display: flex; justify-content: space-between; align-items: center; gap: var(--gut); margin-top: var(--sp-2); }   /* 40px under the tab row on desktop (card gap 24 + 16, user) */ .pkg .mcp-head h4 { font-size: 28px; line-height: 34px; margin: 0; }   /* title only, npm and GitHub at the right (user) */
+.mcp-head .pkg-links { margin-top: 0; flex: none; }
+
+.pkg-dark .mcp-list .no { color: #ffffff; }
+.mcp-tabs { position: relative; display: flex; gap: var(--tab-gap, 34px); box-shadow: inset 0 -1px 0 var(--btn); margin-top: -8px; }   /* a tab row on one baseline rule; always fits: tabRow() tightens the gap, then the text and marks, when the card is narrow (user: no scrolling) */
+.mcp-tabs.wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; } .mcp-tabs.wrap .mcp-tab { width: 100%; }   /* last resort on the narrowest phones: a tidy 3-column grid instead of hidden tabs */
+.mcp-tabs.names2 .mcp-tab { flex: 0 1 min-content; white-space: normal; text-align: center; line-height: 1.15; }   /* two-line names set tighter than the 20px single line, and proportional so it holds as the step shrinks the font (user) */   /* tight: each tab as wide as its longest word, so two-word names take two lines (user) */
+.mcp-tab { flex: none; padding: 12px 0 14px; display: inline-flex; flex-direction: column; align-items: center; gap: 8px; border: none; border-radius: 0; background: none; color: var(--ink); opacity: .6; font: inherit; font-size: var(--tab-font, 16px); line-height: 20px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: opacity var(--t-fast), box-shadow var(--t-fast); }   /* the mark above the name (user) */
+.mcp-tab-mark { width: var(--tab-mark, 24px); height: var(--tab-mark, 24px); display: flex; align-items: center; justify-content: center; } .mcp-tab-mark svg { width: var(--tab-mark, 24px); height: var(--tab-mark, 24px); fill: currentColor; display: block; } .mcp-tab-mark svg.mark-lg { width: calc(var(--tab-mark, 24px) + 2px); height: calc(var(--tab-mark, 24px) + 2px); }   /* the slot stays for every tab, so the names share one line */
+.mcp-title { display: flex; align-items: center; } .mcp-title-mark { display: none; }   /* title text on the step text's left edge; the marks live in the tabs again (user) */
+
+.mcp-tab:hover { opacity: .85; }
+.mcp-tab[aria-selected="true"] { opacity: 1; box-shadow: inset 0 -2px 0 var(--ink); }   /* the chosen tab: full colour, underlined */
+.mcp-tab:active { opacity: .6; } .mcp-tab:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+.mcp-body { display: flex; flex-direction: column; gap: var(--sp-2); } .mcp-list { display: contents; }   /* half-width card: the steps and the snippet share one column */
+.mcp-list li:nth-child(1) { order: 1; } .mcp-body .step-box-1 { order: 2; } .mcp-list li:nth-child(2) { order: 3; } .mcp-body .step-box-2 { order: 4; } .mcp-list li:nth-child(3) { order: 5; }   /* each snippet follows the step it belongs to */
+.mcp-list { list-style: none; margin: 0; padding: 0; gap: var(--sp-2); }
+.mcp-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr); }   /* number, then the step text (user: closer) */
+.mcp-list .no { font-size: 12px; line-height: 24px; color: var(--ink); }   /* 01 02 03 on the step title's line, in the text colour (user) */
+.pkg .mcp-list h4 { font-size: 16px; line-height: 24px; margin: 0; }
+.pkg .mcp-list p { font-size: 16px; line-height: 24px; margin: 0; }
+.mcp-list p code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 14px; overflow-wrap: anywhere; }   /* file paths inside the step text */
+.mcp-list .pkg-links { margin-top: var(--sp-1); } .mcp-list .pkg-links[hidden] { display: none; }   /* .pkg-links is a flex row, which would otherwise override hidden */
+.pkg .mcp-body .cmd { width: auto; margin: 0 0 0 28px; min-height: 0; align-content: flex-start; padding-right: 36px; }   /* the copy icon keeps its own corner */   /* snippets line up with the step text, not the 01 02 03 numbers (user) */
+.pkg .mcp-body .cmd code { font-size: 12px; }
+.inline-copy { cursor: pointer; color: var(--ink); background: var(--line); border-radius: var(--r-xs); padding: 3px 5px 3px 6px; margin: 0 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background var(--t-fast); }   /* a soft rectangle under the icon and text; each wrapped line gets its own */   /* the example request, copyable right inside the sentence: copy icon + text in the card's own colour on a soft rectangle (user) */
+.inline-copy:hover { background: var(--btn); } .inline-copy:active { opacity: .6; } .inline-copy:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }
+.inline-copy-icon { display: inline-block; vertical-align: -1.92px; margin-left: 5px; } .inline-copy-icon svg { width: 15.36px; height: 15.36px; fill: currentColor; display: block; }   /* after the text; the copy glyph's ink (y 3–21 of 24) equals the 16px face's cap height, 11.52px, and sits on the baseline (user) */
+.inline-copy-icon .i-done { display: none; } .inline-copy.copied .inline-copy-icon .i-copy { display: none; } .inline-copy.copied .inline-copy-icon .i-done { display: block; }   /* snippets at 12px: the Claude Code command stays on one line under the indented text */
+.pkg h4 { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 var(--sp-1); overflow-wrap: anywhere; }
+.support-title .pkg-beta { display: inline-flex; vertical-align: middle; margin-left: 10px; top: -3px; will-change: transform; font-family: 'Inter', sans-serif; font-feature-settings: normal; font-variant-ligatures: normal; }   /* the header's BETA badge itself (user: same as the one by the logo) — .beta-badge carries every other value; display overrides its display:none, and Inter matches the header's letterforms (the title would pass the page face down) */   /* will-change: its own compositor layer, so the pill rasterises at its own origin instead of snapping to whatever sub-pixel row the heading lands on. Measured: the gap to the baseline is 3.188px at every width, so the wobble was rounding, not layout. Trade-off: composited text loses sub-pixel antialiasing, so watch whether BETA looks thinner */
+.pkg p { font-size: 16px; line-height: 24px; margin: 0 0 var(--stack); }
+.pkg .cmd { position: relative; margin-top: auto; min-height: 80px; display: flex; flex-wrap: wrap; align-content: space-between; align-items: center; justify-content: space-between; gap: 4px var(--sp-2); width: 100%; text-align: left; border: none; background: var(--field); color: inherit; border-radius: var(--r-sm); padding: 8px 12px; cursor: pointer; font: inherit; transition: background var(--t-fast); }   /* the whole row copies the command */
+.pkg .cmd:hover { background: var(--line-hover); } .pkg .cmd:active { opacity: .6; }
+.pkg .cmd code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 20px; overflow-wrap: anywhere; white-space: pre-wrap; }   /* wraps rather than clips; pre-wrap keeps the JSON snippets' line breaks and indent */
+.pkg .cmd .cmd-hint { position: absolute; right: 10px; bottom: 9px; display: flex; opacity: .7; transition: opacity var(--t-fast); }   /* always the bottom-right corner, never beside a short command (user) */
+.pkg .cmd .cmd-hint svg { width: 18px; height: 18px; fill: currentColor; display: block; }   /* Iconoteka's own copy and checkmark icons, regular stroke */
+.pkg .cmd .cmd-hint .i-done { display: none; } .pkg .cmd.copied .cmd-hint .i-copy { display: none; } .pkg .cmd.copied .cmd-hint .i-done { display: block; }
+.pkg .cmd:hover .cmd-hint { opacity: 1; }
+.pkg .cmd.copied { background: var(--line-hover); } .pkg .cmd.copied .cmd-hint { opacity: 1; }   /* copied: the hover tint and a checkmark in place of the copy icon, no brand colour (user) */
+.pkg-links a { height: 32px; padding: 0 14px; border: none; border-radius: var(--r-sm); background: var(--btn); color: var(--ink); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: background var(--t-fast), color var(--t-fast); }
+.pkg-links a:hover { background: var(--ink); color: var(--bg); } .pkg.pkg-dark .pkg-links a:hover { color: #061584; } .pkg-links a:active { opacity: .6; }
+.pkg-links { display: flex; align-items: center; gap: var(--sp-1); margin-top: var(--sp-2); }
+/* features 3×2 */
+.facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--block) var(--gut); }
+.facts h3, .facts p { padding-right: 30px; }   /* the text stops 30px short of its column, so with the smaller gutters the columns of copy stay well apart (user) */   /* 3 × 2, full width; the label's own --stack is the only gap above, as for Author and the timeline */
+.facts .f-icon { width: 64px; height: 64px; fill: var(--fc, currentColor); display: block; margin-bottom: var(--sp-2); position: relative; left: -8px; }   /* brand colour per feature; 8px LEFT = optical compensation (user, 2026-09-06 — an 8px-right try was reversed) */
+.facts [data-icon="grid"] { --fc: #a25624; }   /* Transparent Ox (user swapped it from Blue) */
+.facts [data-icon="eye"] { --fc: #febd32; }   /* Yellow */
+.facts [data-icon="circle"] { --fc: #12ab57; }   /* Green */
+.facts [data-icon="bar_chart"] { --fc: #f04c1a; }   /* Red */
+.facts [data-icon="user"] { --fc: #673726; }   /* Warm Sepia on the light theme … */
+[data-theme="dark"] .facts [data-icon="user"] { --fc: #ffc3dc; }   /* … Pink on dark, where it reads */
+.facts [data-icon="cube"] { --fc: #979c1a; }   /* Moss Olive */
+
+/* in use: one 16:9 slide at content width, the next peeking past the right edge; arrows above */
+.inuse-text { grid-column: 1 / 9; margin: var(--block) 0 0; font-size: 20px; line-height: 30px; letter-spacing: 0; max-width: 60ch; padding-right: var(--block); }   /* large body size. The padding keeps a line that nearly fills its column away from the marks beside it: the gap depended on where the text happened to wrap, and fell to 50px at some widths (user) */
+.handle { font-weight: inherit; text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; text-decoration-skip-ink: none; transition: opacity var(--t-fast); }   /* inline links: same weight and colour as the copy; a 1px underline set low, in the text colour (palette colours were tried and removed — user) */
+.handle:hover { opacity: .8; }   /* same hover as the header links — no colour */
+.slider-nav { grid-column: 9 / 13; align-self: start; display: flex; justify-content: flex-end; gap: 28px; margin-top: var(--block); }   /* level with the first line of the text beside it, not under the whole block (user) */
+#slideFull { margin-right: 28px; }   /* the same mark size as the arrows, set twice their gap away from them (user) */
+.lightbox { position: fixed; inset: 0; z-index: 3000; background: #000; display: flex; align-items: center; justify-content: center; }
+.lightbox img, .lightbox video { width: 100%; height: 100%; object-fit: cover; display: block; }   /* fills the screen rather than sitting in bars (user) */
+.lightbox .lb-stage { position: absolute; inset: 0; }
+.lightbox .lb-stage img, .lightbox .lb-stage video { position: absolute; inset: 0; opacity: 0; transition: opacity var(--t-slow, .4s) ease; }
+.lightbox .lb-stage .on { opacity: 1; }   /* one fades up over the one before it */
+.lightbox .lb-half { position: absolute; top: 0; bottom: 0; width: 50%; }   /* the screen itself turns the page, and the pointer is the library's own arrow (user) */
+.lightbox .lb-half.l { left: 0; } .lightbox .lb-half.r { right: 0; }
+.lightbox .lb-top { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; transition: opacity var(--t-fast); }
+.lightbox button { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--bg) 55%, transparent); backdrop-filter: blur(8px); color: var(--text); border: none; border-radius: 999px; cursor: pointer; transition: opacity var(--t-fast), background var(--t-fast); }   /* the page's own pair -- black circle and white cross in the dark, reversed in the light -- held semi-transparent over the picture (user) */
+.lightbox button:hover:not(:disabled) { background: color-mix(in srgb, var(--bg) 80%, transparent); }
+.lightbox button svg { width: 26px; height: 26px; fill: currentColor; display: block; }
+.lightbox button:disabled { opacity: .25; cursor: default; }
+.lightbox.idle .lb-top { opacity: 0; pointer-events: none; }   /* a second without the mouse moving and the controls step out of the picture (user) */
+.lightbox.idle .lb-half { cursor: none !important; }   /* !important because the arrow cursor is set inline from JS, and an inline style would otherwise win */
+.lightbox button:hover { background: rgba(255,255,255,.24); }
+.lightbox button svg { width: 26px; height: 26px; fill: currentColor; display: block; }
+.slider-nav button { font: inherit; background: none; border: none; padding: 0; cursor: pointer; color: var(--text); display: flex; transition: opacity var(--t-fast); }
+.slider-nav button:hover:not(:disabled) { opacity: .7; }
+.slider-nav button svg { width: 28px; height: 28px; fill: currentColor; display: block; }
+.slider-nav button:disabled { opacity: .3; cursor: default; }
+.slider { display: flex; align-items: flex-start; gap: var(--gut); overflow-x: auto; scrollbar-width: none; cursor: grab; user-select: none;
+          margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-left: calc(50vw - 50%); padding-right: calc(50vw - 50%); }   /* runs edge to edge, so slides leave the screen on the left too; snapping is done in JS */
+.slider.dragging { cursor: grabbing; }
+.slider:focus, .slider:focus-visible { outline: none; }   /* Chrome makes a scroll container keyboard-focusable, so landing on #gallery drew a ring round the whole strip. The arrows are the visible control here, and they keep their own focus ring */
+.slider::-webkit-scrollbar { display: none; }
+.slider .slot { flex: 0 0 100%; aspect-ratio: 16 / 9; height: auto; border-radius: 8px; background: var(--ui-surface); overflow: hidden; }
+.slider .slot img, .slider .slot video { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; user-drag: none; }   /* dragging a shot pans the strip; without this the browser lifts the picture out instead */
+
+/* author: 4:3 portrait on the left half, text and links on the right half */
+.photo { aspect-ratio: 4 / 3; border-radius: 8px; background: var(--ui-surface); overflow: hidden; }
+.author .half-a, .author .half-b { margin-top: 0; }   /* the label's --stack already separates them */
+.author .half-b { display: flex; flex-direction: column; justify-content: space-between; margin-top: -6px; }   /* the bio's CAP HEIGHT lines up with the photo's top edge (measured in a render, not derived: -9 overshot by 3px) */   /* text at the top, links at the bottom */
+.author .bio, .author-contact { font-size: 24px; line-height: 32px; letter-spacing: -.01em; }   /* author copy: one step above the large body (a 20% larger try was reverted) */
+.author .bio { margin: 0 0 var(--stack); }
+.half-b .author-contact { margin: 0 0 var(--block); }   /* .half-b prefix: outranks the generic `.half-b p` margin */
+.author .half-b .links { margin-top: auto; align-items: center; }   /* links stay at the bottom */
+.author-links .site { margin-left: auto; border-radius: 999px; }   /* the website button sits at the right edge, fully rounded */
+.author-links.site-wrapped .site { margin-left: 0; }   /* when it drops to its own line it starts at the left, under Instagram (user) */
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* request form */
+form { display: flex; gap: var(--sp-1); }
+input[type=text] { flex: 1; min-width: 0; height: 44px; padding: 0 var(--sp-2); border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--ui-input); color: var(--text); font: inherit; font-size: 16px; outline: none; }
+input[type=text]:focus { background: var(--ui-input-hover); border-color: var(--text); }
+input[type=text]::placeholder { color: var(--text); opacity: .5; }
+button.primary { height: 44px; padding: 2px 18px 0; border: none; border-radius: var(--r-sm); background: var(--text); color: var(--bg); font: inherit; font-size: 15px; font-weight: 500; cursor: pointer; transition: opacity var(--t-fast); }
+button.primary:hover { opacity: .82; }
+button.primary:disabled { cursor: default; opacity: 1; }   /* while it shows a status */
+
+
+/* timeline: date, version, count, weights/styles, note, on the page's 12 columns */
+.tl { list-style: none; margin: 0; padding: 0; grid-column: 1 / -1; border-top: 1px solid var(--rule); }
+.tl li { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut);   /* the page's 12 columns, so the cells sit on the grid lines */ padding: var(--sp-2) 0; border-bottom: 1px solid var(--rule); font-size: 16px; line-height: 24px; }
+.tl li:last-child { border-bottom: none; }   /* no rule under the last timeline row */
+.tl time { grid-column: 1 / 3; color: var(--text); }
+.tl time .m-short { display: none; }   /* wide screens spell the month out; the 3-letter form takes over when the column gets tight (user) */
+.tl b { grid-column: 3 / 5; }
+.tl .n { grid-column: 5 / 7; }
+.tl .w { grid-column: 7 / 9; }
+.tl .d { grid-column: 9 / 13; }
+.tl b { font-weight: inherit; }
+.tl b .v { font-feature-settings: "liga" 0, "calt" 0, "tnum" 1; }
+.tl .d strong { font-weight: inherit; }
+.tl .n { color: var(--text); }
+/* the weights numbers also read as a dot matrix — one column per weight, one row per style. It lives in the
+   COUNT cell, right-aligned, so it ends on the line that closes column 6 and leads into the weights text;
+   every cell's text keeps its own grid line (user) */
+.tl .n { display: flex; align-items: flex-start; gap: 10px; }   /* flex-start: the count sits on the row's first line like every other cell (centring dropped it to the middle of tall rows) */
+.tl .n .dots { display: inline-grid; grid-auto-flow: column; grid-template-rows: repeat(var(--rows), 3px); grid-auto-columns: 3px; gap: 2px; flex: none; margin-left: auto; height: 24px; align-content: center; }   /* one line tall, matrix centred on it */
+.tl .n .dots i { display: block; width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+/* the icon count also reads as a progress bar in the VERSION cell, right-aligned so it ends on the line
+   closing column 4 and leads into the count text; the largest count in the timeline = full */
+.tl b { display: flex; align-items: flex-start; }   /* no gap: the "v" and the number are separate flex items and a gap would split them */
+.tl b .bar { flex: none; margin-left: auto; padding-left: 10px; box-sizing: content-box; width: 33px; height: 24px; display: flex; align-items: center; }   /* 33px = the 7×2 dot matrix's width (7×3 + 6×2), so bar and matrix read as one family */
+.tl b .bar span { display: block; height: 8px; width: 100%; border-radius: 1.5px; background: var(--bar-track); }   /* 8px = the matrix's height (2×3 + 2); 1.5px radius = ONE DOT's radius (user) */
+.tl b .bar span i { display: block; height: 100%; width: var(--pct); min-width: 2px; border-radius: 1.5px; background: currentColor; }
+
+footer { border-top: 1px solid var(--border);   /* same line as the header */ padding: var(--sec) var(--pad) calc(var(--sec) + 20px);   /* double space before the footer: one --major above its rule, then the usual padding */ font-size: 14px; line-height: 21px; color: var(--text); }
+footer .g { row-gap: var(--block); align-items: start; }
+/* footer on the 12 page columns, one row: icon top-left and © bottom-left (1–2), columns 3–4 empty, Library (5–6), Support (7–8), Follow (9–10), Contact (11–12) */
+.footer-icon { grid-column: 1 / 3; grid-row: 1; align-self: start; justify-self: start; width: 48px; color: var(--text); height: 48px; position: relative; left: -6px; top: -3px; }   /* 48px box = the hover target is the mark itself, not the whole cell */   /* optical compensation: the glyph's own side bearings make it look inset */
+.footer-icon svg { width: 48px; height: 48px; fill: currentColor; display: block; }
+.footer-icon { cursor: pointer; }   /* it reacts to a click / tap; the weight grid cells are not clickable (user), they only react to hover */
+.f-lib { grid-column: 5 / 7; } .f-sup { grid-column: 7 / 9; } .f-fol { grid-column: 9 / 11; } .f-contact { grid-column: 11 / 13; }   /* icon + © in 1–4, groups from column 5, Contact two columns (user) */
+.f-contact p { margin: 0; font-size: 14px; line-height: 21px; }
+.footer-group h4 { font-size: 14px; line-height: 21px; font-weight: 500; color: var(--text-soft); margin: 0 0 var(--sp-2); }   /* grey titles, 16px to the links (links are 8px apart) */
+.footer-group nav { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-1); }
+.footer-crypto-label { color: var(--text-soft); position: relative; top: 3px; }   /* "Crypto:" — plain grey text, not a link; nudged 4px down visually, the next line does not move */
+.footer-crypto { display: flex; gap: 10px; }   /* BTC ETH USDT a little closer (user) */
+footer a { text-decoration: none; }
+footer a:hover, footer button:hover { opacity: .8; }
+footer button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; text-align: left; }
+footer button.copied { color: var(--brand); }
+.footer-copy { grid-column: 1 / 3; grid-row: 1; white-space: nowrap; color: var(--text-muted); align-self: end; }
+.footer-copy a { color: inherit; text-decoration: none; }   /* the name links out, but the line reads as plain copy: no underline, no colour change (user) */   /* grey ©, on the groups' row, its baseline on the last links (Download Press Kit, X) */
+
+/* wide screens: the column widens in two more steps past 1600 / 2000 (user) */
+@media (min-width: 1600px) {
+  .g { max-width: 1540px; }
+  :root { --gut: 32px; --display: clamp(30px, 4.2vw, 72px); }
+  .wall { --tile: 88px; --wgap: 18px; }
+  .hero-band { --band-h: 480px; }
+}
+@media (min-width: 2000px) {
+  .g { max-width: 1780px; }
+  :root { --gut: 40px; --display: clamp(30px, 4.2vw, 84px); }
+  .wall { --tile: 100px; --wgap: 20px; }
+  .hero-band { --band-h: 540px; }
+}
+@media (max-width: 1200px) {
+  .tl time .m-long { display: none; } .tl time .m-short { display: inline; }   /* "26 September 2026" no longer fits the two-column date cell */
+}
+@media (max-width: 1100px) {
+  .packages .support-title { grid-column: 1 / 7; } .packages .support-lead { grid-column: 7 / 13; }
+}
+@media (max-width: 1100px) {
+  .tl .n .dots, .tl b .bar { display: none; }   /* no room for the matrix or the bar once the columns narrow (user) */
+  .tl .w { grid-column: 7 / 10; } .tl .d { grid-column: 10 / 13; }   /* "7 weights, 2 styles" no longer wraps; the note keeps three columns */
+  #supportCards .p-long, #supportCards .a-long, #supportCards .a-net .net { display: none; } #supportCards .p-short, #supportCards .a-short { display: inline; }   /* narrow cards: "$1/mo", a 5…4 address and the ticker only, so every row stays on one line (user) */
+}
+@media (max-width: 700px) {
+  .card .cap .st { display: none; }   /* cells are ~80px: caption = weight name only (the S/F code carries the style) */
+}
+@media (max-width: 640px) {
+  .request-box { grid-template-columns: 1fr; row-gap: var(--stack); }   /* title above the text and form */
+  .facts { grid-template-columns: 1fr; }   /* one feature per row: two 200px text columns were too narrow */
+}
+/* header ≤860: the homepage's tablet bar — navigation folds into the burger (support.js fills its Support group) */
+@media (min-width: 481px) and (max-width: 860px) {
+  header { grid-template-columns: auto 1fr auto; height: 78px; padding: 0 var(--panel-pad); column-gap: 20px; }   /* stays sticky (the homepage makes it relative here — user wants it to stay while scrolling) */
+  .header-nav { display: none; }
+  .burger-btn { display: flex; align-items: center; justify-content: center; grid-column: 3; grid-row: 1; }
+  /* tablet-only layout (user 2026-09-06): */
+  :root { --display: clamp(36px, 5vw, 60px); }   /* intro statement (and the stat numbers that share its size) bigger on tablet: 43px at 860, 38px at 768, 36px floor */
+  .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* weight grid 4-3-4-3: the stroke row breaks after Regular, the fill row starts a new line */
+  .card:nth-child(8) { grid-column-start: 1; }
+  .license .half-a, .license .half-b { grid-column: 1 / -1; }   /* License above Repository, each with its own rule */
+  .license .half-a { margin-bottom: var(--block); }
+  #privacy .half-a, #privacy .half-b { grid-column: 1 / -1; }   /* same as License: this much prose is too narrow in a tablet half */
+  #privacy .half-a { margin-bottom: var(--block); }
+  #supportCards { grid-template-columns: 1fr; } #supportCards .support-card:last-child { grid-column: auto; }
+  .packages-cards { grid-template-columns: 1fr; } .mcp-card { grid-column: auto; }   /* tablet: one card under the other */
+  .packages .support-title { grid-column: 1 / 4; } .packages .support-lead { grid-column: 4 / 7; }
+  .mcp-head { flex-direction: column; align-items: flex-start; } 
+  .tl li { grid-template-columns: 1fr 2fr; grid-template-areas: "t d" "n d" "v d"; row-gap: 0; align-content: start; }   /* timeline: date, count, version stacked on the left; the note on the right; no weights cell */
+  .tl time { grid-area: t; } .tl .n { grid-area: n; } .tl b { grid-area: v; } .tl .d { grid-area: d; } .tl .w { display: none; }
+  .f-lib { grid-column: 1 / 4; } .f-sup { grid-column: 4 / 7; } .f-fol { grid-column: 1 / 4; } .f-contact { grid-column: 4 / 7; }   /* footer 2 × 2: Library | Support, Follow | Contact */
+}
+@media (max-width: 860px) {
+  .burger-ver { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+  .g { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .full, .facts { grid-column: 1 / -1; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .stat-block { grid-template-columns: 1fr; row-gap: var(--sp-2); border-top: 1px solid var(--rule); padding-top: var(--sp-2); }   /* stacked: the text sits UNDER the number, the rule ABOVE the number (user) */
+  .stat-block h2, .stat-block p { grid-column: 1 / -1; }
+  .stat-block h2 { grid-row: 1; } .stat-block p { grid-row: 2; margin-top: 0; border-top: none; padding-top: 0; }
+  .headline .g { border-bottom: none; padding-bottom: 0; }   /* no rule under the intro — the first stat row brings its own line */
+  .row.headline + .row { padding-top: var(--major); }
+  .author-links .site { margin-left: 0; }   /* all four author buttons in one row (user) */
+  .half-a { grid-column: 1 / 4; }
+  .half-b { grid-column: 4 / 7; }
+  .author .half-a, .author .half-b { grid-column: 1 / -1; }   /* portrait above the text: the 24px bio is too narrow in half the width */
+  .author .half-b { margin-top: 0; }   /* stacked: there is no photo edge beside the bio to align its cap height to */
+  .author .photo { margin-bottom: var(--block); }
+  .statement { grid-column: 1 / -1; grid-row: 2; }
+  .ver { grid-column: 1 / -1; grid-row: 1; justify-self: stretch; display: flex; justify-content: space-between; margin: 0 0 var(--stack); }   /* above the intro: version at the LEFT, 01 at the right (user) */
+  .ver .no { margin-left: 0; }
+  .inuse-text { grid-column: 1 / 5; }
+  .support-title { grid-column: 1 / 3; } .support-lead { grid-column: 3 / 7; }   /* tablet: 1/3 + 2/3 of the 6-col grid */
+  .slider-nav { grid-column: 5 / 7; }
+  #slideFull { margin-right: 0; }   /* tight against the arrows here, so it sits away from the text beside it (user) */
+  .hero-band { --band-h: 360px; }
+  .wall { --tile: 68px; --wgap: 14px; }
+  .slider-nav button svg { width: 24px; height: 24px; }
+  .footer-icon { grid-column: 1 / -1; grid-row: auto; }
+  .footer-copy { grid-column: 1 / -1; grid-row: auto; }
+}
+@media (max-width: 480px) {
+  /* header: the homepage's phone bar */
+  header { grid-template-columns: 1fr auto; height: auto; padding: 18px var(--panel-pad) 16px; column-gap: 0; }   /* stays sticky on the phone too (user) */
+  .header-nav { display: none; }
+  .burger-btn { display: flex; align-items: center; justify-content: center; }
+  .logo { font-size: 18.9px; }
+  .beta-badge { top: -3px; }
+  .hero-band { --band-h: 300px; }
+  .wall { --tile: 60px; --wgap: 12px; }
+  .g { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .full, .facts, .stat-block, .inuse-text, .half-a, .half-b, .support-lead, .support-title { grid-column: 1 / -1; }
+  .packages .support-title, .packages .support-lead { grid-column: 1 / -1; } .mcp-head { flex-direction: column; align-items: flex-start; }   /* .packages specificity: without this the ≤1100 rule (cols 7–13) still applies here and grows the 4-column phone grid to 12, squeezing the cards to 60px */
+ .pkg.mcp-card { padding: 16px; } .pkg #mcpSetupCmd { padding: 8px 32px 8px 10px; }   /* phone: 8px more width, so the settings block keeps its lines */
+  #mcpSetupCmd code { font-size: 12px; }   /* the settings block keeps its lines on a phone-width card */
+  .support-title { margin-bottom: var(--sp-2); }
+  #supportCards { grid-template-columns: 1fr; } #supportCards .support-card:last-child { grid-column: auto; }
+  #supportCards .support-card { padding: 20px; }
+  .packages-cards { grid-template-columns: 1fr; } .mcp-card { grid-column: auto; } .pkg { padding: 20px; }
+  .footer-icon { grid-column: 1 / -1; grid-row: auto; }
+  .footer-copy { grid-column: 1 / -1; grid-row: auto; }
+  .footer-copy br { display: none; }   /* © on one line on the phone (user) */
+  .half-a { margin-bottom: var(--block); }
+  .slider-nav { grid-column: 1 / -1; }
+  .facts { grid-template-columns: 1fr; row-gap: var(--block); }
+  .facts h3, .facts p { padding-right: 0; }   /* one column on the phone: no inset */
+  .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* 4-3-4-3 on the phone too (user) */
+  .card:nth-child(8) { grid-column-start: 1; }
+  .card small { font-size: 10px; line-height: 13px; }   /* smaller cell texts on the phone (user) */
+  .card .n { left: 6px; top: 5px; } .card .code { right: 6px; top: 5px; } .card .cap { left: 6px; bottom: 5px; }
+  .author .bio, .author-contact, .inuse-text, .request-box .request-body p, .license p, .support-lead { font-size: 16px; line-height: 24px; letter-spacing: 0; }   /* phone: the standard body size for the author, gallery, License/Repository and request copy (user) */
+  .request-box h3 { font-size: 22px; line-height: 28px; }   /* smaller request title on the phone (user) */
+  .slider { grid-row: 1; } .slider-nav { grid-row: 2; justify-content: flex-start; margin-top: var(--block); } .inuse-text { grid-row: 3; margin-top: var(--stack); }   /* arrows above the text, at the LEFT on the phone (user 2026-09-20; they were right-aligned) */
+  #slideFull { display: none; }   /* no full screen on the phone: it is the whole screen already, and the controls need a pointer (user) */
+  .tl li { display: block; }   /* phone: a small title (date + version) with the note under it; count and weights skipped (user) */
+  .tl time, .tl b { display: inline; font-weight: 500; }
+  .tl b { margin-left: var(--sp-1); }
+  .tl .n, .tl .w { display: none; }
+  .tl .d { display: block; margin-top: 2px; }
+  form { flex-direction: column; }
+  input[type=text] { flex: none; }   /* in the column the flex basis would squash the 44px input */
+  .links a, .button { width: 100%; justify-content: center; height: 44px; }   /* full width and 44px tall: the touch-target minimum (Apple HIG 44pt) */
+  .half-b .author-contact { margin-bottom: calc(var(--block) * 1.5); }   /* 48px between the author text and the buttons (user) */
+  .row.headline + .row { padding-top: calc(var(--major) - 20px); }   /* intro → first stat row 20px closer on the phone (user): 44px */
+  .f-lib, .f-fol { grid-column: 1 / 3; } .f-sup, .f-contact { grid-column: 3 / 5; }   /* two groups per row: Library | Support, Follow | Contact */
+}
+/* ─── Press kit ─────────────────────────────────────────────────────────── */
+/* A reference sheet, not a read: the SPACING is tighter than the rest of the site so the
+   whole kit is visible with little scrolling, but every type size is the About page's own. */
+.press .row { padding: var(--block) var(--pad); }            /* About's own scale, one step tighter than its --sec rows */
+.press .row:last-of-type { padding-bottom: var(--major); }   /* air before the footer */
+.press .row.headline { padding: var(--sec) var(--pad) var(--block); }
+
+/* Wide screens keep the first three columns empty: that lane belongs to the Download button and
+   nothing else, so the button never crosses a word. Everything on the page starts at column 4. */
+@media (min-width: 1101px) {
+  .press .g > * { grid-column: 3 / -1; }
+  .press .boiler { grid-column: 1 / -1; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .press .boiler .no { grid-column: 1 / 3; }
+  .press .boiler h3 { grid-column: 3 / 5; }
+  .press .boiler .boiler-body { grid-column: 5 / 12; }
+  .press #assets .half-a { grid-column: 3 / 8; }
+  .press #assets .half-b { grid-column: 8 / 13; }
+  .press .assets { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* the content span is 10 columns now, so 5 tiles left the pair of buttons stacking */
+  .press .headline .statement { grid-column: 3 / -1; }
+  .press .headline .social-links { grid-column: 3 / -1; }
+  .press .g > .press-dl { grid-column: 1 / 3; grid-row: 1; }
+}
+/* nothing here draws a rule across the page: the numbered labels mark the sections, space separates them */
+.press .headline .g { padding-bottom: 0; border-bottom: none; }
+.press .row.headline + .row { padding-top: var(--block); }   /* outranks .row.headline + .row in the sheet above */
+
+/* a button element, styled as the page's own .links a */
+.links button { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 2px 18px 0; border-radius: var(--r-sm);
+                background: var(--text); color: var(--bg); border: none; font: inherit; font-size: 15px; font-weight: 500; letter-spacing: .01em;
+                cursor: pointer; transition: opacity var(--t-fast); white-space: nowrap; }
+.links button:hover { opacity: .82; }
+.links button.ghost { background: var(--ui-surface); color: var(--text); }
+.links button.ghost:hover { background: var(--text); color: var(--bg); opacity: 1; }
+
+/* Iconoteka's own accounts, under the title */
+.social-links { margin-top: var(--block); gap: var(--sp-1); }
+.social-links a.ghost { height: 48px; padding: 2px 24px 0; font-size: 16px; border-radius: var(--r-pill); }
+
+/* boilerplate: three lengths, each one row of a list. Body copy is 20/30, as License and Repository. */
+.boiler { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut);
+          margin-bottom: var(--block); }   /* air under each block's Copy button */
+.boiler:last-of-type { margin-bottom: 0; }
+.boiler h3 { grid-column: 1 / 3; margin: 0; font-size: 19px; line-height: 28px; }
+.boiler .boiler-body { grid-column: 3 / 12; }
+.boiler-act { margin-top: var(--sp-2); }
+.boiler p { margin: 0 0 var(--sp-1); font-size: 20px; line-height: 30px; }
+.boiler p:last-of-type { margin-bottom: 0; }
+.boiler .len { display: block; margin-top: 2px; font-size: 14px; line-height: 21px; font-weight: 500; color: var(--text-soft); }
+@media (max-width: 1100px) { .boiler h3 { grid-column: 1 / 4; } .boiler .boiler-body { grid-column: 4 / 12; } }
+@media (max-width: 860px) {
+  .boiler .no, .boiler h3, .boiler .boiler-body { grid-column: 1 / -1; }
+  .boiler h3 { margin-bottom: var(--sp-1); }
+  .boiler p { font-size: 17px; line-height: 26px; }
+}
+
+
+/* assets: a thumbnail grid, every file downloadable on its own. Captions are .label size. */
+.assets { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gut) 12px; }
+@media (max-width: 1100px) { .assets { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 860px)  { .assets { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 480px)  { .assets { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.asset { margin: 0; }   /* a figure carries 40px side margins of its own, which would shrink every tile inside its column */
+.asset img, .asset video { cursor: pointer; }
+.asset img, .asset video, .asset .asset-mark { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r-sm); background: var(--surface2); }
+/* height:auto is required: the width/height attributes are a presentational hint, and a used height would beat aspect-ratio */
+.asset .asset-mark { display: flex; align-items: center; justify-content: center; }
+.asset .asset-mark svg { width: 28px; height: 28px; fill: var(--text); }
+.asset-name { margin: var(--sp-1) 0 0; font-size: 14px; line-height: 21px; }
+.asset { position: relative; }
+.asset-zoom { position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; padding: 0; border: none;
+              display: flex; align-items: center; justify-content: center; border-radius: var(--r-sm);
+              background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(6px);
+              color: var(--text); cursor: pointer; opacity: 0; }
+.asset-zoom svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+.asset:hover .asset-zoom, .asset-zoom:focus-visible { opacity: 1; }
+@media (hover: none) { .asset-zoom { opacity: 1; } }   /* no hover to reveal it on a phone */
+
+/* the overlay: the asset at its own size on a black field */
+.big { position: fixed; inset: 0; z-index: 3000; background: #000; display: flex; align-items: center; justify-content: center; }
+.big-stage { position: absolute; inset: 0 0 96px; display: flex; align-items: center; justify-content: center; }
+.big img, .big video { max-width: 100%; max-height: 100%; display: block; }
+.big-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 96px; display: flex; align-items: center;
+           justify-content: center; gap: var(--sp-2); padding: 0 24px; cursor: default; }
+/* baseline, not centre: the name and the button labels then sit on one line together */
+.big-mid { display: flex; align-items: baseline; justify-content: center; gap: var(--sp-2); min-width: 420px; }
+@media (max-width: 720px) { .big-mid { min-width: 0; } }
+.big-name { margin: 0; color: #fff; font-size: 20px; line-height: 30px; }
+.big-links { gap: 6px; }
+.big-links a.ghost { background: rgba(255,255,255,.14); color: #fff; }
+.big-links a.ghost:hover { background: #fff; color: #141414; }
+.big-step { width: 44px; height: 44px; border: none; border-radius: var(--r-pill); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,.14); color: #fff; }
+.big-step:hover { background: #fff; color: #141414; }
+.big-step svg { width: 22px; height: 22px; fill: currentColor; }
+@media (max-width: 600px) { .big-bar { flex-wrap: wrap; justify-content: center; height: auto; padding: 16px; } }
+.big .big-close { position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; border: none; border-radius: var(--r-pill);
+                  display: flex; align-items: center; justify-content: center; cursor: pointer;
+                  background: rgba(255,255,255,.14); color: #fff; }
+.big .big-close svg { width: 22px; height: 22px; fill: currentColor; }
+
+.asset-links { margin-top: var(--sp-1); gap: 6px; }
+.asset-links a.ghost { padding: 2px 14px 0; }   /* a touch tighter than the page's own buttons, so two fit one tile */
+.press .asset-group { margin: var(--block) 0 var(--sp-2); font-size: 19px; line-height: 28px; }
+.press .asset-group:first-of-type { margin-top: 0; }
+#assets .half-a, #assets .half-b { margin-top: var(--block); padding-top: var(--sp-2); border-top: 1px solid var(--rule); }
+/* the one rule on the page: it separates the texts from the assets, and spans the content, not the screen */
+.press #assets .asset-group:first-of-type { border-top: 1px solid var(--rule); padding-top: var(--block); margin-top: 0; }
+@media (min-width: 1101px) {
+  /* the heading spans the grid so its number can sit in column 1, but the RULE belongs to the label,
+     so it starts at column 3 with the rest of the content rather than running out to the left edge */
+  .press #assets .asset-group:first-of-type { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid;
+                                              align-items: start; border-top: none; padding-top: 0; }
+  /* the number sits level with the rule, not with the title that the rule's padding pushes down */
+  .press #assets .asset-group:first-of-type .no { grid-column: 1 / 3; }
+  .press #assets .asset-group:first-of-type .lab { grid-column: 3 / -1; border-top: 1px solid var(--rule); padding-top: var(--block); }
+}
+@media (max-width: 860px) { #assets .half-b { margin-top: var(--sp-2); } }
+
+
+/* The kit itself: fixed at the left edge of the content grid, so it is reachable from anywhere on
+   the page. Brand Yellow on near-black, the pairing the palette itself specifies for this swatch. */
+.press-dl { position: fixed; top: var(--dl-top, 96px); z-index: 1400;
+            left: var(--dl-left, var(--pad));   /* the left edge of .g, measured below: its max-width changes at 1280/1600/2000 */
+            display: inline-flex; align-items: center; justify-content: center; height: var(--dl-h, 52px); padding: 2px 30px 0;
+            border-radius: var(--r-pill); background: #febd32; color: #141414; text-decoration: none;
+            font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: -.005em; white-space: nowrap;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, .2);
+            transition: filter var(--t-fast); }
+.press-dl:hover { filter: brightness(1.06); }
+.press-dl.reveal { transform: translateY(24px); }   /* it is fixed, so it animates in on its own terms */
+.press-dl.reveal.in { transform: none; }
+@media (max-width: 1100px) { .press-dl { height: 52px; } }   /* in flow it keeps its own height */
+/* Under 1101px the columns are too narrow to spare three, so the button stops floating and takes its
+   place in the headline. These rules must come after the ones above to win on source order. */
+@media (max-width: 1100px) {
+  .press-dl { position: static; grid-column: 1 / -1; justify-self: start; margin: 0 0 var(--stack); }
+}
+
+</style>
+<script>
+// Theme init — runs immediately before page renders
+(function() {
+  const saved = new URLSearchParams(location.search).get('theme') || localStorage.getItem('iconoteka-theme');   // ?theme=light|dark: dev switch for renders
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Iconoteka Press Kit",
+  "url": "https://iconoteka.com/press.html",
+  "description": "Descriptions, facts and images for writing about Iconoteka.",
+  "isPartOf": { "@type": "WebSite", "name": "Iconoteka", "url": "https://iconoteka.com/" },
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "Iconoteka",
+    "applicationCategory": "DesignApplication",
+    "license": "https://opensource.org/licenses/MIT",
+    "author": { "@type": "Person", "name": "Oleg Turbaba", "url": "https://turbaba.com/" }
+  }
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <a href="./">
+      <svg id="logomark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.0005 22C10.1672 22 8.48382 21.5583 6.95049 20.675C5.41716 19.7917 4.20882 18.5833 3.32549 17.05C2.44216 15.5167 2.00049 13.8333 2.00049 12C2.00049 10.1667 2.44216 8.48333 3.32549 6.95C4.20882 5.41667 5.41716 4.20833 6.95049 3.325C8.48382 2.44167 10.1672 2 12.0005 2C13.8338 2 15.5172 2.44167 17.0505 3.325C18.5838 4.20833 19.7922 5.41667 20.6755 6.95C21.5588 8.48333 22.0005 10.1667 22.0005 12C22.0005 13.8333 21.5588 15.5167 20.6755 17.05C19.7922 18.5833 18.5838 19.7917 17.0505 20.675C15.5172 21.5583 13.8338 22 12.0005 22ZM12.0005 19.925C13.4505 19.925 14.7755 19.575 15.9755 18.875C17.1755 18.175 18.1255 17.225 18.8255 16.025C19.5255 14.8083 19.8755 13.4667 19.8755 12C19.8755 10.55 19.5255 9.21667 18.8255 8C18.1255 6.78333 17.1755 5.825 15.9755 5.125C14.7755 4.425 13.4505 4.075 12.0005 4.075C10.5505 4.075 9.22549 4.425 8.02549 5.125C6.82549 5.825 5.87549 6.78333 5.17549 8C4.47549 9.2 4.12549 10.5333 4.12549 12C4.12549 13.45 4.47549 14.7833 5.17549 16C5.87549 17.2167 6.82549 18.175 8.02549 18.875C9.22549 19.575 10.5505 19.925 12.0005 19.925ZM12.0005 21.525C11.0005 21.525 10.1672 21.1333 9.50049 20.35C8.83382 19.5667 8.33382 18.4583 8.00049 17.025C7.68382 15.5917 7.52549 13.9167 7.52549 12C7.52549 10.0833 7.68382 8.41667 8.00049 7C8.33382 5.56667 8.83382 4.45833 9.50049 3.675C10.1672 2.89167 11.0005 2.5 12.0005 2.5C13.0005 2.5 13.8338 2.9 14.5005 3.7C15.1672 4.48333 15.6588 5.58333 15.9755 7C16.3088 8.41667 16.4755 10.0833 16.4755 12C16.4755 13.9167 16.3088 15.5917 15.9755 17.025C15.6588 18.4583 15.1672 19.5667 14.5005 20.35C13.8338 21.1333 13.0005 21.525 12.0005 21.525ZM12.0005 19.925C12.5005 19.925 12.9255 19.6 13.2755 18.95C13.6255 18.3 13.8838 17.3833 14.0505 16.2C14.2338 15.0167 14.3255 13.6167 14.3255 12C14.3255 10.4 14.2338 9.00833 14.0505 7.825C13.8838 6.625 13.6255 5.7 13.2755 5.05C12.9255 4.4 12.5005 4.075 12.0005 4.075C11.5005 4.075 11.0755 4.4 10.7255 5.05C10.3755 5.7 10.1088 6.625 9.92549 7.825C9.75882 9.00833 9.67549 10.4 9.67549 12C9.67549 13.6167 9.75882 15.0167 9.92549 16.2C10.1088 17.3833 10.3755 18.3 10.7255 18.95C11.0755 19.6 11.5005 19.925 12.0005 19.925ZM3.00049 13.8H21.0005V15.85H3.00049V13.8ZM3.00049 8.175H21.0005V10.225H3.00049V8.175Z"/></svg>
+      <span class="logo">Iconoteka</span>
+    </a>
+  </div>
+  <nav class="header-nav">
+      <div class="support-wrap">
+        <button class="header-link support-btn" id="supportBtn" aria-haspopup="true" aria-expanded="false">Support Project</button>
+      </div>
+    <a class="header-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+    <a class="header-link" href="about.html">About</a>
+  </nav>
+  <!-- Mobile burger (same as the homepage) -->
+  <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 6h18M3 12h18M3 18h18"/>
+    </svg>
+  </button>
+  <!-- Burger dropdown -->
+  <div class="burger-menu" id="burgerMenu">
+    <div class="burger-group" id="burgerSupport"><div class="burger-label">Support Project</div></div>
+    <hr class="burger-sep">
+    <a class="burger-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+    <a class="burger-link" href="about.html">About</a>
+    <hr class="burger-sep">
+    <div class="burger-ver"><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></div>
+  </div>
+</header>
+
+<main class="press">
+
+<!-- headline -->
+<div class="row headline">
+  <div class="g">
+    <h1 class="statement">Iconoteka Press Kit</h1>
+    <div class="links social-links">
+      <a class="ghost" href="https://www.instagram.com/iconoteka/" target="_blank" rel="noopener">Instagram</a>
+      <a class="ghost" href="https://x.com/iconoteka" target="_blank" rel="noopener">X</a>
+      <a class="ghost" href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="ghost" href="https://www.pinterest.com/turbaba/iconoteka/" target="_blank" rel="noopener">Pinterest</a>
+      <a class="ghost" href="https://www.are.na/oleg-turbaba/iconoteka" target="_blank" rel="noopener">Are.na</a>
+    </div>
+    <a class="press-dl" href="https://www.dropbox.com/scl/fi/xc8vz7go117dfcvrdqjb6/Iconoteka-Press-Kit.zip?rlkey=sjpz7p3vaxxf8neyuuee3kauv&amp;dl=1" target="_blank" rel="noopener">
+      Download Press Kit
+    </a>
+  </div>
+</div>
+
+<!-- boilerplate: three lengths, ready to paste -->
+<div class="row" id="boilerplate">
+  <div class="g">
+    <div class="boiler">
+      <span class="no" aria-hidden="true">01</span>
+      <h3>One Line<span class="len">10 words</span></h3>
+      <div class="boiler-body">
+        <p>Iconoteka is a universal, open-source library of precisely designed pictograms.</p>
+        <div class="links boiler-act"><button type="button" class="ghost copy-text" data-copy="Iconoteka is a universal, open-source library of precisely designed pictograms.">Copy</button></div>
+      </div>
+    </div>
+    <div class="boiler">
+      
+      <h3>One Sentence<span class="len">31 words</span></h3>
+      <div class="boiler-body">
+        <p>Iconoteka is a free, open-source icon library under the MIT License: 1,300 icons in 7 weights from Thin to Bold, in stroke and fill, on iconoteka.com and in a Figma plugin.</p>
+        <div class="links boiler-act"><button type="button" class="ghost copy-text" data-copy="Iconoteka is a free, open-source icon library under the MIT License: 1,300 icons in 7 weights from Thin to Bold, in stroke and fill, on iconoteka.com and in a Figma plugin.">Copy</button></div>
+      </div>
+    </div>
+    <div class="boiler">
+      
+      <h3>One Paragraph<span class="len">61 words</span></h3>
+      <div class="boiler-body">
+        <p>Iconoteka is a free, open-source icon library released under the MIT License. It holds 1,300 icons in 7 weights from Thin to Bold, in stroke and fill, 14,970 shapes in all. The icons are on iconoteka.com, in a Figma plugin, and in a GitHub repository that also carries an MCP server for AI assistants and packages for React, Vue and Svelte.</p>
+        <div class="links boiler-act"><button type="button" class="ghost copy-text" data-copy="Iconoteka is a free, open-source icon library released under the MIT License. It holds 1,300 icons in 7 weights from Thin to Bold, in stroke and fill, 14,970 shapes in all. The icons are on iconoteka.com, in a Figma plugin, and in a GitHub repository that also carries an MCP server for AI assistants and packages for React, Vue and Svelte.">Copy</button></div>
+      </div>
+    </div>
+    <div class="boiler">
+      
+      <h3>One Page<span class="len">163 words</span></h3>
+      <div class="boiler-body">
+        <p>Iconoteka is a free, open-source icon library released under the MIT License, so it can be used in personal and commercial work, and shipped inside closed-source products.</p>
+        <p>It holds 1,300 icons in 7 weights from Thin to Bold, in stroke and fill, 14,970 shapes in all, sorted into 23 categories and reachable by 7,716 keywords. Every icon is drawn on a 24-point grid, with optical compensation applied by hand: deliberate overshoots, density-based weight modularity, a 5° geometric angle rule and tiered corner rounding. From Thin to Bold, from a user icon to a street sign.</p>
+        <p>The icons are on iconoteka.com, where they can be searched, restyled and saved as SVG, PNG or PDF. A Figma plugin places them on the canvas and restyles icons already there. A GitHub repository carries the vector sources, an MCP server for AI assistants, and packages for React, Vue and Svelte, all under the MIT License.</p>
+        <p>Iconoteka is designed by Oleg Turbaba, Brand Design Director at Clay Global.</p>
+        <div class="links boiler-act"><button type="button" class="ghost copy-text" data-copy="Iconoteka is a free, open-source icon library released under the MIT License, so it can be used in personal and commercial work, and shipped inside closed-source products.
+
+It holds 1,300 icons in 7 weights from Thin to Bold, in stroke and fill, 14,970 shapes in all, sorted into 23 categories and reachable by 7,716 keywords. Every icon is drawn on a 24-point grid, with optical compensation applied by hand: deliberate overshoots, density-based weight modularity, a 5° geometric angle rule and tiered corner rounding. From Thin to Bold, from a user icon to a street sign.
+
+The icons are on iconoteka.com, where they can be searched, restyled and saved as SVG, PNG or PDF. A Figma plugin places them on the canvas and restyles icons already there. A GitHub repository carries the vector sources, an MCP server for AI assistants, and packages for React, Vue and Svelte, all under the MIT License.
+
+Iconoteka is designed by Oleg Turbaba, Brand Design Director at Clay Global.">Copy</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- author: its own section, the bio copyable like the other texts -->
+<div class="row" id="author">
+  <div class="g">
+    <div class="boiler">
+      
+      <h3>Author<span class="len">28 words</span></h3>
+      <div class="boiler-body">
+        <p>Oleg Turbaba is a multidisciplinary designer specializing in the intersection of brand identity, digital products, and visual experiences. Brand Design Director at Clay Global and author of Iconoteka.</p>
+        <div class="links boiler-act"><button type="button" class="ghost copy-text" data-copy="Oleg Turbaba is a multidisciplinary designer specializing in the intersection of brand identity, digital products, and visual experiences. Brand Design Director at Clay Global and author of Iconoteka.">Copy</button></div>
+      </div>
+    </div>
+    <div class="boiler boiler-plain">
+      <h3>Contact</h3>
+      <div class="boiler-body">
+        <p>For enquiries, collaborations, interviews, or sponsorships, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
+        <div class="links" style="margin-top: 12px">
+          <a class="ghost" href="https://turbaba.com/" target="_blank" rel="noopener">turbaba.com</a>
+          <a class="ghost" href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="ghost" href="https://www.instagram.com/turbaba/" target="_blank" rel="noopener">Instagram</a>
+          <a class="ghost" href="https://www.behance.net/turbaba" target="_blank" rel="noopener">Behance</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- assets: every file downloadable on its own -->
+<div class="row" id="assets">
+  <div class="g">
+    <h3 class="full asset-group"><span class="no" aria-hidden="true">02</span><span class="lab">Iconoteka Brand</span></h3>
+    <div class="assets">
+      <figure class="asset">
+        <div class="asset-mark" id="pressMark" aria-hidden="true"></div>
+        <figcaption>
+          <p class="asset-name">Logomark</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-logomark.svg" download>SVG black</a><a class="ghost" href="media/iconoteka-logomark-white.svg" download>SVG white</a></div>
+        </figcaption>
+      </figure>
+    </div>
+    <h3 class="full asset-group"><span class="lab">Products</span></h3>
+    <div class="assets">
+      <figure class="asset">
+        <img src="media/iconoteka-product-website-light-960.jpg" alt="Website, Light" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Website, Light large"></button>
+        <figcaption>
+          <p class="asset-name">Website, Light</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-product-website-light-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-product-website-dark-960.jpg" alt="Website, Dark" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Website, Dark large"></button>
+        <figcaption>
+          <p class="asset-name">Website, Dark</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-product-website-dark-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-product-about-960.jpg" alt="About Page" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open About Page large"></button>
+        <figcaption>
+          <p class="asset-name">About Page</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-product-about-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+    </div>
+    <h3 class="full asset-group"><span class="lab">Author</span></h3>
+    <div class="assets">
+      <figure class="asset">
+        <img src="media/iconoteka-author-oleg-turbaba.jpg" alt="Oleg Turbaba" loading="lazy" decoding="async">
+        <button type="button" class="asset-zoom" aria-label="Open Oleg Turbaba large"></button>
+        <figcaption>
+          <p class="asset-name">Oleg Turbaba</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-author-oleg-turbaba.png" download>PNG</a><a class="ghost" href="media/iconoteka-author-oleg-turbaba.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+    </div>
+    <h3 class="full asset-group"><span class="lab">Iconoteka in Use</span></h3>
+    <div class="assets">
+      <figure class="asset">
+        <video src="media/iconoteka-gallery-automation.mp4" poster="media/iconoteka-gallery-automation-poster.jpg" muted loop playsinline preload="none" aria-label="Automation Workflow"></video>
+        <button type="button" class="asset-zoom" aria-label="Open Automation Workflow large"></button>
+        <figcaption>
+          <p class="asset-name">Automation Workflow</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-automation.mp4" download>MP4</a><a class="ghost" href="media/iconoteka-gallery-automation-poster.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <video src="media/iconoteka-gallery-bus-stop.mp4" poster="media/iconoteka-gallery-bus-stop-poster.jpg" muted loop playsinline preload="none" aria-label="Bus Stop Sign"></video>
+        <button type="button" class="asset-zoom" aria-label="Open Bus Stop Sign large"></button>
+        <figcaption>
+          <p class="asset-name">Bus Stop Sign</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-bus-stop.mp4" download>MP4</a><a class="ghost" href="media/iconoteka-gallery-bus-stop-poster.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <video src="media/iconoteka-gallery-recycling.mp4" poster="media/iconoteka-gallery-recycling-poster.jpg" muted loop playsinline preload="none" aria-label="Waste Sorting Bins"></video>
+        <button type="button" class="asset-zoom" aria-label="Open Waste Sorting Bins large"></button>
+        <figcaption>
+          <p class="asset-name">Waste Sorting Bins</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-recycling.mp4" download>MP4</a><a class="ghost" href="media/iconoteka-gallery-recycling-poster.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <video src="media/iconoteka-gallery-ui-kit.mp4" poster="media/iconoteka-gallery-ui-kit-poster.jpg" muted loop playsinline preload="none" aria-label="Interface Components"></video>
+        <button type="button" class="asset-zoom" aria-label="Open Interface Components large"></button>
+        <figcaption>
+          <p class="asset-name">Interface Components</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-ui-kit.mp4" download>MP4</a><a class="ghost" href="media/iconoteka-gallery-ui-kit-poster.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-bank-app-960.jpg" alt="Banking App Screens" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Banking App Screens large"></button>
+        <figcaption>
+          <p class="asset-name">Banking App Screens</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-bank-app-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-book-cover-960.jpg" alt="Book Cover" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Book Cover large"></button>
+        <figcaption>
+          <p class="asset-name">Book Cover</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-book-cover-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-city-guide-960.jpg" alt="City Guide Tiles" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open City Guide Tiles large"></button>
+        <figcaption>
+          <p class="asset-name">City Guide Tiles</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-city-guide-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-festival-cyclist-960.jpg" alt="Festival Hoarding" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Festival Hoarding large"></button>
+        <figcaption>
+          <p class="asset-name">Festival Hoarding</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-festival-cyclist-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-icon-pillows-960.jpg" alt="Stitched Pillows" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Stitched Pillows large"></button>
+        <figcaption>
+          <p class="asset-name">Stitched Pillows</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-icon-pillows-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-painted-wall-960.jpg" alt="Hand-Painted Wall" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Hand-Painted Wall large"></button>
+        <figcaption>
+          <p class="asset-name">Hand-Painted Wall</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-painted-wall-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-project-app-960.jpg" alt="Project Management App" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Project Management App large"></button>
+        <figcaption>
+          <p class="asset-name">Project Management App</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-project-app-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-reading-app-960.jpg" alt="Reading App Onboarding" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Reading App Onboarding large"></button>
+        <figcaption>
+          <p class="asset-name">Reading App Onboarding</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-reading-app-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-smart-home-app-960.jpg" alt="Smart Home App" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Smart Home App large"></button>
+        <figcaption>
+          <p class="asset-name">Smart Home App</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-smart-home-app-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-travel-cards-960.jpg" alt="Travel Story Cards" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Travel Story Cards large"></button>
+        <figcaption>
+          <p class="asset-name">Travel Story Cards</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-travel-cards-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset">
+        <img src="media/iconoteka-gallery-wayfinding-signs-960.jpg" alt="Museum Wayfinding" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Museum Wayfinding large"></button>
+        <figcaption>
+          <p class="asset-name">Museum Wayfinding</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-gallery-wayfinding-signs-1920.jpg" download>JPG</a></div>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="half-a">
+      <h3>Using These Assets</h3>
+      <p>The images and video show Iconoteka applied in interfaces, print and environmental graphics. They may be reproduced in articles, reviews and presentations about the library. Please credit Oleg Turbaba.</p>
+    </div>
+    <div class="half-b">
+      <h3>The Icons Themselves</h3>
+      <p>The library is released under the <a class="handle" href="https://github.com/iconoteka/iconoteka/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>, so the icons can be used in personal and commercial work, shipped inside closed-source products, and reproduced in print. Crediting Iconoteka is appreciated, and permission is never needed.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+
+<footer>
+  <div class="g">
+    <div class="footer-icon" id="footerIcon" aria-hidden="true"></div>   <!-- one random icon, text colour, new on every load -->
+    <div class="footer-group f-lib">
+      <h4>Library</h4>
+      <nav>
+        <a href="https://github.com/iconoteka/iconoteka/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+        <a href="https://github.com/iconoteka/iconoteka" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+        <a href="press.html">Press Kit</a>
+        <a href="about.html#privacy">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-group f-sup">
+      <h4>Support</h4>
+      <nav id="footerSupport"></nav>
+    </div>
+    <div class="footer-group f-fol">
+      <h4>Follow</h4>
+      <nav>
+        <a href="https://www.instagram.com/iconoteka/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.pinterest.com/turbaba/iconoteka/" target="_blank" rel="noopener">Pinterest</a>
+        <a href="https://www.are.na/oleg-turbaba/iconoteka" target="_blank" rel="noopener">Are.na</a>
+        <a href="https://x.com/iconoteka" target="_blank" rel="noopener">X</a>
+      </nav>
+    </div>
+    <div class="footer-group f-contact">
+      <h4>Contact</h4>
+      <p>For enquiries, collaborations, interviews, or sponsorships, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
+    </div>
+    <div class="footer-copy">© 2016–2026 <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">Oleg Turbaba</a>.<br> All rights reserved.</div>
+  </div>
+</footer>
+<div id="toast"></div>
+<div class="grid-overlay" id="gridOverlay" hidden aria-hidden="true"><div class="g"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+
+<script>
+(() => {   // the Logomark tile shows the same mark the header draws
+  const src = document.querySelector('header svg'), box = document.getElementById('pressMark');
+  if (src && box) box.innerHTML = src.outerHTML;
+})();
+</script>
+<script>
+let toastTimer = null;
+function showToast(msg) { const t = document.getElementById('toast'); if (!t) return; t.textContent = msg; t.classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('visible'), 1800); }
+
+
+// Reveal on load and on scroll, one ROW at a time rather than one section at a time: the title, the
+// account buttons, each boilerplate row, each asset heading and every single tile is its own target,
+// so the page assembles line by line down the screen. Items arriving together cascade 70 ms apart.
+(() => {
+  const targets = [...document.querySelectorAll(
+    '.press-dl, main .g > h1, main .g > .social-links, main .g > .label, .boiler, .asset-group, .asset,' +
+    ' #assets .half-a, #assets .half-b, footer .footer-icon, footer .footer-group, footer .footer-copy')];
+  const prep = el => { el.classList.add('reveal'); el.style.transitionDelay = '0ms'; };
+  targets.forEach(prep);
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches || /noreveal/.test(location.search);
+  if (still) { targets.forEach(el => el.classList.add('in')); return; }
+  targets.forEach(el => { if (el.getBoundingClientRect().bottom < 0) el.classList.add('now', 'in'); });
+  const io = new IntersectionObserver(entries => {
+    let n = 0;
+    entries.filter(e => e.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)   // always top to bottom
+      .forEach(e => {
+        if (e.boundingClientRect.top < 0) e.target.classList.add('now');
+        else e.target.style.transitionDelay = (n++ * 70) + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+  }, { threshold: 0.02 });
+  targets.forEach(el => io.observe(el));
+  addEventListener('scroll', () => {   // safety net at the very bottom
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) targets.forEach(el => el.classList.add('in'));
+  }, { passive: true });
+})();
+
+// Header: hides while scrolling down, reappears as soon as the user scrolls up (every breakpoint)
+(() => {
+  const hdr = document.querySelector('header'); let last = scrollY, down = 0;
+  const show = () => { hdr.classList.remove('hidden'); down = 0; };
+  window.addEventListener('scroll', () => {
+    const y = Math.max(0, scrollY), dy = y - last; last = y;   // Math.max: iOS rubber-banding reports negative values
+    if (dy < 0 || y <= hdr.offsetHeight) return show();          // ANY upward movement, or being near the top, shows the header at once (user: always, every breakpoint)
+    down += dy;
+    if (down > 12) { hdr.classList.add('hidden'); document.getElementById('burgerMenu').classList.remove('open'); }
+  }, { passive: true });
+  window.addEventListener('resize', show);                       // orientation change / iOS toolbar collapse: never leave it hidden
+  window.addEventListener('touchstart', () => { last = Math.max(0, scrollY); }, { passive: true });   // a new touch starts a fresh measurement
+})();
+
+
+// Mobile burger (same as the homepage)
+const burgerBtn = document.getElementById('burgerBtn');
+const burgerMenu = document.getElementById('burgerMenu');
+burgerBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const rect = burgerBtn.querySelector('svg').getBoundingClientRect();   // align to the glyph, not the padded button
+  burgerMenu.style.top = (rect.bottom + 6) + 'px';
+  burgerMenu.style.left = 'auto';
+  burgerMenu.style.right = (document.documentElement.clientWidth - rect.right) + 'px';
+  burgerMenu.classList.toggle('open');
+});
+document.addEventListener('click', () => burgerMenu.classList.remove('open'));
+
+// G toggles the layout-grid overlay (ignored while typing in a field); Escape closes the burger
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') burgerMenu.classList.remove('open');
+  if (e.key !== 'g' && e.key !== 'G') return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const t = e.target; if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+  const o = document.getElementById('gridOverlay'); o.hidden = !o.hidden;
+});
+
+
+// The floating Download button sits at the top, just under the header, at the left edge of the content
+// grid. Both measurements are read from the page: the header's height changes with the breakpoint, and
+// the grid's max-width steps up at 1280, 1600 and 2000.
+(() => {
+  const dl = document.querySelector('.press-dl');
+  if (!dl) return;
+  const grid = document.querySelector('main .g');
+  const h1 = document.querySelector('.headline .statement');
+  const hdr = document.querySelector('header');
+  // Where the title's capitals actually start: half the leading, plus the gap between the font's
+  // ascent and its cap height. Canvas reports both for the very font in use, so this needs no constants.
+  // The title's baseline and cap height, measured by the browser rather than from font tables:
+  // a zero-width inline probe with vertical-align:baseline puts its own bottom ON the baseline,
+  // and 1cap resolves to the cap height of whatever font the h1 is actually rendering.
+  const capBox = () => {
+    if (!h1) return null;
+    const probe = document.createElement('span');
+    probe.style.cssText = 'display:inline-block;width:0;height:1cap;vertical-align:baseline';
+    h1.appendChild(probe);
+    const r = probe.getBoundingClientRect();
+    h1.removeChild(probe);
+    const cap = r.height || parseFloat(getComputedStyle(h1).fontSize) * 0.72;   // 1cap is Safari 16.4+/Chrome 111+
+    // the title reveals itself with a translateY, and a rect includes that; read it back out so the
+    // measurement is the settled position no matter when this runs
+    const t = getComputedStyle(h1).transform;
+    const ty = t && t !== 'none' ? (parseFloat(t.split(',')[5]) || 0) : 0;
+    const base = r.bottom + window.scrollY - ty;   // document-relative: --dl-top is the `top` of a FIXED
+    return { top: base - cap, cap: cap, baseline: base };   // element, i.e. its position at scroll 0
+  };
+  const lift = () => {
+    const root = document.documentElement.style;
+    const c = capBox();
+    if (c) {
+      const h = Math.round(c.cap);                 // as tall as the capitals beside it
+      root.setProperty('--dl-h', h + 'px');
+      // the pill occupies exactly the title's cap band: its top on the cap tops, its bottom on the baseline
+      root.setProperty('--dl-top', Math.round(c.top) + 'px');
+    } else {
+      root.setProperty('--dl-top', '96px');
+    }
+    if (grid) root.setProperty('--dl-left', Math.round(grid.getBoundingClientRect().left) + 'px');
+  };
+  lift();
+  addEventListener('resize', lift);
+
+  document.fonts && document.fonts.ready.then(lift);
+  if (h1) h1.addEventListener('transitionend', lift);   // belt and braces once the reveal lands
+})();
+
+// A video asset plays while the pointer is over its tile and rewinds when it leaves. preload="none"
+// keeps the file off the wire until someone actually hovers, so the page still costs only its posters.
+if (matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('.asset video').forEach(v => {
+    const tile = v.closest('.asset');
+    tile.addEventListener('mouseenter', () => { v.play().catch(() => {}); });
+    tile.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+  });
+}
+
+// The viewer: an asset at full size, with its name, its own download buttons and a way to step
+// through every other media asset without going back to the grid. Arrow keys and Escape work too.
+(() => {
+  const tiles = [...document.querySelectorAll('.asset')].filter(a => a.querySelector('.asset-zoom'));
+  if (!tiles.length) return;
+  let box = null, stage = null, bar = null, prev = null, next = null, at = 0;
+
+  const shut = () => { if (!box) return; box.remove(); box = null; removeEventListener('keydown', onKey); };
+  const onKey = e => {
+    if (e.key === 'Escape') return shut();
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(at + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
+  };
+
+  const show = i => {
+    at = ((i % tiles.length) + tiles.length) % tiles.length;   // wraps at both ends
+    const tile = tiles[at], media = tile.querySelector('img, video');
+    const copy = media.cloneNode(true);
+    copy.removeAttribute('loading'); copy.removeAttribute('width'); copy.removeAttribute('height');
+    copy.removeAttribute('srcset'); copy.removeAttribute('sizes');
+    if (copy.tagName === 'IMG') {
+      const full = tile.querySelector('.asset-links a[href$=".jpg"], .asset-links a[href$=".png"]');
+      if (full) copy.src = full.getAttribute('href');
+    } else {
+      copy.muted = true; copy.loop = true; copy.autoplay = true; copy.setAttribute('preload', 'auto');
+    }
+    stage.replaceChildren(copy);
+    if (copy.tagName === 'VIDEO') copy.play().catch(() => {});
+    const name = tile.querySelector('.asset-name').textContent;
+    const links = tile.querySelector('.asset-links');
+    const label = document.createElement('p');
+    label.className = 'big-name'; label.textContent = name;
+    const mid = document.createElement('div'); mid.className = 'big-mid';
+    mid.append(label);
+    if (links) { const l = links.cloneNode(true); l.classList.add('big-links'); mid.append(l); }
+    bar.replaceChildren(prev, mid, next);
+  };
+
+  const button = (cls, label, html, go) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = cls; b.setAttribute('aria-label', label); b.innerHTML = html;
+    b.addEventListener('click', e => { e.stopPropagation(); go(); });
+    return b;
+  };
+
+  const open = (btn, e) => {
+    e.stopPropagation();
+    if (box) shut();
+    box = document.createElement('div');
+    box.className = 'big';
+    stage = document.createElement('div'); stage.className = 'big-stage';
+    bar = Object.assign(document.createElement('div'), { className: 'big-bar' });
+    prev = button('big-step', 'Previous', window.PREV_MARK || '←', () => show(at - 1));
+    next = button('big-step', 'Next', window.NEXT_MARK || '→', () => show(at + 1));
+    box.append(stage, bar, button('big-close', 'Close', window.CLOSE_MARK || '×', shut));
+    box.addEventListener('click', ev => { if (ev.target === box || ev.target === stage) shut(); });
+    document.body.appendChild(box);
+    show(tiles.indexOf(btn));
+    addEventListener('keydown', onKey);
+  };
+  tiles.forEach(tile => {
+    tile.querySelector('.asset-zoom').addEventListener('click', e => open(tile, e));
+    // the picture itself opens it too, which is where people click first
+    const media = tile.querySelector('img, video');
+    if (media) media.addEventListener('click', e => open(tile, e));
+  });
+})();
+
+// Copy a boilerplate block; the button confirms in place, as the install commands do.
+document.querySelectorAll('.copy-text').forEach(b => b.addEventListener('click', () => {
+  navigator.clipboard.writeText(b.dataset.copy).then(() => {
+    const was = b.textContent; b.textContent = 'Copied';
+    setTimeout(() => { b.textContent = was; }, 1600);
+  }).catch(() => showToast('Copy failed'));
+}));
+
+// The library version for the header line and the burger, plus the footer's random icon.
+// Only the pieces of the shared chrome that need the data: this page draws no icon grid.
+fetch('icons.json').then(r => r.json()).then(data => {
+  const icons = data.icons || [];
+  const ver = data.meta && data.meta.version ? 'v' + data.meta.version.split('.').map(x => String(+x)).join('.') : '';
+  if (ver) document.querySelectorAll('.lib-ver').forEach(el => el.textContent = ver);
+  const bv = document.querySelector('.burger-ver');
+  if (bv) bv.innerHTML = '<span><span class="ver-num">' + ver + '</span><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></span>';
+  const byName = (n, w, style) => { const ic = icons.find(i => i.name.split('-')[0] === n);
+    return ic ? pathOf(ic, w, style) : ''; };
+  const pathOf = (ic, w, style) => { const v = ic.variants[w] && ic.variants[w][style]; return typeof v === 'string' ? v : (v && (v.d || v.path)) || ''; };
+  const zoom = byName('fullscreen', 'regular', 'stroke') || byName('expand', 'regular', 'stroke');
+  if (zoom) document.querySelectorAll('.asset-zoom').forEach(b =>
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + zoom + '"/></svg>');
+  const mark = n => (d => d ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + d + '"/></svg>' : '')(byName(n, 'regular', 'stroke'));
+  window.CLOSE_MARK = mark('cross');
+  window.PREV_MARK = mark('arrow_left');
+  window.NEXT_MARK = mark('arrow_right');
+  const fillPool = icons.filter(i => pathOf(i, 'regular', 'fill'));
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const fi = document.getElementById('footerIcon'), fIcon = fillPool.length && pick(fillPool);
+  if (fi && fIcon) {
+    fi.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + pathOf(fIcon, 'regular', 'fill') + '"/></svg>';
+    let current = fIcon;
+    fi.addEventListener('mouseenter', () => {
+      if (window.matchMedia('(max-width: 480px)').matches) return;
+      let next = pick(fillPool); let guard = 0;
+      while (next === current && guard++ < 8) next = pick(fillPool);
+      current = next;
+      fi.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + pathOf(next, 'regular', 'fill') + '"/></svg>';
+    });
+  }
+}).catch(() => {});
+</script>
+<script src="support.js?v=10"></script>
+<script src="consent.js?v=1"></script>
+</body>
+</html>

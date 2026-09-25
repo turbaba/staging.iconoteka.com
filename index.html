@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>[staging] Iconoteka, 1,300 open-source icons in 7 weights and 2 styles</title>
+<meta name="description" content="Iconoteka is a free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Iconoteka, 1,300 open-source icons in 7 weights and 2 styles"/>
+<meta property="og:description" content="Iconoteka is a free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+<meta property="og:image" content="https://iconoteka.com/iconoteka-preview.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:type" content="image/png"/>
+<meta property="og:image:alt" content="Iconoteka icons on a grid"/>
+<meta property="og:url" content="https://iconoteka.com/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Iconoteka"/>
+
+<!-- Twitter/X -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Iconoteka, 1,300 open-source icons in 7 weights and 2 styles"/>
+<meta name="twitter:description" content="Iconoteka is a free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+<meta name="twitter:image" content="https://iconoteka.com/iconoteka-preview.png"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="support.css?v=11">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f7f7f7;
+  --surface2: #efefef;
+  --border: #ededed;
+  --text: #141414;
+  --text-muted: #63626d;
+  --text-dim: #8b8a94;
+  --brand: #ffc3dc;
+  --radius: 6px;
+  --panel-w: 270px;
+  --pad: 24px;
+  --panel-pad: 20px;   /* side inset inside the two panels; header and grid keep --pad */
+  --sb: 11px;   /* native scrollbar width inside the category list */
+  /* radius scale */
+  --r-xs: 3px;      /* scrollbar thumbs, slider track */
+  --r-sm: 6px;      /* small controls: buttons, segmented, options */
+  --r-md: 10px;     /* surfaces: cards, dropdown menus */
+  --r-pill: 999px;  /* badges, tags, search */
+  /* motion */
+  --t-fast: .12s;   /* hover/colour */
+  --t-base: .2s;    /* size/position */
+  --t-slow: .28s;   /* panel + large moves */
+  /* elevation */
+  --shadow-md: 0 4px 16px rgba(20,20,20,0.12);
+  --shadow-lg: 0 8px 30px rgba(20,20,20,0.18);
+  --panel-margin: 0px;
+  --ui-surface: #f2f2f3;
+  --ui-surface-hover: #e8e8e8;
+  --ui-input: #f3f3f4;
+  --ui-input-hover: #eeeeef;
+  --ui-seg-on: #ffffff;
+  --ui-panel: #ffffff;
+  --ui-dropdown: #ffffff;
+  --ui-card-hover: rgba(242,242,243,0.7);
+  --ui-card-active: #f2f2f3;
+  --ui-slider-track: #efefef;
+  --ui-slider-stop: #cecece;
+  --logomark-color: #141414;
+}
+[data-theme="dark"] {
+  --shadow-md: 0 4px 16px rgba(20,20,20,0.45);
+  --shadow-lg: 0 8px 30px rgba(20,20,20,0.55);
+  --bg: #191919;
+  --surface: #222222;
+  --surface2: #2a2a2a;
+  --border: #333333;
+  --text: #ffffff;
+  --text-muted: #a2a2a2;
+  --text-dim: #8a8a8a;
+  --brand: #ffc3dc;
+  --ui-surface: #2a2a2a;
+  --ui-surface-hover: #363636;
+  --ui-input: #252525;
+  --ui-input-hover: #2e2e2e;
+  --ui-seg-on: #3a3a3a;
+  --ui-panel: #202020;
+  --ui-dropdown: #242424;
+  --ui-card-hover: rgba(50,50,50,0.49);
+  --ui-card-active: #232323;
+  --ui-slider-track: #2e2e2e;
+  --ui-slider-stop: #444444;
+  --logomark-color: #ffffff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: 'Inter', sans-serif; font-size: 14px; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow: hidden; }
+body { display: flex; flex-direction: column; }
+
+/* HEADER */
+header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 var(--panel-pad); height: 78px; flex-shrink: 0; column-gap: 8px; border-bottom: 1px solid var(--border); }
+.logo-wrap { display: flex; align-items: center; gap: 8px; }
+.logo { font-weight: 550; font-size: 23px; letter-spacing: -0.3px; color: var(--text); }
+.logo-wrap a { transition: opacity var(--t-fast); color: var(--text); text-decoration: none; }
+.action-btn.primary:hover { background: #333; opacity: 0.8; }
+.action-btn.secondary:hover { background: var(--ui-surface-hover); opacity: 0.8; }
+.beta-badge { font-size: 8.5px; font-weight: 700; background: var(--brand); color: #141414; height: 14px; padding: 2px 6px 0 6.6px; line-height: 1; border-radius: var(--r-pill); letter-spacing: 0.6px; text-transform: uppercase; display: inline-flex; align-items: center; justify-content: center; position: relative; top: -2px; }
+.header-search { display: flex; justify-content: center; align-items: center; width: 100%; min-width: 0; }
+.header-nav { display: flex; align-items: center; gap: 32px; justify-content: flex-end; position: relative; top: -1px; }
+.header-link { font-size: 14px; color: var(--text); text-decoration: none; transition: color var(--t-fast); font-weight: 600; }
+.header-link:hover { color: var(--text); opacity: 0.8; }
+/* hit area ≈ 38×(text+24)px without moving the text: padding cancelled by negative margins */
+.header-link { padding: 10px 12px; margin: -10px -12px; border-radius: var(--r-sm); }
+
+.header-btn { font-size: 16px; font-family: 'Inter', sans-serif; font-weight: 500; color: var(--text); background: var(--surface2); border: none; border-radius: var(--r-sm); padding: 6px 14px; cursor: pointer; text-decoration: none; transition: background var(--t-fast); }
+.header-btn:hover { background: var(--ui-surface-hover); }
+
+/* LAYOUT */
+.layout { display: flex; flex: 1; min-height: 0; }
+
+/* SIDEBAR */
+aside { width: var(--panel-w); flex-shrink: 0; display: flex; flex-direction: column; overflow: hidden; padding-top: 20px; border-right: 1px solid var(--border); }
+.sidebar-top { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.sidebar-controls { padding: 0px var(--panel-pad) 16px; display: flex; flex-direction: column; gap: 18px; flex-shrink: 0; }
+.cat-list-wrap { overflow-y: auto; flex: 1; scrollbar-width: thin; scrollbar-color: var(--border) transparent; padding-bottom: 10px; }
+.cat-list-wrap.has-scrollbar { width: 100%; }
+.cat-list-wrap.has-scrollbar .cat-item { padding-right: calc(var(--panel-pad) - var(--sb)); }
+.cat-list-wrap::-webkit-scrollbar { width: 3px; transition: width var(--t-base); }
+.cat-list-wrap:hover::-webkit-scrollbar { width: 6px; }
+.cat-list-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--r-xs); }
+.cat-list-wrap:hover::-webkit-scrollbar-thumb { background: var(--text-dim); }
+.cat-list-wrap::-webkit-scrollbar-track { background: transparent; }
+.seg { display: flex; background: var(--ui-surface); border: none; border-radius: var(--r-sm); padding: 2px; gap: 2px; transition: background var(--t-fast); }
+.seg:hover { background: var(--ui-surface-hover); }
+.seg-btn { flex: 1; height: 28px; border: none; border-radius: var(--r-sm); cursor: pointer; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--text-muted); background: transparent; transition: all var(--t-fast); }
+.seg-btn:hover { color: var(--text); }
+.seg-btn.on { background: var(--ui-seg-on); color: var(--text); font-weight: 500; box-shadow: var(--shadow-md); }
+.style-row { display: flex; justify-content: flex-start; align-items: baseline; gap: 7px; }
+.style-opts { display: flex; gap: 3px; }
+.style-row .seg-btn { flex: none; height: auto; padding: 7px 8px; margin: -7px 0; background: none; box-shadow: none; border-radius: 0; font-size: 12px; font-weight: 500; color: var(--text-muted); }
+.style-row .seg-btn:hover { color: var(--text); }
+.style-row .seg-btn.on { background: none; box-shadow: none; color: var(--text); font-weight: 500; }
+.slider-row { display: flex; flex-direction: column; gap: 14px; margin: 0; }
+.slider-label-row { display: flex; justify-content: flex-start; align-items: baseline; gap: 15px; }
+.slider-label { font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
+.slider-val { font-size: 12px; color: var(--text); font-weight: 500; }
+.weight-step { cursor: pointer; user-select: none; border-radius: var(--r-xs); transition: opacity var(--t-fast); display: inline-block; text-align: left; padding: 8px 0; margin: -8px 0; }   /* the weight name steps through the weights on tap. The hit area is padded vertically (the margin cancels it again so nothing moves) and held to the width of the longest name, so short ones like Bold are no harder to hit than Ultralight (user) */
+.weight-step:hover { opacity: .7; }
+.weight-step:active { opacity: .5; }
+.weight-step:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.slider-track-wrap { position: relative; height: 14px; display: flex; align-items: center; }
+.weight-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: var(--r-xs); outline: none; cursor: pointer; position: relative; z-index: 1; background: transparent; }
+.weight-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--text); cursor: pointer; transition: transform var(--t-fast); position: relative; z-index: 2; }
+.weight-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.weight-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--text); cursor: pointer; border: none; }
+.slider-stops-line { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: 4px; background: var(--ui-slider-track); border-radius: var(--r-xs); display: flex; align-items: center; justify-content: space-between; padding: 0; pointer-events: none; }
+.slider-stop { width: 4px; height: 4px; background: var(--ui-slider-stop); border-radius: 50%; flex-shrink: 0; transition: background var(--t-fast); }
+.slider-stop.hot { background: var(--text-muted); }
+.cat-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 6px; cursor: pointer; user-select: none; }
+.cat-header:hover .cat-label-text { color: var(--text); }
+.cat-label-text { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; transition: color var(--t-fast); }
+.cat-chevron { color: var(--text-muted); display: flex; transition: transform var(--t-base); }
+.cat-header.collapsed .cat-chevron { transform: rotate(-90deg); }
+.cat-list { overflow: hidden; transition: max-height var(--t-slow) cubic-bezier(.4,0,.2,1); }
+.cat-list.collapsed { max-height: 0 !important; }
+.cat-item { display: flex; align-items: center; justify-content: space-between; padding: 5px var(--panel-pad) 6px; cursor: pointer; color: var(--text-muted); font-size: 12px; transition: color var(--t-fast); }
+.cat-item:hover { background: transparent; color: var(--text); opacity: 0.8; }
+.cat-item.active { background: transparent; color: var(--text); font-weight: 600; }
+.cat-count { font-size: 12px; opacity: 0.45; padding-right: 3px; position: relative; right: -4px; }
+.sidebar-ver { padding: 20px var(--panel-pad); margin-top: auto; flex-shrink: 0; display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; }
+.footer-ver { font-size: 11px; line-height: 1.5; white-space: nowrap; color: var(--text-muted); }
+/* version number: one style across the site — 12px medium system mono (same as the About page) */
+.ver-num { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; font-weight: 500; }
+.footer-link { color: inherit; text-decoration: none; transition: color var(--t-fast); }
+.footer-link:hover { color: var(--text); }
+.sidebar-footer { display: none; }
+
+/* MAIN */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }   /* the page's heading: read by search engines and screen readers, never drawn */
+.main-wrap { flex: 1; display: flex; flex-direction: column; min-width: 0; overflow-y: scroll; scrollbar-width: thin; scrollbar-color: var(--border) transparent; scrollbar-gutter: stable both-edges; }
+.search-wrap { position: relative; width: clamp(300px, calc(300px + (100vw - 861px) * 0.114), 410px); max-width: 100%; min-width: 120px; flex-shrink: 1; }
+.search-ico { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); pointer-events: none; display: flex; color: var(--text-muted); }
+.search-input { width: 100%; height: 44px; padding: 0 50px 1px 22px; background: var(--ui-input); border: 1px solid transparent; border-radius: var(--r-pill); font-size: 16px; font-family: 'Inter', sans-serif; color: var(--text); outline: none; transition: background var(--t-fast); }
+.search-input:hover { background: var(--ui-input-hover); }
+.search-input:focus { border-color: transparent; }
+.search-input::placeholder { color: var(--text-muted); opacity: 1; }
+.search-input:focus { border-color: transparent; }
+.search-input::placeholder { color: var(--text-muted); opacity: 1; }
+.search-count { position: absolute; right: 79px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--text-muted); opacity: 0.65; pointer-events: none; white-space: nowrap; display: none; }
+.search-count.visible { display: block; }
+.search-clear { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); display: none; align-items: center; justify-content: center; padding: 0; line-height: 0; }
+.search-clear.visible { display: flex; }
+.search-wrap:has(.search-clear.visible) .search-ico { display: none; }
+.search-wrap:has(.search-clear.visible) .search-count { right: 44px; }
+
+/* GRID */
+main { flex: 1; padding: 28px calc(var(--pad) + 10px) 40px calc(var(--pad) + 10px); display: flex; flex-direction: column; align-items: center; }
+main::-webkit-scrollbar { width: 4px; }
+main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--r-xs); }
+.category-section { margin-bottom: 32px; width: 100%; max-width: 1256px; padding-top: 28px; margin-left: auto; margin-right: auto; }
+.category-section:first-child { padding-top: 0; }
+.category-title { font-size: 14px; font-weight: 500; color: var(--text); padding: 0 0 20px 0; display: flex; align-items: baseline; gap: 8px; }
+.category-title span { opacity: 0.6; font-size: 14px; font-weight: 400; color: var(--text-muted); }
+.icons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 12px 24px; width: 100%; max-width: 1256px; }
+
+/* ICON CARD */
+.icon-card { -webkit-user-select: none; user-select: none; width: 100%; height: 128px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 16px; gap: 8px; border-radius: var(--r-md); cursor: pointer; background: transparent; border: 1px solid transparent; transition: background var(--t-fast), border-color .1s; color: var(--text); position: relative; flex-shrink: 0; overflow: hidden; }
+.icon-card:hover { background: var(--ui-card-hover); border-color: transparent; }
+.icon-card.focused { background: var(--ui-card-hover); border-color: transparent; outline: none; }
+.icon-card.active-panel { background: var(--ui-surface); border-color: transparent; }
+.icon-svg-wrap { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; flex-shrink: 0; }
+.icon-label { font-size: 14px; color: var(--text-muted); text-align: center; line-height: 1.2; width: 100%; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; padding: 0 6px; }
+.icon-card:hover .card-dl-btn { opacity: 1; }
+
+/* LOADING */
+#loading { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--text-muted); }
+.spinner { width: 22px; height: 22px; border: 2px solid var(--border); border-top-color: var(--text-muted); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty { padding: 48px 16px; text-align: center; color: var(--text-muted); line-height: 1.43; font-size: 23px; width: 100%; max-width: 1256px; }
+.empty a { color: var(--text); text-decoration: none; font-weight: 700; font-size: 16px; display: inline-block; margin-top: 20px; }
+
+/* BETA badge shown again (user 2026-09-06) */
+
+/* TOAST */
+#toast { position: fixed; bottom: 20px; top: auto; left: 50%; transform: translateX(-50%); background: var(--brand); color: #141414; font-size: 12px; font-weight: 400; font-family: 'Inter', sans-serif; padding: 4px 14px; border-radius: var(--r-pill); pointer-events: none; opacity: 0; transition: opacity var(--t-slow); z-index: 2000; white-space: nowrap; width: auto; max-width: 400px; }
+#toast.visible { opacity: 1; transition: opacity var(--t-base); }
+
+@media (max-width: 480px) {
+  #toast { font-size: 13px; padding: 8px 18px;
+           top: calc(var(--toolbar-bottom, 160px) + 12px); bottom: auto; }
+  #toast.visible { opacity: 1; }
+}
+
+/* TOOLTIP */
+#tooltip { position: fixed; background: var(--text); color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; padding: 4px 9px; border-radius: var(--r-sm); pointer-events: none; opacity: 0; transition: opacity var(--t-fast); z-index: 1000; white-space: nowrap; }
+#tooltip.visible { opacity: 1; }
+#themeToggle { background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-muted); padding: 0; transition: color var(--t-fast); flex-shrink: 0; }
+#themeToggle:hover { color: var(--text); }
+
+/* PANEL */
+#panel { position: fixed; top: 78px; right: 0; height: calc(100vh - 78px); width: var(--panel-w); background: var(--bg); border: none; border-radius: 0; display: flex; flex-direction: column; z-index: 500; transition: right var(--t-slow) cubic-bezier(.4,0,.2,1); box-shadow: none; overflow: hidden; }
+[data-theme="dark"] .logo { color: #ffffff; }
+[data-theme="dark"] #logomark { color: #ffffff; }
+[data-theme="dark"] .logo-wrap a { color: #ffffff; }
+#logomark { color: var(--text); }
+#panel.open { right: 0; }
+/* Mobile toolbar: search + controls as a single bar beneath the header */
+@media (max-width: 480px) {
+  .beta-badge { top: -3px; } /* whole chip 1px higher on mobile (base top is -2px) */
+  .toolbar { display: flex; flex-direction: column; gap: 10px; padding: 10px;
+             border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .toolbar .mobile-search-row { padding: 0; }
+  .toolbar .mobile-controls { padding: 0; }
+  /* category title sits at double the grid's left inset */
+  .category-title { padding-left: 10px; }
+  /* logo is decorative here — no tap, no hover feedback */
+  .logo-wrap a { pointer-events: none; }
+  .logo-wrap a:hover { opacity: 1; }
+}
+/* above mobile the wrapper must not create a box of its own */
+@media (min-width: 481px) { .toolbar { display: contents; } }
+
+/* Burger menu footer on mobile + tablet: credit left, theme toggle right */
+@media (max-width: 860px) {
+  .burger-ver { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+  .burger-ver #themeToggle { position: relative; bottom: 2px; flex-shrink: 0; }
+}
+
+/* Mobile only: the always-open panel is a desktop pattern, so below 481px it
+   becomes a dismissible full-width sheet and the grid gets its width back.
+   (Tablet has its own single-column layout and must not match this.) */
+@media (max-width: 480px) {
+  .main-wrap { padding-right: 0 !important; }
+  /* Bottom sheet: no preview — name, tags and actions across the full width */
+  #panel { left: 0; right: 0 !important; bottom: 0; top: auto;
+           width: 100% !important; height: auto; max-height: 62vh;
+           flex-direction: column;
+           border-left: none; border-top: 1px solid var(--border);
+           transform: translateY(105%);
+           transition: transform var(--t-slow) cubic-bezier(.4,0,.2,1); }
+  #panel.sheet-open { transform: translateY(0); }
+  #panel .panel-preview { display: none; }
+  #panel .panel-body { flex: 1 1 auto; min-width: 0; overflow-y: auto;
+                       border-left: none; padding: 18px var(--panel-pad) 18px; gap: 14px; }
+  #panel .panel-body-top { margin-top: 0; flex: 0 0 auto; gap: 10px; }
+  #panel .panel-body-bottom { padding-bottom: 0; }
+  #panel .panel-name { font-size: 22px; letter-spacing: -0.65px; }
+  #panel .action-btn { height: 38px; font-size: 13px; white-space: nowrap; }
+  #panel .tags-wrap { height: 23px; margin-top: -1px; }
+  #panel .copy-row { flex-wrap: nowrap; white-space: nowrap; gap: 10px; }
+  #panel .actions-list > *:nth-child(2) { display: flex; gap: 8px; }
+  #panel .actions-list > *:nth-child(2) .action-btn { flex: 1; min-width: 0; }
+  /* two rows: all three buttons on one, export + copy-code on the next.
+     Children 2 and 3 have no classes, so they're addressed by position. */
+  #panel .actions-list { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);
+                         gap: 15px 8px; align-items: center; }
+  #panel .actions-list > *:nth-child(1) { grid-column: 1; grid-row: 1; }        /* Copy SVG      */
+  #panel .actions-list > *:nth-child(2) { grid-column: 2 / span 2; grid-row: 1; /* Save SVG/PNG  */
+                                          display: flex; gap: 8px; }
+  #panel .actions-list > *:nth-child(2) .action-btn { flex: 1; min-width: 0; }
+  #panel .actions-list > *:nth-child(3) { grid-column: 1; grid-row: 2; margin: 0 !important; min-width: 0; } /* Export size */
+  /* its label row carries inline gap/layout from JS — tighten so it fits its column */
+  #panel .actions-list > *:nth-child(3) > div { gap: 8px !important; min-width: 0; }
+  #panel .actions-list > *:nth-child(3) .size-combobox { width: 40px; }
+  #panel .actions-list > .copy-row      { grid-column: 2 / span 2; grid-row: 2; margin: 0;
+                                          justify-content: flex-end; } /* Copy code, flush right */
+  .panel-sheet-close { position: absolute; top: 10px; right: 10px; z-index: 2; width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center; background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--r-pill); color: var(--text); font-size: 15px; line-height: 1; cursor: pointer; }
+}
+@media (min-width: 861px) { .panel-sheet-close { display: none; } }
+.logo-wrap { position: relative; top: -1px; } /* whole logo group 1px up, every breakpoint */
+
+.main-wrap { padding-right: var(--panel-w); transition: padding-right var(--t-slow) cubic-bezier(.4,0,.2,1); }
+.panel-preview { width: 100%; background: transparent; border-left: 1px solid var(--border); padding: 20px var(--panel-pad) 0 calc(var(--panel-pad) - 1px); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; cursor: pointer; border-radius: 0; overflow: visible; z-index: 1; user-select: none; -webkit-user-select: none; }
+.empty a:hover { opacity: 0.8; }
+/* badge: one of three brand shapes (radius 200 / 420 / 960 on a 1024 tile), picked at random per preview */
+.preview-badge { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; transition: none; }
+.preview-badge svg { width: 60%; height: 60%; }
+.panel-body { flex: 1; overflow-y: auto; border-left: 1px solid var(--border); padding: 20px var(--panel-pad) 0 calc(var(--panel-pad) - 1px); display: flex; flex-direction: column; gap: 16px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; user-select: none; -webkit-user-select: none; min-height: 0; }
+.panel-body::-webkit-scrollbar { width: 4px; }
+.panel-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--r-xs); }
+.panel-body::-webkit-scrollbar-track { background: transparent; }
+.panel-body-top { display: flex; flex-direction: column; gap: 16px; flex: 1; }
+.panel-body-bottom { padding: 0 0 20px 0; margin-top: 0; }   /* same bottom inset as the left panel's version block */
+.panel-body-bottom .slider-row { margin-bottom: 18px; }
+.panel-name { font-size: 27px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.1; user-select: text; -webkit-user-select: text; cursor: text; }
+.panel-style-label { font-size: 12px; color: var(--text-muted); font-weight: 400; letter-spacing: 0.2px; margin-top: 4px; user-select: none; -webkit-user-select: none; }
+.tags-wrap { display: flex; flex-wrap: wrap; gap: 8px 4px; height: 54px; overflow: hidden; flex-shrink: 0; align-content: flex-start; margin-top: 1px; }
+.tag { padding: 4px 10px; background: var(--ui-surface); font-size: 12px; color: var(--text-muted); cursor: pointer; transition: background var(--t-fast), color .15s; user-select: text !important; -webkit-user-select: text !important; }
+.tag:hover { background: var(--ui-surface-hover); color: var(--text); }
+.tag-pill { border-radius: var(--r-pill); padding-left: 9px; padding-right: 9px; }
+.tag-rect { border-radius: var(--r-xs); }
+.tag-rounded { border-radius: var(--r-sm); }
+.panel-section-label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.actions-list { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.action-btn { display: flex; align-items: center; justify-content: center; height: 40px; padding: 0 16px 2px; border-radius: var(--r-sm); cursor: pointer; font-size: 13px; font-family: 'Inter', sans-serif; transition: all var(--t-fast); width: 100%; font-weight: 600; border: none; }
+.action-btn.primary { background: var(--text); color: #fff; }
+.action-btn.primary:hover { background: #333; }
+.action-btn.secondary { background: var(--ui-surface); color: var(--text); }
+.action-btn.secondary:hover { background: var(--ui-surface-hover); }
+[data-theme="dark"] .action-btn.primary { background: var(--text); color: var(--bg); }
+[data-theme="dark"] .action-btn.primary:hover { background: var(--text); opacity: 0.85; }
+.action-btn.success { opacity: 0.6; }
+.copy-row { display: flex; align-items: baseline; gap: 15px; margin-top: 3px; flex-wrap: nowrap; white-space: nowrap; }
+.copy-opts { display: flex; gap: 12px; }
+.copy-label { font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
+.copy-btn { background: none; border: none; cursor: pointer; font-size: 12px; font-weight: 500; font-family: 'Inter', sans-serif; color: var(--text-muted); padding: 3px 0; border-radius: var(--r-sm); transition: color var(--t-fast); }
+.copy-btn:hover { background: none; color: var(--text); opacity: 1; }
+.copy-btn.success { color: var(--text-muted); }
+.size-pill { height: 28px; padding: 0 12px; border: 1px solid var(--border); border-radius: var(--r-pill); background: transparent; font-size: 12px; font-family: 'Inter', sans-serif; color: var(--text-muted); cursor: pointer; transition: all var(--t-fast); }
+.size-pill:hover { border-color: var(--text-dim); color: var(--text); }
+.size-pill.active { background: var(--text); color: #fff; border-color: var(--text); }
+.size-combobox-wrap { position: relative; display: inline-flex; align-items: center; background: none;  transition: background var(--t-fast); }
+.size-combobox-wrap:hover .size-combobox, .size-combobox-wrap:focus-within .size-combobox { color: var(--text); }
+.size-combobox-wrap:hover .size-combobox-arrow { color: var(--text); }
+.size-combobox { width: 36px; text-align: left; border: none; background: none; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 500; color: var(--text); outline: none; cursor: text; padding: 0; line-height: 1; }
+.size-combobox-arrow { display: flex; align-items: center; padding: 0 0 0 1px; color: var(--text-muted); cursor: pointer; }
+.size-combobox-arrow:hover { color: var(--text); }
+.size-dropdown-menu { display: none; position: fixed; top: auto; bottom: auto; background: var(--ui-panel); border-radius: var(--r-md); box-shadow: var(--shadow-md); padding: 4px; z-index: 2000; flex-direction: column; gap: 2px; min-width: 90px; }
+.size-dropdown-menu.open { display: flex; }
+.size-dropdown-opt { background: none; border: none; cursor: pointer; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 500; color: var(--text); padding: 6px 10px; border-radius: var(--r-sm); text-align: left; transition: background var(--t-fast); }
+.size-dropdown-opt:hover { background: var(--ui-surface); }
+.size-dropdown-opt.active { font-weight: 700; }
+.tablet-controls { display: none; }
+.burger-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; margin-right: -4px; color: var(--text); }
+/* hover for the few controls that had none, and a pressed state for every control (2026-09-06) */
+.burger-btn, .search-clear, .panel-sheet-close, .mob-size-btn { transition: opacity var(--t-fast); }
+.burger-btn:hover, .search-clear:hover, .panel-sheet-close:hover, .mob-size-btn:hover { opacity: .8; }
+.header-link:active, .logo-wrap a:active, .header-btn:active, .action-btn:active, .seg-btn:active, .cat-item:active, .cat-header:active, .footer-link:active,
+.icon-card:active, .card-dl-btn:active, #themeToggle:active, .tag:active, .copy-btn:active, .size-pill:active, .size-dropdown-opt:active, .size-combobox-arrow:active,
+.tab-cat-btn:active, .tab-cat-option:active, .burger-link:active, .burger-btn:active, .mob-weight-btn:active:not(:disabled), .mob-size-option:active, .mob-size-btn:active,
+.search-clear:active, .panel-sheet-close:active, .empty a:active { opacity: .6; }
+
+@media (min-width: 481px) and (max-width: 860px) {
+  header { grid-template-columns: auto 1fr auto; height: 78px; padding: 0 var(--panel-pad); position: relative; column-gap: 20px; }
+  .header-search { display: flex; grid-column: 2; }
+  .header-nav { display: none; }
+  .burger-btn { display: flex; align-items: center; justify-content: center; grid-column: 3; grid-row: 1; }
+  .burger-menu { right: auto; left: 20px; }
+  /* Single left column: controls + category dropdown + icon panel, stacked */
+  .tablet-controls { display: none !important; }
+  .cat-list-wrap { display: none; }
+  .main-wrap { padding-right: 0 !important; }
+  #panel { position: static; width: 100%; height: auto; flex: 1; min-height: 0;
+           border-left: none; background: transparent; }
+  #panel .panel-body { border-left: none; }
+  /* content is one block, pinned to the bottom; margin-top:auto (not justify-content)
+     so the panel still scrolls when it overflows */
+  #panel .panel-body { justify-content: flex-start; overflow-y: auto; }
+  #panel .panel-body-top { margin-top: auto; flex: 0 0 auto; }
+  #panel .panel-body-bottom { padding-bottom: 19px; }
+  /* version + credit + theme live in the burger menu at this width */
+  aside .sidebar-ver { display: none; }
+  .burger-ver { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+  .burger-ver #themeToggle { position: relative; bottom: 2px; flex-shrink: 0; }
+  /* tags to a single row — the column is short enough without two */
+  #panel .tags-wrap { height: 23px; }
+  /* slightly smaller action buttons to suit the narrower column */
+  #panel .action-btn { height: 34px; font-size: 12px; padding: 0 14px 2px; }
+  /* icon name 20% smaller in the narrower column */
+  #panel .panel-name { font-size: 21.6px; letter-spacing: -0.64px; }
+  /* no preview at this width — the space is better spent on the grid */
+  #panel .panel-preview { display: none; }
+  /* category picker matches the Export size control: label + plain value + chevron */
+  aside .tab-cat-wrap { width: 100%; display: flex; align-items: baseline; gap: 15px; }
+  aside .tab-cat-wrap::before { content: 'Category:'; font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
+  aside .tab-cat-btn { width: auto; height: auto; padding: 0; gap: 1px; background: none; border: none;
+    border-radius: 0; font-size: 12px; font-weight: 500; color: var(--text);
+    transition: color var(--t-fast); }
+  aside .tab-cat-btn:hover { background: none; color: var(--text); }
+  aside .tab-cat-btn svg { width: 10px; height: 10px; }
+  /* controls take their natural height; the panel takes the slack */
+  aside .sidebar-top { flex: 1; min-height: 0; }
+  aside .sidebar-controls { flex: 0 0 auto; }
+  aside { overflow: hidden; }
+  #panel .panel-body { overflow-y: auto; }
+  /* not a sheet at this size — the close control belongs to mobile only */
+  .panel-sheet-close { display: none; }
+  .panel-preview { aspect-ratio: 4/3; }
+  .panel-preview svg { max-width: 111px; max-height: 111px; }
+  .logo-wrap { grid-column: 1; }
+
+
+  aside { display: flex; }
+  .layout { flex-direction: row; }
+  main { padding: 28px 24px 40px; }
+  .icons-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .icon-card { flex: 1 1 calc(16.66% - 10px); min-width: 90px; max-width: 130px; }
+
+  /* Tablet controls bar — row 2: categories + style switch + weight slider */
+  .tablet-controls { display: flex; align-items: center; padding: 6px var(--panel-pad) 20px; gap: 24px; }
+
+  /* Seg */
+  .tab-seg { display: flex; background: var(--ui-surface); border-radius: var(--r-sm); padding: 2px; gap: 2px; flex-shrink: 0; }
+  .tab-seg .seg-btn { height: 34px; font-size: 13px; padding: 0; width: 64px; }
+
+  /* Weight slider */
+  .tab-weight-wrap { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+  /* Categories dropdown */
+  .tab-cat-wrap { position: relative; flex-shrink: 0; }
+  .tab-cat-btn { display: flex; align-items: center; gap: 8px; background: var(--ui-surface); border: none; border-radius: var(--r-sm); font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 500; color: var(--text); padding: 0 12px; cursor: pointer; outline: none; height: 38px; white-space: nowrap; }
+  .tab-cat-dropdown { display: none; position: fixed; background: var(--ui-panel); border-radius: var(--r-md); box-shadow: var(--shadow-md); padding: 8px; z-index: 1000; flex-direction: column; gap: 2px; width: 260px; max-height: 400px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+  .tab-cat-dropdown::-webkit-scrollbar { width: 3px; }
+  .tab-cat-dropdown::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--r-xs); }
+  .tab-cat-dropdown::-webkit-scrollbar-track { background: transparent; }
+  .tab-cat-dropdown.open { display: flex; }
+  .tab-cat-option { background: none; border: none; cursor: pointer; font-size: 14px; font-family: 'Inter', sans-serif; color: var(--text); padding: 10px 16px; border-radius: var(--r-sm); text-align: left; display: flex; justify-content: space-between; gap: 16px; }
+  .tab-cat-option:hover { background: var(--surface); }
+  .tab-cat-option.active { font-weight: 700; }
+  .tab-cat-count { font-size: 12px; opacity: 0.4; }
+}
+.burger-menu { display: none; position: fixed; background: var(--ui-panel); border-radius: var(--r-md); box-shadow: var(--shadow-md); padding: 8px; z-index: 1000; flex-direction: column; gap: 2px; width: 272px; }
+.burger-menu.open { display: flex; }
+.burger-link { font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; padding: 14px 12px; border-radius: var(--r-sm); }
+.burger-link:hover { background: var(--surface); }
+.burger-ver { font-size: 12px; color: var(--text-muted); padding: 12px 12px 8px; line-height: 1.6; }
+.burger-ver #themeToggle { color: var(--text-muted); }
+.mobile-controls { display: none; }
+.mobile-search-row { display: none; }
+
+@media (max-width: 480px) {
+  header { grid-template-columns: 1fr auto; height: auto; padding: 18px var(--panel-pad) 16px; position: relative; column-gap: 0; }
+  .header-search { display: none; }
+  .header-nav { display: none; }
+  .burger-btn { display: flex; align-items: center; justify-content: center; }
+  .logo { font-size: 18.9px; }
+
+  /* Mobile search row */
+  .mobile-search-row { display: flex; padding: 0 10px 10px; }
+  .mobile-search-row .search-wrap { width: 100%; max-width: 100%; }
+  .mobile-search-row .search-input { height: 46px; padding-left: 20px; }
+
+  /* Mobile controls row */
+  .mobile-controls { display: flex; align-items: center; padding: 0; gap: 7px; }
+
+  /* Stroke/Fill */
+  .mob-seg { display: flex; flex: 3 1 auto; min-width: 0; background: var(--ui-surface); border-radius: var(--r-sm); padding: 2px; gap: 2px; }
+  .mob-seg .seg-btn.on { box-shadow: none; }
+  .mob-seg .seg-btn { height: 34px; font-size: 13px; padding: 0 6px; flex: 1; width: auto; min-width: 52px; }
+
+  /* Weight control */
+  .mob-weight { display: flex; align-items: center; flex: 1 1 auto; min-width: 0; background: var(--ui-surface); border-radius: var(--r-sm); height: 38px; padding: 0 5px 0 12px; justify-content: space-between; }
+  .mob-weight-label { font-size: 13px; font-weight: 500; color: var(--text); min-width: 60px; }
+  .mob-weight-arrows { display: flex; gap: 4px; }
+  .mob-weight-btn { background: none; border: none; cursor: pointer; color: var(--text); padding: 0; line-height: 1; font-family: 'Inter', sans-serif; width: 22px; height: 38px; display: flex; align-items: center; justify-content: center; transition: opacity var(--t-fast); }
+  .mob-weight-btn:hover { color: var(--text); }
+  .mob-weight-btn:disabled { opacity: 0.25; cursor: default; }
+
+  /* Custom size dropdown */
+  .mob-size-wrap { position: relative; display: flex; align-items: center; flex: 0 0 auto; }
+  .mob-size-btn { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--ui-surface); border: none; border-radius: var(--r-sm); font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 500; color: var(--text); padding: 0 8px 0 12px; cursor: pointer; outline: none; height: 38px; width: 82px; }
+  .mob-size-dropdown { display: none; position: fixed; background: var(--ui-panel); border-radius: var(--r-md); box-shadow: var(--shadow-md); padding: 8px; z-index: 1000; flex-direction: column; gap: 2px; min-width: 90px; }
+  .mob-size-dropdown.open { display: flex; }
+  .mob-size-option { background: none; border: none; cursor: pointer; font-size: 14px; font-weight: 500; font-family: 'Inter', sans-serif; color: var(--text); padding: 8px 14px; border-radius: var(--r-sm); text-align: left; }
+  .mob-size-option:hover { background: var(--surface); }
+  .mob-size-option.active { color: var(--text); font-weight: 700; }
+
+  aside { display: none; }
+  .layout { flex-direction: column; }
+  main { padding: 20px 10px 40px; }
+
+  /* 4 icons per row evenly */
+  .icons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px 8px; max-width: 100%; width: 100%; }
+  .icon-card { width: 100%; height: 104px; padding-top: 8px; }
+  .category-section { max-width: 100%; }
+  .icon-label { font-size: 12px; }
+  .icon-svg-wrap { width: 40px; height: 40px; }
+  .icon-svg-wrap svg { width: 40px; height: 40px; }
+  .empty { font-size: 18px; }
+}
+/* ─── Promo card ────────────────────
+   One card above the grid, picked at random on each load, on the same 1256 measure as the
+   icon sections. It lives outside <main> because render() replaces its contents, and it is
+   desktop only: below 861px the page is already a narrow grid with a sheet panel. */
+.promo { width: 100%; padding: 28px calc(var(--pad) + 10px) 0; }
+.promo-card { position: relative; width: 100%; max-width: 1256px; margin: 0 auto; display: flex; align-items: flex-start; gap: 28px;
+              padding: 26px 36px 26px 28px; border-radius: var(--r-md); background: var(--ui-surface); }
+.promo-mark { flex: none; width: 40px; height: 40px; color: var(--text); }   /* JS nudges it onto the title's cap line */
+.promo-mark svg { width: 100%; height: 100%; fill: currentColor; display: block; overflow: visible; }
+/* a product whose mark reads as an app icon gets the tile treatment: rounded square, glyph inset */
+.promo-mark.tile { border-radius: 22%; background: var(--text); color: var(--bg);
+                   display: flex; align-items: center; justify-content: center; }
+.promo-mark.tile svg { width: 56%; height: 56%; }
+.promo-text { min-width: 0; max-width: 780px; }
+.promo-card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; line-height: 22px; color: var(--text); }
+.promo-card p { margin: 0; font-size: 13px; line-height: 20px; color: var(--text-muted); }
+.promo-btn { flex: none; margin-left: auto; align-self: flex-end; width: auto; padding: 0 20px 2px; text-decoration: none;
+             background: rgba(255, 255, 255, .75); color: var(--text); border: none; }   /* bottom edge on the text's last line */
+.promo-btn:hover { background: rgba(255, 255, 255, .95); }
+[data-theme="dark"] .promo-btn { background: rgba(255, 255, 255, .10); color: var(--text); }
+[data-theme="dark"] .promo-btn:hover { background: rgba(255, 255, 255, .16); }
+.promo-close { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; padding: 0; display: flex;
+               align-items: center; justify-content: center; background: none; border: none; border-radius: var(--r-sm);
+               color: var(--text-dim); cursor: pointer; opacity: 0; transition: opacity var(--t-fast), color var(--t-fast), background var(--t-fast); }
+.promo-card:hover .promo-close, .promo-close:focus-visible { opacity: 1; }
+.promo-close:hover { color: var(--text); background: var(--ui-surface-hover); }
+.promo-close svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+@media (max-width: 1100px) {
+  .promo-card { flex-wrap: wrap; gap: 18px; padding: 20px 20px 20px 22px; }
+  .promo-text { flex: 1 1 260px; }
+  .promo-btn { margin-left: 0; flex: 1 0 100%; width: 100%; }
+}
+@media (max-width: 860px) { .promo { display: none; } }
+
+/* ─── Footer ────────────────────────────────────────────────────────────────
+   A compact version of About's: one row of links rather than four columns. This page is a
+   fixed-height shell (html, body { overflow: hidden }), so the footer cannot sit on the window;
+   it lives at the end of .main-wrap, the pane that actually scrolls. */
+:root { --text-soft: #75747d; }
+[data-theme="dark"] { --text-soft: var(--text-muted); }
+footer { border-top: 1px solid var(--border); margin-top: 48px; padding: 20px var(--pad) 24px;
+         font-size: 14px; line-height: 21px; color: var(--text); }
+.foot-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 28px; max-width: 1252px; margin: 0 auto; }
+.foot-row nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+footer a, footer button { color: inherit; text-decoration: none; font: inherit; background: none; border: none; padding: 0; cursor: pointer; }
+footer a:hover, footer button:hover { opacity: .7; }
+footer button.copied { color: var(--brand); }
+.foot-mark { width: 24px; height: 24px; flex: none; color: var(--text); cursor: pointer; }
+.foot-mark svg { width: 24px; height: 24px; fill: currentColor; display: block; }
+.foot-sep { width: 1px; height: 14px; background: var(--border); flex: none; }
+.foot-copy { margin: 0 0 0 auto; color: var(--text-muted); white-space: nowrap; }
+.foot-row .footer-crypto-label { color: var(--text-soft); }
+.foot-row .footer-crypto { display: flex; gap: 10px; }
+@media (max-width: 860px) { .foot-copy { margin-left: 0; } }
+
+
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://iconoteka.com/#website",
+      "url": "https://iconoteka.com/",
+      "name": "Iconoteka",
+      "description": "A free, open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://iconoteka.com/#author"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://iconoteka.com/#author",
+      "name": "Oleg Turbaba",
+      "url": "https://turbaba.com",
+      "sameAs": [
+        "https://www.behance.net/turbaba",
+        "https://www.linkedin.com/in/turbaba/",
+        "https://www.instagram.com/turbaba/"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://iconoteka.com/#library",
+      "name": "Iconoteka",
+      "url": "https://iconoteka.com/",
+      "description": "A free, open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any",
+      "image": "https://iconoteka.com/iconoteka-preview.png",
+      "author": {
+        "@id": "https://iconoteka.com/#author"
+      },
+      "license": "https://github.com/iconoteka/iconoteka/blob/main/LICENSE",
+      "codeRepository": "https://github.com/iconoteka/iconoteka",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "sameAs": [
+        "https://www.figma.com/community/plugin/1675995752572535073/iconoteka",
+        "https://www.npmjs.com/package/iconoteka-react",
+        "https://www.npmjs.com/package/iconoteka-mcp"
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<h1 class="sr-only">Iconoteka, a free and open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid by Oleg Turbaba and released under the MIT license.</h1>
+
+<header>
+  <div class="logo-wrap">
+    <a href="#" onclick="window.location.href=window.location.pathname;return false;" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:5px;">
+      <svg id="logomark" style="position:relative;top:0px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.0005 22C10.1672 22 8.48382 21.5583 6.95049 20.675C5.41716 19.7917 4.20882 18.5833 3.32549 17.05C2.44216 15.5167 2.00049 13.8333 2.00049 12C2.00049 10.1667 2.44216 8.48333 3.32549 6.95C4.20882 5.41667 5.41716 4.20833 6.95049 3.325C8.48382 2.44167 10.1672 2 12.0005 2C13.8338 2 15.5172 2.44167 17.0505 3.325C18.5838 4.20833 19.7922 5.41667 20.6755 6.95C21.5588 8.48333 22.0005 10.1667 22.0005 12C22.0005 13.8333 21.5588 15.5167 20.6755 17.05C19.7922 18.5833 18.5838 19.7917 17.0505 20.675C15.5172 21.5583 13.8338 22 12.0005 22ZM12.0005 19.925C13.4505 19.925 14.7755 19.575 15.9755 18.875C17.1755 18.175 18.1255 17.225 18.8255 16.025C19.5255 14.8083 19.8755 13.4667 19.8755 12C19.8755 10.55 19.5255 9.21667 18.8255 8C18.1255 6.78333 17.1755 5.825 15.9755 5.125C14.7755 4.425 13.4505 4.075 12.0005 4.075C10.5505 4.075 9.22549 4.425 8.02549 5.125C6.82549 5.825 5.87549 6.78333 5.17549 8C4.47549 9.2 4.12549 10.5333 4.12549 12C4.12549 13.45 4.47549 14.7833 5.17549 16C5.87549 17.2167 6.82549 18.175 8.02549 18.875C9.22549 19.575 10.5505 19.925 12.0005 19.925ZM12.0005 21.525C11.0005 21.525 10.1672 21.1333 9.50049 20.35C8.83382 19.5667 8.33382 18.4583 8.00049 17.025C7.68382 15.5917 7.52549 13.9167 7.52549 12C7.52549 10.0833 7.68382 8.41667 8.00049 7C8.33382 5.56667 8.83382 4.45833 9.50049 3.675C10.1672 2.89167 11.0005 2.5 12.0005 2.5C13.0005 2.5 13.8338 2.9 14.5005 3.7C15.1672 4.48333 15.6588 5.58333 15.9755 7C16.3088 8.41667 16.4755 10.0833 16.4755 12C16.4755 13.9167 16.3088 15.5917 15.9755 17.025C15.6588 18.4583 15.1672 19.5667 14.5005 20.35C13.8338 21.1333 13.0005 21.525 12.0005 21.525ZM12.0005 19.925C12.5005 19.925 12.9255 19.6 13.2755 18.95C13.6255 18.3 13.8838 17.3833 14.0505 16.2C14.2338 15.0167 14.3255 13.6167 14.3255 12C14.3255 10.4 14.2338 9.00833 14.0505 7.825C13.8838 6.625 13.6255 5.7 13.2755 5.05C12.9255 4.4 12.5005 4.075 12.0005 4.075C11.5005 4.075 11.0755 4.4 10.7255 5.05C10.3755 5.7 10.1088 6.625 9.92549 7.825C9.75882 9.00833 9.67549 10.4 9.67549 12C9.67549 13.6167 9.75882 15.0167 9.92549 16.2C10.1088 17.3833 10.3755 18.3 10.7255 18.95C11.0755 19.6 11.5005 19.925 12.0005 19.925ZM3.00049 13.8H21.0005V15.85H3.00049V13.8ZM3.00049 8.175H21.0005V10.225H3.00049V8.175Z"/></svg>
+      <span class="logo">Iconoteka</span>
+    </a>
+  </div>
+    <div class="header-search">
+    <div class="search-wrap">
+      <span class="search-ico">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10.1005 18.15C8.61716 18.15 7.25049 17.7917 6.00049 17.075C4.76716 16.3583 3.79216 15.3833 3.07549 14.15C2.35882 12.9167 2.00049 11.5583 2.00049 10.075C2.00049 8.59167 2.35882 7.24167 3.07549 6.025C3.79216 4.79167 4.76716 3.81667 6.00049 3.1C7.25049 2.38333 8.61716 2.025 10.1005 2.025C11.5838 2.025 12.9422 2.38333 14.1755 3.1C15.4088 3.81667 16.3838 4.79167 17.1005 6.025C17.8172 7.24167 18.1755 8.59167 18.1755 10.075C18.1755 11.5583 17.8172 12.9167 17.1005 14.15C16.3838 15.3833 15.4088 16.3583 14.1755 17.075C12.9422 17.7917 11.5838 18.15 10.1005 18.15ZM10.1005 15.65C11.1172 15.65 12.0422 15.4083 12.8755 14.925C13.7255 14.425 14.3922 13.75 14.8755 12.9C15.3755 12.05 15.6255 11.1083 15.6255 10.075C15.6255 9.05833 15.3755 8.125 14.8755 7.275C14.3922 6.425 13.7255 5.75833 12.8755 5.275C12.0422 4.775 11.1172 4.525 10.1005 4.525C9.06716 4.525 8.12549 4.775 7.27549 5.275C6.44216 5.75833 5.77549 6.425 5.27549 7.275C4.79216 8.125 4.55049 9.05833 4.55049 10.075C4.55049 11.1083 4.79216 12.05 5.27549 12.9C5.77549 13.75 6.44216 14.425 7.27549 14.925C8.12549 15.4083 9.06716 15.65 10.1005 15.65ZM14.0755 15.8L15.8255 14.05L21.6755 19.875L19.9005 21.65L14.0755 15.8Z"/></svg>
+      </span>
+      <input type="text" class="search-input" id="search" placeholder="Search icons"/>
+      <span class="search-count" id="searchCount">0</span>
+      <button class="search-clear" id="clearBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="header-nav">
+      <div class="support-wrap">
+        <button class="header-link support-btn" id="supportBtn" aria-haspopup="true" aria-expanded="false">Support Project</button>
+      </div>
+    <a class="header-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+    <a class="header-link" href="about.html">About</a>
+  </nav>
+  <!-- Mobile burger -->
+  <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 6h18M3 12h18M3 18h18"/>
+    </svg>
+  </button>
+  <!-- Burger dropdown -->
+  <div class="burger-menu" id="burgerMenu">
+    <div class="burger-group" id="burgerSupport"><div class="burger-label">Support Project</div></div>
+    <hr class="burger-sep">
+    <a class="burger-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+    <a class="burger-link" href="about.html">About</a>
+    <hr class="burger-sep">
+    <div class="burger-ver"><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></div>
+  </div>
+</header>
+
+<!-- Tablet controls bar -->
+<div class="tablet-controls" id="tabletControls">
+  <div class="tab-cat-wrap">
+    <button class="tab-cat-btn" id="tabCatBtn">
+      <span id="tabCatLabel">Popular</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="tab-cat-dropdown" id="tabCatDropdown"></div>
+  </div>
+  <div class="seg tab-seg">
+    <button class="seg-btn on" data-style="stroke">Stroke</button>
+    <button class="seg-btn" data-style="fill">Fill</button>
+  </div>
+  <div class="tab-weight-wrap">
+    <div class="slider-label-row">
+      <span class="slider-label">Weight</span>
+      <span class="slider-val" id="tabWeightLabel">Regular</span>
+    </div>
+    <div class="slider-track-wrap">
+      <div class="slider-stops-line">
+        <div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div>
+      </div>
+      <input type="range" class="weight-slider" id="tabWeightSlider" min="0" max="6" step="1" value="3"/>
+    </div>
+  </div>
+</div>
+<div class="toolbar" id="toolbar">
+<div class="mobile-search-row">
+  <div class="search-wrap">
+    <span class="search-ico">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10.1005 18.15C8.61716 18.15 7.25049 17.7917 6.00049 17.075C4.76716 16.3583 3.79216 15.3833 3.07549 14.15C2.35882 12.9167 2.00049 11.5583 2.00049 10.075C2.00049 8.59167 2.35882 7.24167 3.07549 6.025C3.79216 4.79167 4.76716 3.81667 6.00049 3.1C7.25049 2.38333 8.61716 2.025 10.1005 2.025C11.5838 2.025 12.9422 2.38333 14.1755 3.1C15.4088 3.81667 16.3838 4.79167 17.1005 6.025C17.8172 7.24167 18.1755 8.59167 18.1755 10.075C18.1755 11.5583 17.8172 12.9167 17.1005 14.15C16.3838 15.3833 15.4088 16.3583 14.1755 17.075C12.9422 17.7917 11.5838 18.15 10.1005 18.15ZM10.1005 15.65C11.1172 15.65 12.0422 15.4083 12.8755 14.925C13.7255 14.425 14.3922 13.75 14.8755 12.9C15.3755 12.05 15.6255 11.1083 15.6255 10.075C15.6255 9.05833 15.3755 8.125 14.8755 7.275C14.3922 6.425 13.7255 5.75833 12.8755 5.275C12.0422 4.775 11.1172 4.525 10.1005 4.525C9.06716 4.525 8.12549 4.775 7.27549 5.275C6.44216 5.75833 5.77549 6.425 5.27549 7.275C4.79216 8.125 4.55049 9.05833 4.55049 10.075C4.55049 11.1083 4.79216 12.05 5.27549 12.9C5.77549 13.75 6.44216 14.425 7.27549 14.925C8.12549 15.4083 9.06716 15.65 10.1005 15.65ZM14.0755 15.8L15.8255 14.05L21.6755 19.875L19.9005 21.65L14.0755 15.8Z"/></svg>
+    </span>
+    <input type="text" class="search-input" id="searchMob" placeholder="Search icons"/>
+    <button class="search-clear" id="clearBtnMob">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile controls bar -->
+<div class="mobile-controls" id="mobileControls">
+  <div class="seg mob-seg">
+    <button class="seg-btn on" data-style="stroke">Stroke</button>
+    <button class="seg-btn" data-style="fill">Fill</button>
+  </div>
+  <div class="mob-weight">
+    <span class="mob-weight-label" id="mobWeightLabel">Regular</span>
+    <div class="mob-weight-arrows">
+      <button class="mob-weight-btn" id="mobWeightPrev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="mob-weight-btn" id="mobWeightNext"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+  </div>
+  <div class="mob-size-wrap">
+    <button class="mob-size-btn" id="mobSizeBtn">
+      <span id="mobSizeLabel">24px</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="mob-size-dropdown" id="mobSizeDropdown">
+      <button class="mob-size-option" data-value="16">16px</button>
+      <button class="mob-size-option" data-value="20">20px</button>
+      <button class="mob-size-option active" data-value="24">24px</button>
+      <button class="mob-size-option" data-value="36">36px</button>
+      <button class="mob-size-option" data-value="48">48px</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-top">
+      <div class="sidebar-controls">
+        <div class="style-row">
+          <span class="slider-label">Style:</span>
+          <div class="style-opts">
+            <button class="seg-btn on" data-style="stroke">Stroke</button>
+            <button class="seg-btn" data-style="fill">Fill</button>
+          </div>
+        </div>
+        <div class="slider-row">
+          <div class="slider-label-row">
+            <span class="slider-label">Weight:</span>
+            <span class="slider-val" id="weightLabel">Regular</span>
+          </div>
+          <div class="slider-track-wrap">
+            <div class="slider-stops-line">
+              <div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div><div class="slider-stop"></div>
+            </div>
+            <input type="range" class="weight-slider" id="weightSlider" min="0" max="6" step="1" value="3"/>
+          </div>
+        </div>
+      </div>
+      <div class="cat-list-wrap">
+        <div class="cat-list" id="catList">
+        </div>
+      </div>
+      <div class="sidebar-ver"><span class="footer-ver" id="footerVer"><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></span><button id="themeToggle" title="Toggle theme" aria-label="Toggle dark mode"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C10.1667 22 8.48333 21.5583 6.95 20.675C5.41667 19.7917 4.20833 18.5833 3.325 17.05C2.44167 15.5167 2 13.8333 2 12C2 10.1667 2.44167 8.48333 3.325 6.95C4.20833 5.41667 5.41667 4.20833 6.95 3.325C8.48333 2.44167 10.1667 2 12 2C13.8333 2 15.5167 2.44167 17.05 3.325C18.5833 4.20833 19.7917 5.41667 20.675 6.95C21.5583 8.48333 22 10.1667 22 12C22 13.8333 21.5583 15.5167 20.675 17.05C19.7917 18.5833 18.5833 19.7917 17.05 20.675C15.5167 21.5583 13.8333 22 12 22ZM12 20.025C13.4833 20.025 14.8333 19.675 16.05 18.975C17.2833 18.2583 18.25 17.2917 18.95 16.075C19.6667 14.8417 20.025 13.4833 20.025 12C20.025 10.5167 19.6667 9.16667 18.95 7.95C18.25 6.71667 17.2833 5.75 16.05 5.05C14.8333 4.33333 13.4833 3.975 12 3.975V20.025Z"/></svg></button></div>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <div class="promo" id="promo" hidden></div>
+    <main id="main">
+      <div id="loading"><div class="spinner"></div><span>Loading icons…</span></div>
+    </main>
+<footer>
+  <div class="foot-row">
+    <div class="foot-mark" id="footerIcon" aria-hidden="true"></div>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="https://github.com/iconoteka/iconoteka/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+      <a href="https://github.com/iconoteka/iconoteka" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+      <a href="press.html">Press Kit</a>
+      <a href="about.html#privacy">Privacy</a>
+    </nav>
+    <span class="foot-sep" aria-hidden="true"></span>
+    <nav id="footerSupport"></nav>
+    <span class="foot-sep" aria-hidden="true"></span>
+    <nav>
+      <a href="https://www.instagram.com/iconoteka/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.pinterest.com/turbaba/iconoteka/" target="_blank" rel="noopener">Pinterest</a>
+      <a href="https://www.are.na/oleg-turbaba/iconoteka" target="_blank" rel="noopener">Are.na</a>
+      <a href="https://x.com/iconoteka" target="_blank" rel="noopener">X</a>
+    </nav>
+    <p class="foot-copy">© 2016–2026 <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">Oleg Turbaba</a></p>
+  </div>
+</footer>
+  </div>
+</div>
+
+<div id="panel" class="open">
+  <button class="panel-sheet-close" id="panelSheetClose" aria-label="Close">✕</button>
+  <div class="panel-preview" id="panelPreview"></div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// Theme init — runs immediately before page renders
+(function() {
+  const saved = localStorage.getItem('iconoteka-theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+
+const CDN = 'icons.json';   // no cache-buster: GitHub Pages serves max-age=600 + ETag, so repeat visits revalidate (304) instead of re-downloading the 8 MB file
+const WEIGHTS = ['thin','ultralight','light','regular','medium','semibold','bold'];
+const WEIGHT_LABELS = ['Thin','Ultralight','Light','Regular','Medium','Semibold','Bold'];
+
+const HYPHENATE_MAP = {
+  "up_left":"up-left","up_right":"up-right","up_down":"up-down","down_left":"down-left",
+  "down_right":"down-right","left_up":"left-up","left_down":"left-down","left_right":"left-right",
+  "right_up":"right-up","right_down":"right-down","north_east":"north-east","north_west":"north-west",
+  "south_east":"south-east","south_west":"south-west","wi_fi":"wi-fi","see_through":"see-through",
+  "up_to_date":"up-to-date","t_shirt":"t-shirt","x_ray":"x-ray","add_on":"add-on","top_up":"top-up","auto_renew":"auto-renew",
+};
+
+const CAPITALIZE_MAP = {
+  "zoom_in":"Zoom In",
+  "ai":"AI","ar":"AR","vr":"VR","mr":"MR","tv":"TV","pc":"PC","id":"ID","zip":"ZIP","qr":"QR",
+  "nfc":"NFC","url":"URL","gps":"GPS","dna":"DNA","ocr":"OCR","llm":"LLM","ml":"ML","iot":"IoT",
+  "sim":"SIM","esim":"eSIM","lte":"LTE","gsm":"GSM","usb":"USB","usba":"USB A","usbb":"USB-B","usbc":"USB-C",
+  "hdmi":"HDMI","ssd":"SSD","hdd":"HDD","lan":"LAN","vpn":"VPN","cpu":"CPU","gpu":"GPU",
+  "html":"HTML","css":"CSS","sql":"SQL","svg":"SVG","eps":"EPS","mp4":"MP4","hd":"HD","hq":"HQ",
+  "fps":"FPS","ios":"iOS","atm":"ATM","otp":"OTP","2fa":"2FA","az":"A-Z","cta":"CTA","ui":"UI",
+  "ux":"UX","qa":"QA","cv":"CV","cc":"CC","dm":"DM","im":"IM","sos":"SOS","suv":"SUV","uav":"UAV",
+  "ev":"EV","ac":"AC","fm":"FM","am":"AM","pm":"PM","ir":"IR","fx":"FX","cw":"CW","ccw":"CCW","wc":"WC",
+  "tm":"TM","www":"WWW","sms":"SMS","nlp":"NLP","tldr":"TLDR","nsfw":"NSFW","dnd":"DnD",
+  "nba":"NBA","nfl":"NFL","nhl":"NHL","mlb":"MLB","mrt":"MRT","cmd":"CMD","ctrl":"CTRL",
+  "otf":"OTF","ttf":"TTF","woff":"WOFF","asl":"ASL","wcag":"WCAG","ada":"ADA","cnd":"CnD",
+  "api":"API","sdk":"SDK","ram":"RAM","usd":"USD","eur":"EUR","gbp":"GBP","jpy":"JPY","krw":"KRW",
+  "rub":"RUB","amd":"AMD","azn":"AZN","gel":"GEL","kzt":"KZT","mnt":"MNT","uah":"UAH","inr":"INR",
+  "php":"PHP","try":"TRY","sar":"SAR","nis":"NIS","thb":"THB","btc":"BTC","eth":"ETH","bnb":"BNB",
+  "sol":"SOL","xrp":"XRP","trx":"TRX","usdt":"USDT","usdc":"USDC","3d":"3D","toc":"TOC","faq":"FAQ",
+  "kpi":"KPI","vip":"VIP","vod":"VOD","rw":"RW","ff":"FF","fwd":"FWD","daw":"DAW","eq":"EQ",
+  "cd":"CD","ip":"IP","uk":"UK","irn":"IRN","pa":"PA","sku":"SKU","pvc":"PVC","hdpe":"HDPE",
+  "ldpe":"LDPE","pp":"PP","ps":"PS","wpa":"WPA","xyz":"XYZ","nvme":"NVMe","lidar":"LiDAR",
+  "aids":"AIDS","hiv":"HIV","api":"API","x_ray":"X-ray","avi":"AVI","mpeg":"MPEG","mov":"MOV","fr":"FR","wifi":"Wi-Fi","wi_fi":"Wi-Fi","defi":"DeFi","top_up":"Top-Up","lol":"LOL","ipad":"iPad","hifi":"Hi-Fi","rmb":"RMB","lmb":"LMB","mmb":"MMB","iphone":"iPhone","fpv":"FPV","macos":"macOS","mv":"MV","a_z":"A-Z","ne":"NE","auto_renew":"Auto-Renew",
+};
+
+const LOWERCASE_WORDS = new Set(['of','in','at','to','an','the','and','or','but','for','with','by','from','as','into','via','per']);
+
+function formatSegment(seg) {
+  if (CAPITALIZE_MAP[seg]) return CAPITALIZE_MAP[seg];
+  if (HYPHENATE_MAP[seg]) {
+    return HYPHENATE_MAP[seg].split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('-');
+  }
+  const parts = seg.split('_');
+  const result = [];
+  let i = 0;
+  while (i < parts.length) {
+    // Try to match longest combo starting at i
+    let matched = false;
+    for (let j = parts.length; j > i + 1; j--) {
+      const combo = parts.slice(i, j).join('_');
+      if (HYPHENATE_MAP[combo]) {
+        const hyphenated = HYPHENATE_MAP[combo].split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('-');
+        result.push(hyphenated);
+        i = j;
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      const w = parts[i];
+      const isFirst = result.length === 0;
+      if (!isFirst && LOWERCASE_WORDS.has(w)) {
+        result.push(w);
+      } else {
+        result.push(CAPITALIZE_MAP[w] || (w.charAt(0).toUpperCase() + w.slice(1)));
+      }
+      i++;
+    }
+  }
+  return result.join(' ');
+}
+
+function toTitleCase(str) {
+  return str.split(' ').map(w => CAPITALIZE_MAP[w.toLowerCase()] || (w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
+}
+
+function hexLuminance(hex) {
+  const c = hex.replace('#','');
+  const r = parseInt(c.slice(0,2),16)/255, g = parseInt(c.slice(2,4),16)/255, b = parseInt(c.slice(4,6),16)/255;
+  const toL = x => x <= 0.03928 ? x/12.92 : Math.pow((x+0.055)/1.055, 2.4);
+  return 0.2126*toL(r) + 0.7152*toL(g) + 0.0722*toL(b);
+}
+
+let state = { weightIdx: 3, style: 'stroke', search: '', category: 'All' };
+let panelIcon = null, panelSize = 24;
+let tipTimer = null, mx = 0, my = 0;
+
+// Icon-preview badges follow the Brand file's "Badges Grid Rules" (Iconoteka-Brand › Brand Core):
+// the 13 starred palette colours, Beige used 1.5× as often, Transparent Ox rarely, the rest equally.
+// Foreground is the card's logo mark (black or white), never picked by luminance.
+const BADGE_COLORS = [
+  { bg: '#ffc3dc', fg: '#141414', w: 1,   name: 'Pink' },
+  { bg: '#f7f2e9', fg: '#141414', w: 1.5, name: 'Beige' },
+  { bg: '#1e39c9', fg: '#ffffff', w: 1,   name: 'Blue' },
+  { bg: '#061584', fg: '#ffffff', w: 1,   name: 'Dark Blue' },
+  { bg: '#12ab57', fg: '#141414', w: 1,   name: 'Green' },
+  { bg: '#979c1a', fg: '#141414', w: 1,   name: 'Moss Olive' },
+  { bg: '#cfbc13', fg: '#141414', w: 1,   name: 'Golden Olive' },
+  { bg: '#febd32', fg: '#141414', w: 1,   name: 'Yellow' },
+  { bg: '#f04c1a', fg: '#ffffff', w: 1,   name: 'Red' },
+  { bg: '#673726', fg: '#ffffff', w: 1,   name: 'Warm Sepia' },
+  { bg: '#a25624', fg: '#ffffff', w: 0.35, name: 'Transparent Ox' },
+  { bg: '#81808b', fg: '#ffffff', w: 1,   name: 'Cool Pewter' },
+  { bg: '#141414', fg: '#ffffff', w: 1,   name: 'Black' },
+];
+const COLOR_PAIRS = BADGE_COLORS.map(c => [c.bg, c.fg]);
+
+// Exclude very light/pastel bg colors that look washed out on dark UI
+const DARK_EXCLUDED_BG = new Set(['#141414','#161635','#392518','#1e2d00']);   // too close to the dark panel
+const badgeSet = (dark) => BADGE_COLORS.filter(c => {
+  if (!dark) return true;
+  if (DARK_EXCLUDED_BG.has(c.bg)) return false;
+  const h = c.bg.slice(1); const lum = 0.299*parseInt(h.slice(0,2),16) + 0.587*parseInt(h.slice(2,4),16) + 0.114*parseInt(h.slice(4,6),16);
+  return lum < 220;   // very light cards vanish on the dark panel (Beige 242 out; Pink 216 stays)
+});
+const COLOR_PAIRS_DARK = badgeSet(true).map(c => [c.bg, c.fg]);
+
+// Iconoteka pink + near-black: fixed pair for the first preview on load
+const BRAND_PAIR = ['#ffc3dc', '#141414'];
+let firstPreviewShown = false;
+
+let lastBadgeBg = null;
+function randomColorPair() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const set = badgeSet(isDark).filter(c => c.bg !== lastBadgeBg);
+  const total = set.reduce((a, c) => a + c.w, 0);
+  let r = Math.random() * total, pick = set[set.length - 1];
+  for (const c of set) { r -= c.w; if (r <= 0) { pick = c; break; } }
+  lastBadgeBg = pick.bg;
+  return [pick.bg, pick.fg];
+}
+
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+function getWeight() { return WEIGHTS[state.weightIdx]; }
+
+// Export filename: display name + weight code + style code + library suffix,
+// e.g. "Phone Missed-r-s_iconoteka". Weight codes follow the Figma convention
+// (thin/ultralight/light/regular/medium/semibold/bold -> t/u/l/r/m/s/b).
+const WEIGHT_CODES = ['t','u','l','r','m','s','b'];
+function iconFileName(icon) {
+  const base = formatSegment(icon.name.split('-')[0]);
+  const w = WEIGHT_CODES[state.weightIdx] || 'r';
+  const st = state.style === 'fill' ? 'f' : 's';
+  return base + '-' + w + '-' + st + '_iconoteka';
+}
+
+async function loadIcons() {
+  try {
+    const res = await fetch(CDN);
+    const data = await res.json();
+    iconsData = data.icons || [];
+    iconsMap = {};
+    iconsData.forEach(i => { iconsMap[i.name] = i; });
+    meta = data.meta || {};
+    const ver = meta.version ? 'v' + meta.version.split('.').map(x => String(+x)).join('.') : '';   // 02.00.05 → v2.0.5 (conventional, same as the About page)
+    document.getElementById('footerVer').innerHTML = '<span class="ver-num">' + ver + '</span><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a>';
+      const _bv = document.querySelector('.burger-ver');
+      if (_bv) { const _t = _bv.querySelector('#themeToggle');
+                 _bv.innerHTML = '<span><span class="ver-num">' + ver + '</span><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></span>';
+                 if (_t) _bv.appendChild(_t); }
+    buildSidebar();
+    buildTabCatDropdown();
+    render();
+    initLogomark();
+    initFooterIcon();
+    buildPromo();
+    // Track session theme
+    const sessionTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    sendAnalytics({ type: 'theme', theme: sessionTheme, action: 'session_start' });
+    // Open icon from URL hash
+    const hash = decodeURIComponent(window.location.hash.slice(1));
+    if (hash) {
+      const found = iconsData.find(i => i.name.split('-')[0] === hash);
+      if (found) openPanel(found);
+    }
+    // No hash (or it matched nothing): open a random Popular icon so the panel is never empty
+    if (!panelIcon) {
+      const pop = iconsData.filter(i => i.popular);   // Popular is a flag on the real entry (02.00.08)
+      if (pop.length) openPanel(pop[Math.floor(Math.random() * pop.length)]);
+    }
+  } catch(e) {
+    document.getElementById('loading').innerHTML = '<div class="empty">Failed to load icons. <a href="#" onclick="loadIcons()">Retry</a></div>';
+  }
+}
+function buildSidebar() {
+  const map = {};
+  iconsData.forEach(i => { const c = i.category || 'Other'; map[c] = (map[c] || 0) + 1; });
+  const SIDEBAR_PINNED = ['Interface', 'Files & Data', 'Hardware', 'Map'];
+  const pinnedEntries = SIDEBAR_PINNED.filter(k => map[k]).map(k => [k, map[k]]);
+  const sorted = [...pinnedEntries, ...Object.entries(map).filter(([name]) => !SIDEBAR_PINNED.includes(name)).sort(([a],[b]) => a.localeCompare(b))];
+  const total = iconsData.length;   // no duplicate Popular entries any more
+  const catList = document.getElementById('catList');
+  catList.innerHTML = '';
+  const popularCount = iconsData.filter(i => i.popular).length;
+  [['Popular', popularCount], ...sorted].forEach(([name, count]) => {
+    const el = document.createElement('div');
+    const catKey = name;
+    el.className = 'cat-item' + (((state.activeCat || 'Popular') === catKey) ? ' active' : '');
+    el.innerHTML = '<span>' + toTitleCase(name) + '</span><span class="cat-count">' + count + '</span>';
+    el.addEventListener('click', () => {
+      state.category = 'All'; state.activeCat = catKey; state.search = '';
+      document.getElementById('search').value = '';
+      document.getElementById('clearBtn').classList.remove('visible');
+      buildSidebar(); render();
+      scrollToCategory(catKey);
+    });
+    catList.appendChild(el);
+  });
+  catList.style.maxHeight = 'none';
+
+  // Detect if scrollbar is visible and narrow aside
+  const wrap = document.querySelector('.cat-list-wrap');
+  const aside = document.querySelector('aside');
+  const checkScroll = () => {
+    wrap.classList.toggle('has-scrollbar', wrap.scrollHeight > wrap.clientHeight);
+    aside.classList.remove('has-scrollbar');
+  };
+  checkScroll();
+  new ResizeObserver(checkScroll).observe(wrap);
+}
+
+const SYNONYMS = {
+  home:         ['house'],
+  house:        ['home'],
+  close:        ['cross','dismiss','cancel'],
+  search:       ['find','magnify'],
+  edit:         ['pen','pencil','write'],
+  pen:          ['pencil','edit'],
+  file:         ['document','doc'],
+  document:     ['file','doc'],
+  folder:       ['directory'],
+  save:         ['floppy','download'],
+  share:        ['send','export'],
+  user:         ['person','profile','account'],
+  person:       ['user','profile'],
+  email:        ['mail','envelope'],
+  mail:         ['email','envelope'],
+  message:      ['speech_balloon','chat'],
+  chat:         ['speech_balloon','message'],
+  phone:        ['call','mobile'],
+  call:         ['phone','telephone'],
+  bell:         ['notification','alert'],
+  notification: ['bell','alert'],
+  settings:     ['gear','preferences'],
+  gear:         ['settings'],
+  lock:         ['secure','password'],
+  password:     ['lock','key'],
+  warning:      ['alert','caution','danger'],
+  alert:        ['warning','notification'],
+  check:        ['checkmark','tick','done'],
+  location:     ['pin','place'],
+  map:          ['location','navigation'],
+  calendar:     ['date','schedule','event'],
+  time:         ['clock','timer','watch'],
+  clock:        ['time','timer'],
+  music:        ['audio','sound','song'],
+  audio:        ['music','sound'],
+  photo:        ['camera','image','picture'],
+  camera:       ['photo','photo_camera'],
+  video:        ['film','movie'],
+  chart:        ['graph','analytics'],
+  heart:        ['like','love','favorite'],
+  star:         ['star_five','favorite','rating'],
+  trash:        ['garbage','delete','bin'],
+  delete:       ['trash','garbage','remove'],
+  car:          ['automobile','vehicle'],
+  bus:          ['transit','commute'],
+  airplane:     ['airport','flight'],
+  flight:       ['airport','airplane'],
+  hospital:     ['doctor','medical'],
+  medical:      ['hospital','pharmacy'],
+  money:        ['cash','dollar','wallet'],
+  wallet:       ['purse','payment','funds'],
+  shopping:     ['cart','shopping_trolley'],
+  cart:         ['shopping_trolley','basket'],
+};
+
+function fuzzyMatch(str, q) {
+  let si = 0, qi = 0, score = 0, consecutive = 0;
+  while (si < str.length && qi < q.length) {
+    if (str[si] === q[qi]) {
+      score += 1 + consecutive;
+      consecutive++;
+      qi++;
+    } else {
+      consecutive = 0;
+    }
+    si++;
+  }
+  return qi === q.length ? score : 0;
+}
+
+function wordMatch(segment, q) {
+  return segment === q || segment.split('_').includes(q);
+}
+
+function scoreIcon(icon, q) {
+  const name = icon.name.toLowerCase();
+  const parts = name.split('-');
+  const terms = (icon.searchTerms || []).map(t => t.toLowerCase());
+  const cat = (icon.category || '').toLowerCase();
+
+  // Exact full name or first segment
+  if (name === q || parts[0] === q)                              return 1000;
+  // Exact segment word match
+  if (parts.some(p => wordMatch(p, q)))                         return 900;
+  // Joined segment match (e.g. "wifi" matches "wi_fi")
+  if (parts.some(p => p.split('_').join('') === q))             return 890;
+  // Exact search term word match
+  if (terms.some(t => wordMatch(t, q)))                         return 850;
+  // Category exact word match
+  if (cat.split(' ').includes(q) || cat === q)                  return 500;
+  // Prefix match on name parts — queries 2+ chars
+  if (q.length >= 2) {
+    if (parts.some(p => p.split('_').some(w => w.startsWith(q)))) return 450;
+    if (parts.some(p => p.split('_').join('').startsWith(q)))      return 445;
+    if (terms.some(t => t.split('_').some(w => w.startsWith(q)))) return 430;
+  }
+  // Synonyms — queries 3+ chars only
+  if (q.length >= 3) {
+    const synonyms = SYNONYMS[q] || [];
+    if (synonyms.some(s => parts.some(p => wordMatch(p, s)) || terms.some(t => wordMatch(t, s)))) return 400;
+  }
+  // Fuzzy — queries 7+ chars only, high threshold
+  if (q.length >= 7) {
+    const fuzzyParts = Math.max(...parts.map(p => Math.max(...p.split('_').map(w => fuzzyMatch(w, q)))), 0);
+    const fuzzyTerms = Math.max(...terms.map(t => fuzzyMatch(t, q)), 0);
+    const fuzzyBest  = Math.max(fuzzyParts, fuzzyTerms);
+    if (fuzzyBest > q.length * 0.9)                            return 200 + fuzzyBest;
+  }
+  return 0;
+}
+
+function getFiltered() {
+  const q = state.search.toLowerCase().trim().replace(/-/g, '');
+  if (!q) {
+    return iconsData.filter(i => state.category === 'All' || i.category === state.category);
+  }
+  const words = q.split(/\s+/).filter(w => w.length > 0);
+  const scored = iconsData
+    .map(i => {
+      // Multi-word: score each word and take the minimum (all words must match)
+      if (words.length > 1) {
+        const wordScores = words.map(w => scoreIcon(i, w));
+        const minScore = Math.min(...wordScores);
+        return { icon: i, score: minScore > 0 ? minScore : 0 };
+      }
+      return { icon: i, score: scoreIcon(i, q) };
+    })
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+  return scored.map(x => x.icon);
+}
+
+function getPath(icon, wIdx) {
+  const w = WEIGHTS[wIdx !== undefined ? wIdx : state.weightIdx];
+  const s = state.style;
+  const fallback = s === 'fill' ? 'stroke' : 'fill';
+  const v = icon.variants || {};
+  if (v[w] && v[w][s]) return v[w][s];
+  for (const ww of WEIGHTS) { if (v[ww] && v[ww][s]) return v[ww][s]; }
+  if (v[w] && v[w][fallback]) return v[w][fallback];
+  for (const ww of WEIGHTS) { if (v[ww] && v[ww][fallback]) return v[ww][fallback]; }
+  return null;
+}
+
+function parseTags(icon) {
+  const raw = icon.name || '';
+  const segments = raw.split('-');
+  segments.shift(); // remove first segment (icon name)
+  const tags = segments.filter(t => t.length > 1 && !/^[a-z]$/.test(t)); // remove single-char suffixes
+  return [...new Set(tags)].filter(t => t && t !== raw);
+}
+
+// Animated scroll to a category section. The browser's native smooth scroll is
+// cancelled by the virtualised grid re-rendering mid-flight, so we drive it by hand.
+// Target = section title landing exactly where "Popular" sits on first load.
+function scrollToCategory(catKey) {
+  const wrap = document.querySelector('.main-wrap');
+  const target = catKey === 'All' ? null : document.getElementById(catSlug(catKey));
+  const TOP_PAD = parseInt(getComputedStyle(document.querySelector('main')).paddingTop, 10) || 28;
+  const measure = () => {
+    if (!target) return 0;
+    // anchor on the TITLE, not the section: sections carry 28px top padding, so
+    // aligning the section box would land the heading a padding lower than "Popular"
+    const anchor = target.querySelector('.category-title') || target;
+    const wr = wrap.getBoundingClientRect().top;
+    const tr = anchor.getBoundingClientRect().top;
+    return Math.max(0, Math.round(wrap.scrollTop + (tr - wr - TOP_PAD)));
+  };
+  const from = wrap.scrollTop;
+  const to = measure();
+  if (Math.abs(to - from) < 2) return;
+  const DUR = 720;
+  // ease-out tuned so ~66% of the duration is spent on the final 10% of travel
+  const ease = t => 1 - Math.pow(1 - t, 5.54);
+  const t0 = performance.now();
+  let done = false;
+  const settle = () => {
+    if (done) return;
+    done = true;
+    // grid height can shift as cards render in; correct once at the end
+    const corrected = measure();
+    if (Math.abs(corrected - wrap.scrollTop) > 2) wrap.scrollTop = corrected;
+  };
+  (function step(now) {
+    if (done) return;
+    const t = Math.min(1, (now - t0) / DUR);
+    wrap.scrollTop = from + (to - from) * ease(t);
+    if (t < 1) requestAnimationFrame(step); else settle();
+  })(t0);
+  // rAF is paused in hidden/background tabs — land on the anchor regardless
+  setTimeout(() => { if (!done) { wrap.scrollTop = to; settle(); } }, DUR + 250);
+}
+
+function catSlug(n){ return 'cat-' + String(n).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+
+function render() {
+  state.focusedIdx = -1;
+  // the cards sit above the browsable grid; a search should put its results first
+  const promoEl = document.getElementById('promo');
+  if (promoEl && promoEl.dataset.ready) promoEl.hidden = !!state.search;
+  _fastUpdatePending = false;
+  const icons = getFiltered();
+  const countable = icons.length;
+  const countEl = document.getElementById('searchCount');
+  countEl.textContent = countable;
+  countEl.classList.toggle('visible', countable > 0 && !!state.search);
+  const main = document.getElementById('main');
+  if (!icons.length) {
+    const emptyPhrases = [["\u201c" + state.search + "\u201d? Never heard of it.", "Request Icon"],["Looked everywhere. No \u201c" + state.search + "\u201d.", "Request Icon"],["\u201c" + state.search + "\u201d is playing hide and seek.", "Request Icon"],["We have " + iconsData.filter(i => i.category !== 'Popular').length + " icons. \u201c" + state.search + "\u201d is not one of them.", "Request Icon"],["\u201c" + state.search + "\u201d doesn\u0027t exist here. Yet.", "Request Icon"]]; const _ep = emptyPhrases[Math.floor(Math.random() * emptyPhrases.length)]; main.innerHTML = `<div class="empty">${_ep[0]}<br><a href="#" onclick="requestIcon('${state.search.replace(/'/g, "\\'")}');return false;">${_ep[1]}</a></div>`;
+    // Track failed search
+    trackFailedSearch(state.search);
+    return;
+  }
+  if (state.search) {
+    const frag = document.createDocumentFragment();
+    const sec = document.createElement('div'); sec.className = 'category-section';
+    const grid = document.createElement('div'); grid.className = 'icons-grid';
+    icons.forEach(icon => grid.appendChild(makeCard(icon)));
+    sec.appendChild(grid); frag.appendChild(sec);
+    main.innerHTML = ''; main.appendChild(frag);
+  } else {
+    const grouped = {};
+    icons.forEach(i => { const c = i.category || 'Other'; (grouped[c] = grouped[c] || []).push(i); });
+    // Popular: the curated set from meta.popular (in its order), falling back to the flag; the icons stay in their real categories too
+    const byId = {}; icons.forEach(i => { byId[i.name.split('-')[0]] = i; });
+    let pop = (meta.popular || []).map(id => byId[id]).filter(Boolean);
+    if (!pop.length) pop = icons.filter(i => i.popular);
+    if (pop.length) grouped['Popular'] = pop;
+    // Pinned order first, rest alphabetical
+    const PINNED = ['Popular', 'Interface', 'Files & Data', 'Hardware', 'Map'];
+    const pinned = PINNED.filter(k => grouped[k]).map(k => [k, grouped[k]]);
+    const ord = [...pinned, ...Object.keys(grouped).filter(k => !PINNED.includes(k)).sort((a,b) => a.localeCompare(b)).map(k => [k, grouped[k]])];
+    const frag = document.createDocumentFragment();
+    ord.forEach(([cat, catIcons]) => {
+      const sec = document.createElement('div'); sec.className = 'category-section';
+      sec.id = catSlug(cat);
+      const title = document.createElement('div'); title.className = 'category-title';
+      title.innerHTML = toTitleCase(cat) + '<span>' + catIcons.length + '</span>';
+      sec.appendChild(title);
+      const grid = document.createElement('div'); grid.className = 'icons-grid';
+      catIcons.forEach(icon => grid.appendChild(makeCard(icon)));
+      sec.appendChild(grid); frag.appendChild(sec);
+    });
+    main.innerHTML = ''; main.appendChild(frag);
+  }
+  if (panelIcon) {
+    const active = main.querySelector('[data-name="' + panelIcon.name + '"]');
+    if (active) active.classList.add('active-panel');
+  }
+}
+
+// Fast path: only swap SVG paths on visible cards, no DOM rebuild
+let _fastUpdatePending = false;
+let iconsMap = {};
+function fastUpdate() {
+  _fastUpdatePending = true;
+  const mainWrap = document.querySelector('.main-wrap');
+  if (!mainWrap) return;
+  const top = mainWrap.scrollTop - 300;
+  const bottom = top + mainWrap.clientHeight + 600;
+  document.querySelectorAll('.icon-card').forEach(card => {
+    const cardTop = card.offsetTop;
+    if (cardTop + 128 < top || cardTop > bottom) return;
+    const icon = iconsMap[card.dataset.name];
+    if (!icon) return;
+    const path = getPath(icon);
+    const p = card.querySelector('svg path');
+    if (p && path) p.setAttribute('d', path);
+    else if (!p && path) {
+      const svgWrap = card.querySelector('.icon-svg-wrap');
+      if (svgWrap) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '48'); svg.setAttribute('height', '48');
+        svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'currentColor');
+        const newP = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        newP.setAttribute('d', path); svg.appendChild(newP);
+        svgWrap.innerHTML = ''; svgWrap.appendChild(svg);
+      }
+    }
+  });
+}
+
+function makeCard(icon) {
+  const path = getPath(icon);
+  const card = document.createElement('div');
+  card.className = 'icon-card' + (panelIcon && panelIcon.name === icon.name ? ' active-panel' : '');
+  card.dataset.name = icon.name;
+  card.draggable = true;   // drag the icon straight out to the desktop, or into an app that takes SVG
+  card.addEventListener('dragstart', e => dragIcon(e, icon));
+
+  const svgWrap = document.createElement('div'); svgWrap.className = 'icon-svg-wrap';
+  if (path) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '48'); svg.setAttribute('height', '48');
+    svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'currentColor');
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', path); svg.appendChild(p); svgWrap.appendChild(svg);
+  }
+  card.appendChild(svgWrap);
+
+  const label = document.createElement('div'); label.className = 'icon-label';
+  const labelText = formatSegment(icon.name.split('-')[0]);
+  label.textContent = labelText;
+  card.appendChild(label);
+
+  card.addEventListener('click', e => {
+    if (window.innerWidth <= 480) {
+      // tap opens the bottom sheet; copying is one of its buttons
+      openPanel(icon);
+      return;
+    }
+    // Update focusedIdx so arrow keys start from here
+    const allCards = Array.from(document.querySelectorAll('.icon-card'));
+    state.focusedIdx = allCards.indexOf(card);
+    allCards.forEach(c => c.classList.remove('focused'));
+    card.classList.add('focused');
+
+    if (panelIcon && panelIcon.name === icon.name) {
+      copySVG(icon);
+    } else {
+      openPanel(icon);
+    }
+  });
+
+  return card;
+}
+
+let toastTimer = null;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  // On the phone the confirmation sits just above the open sheet, beside the button that was
+  // tapped. It used to appear under the toolbar at the top of the grid, far from the action.
+  if (window.matchMedia('(max-width: 480px)').matches) {
+    const p = document.getElementById('panel');
+    const sheet = p ? Math.max(0, Math.round(window.innerHeight - p.getBoundingClientRect().top)) : 0;
+    el.style.top = 'auto';
+    el.style.bottom = (sheet + 12) + 'px';
+  } else { el.style.top = ''; el.style.bottom = ''; }
+  el.classList.add('visible');
+  clearTimeout(toastTimer);
+  const duration = 2000;
+  toastTimer = setTimeout(() => el.classList.remove('visible'), duration);
+}
+
+// ── PDF export ───────────────────────────────────────────────────────────────
+// Icon paths use only M/H/V/L/C/Z, which map 1:1 onto PDF path operators —
+// so this is a true vector export, no rasterising or curve approximation.
+function svgPathToPdfOps(d, size) {
+  const k = size / 24;
+  const X = x => (x * k).toFixed(3);
+  const Y = y => ((24 - y) * k).toFixed(3);   // PDF origin is bottom-left
+  const out = [];
+  let cx = 0, cy = 0, sx = 0, sy = 0;
+  const re = /([MLHVCZmlhvcz])([^MLHVCZmlhvcz]*)/g;
+  let m;
+  while ((m = re.exec(d)) !== null) {
+    const cmd = m[1];
+    const n = (m[2].match(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi) || []).map(Number);
+    switch (cmd) {
+      case 'M': for (let i = 0; i + 1 < n.length; i += 2) {
+                  cx = n[i]; cy = n[i+1];
+                  if (i === 0) { sx = cx; sy = cy; out.push(X(cx) + ' ' + Y(cy) + ' m'); }
+                  else out.push(X(cx) + ' ' + Y(cy) + ' l');
+                } break;
+      case 'L': for (let i = 0; i + 1 < n.length; i += 2) { cx = n[i]; cy = n[i+1]; out.push(X(cx) + ' ' + Y(cy) + ' l'); } break;
+      case 'H': for (const v of n) { cx = v; out.push(X(cx) + ' ' + Y(cy) + ' l'); } break;
+      case 'V': for (const v of n) { cy = v; out.push(X(cx) + ' ' + Y(cy) + ' l'); } break;
+      case 'C': for (let i = 0; i + 5 < n.length; i += 6) {
+                  out.push(X(n[i]) + ' ' + Y(n[i+1]) + ' ' + X(n[i+2]) + ' ' + Y(n[i+3]) + ' ' + X(n[i+4]) + ' ' + Y(n[i+5]) + ' c');
+                  cx = n[i+4]; cy = n[i+5];
+                } break;
+      case 'Z': case 'z': out.push('h'); cx = sx; cy = sy; break;
+    }
+  }
+  return out.join('\n');
+}
+
+function buildIconPdf(pathData, size) {
+  const content = '0 0 0 rg\n' + svgPathToPdfOps(pathData, size) + '\nf\n';
+  const objs = [
+    '<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + size + ' ' + size + '] /Contents 4 0 R /Resources << >> >>',
+    '<< /Length ' + content.length + ' >>\nstream\n' + content + 'endstream',
+  ];
+  let pdf = '%PDF-1.4\n';
+  const offsets = [];
+  objs.forEach(function (o, i) { offsets.push(pdf.length); pdf += (i + 1) + ' 0 obj\n' + o + '\nendobj\n'; });
+  const xref = pdf.length;
+  pdf += 'xref\n0 ' + (objs.length + 1) + '\n0000000000 65535 f \n';
+  offsets.forEach(function (o) { pdf += String(o).padStart(10, '0') + ' 00000 n \n'; });
+  pdf += 'trailer\n<< /Size ' + (objs.length + 1) + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF';
+  return pdf;
+}
+
+function downloadPDF(icon, size) {
+  const sz = size || panelSize || 24;
+  const path = getPath(icon);
+  if (!path) return;
+  const blob = new Blob([buildIconPdf(path, sz)], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = iconFileName(icon) + '.pdf';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  showToast(formatSegment(icon.name.split('-')[0]) + ' PDF Saved');
+  trackDownload(icon, 'Save PDF', sz);
+}
+
+function downloadSVG(icon, color, sz) {
+  color = color || '#141414'; sz = sz || panelSize || 24;
+  const path = getPath(icon); if (!path) return;
+  const svg = '<svg id="' + iconFileName(icon) + '" xmlns="http://www.w3.org/2000/svg" width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" fill="' + color + '"><path id="' + formatSegment(icon.name.split('-')[0]) + '" d="' + path + '"/></svg>';
+  const blob = new Blob([svg], {type:'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = iconFileName(icon) + '.svg';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 100);
+  showToast('SVG for ' + formatSegment(icon.name.split('-')[0]) + ' Saved');
+  trackDownload(icon, 'Save SVG', sz);
+}
+
+function downloadPNG(icon, color, sz) {
+  color = color || '#141414'; sz = sz || panelSize || 24;
+  const path = getPath(icon); if (!path) return;
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" fill="' + color + '"><path d="' + path + '"/></svg>';
+  const img = new Image();
+  const blob = new Blob([svg], {type:'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  img.onload = () => {
+    const canvas = document.createElement('canvas'); canvas.width = sz; canvas.height = sz;
+    canvas.getContext('2d').drawImage(img, 0, 0);
+    URL.revokeObjectURL(url);
+    const a = document.createElement('a'); a.href = canvas.toDataURL('image/png'); a.download = iconFileName(icon) + '.png';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    showToast('PNG for ' + formatSegment(icon.name.split('-')[0]) + ' Saved');
+    trackDownload(icon, 'Save PNG', sz);
+  };
+  img.src = url;
+}
+
+// Dragging an icon out of the grid. The same SVG is offered three ways, and the receiver picks:
+//   DownloadURL     the browser writes <name>.svg wherever it is dropped (Finder, and apps that take files)
+//   image/svg+xml   apps that read vector off the drag itself
+//   text/plain      anything else gets the source
+// The blob has to outlive the drag, so it is revoked on dragend rather than straight away.
+let dragBlobURL = null;
+function dragIcon(e, icon) {
+  const sz = panelSize || 24, path = getPath(icon);
+  if (!path || !e.dataTransfer) return;
+  const name = iconFileName(icon);
+  const svg = '<svg id="' + name + '" xmlns="http://www.w3.org/2000/svg" width="' + sz + '" height="' + sz +
+              '" viewBox="0 0 24 24" fill="#141414"><path id="' + formatSegment(icon.name.split('-')[0]) +
+              '" d="' + path + '"/></svg>';
+  if (dragBlobURL) URL.revokeObjectURL(dragBlobURL);
+  dragBlobURL = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+  const dt = e.dataTransfer;
+  dt.effectAllowed = 'copy';
+  try { dt.setData('DownloadURL', 'image/svg+xml:' + name + '.svg:' + dragBlobURL); } catch (err) {}
+  try { dt.setData('image/svg+xml', svg); } catch (err) {}
+  try { dt.setData('text/html', svg); } catch (err) {}   // Figma reads SVG off text/html when pasting; worth offering on a drop too
+  dt.setData('text/plain', svg);
+  const art = e.currentTarget.querySelector('svg');
+  if (art) dt.setDragImage(art, art.clientWidth / 2, art.clientHeight / 2);   // the glyph itself follows the cursor
+  trackDownload(icon, 'Drag SVG', sz);
+}
+window.addEventListener('dragend', () => { if (dragBlobURL) { URL.revokeObjectURL(dragBlobURL); dragBlobURL = null; } });
+
+function copySVG(icon, sz) {
+  sz = sz || panelSize || 24;
+  const path = getPath(icon); if (!path) return;
+  const svg = '<svg id="' + iconFileName(icon) + '" xmlns="http://www.w3.org/2000/svg" width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" fill="#141414"><path id="' + formatSegment(icon.name.split('-')[0]) + '" d="' + path + '"/></svg>';
+  navigator.clipboard.writeText(svg).then(() => showToast('SVG for ' + formatSegment(icon.name.split('-')[0]) + ' Copied')).catch(() => showToast('Copy failed'));
+  trackDownload(icon, 'Copy SVG', sz);
+}
+
+// One action for the three Copy-code buttons and their W / A / I shortcuts.
+function copyCode(icon, label) {
+  const gen = { Web: cssSnippet, Android: androidSnippet, Apple: iosSnippet }[label];
+  if (!gen || !icon) return;
+  navigator.clipboard.writeText(gen(icon))
+    .then(() => showToast(label + ' code for ' + formatSegment(icon.name.split('-')[0]) + ' Copied'))
+    .catch(() => showToast('Copy failed'));
+  trackDownload(icon, 'Copy ' + label);
+}
+
+function cssSnippet(icon) {
+  const name = (icon.name.split('-')[0]).replace(/_/g,'-').toLowerCase();
+  const sz = panelSize || 24;
+  const path = getPath(icon) || '';
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="' + path + '"/></svg>';
+  const enc = encodeURIComponent(svg).replace(/'/g, '%27').replace(/"/g, '%22');
+  return '.icon-' + name + ' {\n  display: inline-block;\n  width: ' + sz + 'px;\n  height: ' + sz + 'px;\n  background-color: currentColor;\n  -webkit-mask: url("data:image/svg+xml,' + enc + '") center / contain no-repeat;\n          mask: url("data:image/svg+xml,' + enc + '") center / contain no-repeat;\n}';
+}
+
+function androidSnippet(icon) {
+  const name = (icon.name.split('-')[0]).replace(/ /g,'_').toLowerCase();
+  const path = getPath(icon) || '';
+  const sz = panelSize || 24;
+  return '<!-- res/drawable/ic_' + name + '.xml -->\n<vector xmlns:android="http://schemas.android.com/apk/res/android"\n    android:width="' + sz + 'dp" android:height="' + sz + 'dp"\n    android:viewportWidth="24" android:viewportHeight="24">\n  <path android:fillColor="#FF000000"\n        android:pathData="' + path + '"/>\n</vector>';
+}
+
+// SVG path -> SwiftUI Path. Every icon in the library uses only absolute
+// M/H/V/L/C/Z, so the mapping is exact — no arc or quadratic cases to cover.
+function swiftPathStatements(d) {
+  const out = [];
+  const num = v => { const r = Math.round(v * 1000) / 1000; return String(r); };
+  const pt = (x, y) => 'CGPoint(x: ' + num(x) + ' * s, y: ' + num(y) + ' * s)';
+  let cx = 0, cy = 0, sx = 0, sy = 0, m;
+  const re = /([MHVLCZ])([^MHVLCZ]*)/gi;
+  while ((m = re.exec(d)) !== null) {
+    const cmd = m[1].toUpperCase();
+    const a = (m[2].match(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi) || []).map(Number);
+    if (cmd === 'M') {
+      for (let i = 0; i + 1 < a.length; i += 2) {
+        cx = a[i]; cy = a[i + 1];
+        if (i === 0) { sx = cx; sy = cy; out.push('p.move(to: ' + pt(cx, cy) + ')'); }
+        else out.push('p.addLine(to: ' + pt(cx, cy) + ')');   // implicit lineto after moveto
+      }
+    } else if (cmd === 'L') {
+      for (let i = 0; i + 1 < a.length; i += 2) { cx = a[i]; cy = a[i + 1]; out.push('p.addLine(to: ' + pt(cx, cy) + ')'); }
+    } else if (cmd === 'H') {
+      for (const x of a) { cx = x; out.push('p.addLine(to: ' + pt(cx, cy) + ')'); }
+    } else if (cmd === 'V') {
+      for (const y of a) { cy = y; out.push('p.addLine(to: ' + pt(cx, cy) + ')'); }
+    } else if (cmd === 'C') {
+      for (let i = 0; i + 5 < a.length; i += 6) {
+        out.push('p.addCurve(to: ' + pt(a[i + 4], a[i + 5]) + ',\n                   control1: ' + pt(a[i], a[i + 1]) +
+                 ',\n                   control2: ' + pt(a[i + 2], a[i + 3]) + ')');
+        cx = a[i + 4]; cy = a[i + 5];
+      }
+    } else if (cmd === 'Z') {
+      out.push('p.closeSubpath()'); cx = sx; cy = sy;
+    }
+  }
+  return out;
+}
+
+function iosSnippet(icon) {
+  const raw = icon.name.split('-')[0];
+  let type = raw.split(/[_ ]+/).filter(Boolean)
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+  if (!/^[A-Za-z]/.test(type)) type = 'Icon' + type;   // Swift type names can't start with a digit
+  type += 'Shape';
+  const sz = panelSize || 24;
+  const path = getPath(icon) || '';
+  const body = swiftPathStatements(path).map(l => '        ' + l).join('\n');
+  return 'struct ' + type + ': Shape {\n' +
+         '    func path(in rect: CGRect) -> Path {\n' +
+         '        let s = min(rect.width, rect.height) / 24\n' +
+         '        var p = Path()\n' +
+         body + '\n' +
+         '        return p\n' +
+         '    }\n' +
+         '}\n\n' +
+         type + '()\n' +
+         '    .fill(.primary)\n' +
+         '    .frame(width: ' + sz + ', height: ' + sz + ')';
+}
+
+function updatePanelPreview(icon) {
+  const path = getPath(icon);
+  const preview = document.getElementById('panelPreview');
+  const existing = preview.querySelector('svg');
+  if (existing) existing.remove();
+  if (!path) return;
+  const pair = preview._colorPair || ['#141414', '#ffffff'];
+  const [bg, fg] = pair;
+  preview.style.background = '';
+  // new colour pair → new badge shape (never the same shape twice in a row)
+  if (preview._pairRef !== pair) {
+    let shape = BADGE_SHAPES[Math.floor(Math.random() * BADGE_SHAPES.length)];
+    if (BADGE_SHAPES.length > 1) while (shape === preview._shape) shape = BADGE_SHAPES[Math.floor(Math.random() * BADGE_SHAPES.length)];
+    preview._shape = shape; preview._pairRef = pair;
+  }
+  let badge = preview.querySelector('.preview-badge');
+  if (!badge) { badge = document.createElement('div'); badge.className = 'preview-badge'; preview.appendChild(badge); }
+  badge.style.background = bg;
+  badge.style.borderRadius = preview._shape;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', fg);
+  const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  p.setAttribute('d', path); svg.appendChild(p);
+  badge.appendChild(svg);
+}
+// Badge shape: 14px rounded square only
+const BADGE_SHAPES = ['14px'];
+
+
+function openPanel(icon) {
+  panelIcon = icon;
+  document.querySelectorAll('.icon-card').forEach(c => c.classList.remove('active-panel'));
+  const active = document.querySelector('[data-name="' + icon.name + '"]');
+  if (active) active.classList.add('active-panel');
+
+  const name = formatSegment(icon.name.split('-')[0]);
+  const tags = parseTags(icon);
+
+  const preview = document.getElementById('panelPreview');
+  if (!firstPreviewShown) { preview._colorPair = BRAND_PAIR; firstPreviewShown = true; }
+  else { preview._colorPair = randomColorPair(); }
+  updatePanelPreview(icon);
+
+  const body = document.getElementById('panelBody');
+  body.innerHTML = '';
+  // Remove any lingering size dropdown from body
+  document.querySelectorAll('.size-dropdown-menu').forEach(el => el.remove());
+
+  const topDiv = document.createElement('div'); topDiv.className = 'panel-body-top';
+  const bottomDiv = document.createElement('div'); bottomDiv.className = 'panel-body-bottom';
+
+  const nameWrap = document.createElement('div'); nameWrap.style.cssText = 'display:flex;flex-direction:column;gap:2px;margin-bottom:4px;';
+  const nameEl = document.createElement('div'); nameEl.className = 'panel-name';
+  nameEl.textContent = name; nameWrap.appendChild(nameEl);
+  const styleEl = document.createElement('div'); styleEl.className = 'panel-style-label';
+  styleEl.textContent = (state.style === 'stroke' ? 'Stroke' : 'Fill') + ' ' + WEIGHT_LABELS[state.weightIdx] + ' ' + panelSize + 'px';
+  nameWrap.appendChild(styleEl); topDiv.appendChild(nameWrap);
+
+  if (tags.length) {
+    const tagsWrap = document.createElement('div'); tagsWrap.className = 'tags-wrap';
+    tags.forEach(t => {
+      const tag = document.createElement('span');
+      const tagTypes = ['tag-pill', 'tag-rect', 'tag-rounded'];
+      const tagType = tagTypes[Math.floor(Math.random() * tagTypes.length)];
+      tag.className = 'tag ' + tagType;
+      tag.textContent = formatSegment(t);
+      tag.addEventListener('click', () => {
+        const searchVal = formatSegment(t).toLowerCase();
+        state.search = searchVal;
+        // both search fields exist at once — keep them in step, or the visible one
+        // looks empty while the grid is filtered
+        const _d = document.getElementById('search');
+        const _m = document.getElementById('searchMob');
+        if (_d) _d.value = searchVal;
+        if (_m) _m.value = searchVal;
+        const _dc = document.getElementById('clearBtn');
+        const _mc = document.getElementById('clearBtnMob');
+        if (_dc) _dc.classList.add('visible');
+        if (_mc) _mc.classList.add('visible');
+        render();
+        // on mobile the sheet covers the results it just filtered
+        if (window.matchMedia('(max-width: 480px)').matches) {
+          document.getElementById('panel').classList.remove('sheet-open');
+        }
+      });
+      tagsWrap.appendChild(tag);
+    });
+    topDiv.appendChild(tagsWrap);
+  }
+
+  // Size control: combobox (editable + dropdown)
+  const SIZE_STEPS = [16, 20, 24, 36, 48, 96, 512];
+  const sizeSec = document.createElement('div'); sizeSec.style.marginTop = '15px';
+  const sizeLabelRow = document.createElement('div');
+  sizeLabelRow.style.cssText = 'display:flex;align-items:baseline;justify-content:flex-start;gap:15px;';
+  const sizeLabelLeft = document.createElement('span'); sizeLabelLeft.className = 'slider-label'; sizeLabelLeft.textContent = window.matchMedia('(max-width: 480px)').matches ? 'Size:' : 'Export size:';
+
+  const sizeComboWrap = document.createElement('div');
+  sizeComboWrap.className = 'size-combobox-wrap';
+  sizeComboWrap.addEventListener('click', e => e.stopPropagation());
+
+  const sizeInput = document.createElement('input');
+  sizeInput.type = 'text'; sizeInput.value = panelSize + 'px';
+  sizeInput.id = 'exportSize'; sizeInput.setAttribute('aria-label', 'Export size');   /* a field with neither id nor name is flagged by the browser and skipped by assistive tech */
+  sizeInput.className = 'size-combobox';
+
+  const sizeArrow = document.createElement('span');
+  sizeArrow.className = 'size-combobox-arrow';
+  sizeArrow.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+  sizeArrow.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (sizeDropdownMenu.classList.contains('open')) {
+      sizeDropdownMenu.classList.remove('open');
+    } else {
+      const rect = sizeComboWrap.getBoundingClientRect();
+      const dropdownHeight = 200; // approximate max height
+      const spaceBelow = window.innerHeight - rect.bottom;
+      if (spaceBelow < dropdownHeight) {
+        sizeDropdownMenu.style.top = '';
+        sizeDropdownMenu.style.bottom = (window.innerHeight - rect.top + 4) + 'px';
+      } else {
+        sizeDropdownMenu.style.bottom = '';
+        sizeDropdownMenu.style.top = (rect.bottom + 4) + 'px';
+      }
+      sizeDropdownMenu.style.left = rect.left + 'px';
+      sizeDropdownMenu.classList.add('open');
+    }
+  });
+  document.addEventListener('click', () => sizeDropdownMenu.classList.remove('open'));
+
+  const sizeDropdownMenu = document.createElement('div');
+  sizeDropdownMenu.className = 'size-dropdown-menu';
+
+  function updateSizeDropdownActive() {
+    sizeDropdownMenu.querySelectorAll('.size-dropdown-opt').forEach(o => o.classList.toggle('active', parseInt(o.textContent) === panelSize));
+  }
+
+  SIZE_STEPS.forEach(s => {
+    const opt = document.createElement('button');
+    opt.className = 'size-dropdown-opt' + (s === panelSize ? ' active' : '');
+    opt.textContent = s + 'px';
+    opt.addEventListener('mousedown', e => {
+      e.preventDefault(); // prevent blur on input
+      panelSize = s;
+      sizeInput.value = panelSize + 'px';
+      updateSizeDropdownActive();
+      styleEl.textContent = (state.style === 'stroke' ? 'Stroke' : 'Fill') + ' ' + WEIGHT_LABELS[state.weightIdx] + ' ' + panelSize + 'px';
+      sizeDropdownMenu.classList.remove('open');
+    });
+    sizeDropdownMenu.appendChild(opt);
+  });
+
+  sizeInput.addEventListener('focus', () => {
+    sizeInput.value = panelSize;
+    sizeInput.select();
+  });
+  sizeInput.addEventListener('blur', () => {
+    const val = parseInt(sizeInput.value);
+    if (!isNaN(val) && val > 0 && val <= 2048) panelSize = val;
+    sizeInput.value = panelSize + 'px';
+    updateSizeDropdownActive();
+    styleEl.textContent = (state.style === 'stroke' ? 'Stroke' : 'Fill') + ' ' + WEIGHT_LABELS[state.weightIdx] + ' ' + panelSize + 'px';
+    sizeDropdownMenu.classList.remove('open');
+  });
+  sizeInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sizeInput.blur();
+    if (e.key === 'Escape') { sizeInput.value = panelSize + 'px'; sizeInput.blur(); }
+  });
+
+  sizeComboWrap.appendChild(sizeInput);
+  sizeComboWrap.appendChild(sizeArrow);
+  document.body.appendChild(sizeDropdownMenu);
+  sizeLabelRow.appendChild(sizeLabelLeft);
+  sizeLabelRow.appendChild(sizeComboWrap);
+  sizeSec.appendChild(sizeLabelRow); // appended to list later after saveRow
+
+  const actionSec = document.createElement('div');
+  const list = document.createElement('div'); list.className = 'actions-list';
+
+  const copySvgBtn = document.createElement('button');
+  copySvgBtn.className = 'action-btn primary';
+  copySvgBtn.textContent = 'Copy SVG';
+  copySvgBtn.addEventListener('click', () => copySVG(icon, panelSize));
+  list.appendChild(copySvgBtn);
+
+  const saveRow = document.createElement('div');
+  saveRow.style.cssText = 'display:flex;gap:6px;';
+
+  const dlBtn = document.createElement('button');
+  dlBtn.className = 'action-btn secondary';
+  dlBtn.style.flex = '1';
+  dlBtn.textContent = 'Save SVG';
+  dlBtn.addEventListener('click', () => downloadSVG(icon, null, panelSize));
+  saveRow.appendChild(dlBtn);
+
+  const dlPngBtn = document.createElement('button');
+  dlPngBtn.className = 'action-btn secondary';
+  dlPngBtn.style.flex = '1';
+  dlPngBtn.textContent = 'Save PNG';
+  dlPngBtn.addEventListener('click', () => downloadPNG(icon, null, panelSize));
+  saveRow.appendChild(dlPngBtn);
+  list.appendChild(saveRow);
+  list.appendChild(sizeSec);
+
+  const copyRow = document.createElement('div'); copyRow.className = 'copy-row';
+  const copyLbl = document.createElement('span'); copyLbl.className = 'copy-label'; copyLbl.textContent = 'Copy code:';
+  copyRow.appendChild(copyLbl);
+  function makeCopyBtn(label, getText) {
+    const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = label;
+    btn.addEventListener('click', () => copyCode(icon, label));
+    return btn;
+  }
+  const copyOpts = document.createElement('div'); copyOpts.className = 'copy-opts';
+  copyOpts.appendChild(makeCopyBtn('Web', () => cssSnippet(icon)));
+  copyOpts.appendChild(makeCopyBtn('Android', () => androidSnippet(icon)));
+  copyOpts.appendChild(makeCopyBtn('Apple', () => iosSnippet(icon)));
+  copyRow.appendChild(copyOpts);
+  list.appendChild(copyRow);
+
+  actionSec.appendChild(list); bottomDiv.appendChild(actionSec);
+  body.appendChild(topDiv); body.appendChild(bottomDiv);
+  document.getElementById('panel').classList.add('open');
+  document.body.classList.add('panel-open');
+  history.replaceState(null, '', '#' + encodeURIComponent(icon.name.split('-')[0]));
+}
+
+document.getElementById('panelPreview').addEventListener('mousedown', e => e.preventDefault());
+document.getElementById('panelPreview').addEventListener('click', e => {
+  if (!panelIcon) return;
+  const preview = document.getElementById('panelPreview');
+  preview._colorPair = randomColorPair();
+  updatePanelPreview(panelIcon);
+});
+
+
+document.getElementById('search').addEventListener('input', e => {
+  state.search = e.target.value;
+  document.getElementById('clearBtn').classList.toggle('visible', !!state.search);
+  // mirror into the mobile field so the two never disagree across a resize
+  const _m = document.getElementById('searchMob');
+  if (_m) _m.value = e.target.value;
+  const _mc = document.getElementById('clearBtnMob');
+  if (_mc) _mc.classList.toggle('visible', !!state.search);
+  render();
+});
+document.getElementById('clearBtn').addEventListener('click', () => {
+  state.search = ''; document.getElementById('search').value = '';
+  document.getElementById('clearBtn').classList.remove('visible');
+  const _m = document.getElementById('searchMob');
+  if (_m) _m.value = '';
+  const _mc = document.getElementById('clearBtnMob');
+  if (_mc) _mc.classList.remove('visible');
+  render();
+});
+document.querySelectorAll('.seg-btn').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on'); state.style = btn.dataset.style; fastUpdate();
+  if (panelIcon) updatePanelPreview(panelIcon);
+}));
+
+const weightSlider = document.getElementById('weightSlider');
+const weightLabel = document.getElementById('weightLabel');
+function handleWeightSlider(slider, onUpdate) {
+  ['input', 'change', 'pointermove'].forEach(evt => {
+    slider.addEventListener(evt, e => {
+      if (evt === 'pointermove' && e.buttons === 0) return;
+      onUpdate();
+    });
+  });
+}
+
+handleWeightSlider(weightSlider, () => {
+  state.weightIdx = parseInt(weightSlider.value);
+  weightLabel.textContent = WEIGHT_LABELS[state.weightIdx];
+  fastUpdate();
+  if (panelIcon) updatePanelPreview(panelIcon);
+});
+
+document.addEventListener('keydown', e => {
+  const mk = (e.key || '').toLowerCase();   // Shift+S reports 'S' — compare case-insensitively
+  if ((e.ctrlKey || e.metaKey) && mk === 'k') { e.preventDefault(); document.getElementById('search').focus(); }
+  if (e.key === 'Escape') {
+    document.getElementById('search').blur();  state.focusedIdx = -1;
+    document.getElementById('panel').classList.remove('sheet-open');
+    document.getElementById('burgerMenu').classList.remove('open');
+  }
+  // Shortcuts stand down inside ANY text field (search, mobile search, export-size input...)
+  const ae = document.activeElement;
+  const searchFocused = !!ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT' || ae.isContentEditable);
+  const hasSelection = window.getSelection && window.getSelection().toString().length > 0;
+  if ((e.ctrlKey || e.metaKey) && mk === 'c' && panelIcon && !searchFocused && !hasSelection) { e.preventDefault(); copySVG(panelIcon); }
+  if ((e.ctrlKey || e.metaKey) && !e.shiftKey && mk === 's' && panelIcon && !searchFocused) { e.preventDefault(); downloadSVG(panelIcon); }
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && mk === 's' && panelIcon && !searchFocused) { e.preventDefault(); downloadPNG(panelIcon); }
+
+  if (searchFocused) return;
+
+  // Bare-key shortcuts (search is already excluded above)
+  if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+    const k = e.key.toLowerCase();
+    if (k === '/') { e.preventDefault(); document.getElementById('search').focus(); return; }
+    if (k === 's') { e.preventDefault(); setStyleFromKey('stroke'); return; }
+    if (k === 'f') { e.preventDefault(); setStyleFromKey('fill'); return; }
+    if (k >= '1' && k <= '7') { e.preventDefault(); setWeightFromKey(parseInt(k, 10) - 1); return; }
+    if (k === '[') { e.preventDefault(); setWeightFromKey(state.weightIdx - 1); return; }
+    if (k === ']') { e.preventDefault(); setWeightFromKey(state.weightIdx + 1); return; }
+    if (k === 'w' && panelIcon) { e.preventDefault(); copyCode(panelIcon, 'Web'); return; }
+    if (k === 'a' && panelIcon) { e.preventDefault(); copyCode(panelIcon, 'Android'); return; }
+    if (k === 'i' && panelIcon) { e.preventDefault(); copyCode(panelIcon, 'Apple'); return; }
+  }
+  const arrows = ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'];
+  if (!arrows.includes(e.key) && e.key !== 'Enter') return;
+
+  const icons = getFiltered();
+  if (!icons.length) return;
+
+  const grid = document.querySelector('main');
+  const cards = grid ? Array.from(grid.querySelectorAll('.icon-card')) : [];
+  if (!cards.length) return;
+
+  // Compute cols per section based on card positions within that section
+  function getColsForCard(card) {
+    const section = card.closest('.category-section');
+    if (!section) return 1;
+    const sectionCards = Array.from(section.querySelectorAll('.icon-card'));
+    if (!sectionCards.length) return 1;
+    const firstTop = sectionCards[0].getBoundingClientRect().top;
+    return sectionCards.filter(c => Math.abs(c.getBoundingClientRect().top - firstTop) < 5).length || 1;
+  }
+
+  if (state.focusedIdx === undefined) state.focusedIdx = -1;
+
+  // If no focused idx yet, start from the currently active panel icon
+  let idx = state.focusedIdx;
+  if (idx < 0 && panelIcon) {
+    idx = cards.findIndex(c => c.dataset.name === panelIcon.name);
+    if (idx < 0) idx = -1;
+  }
+
+  // Enter: copy/download active icon
+  if (e.key === 'Enter') {
+    const targetName = idx >= 0 && cards[idx] ? cards[idx].dataset.name : (panelIcon && panelIcon.name);
+    const icon = targetName && iconsData.find(i => i.name === targetName);
+    if (icon) {
+      if (e.altKey) downloadPDF(icon);
+      else if (e.shiftKey) downloadSVG(icon);
+      else copySVG(icon);
+    }
+    return;
+  }
+
+  if (e.key === 'ArrowRight') {
+    if (idx >= cards.length - 1) return;
+    idx = idx < 0 ? 0 : idx + 1;
+  } else if (e.key === 'ArrowLeft') {
+    if (idx <= 0) return;
+    idx = idx - 1;
+  } else if (e.key === 'ArrowDown') {
+    const curIdx = idx < 0 ? 0 : idx;
+    const curCard = cards[curIdx];
+    const curSection = curCard?.closest('.category-section');
+    const sectionCards = curSection ? Array.from(curSection.querySelectorAll('.icon-card')) : [];
+    const cols = getColsForCard(curCard);
+    const idxInSection = sectionCards.indexOf(curCard);
+    const nextInSection = idxInSection + cols;
+
+    if (nextInSection >= sectionCards.length) {
+      // Cross into the next category, keeping the same column where possible
+      const cats = Array.from(document.querySelectorAll('.category-section'));
+      const currentCatIdx = cats.indexOf(curSection);
+      if (currentCatIdx >= cats.length - 1) return;
+      const nextCatCards = Array.from(cats[currentCatIdx + 1].querySelectorAll('.icon-card'));
+      if (!nextCatCards.length) return;
+      const col = idxInSection % cols;
+      idx = cards.indexOf(nextCatCards[Math.min(col, nextCatCards.length - 1)]);
+      if (idx < 0) return;
+    } else {
+      idx = cards.indexOf(sectionCards[nextInSection]);
+    }
+  } else if (e.key === 'ArrowUp') {
+    const curIdx = idx < 0 ? 0 : idx;
+    const curCard = cards[curIdx];
+    const curSection = curCard?.closest('.category-section');
+    const sectionCards = curSection ? Array.from(curSection.querySelectorAll('.icon-card')) : [];
+    const cols = getColsForCard(curCard);
+    const idxInSection = sectionCards.indexOf(curCard);
+    const prevInSection = idxInSection - cols;
+    if (prevInSection < 0) {
+      // First row: cross up into the previous category's last row, same column
+      const cats = Array.from(document.querySelectorAll('.category-section'));
+      const currentCatIdx = cats.indexOf(curSection);
+      if (currentCatIdx <= 0) return;
+      const prevCards = Array.from(cats[currentCatIdx - 1].querySelectorAll('.icon-card'));
+      if (!prevCards.length) return;
+      const prevCols = getColsForCard(prevCards[0]) || cols;
+      const lastRowStart = Math.floor((prevCards.length - 1) / prevCols) * prevCols;
+      const col = idxInSection % cols;
+      // Stay in the same column: if the previous section's last row is short and
+      // doesn't reach this column, step back a row rather than snapping to its
+      // final icon (which jumps you across the grid).
+      let target = lastRowStart + col;
+      if (target >= prevCards.length) target = lastRowStart - prevCols + col;
+      if (target < 0 || target >= prevCards.length) target = prevCards.length - 1;
+      idx = cards.indexOf(prevCards[target]);
+      if (idx < 0) return;
+    } else {
+      idx = cards.indexOf(sectionCards[prevInSection]);
+      if (idx < 0) return;
+    }
+  }
+
+  if (idx < 0) idx = 0;
+  e.preventDefault();
+  state.focusedIdx = idx;
+
+  cards.forEach(c => c.classList.remove('focused'));
+  if (cards[idx]) {
+    cards[idx].classList.add('focused');
+    cards[idx].scrollIntoView({ block: 'nearest' });
+    const iconName = cards[idx].dataset.name;
+    const icon = iconsData.find(i => i.name === iconName);
+    if (icon) openPanel(icon);
+  }
+});
+
+// Track failed searches
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbypc8jSM4yoJzqBXbdo05pxNupgwz7h4k8ypMtaIFGeCpUvm0tUlAWVy7qIOkdwtGm-sA/exec';
+// Single place all analytics posts go through.
+function sendAnalytics(payload) {
+  fetch(SHEET_URL, { method: 'POST', body: JSON.stringify(payload) }).catch(() => {});
+}
+const _tracked = new Set();
+let _trackTimer = null;
+function trackFailedSearch(query) {
+  clearTimeout(_trackTimer);
+  _trackTimer = setTimeout(() => {
+    const q = query.trim().toLowerCase();
+    if (!q || q.length < 2 || _tracked.has(q)) return;
+    _tracked.add(q);
+    sendAnalytics({ type: 'failed', query: q, userAgent: navigator.userAgent });
+  }, 500);
+}
+function requestIcon(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return;
+  sendAnalytics({ type: 'request', query: q, userAgent: navigator.userAgent });
+  const main = document.getElementById('main');
+  const empty = main.querySelector('.empty');
+  if (empty) { const esc = q.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); empty.innerHTML = '\u201c' + esc + '\u201d added to the request list'; }   // e.g. “Icon Name” added to the request list
+}
+
+function trackDownload(icon, action, sz) {
+  const name = (icon.displayName || icon.name).toLowerCase().replace(/_/g, ' ');
+  sendAnalytics({
+      type: 'download',
+      icon: name,
+      action: action,
+      style: state.style,
+      weight: WEIGHTS[state.weightIdx],
+      size: sz || panelSize || 24
+    });
+}
+
+// The mobile toast hangs off the toolbar's bottom edge.
+(function trackToolbarBottom() {
+  const toolbar = document.getElementById('toolbar');
+  if (!toolbar) return;
+  const sync = () => document.documentElement.style.setProperty(
+    '--toolbar-bottom', Math.round(toolbar.getBoundingClientRect().bottom) + 'px');
+  sync();
+  window.addEventListener('resize', sync);
+  if (window.ResizeObserver) new ResizeObserver(sync).observe(toolbar);
+})();
+
+// Mobile burger
+const burgerBtn = document.getElementById('burgerBtn');
+const burgerMenu = document.getElementById('burgerMenu');
+burgerBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const rect = burgerBtn.querySelector('svg').getBoundingClientRect();   // align to the glyph, not the padded button
+  burgerMenu.style.top = (rect.bottom + 6) + 'px';
+  burgerMenu.style.left = 'auto';
+  burgerMenu.style.right = (document.documentElement.clientWidth - rect.right) + 'px';
+  burgerMenu.classList.toggle('open');
+});
+document.addEventListener('click', () => burgerMenu.classList.remove('open'));
+
+// Mobile weight prev/next
+document.getElementById('mobWeightPrev').addEventListener('click', () => {
+  if (state.weightIdx > 0) { state.weightIdx--; syncWeightUI(); render(); if (panelIcon) updatePanelPreview(panelIcon); }
+});
+document.getElementById('mobWeightNext').addEventListener('click', () => {
+  if (state.weightIdx < 6) { state.weightIdx++; syncWeightUI(); render(); if (panelIcon) updatePanelPreview(panelIcon); }
+});
+// Keyboard: set style/weight from anywhere, keeping all three breakpoints' controls in sync
+function setStyleFromKey(v) {
+  if (state.style === v) return;
+  state.style = v;
+  document.querySelectorAll('.seg-btn').forEach(b => b.classList.toggle('on', b.dataset.style === v));
+  fastUpdate();
+  if (panelIcon) { updatePanelPreview(panelIcon); openPanel(panelIcon); }
+}
+function setWeightFromKey(i) {
+  if (i < 0 || i > 6 || state.weightIdx === i) return;
+  state.weightIdx = i;
+  syncWeightUI();
+  render();
+  if (panelIcon) { updatePanelPreview(panelIcon); openPanel(panelIcon); }
+}
+
+function syncWeightUI() {
+  document.getElementById('weightLabel').textContent = WEIGHT_LABELS[state.weightIdx];
+  document.getElementById('mobWeightLabel').textContent = WEIGHT_LABELS[state.weightIdx];
+  document.getElementById('weightSlider').value = state.weightIdx;
+  document.getElementById('mobWeightPrev').disabled = state.weightIdx === 0;
+  document.getElementById('mobWeightNext').disabled = state.weightIdx === 6;
+  const tl = document.getElementById('tabWeightLabel'); if (tl) tl.textContent = WEIGHT_LABELS[state.weightIdx];
+  const ts = document.getElementById('tabWeightSlider'); if (ts) ts.value = state.weightIdx;
+}
+
+// Tapping the weight name steps to the next weight and wraps round after Bold, so the seven
+// weights are one tap apart without reaching for the slider or the arrows (user).
+['weightLabel', 'mobWeightLabel', 'tabWeightLabel'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('weight-step');
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('aria-label', 'Next weight');
+  const step = () => { state.weightIdx = (state.weightIdx + 1) % 7; syncWeightUI(); render(); if (panelIcon) { updatePanelPreview(panelIcon); openPanel(panelIcon); } };
+  el.addEventListener('click', step);
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); step(); } });
+});
+
+// Hold each weight name to the width of the longest one, measured in its own font, so the tap target
+// never shrinks with the word. Re-measured once the webfont is in, since that changes the widths.
+function sizeWeightSteps() {
+  ['weightLabel', 'mobWeightLabel', 'tabWeightLabel'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap';
+    probe.style.font = getComputedStyle(el).font;
+    document.body.appendChild(probe);
+    let w = 0;
+    WEIGHT_LABELS.forEach(n => { probe.textContent = n; w = Math.max(w, probe.getBoundingClientRect().width); });
+    probe.remove();
+    el.style.minWidth = Math.ceil(w) + 'px';
+  });
+}
+sizeWeightSteps();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeWeightSteps);
+
+// Mobile size custom dropdown
+const mobSizeBtn = document.getElementById('mobSizeBtn');
+const mobSizeDropdown = document.getElementById('mobSizeDropdown');
+mobSizeBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const rect = mobSizeBtn.getBoundingClientRect();
+  mobSizeDropdown.style.top = (rect.bottom + 6) + 'px';
+  mobSizeDropdown.style.right = (window.innerWidth - rect.right) + 'px';
+  mobSizeDropdown.classList.toggle('open');
+});
+document.addEventListener('click', () => mobSizeDropdown.classList.remove('open'));
+document.querySelectorAll('.mob-size-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    panelSize = parseInt(opt.dataset.value);
+    document.getElementById('mobSizeLabel').textContent = opt.dataset.value + 'px';
+    document.querySelectorAll('.mob-size-option').forEach(o => o.classList.remove('active'));
+    opt.classList.add('active');
+    mobSizeDropdown.classList.remove('open');
+  });
+});
+
+// Mobile seg buttons
+document.querySelectorAll('.mob-seg .seg-btn').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.mob-seg .seg-btn, .seg .seg-btn').forEach(b => { if (b.dataset.style === btn.dataset.style) b.classList.add('on'); });
+  state.style = btn.dataset.style; render();
+  if (panelIcon) updatePanelPreview(panelIcon);
+}));
+
+// Mobile search input
+document.getElementById('searchMob').addEventListener('input', e => {
+  state.search = e.target.value;
+  document.getElementById('search').value = e.target.value;
+  document.getElementById('clearBtnMob').classList.toggle('visible', !!state.search);
+  render();
+});
+document.getElementById('clearBtnMob').addEventListener('click', () => {
+  state.search = '';
+  document.getElementById('searchMob').value = '';
+  document.getElementById('search').value = '';
+  document.getElementById('clearBtnMob').classList.remove('visible');
+  render();
+});
+
+// Tablet category dropdown
+function buildTabCatDropdown() {
+  const dropdown = document.getElementById('tabCatDropdown');
+  if (!dropdown) return;
+  dropdown.innerHTML = '';
+  const map = {};
+  iconsData.forEach(i => { const c = i.category || 'Other'; map[c] = (map[c] || 0) + 1; });
+  const total = iconsData.length;   // no duplicate Popular entries any more
+  const SIDEBAR_PINNED = ['Interface', 'Files & Data', 'Hardware', 'Map'];
+  const pinnedEntries = SIDEBAR_PINNED.filter(k => map[k]).map(k => [k, map[k]]);
+  const sorted = [...pinnedEntries, ...Object.entries(map).filter(([name]) => !SIDEBAR_PINNED.includes(name)).sort(([a],[b]) => a.localeCompare(b))];
+  const popularCount = iconsData.filter(i => i.popular).length;
+  [['Popular', popularCount], ...sorted].forEach(([name, count]) => {
+    const catKey = name;
+    const btn = document.createElement('button');
+    btn.className = 'tab-cat-option' + (((state.activeCat || 'Popular') === catKey) ? ' active' : '');
+    btn.innerHTML = '<span>' + toTitleCase(name) + '</span><span class="tab-cat-count">' + count + '</span>';
+    btn.addEventListener('click', () => {
+      // Match the desktop sidebar: categories navigate, they don't filter
+      state.category = 'All';
+      state.activeCat = catKey;
+      state.search = '';
+      document.getElementById('search').value = '';
+      document.getElementById('searchMob') && (document.getElementById('searchMob').value = '');
+      document.getElementById('tabCatLabel').textContent = toTitleCase(name);
+      document.getElementById('tabCatDropdown').classList.remove('open');
+      buildTabCatDropdown();
+      buildSidebar();
+      render();
+      scrollToCategory(catKey);
+    });
+    dropdown.appendChild(btn);
+  });
+}
+
+const tabCatBtn = document.getElementById('tabCatBtn');
+const tabCatDropdown = document.getElementById('tabCatDropdown');
+if (tabCatBtn) {
+  tabCatBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const rect = tabCatBtn.getBoundingClientRect();
+    tabCatDropdown.style.top = (rect.bottom + 6) + 'px';
+    tabCatDropdown.style.left = rect.left + 'px';
+    tabCatDropdown.classList.toggle('open');
+  });
+  document.addEventListener('click', () => tabCatDropdown && tabCatDropdown.classList.remove('open'));
+}
+
+// Tablet weight slider
+const tabWeightSlider = document.getElementById('tabWeightSlider');
+const tabWeightLabel = document.getElementById('tabWeightLabel');
+if (tabWeightSlider) {
+  handleWeightSlider(tabWeightSlider, () => {
+    state.weightIdx = parseInt(tabWeightSlider.value);
+    tabWeightLabel.textContent = WEIGHT_LABELS[state.weightIdx];
+    document.getElementById('weightLabel').textContent = WEIGHT_LABELS[state.weightIdx];
+    document.getElementById('weightSlider').value = state.weightIdx;
+    fastUpdate();
+    if (panelIcon) updatePanelPreview(panelIcon);
+  });
+}
+
+// Tablet seg buttons
+document.querySelectorAll('.tab-seg .seg-btn').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.tab-seg .seg-btn, .seg .seg-btn, .mob-seg .seg-btn').forEach(b => { if (b.dataset.style === btn.dataset.style) b.classList.add('on'); });
+  state.style = btn.dataset.style; render();
+  if (panelIcon) updatePanelPreview(panelIcon);
+}));
+
+// Re-render panel preview on resize to fix icon size at breakpoints
+window.addEventListener('resize', () => {
+  if (panelIcon) updatePanelPreview(panelIcon);
+});
+const _mainWrapEl = document.querySelector('.main-wrap');
+if (_mainWrapEl) _mainWrapEl.addEventListener('scroll', () => { if (_fastUpdatePending) fastUpdate(); });
+
+// Logomark — the globe icon from the library
+let LOGOMARK_PATH = null;
+
+// The footer's mark: one random icon in the fill style, a new one on every load and on hover.
+// One card above the grid, drawn at random on each load: a brand mark, two lines and one action.
+const PROMO_LOGOS = {
+  patreon: 'M22.957 7.21c-.004-3.064-2.391-5.576-5.191-6.482-3.478-1.125-8.064-.962-11.384.604C2.357 3.231 1.093 7.391 1.046 11.54c-.039 3.411.302 12.396 5.369 12.46 3.765.047 4.326-4.804 6.068-7.141 1.24-1.662 2.836-2.132 4.801-2.618 3.376-.836 5.678-3.501 5.673-7.031Z',
+  kofi: 'M11.351 2.715c-2.7 0-4.986.025-6.83.26C2.078 3.285 0 5.154 0 8.61c0 3.506.182 6.13 1.585 8.493 1.584 2.701 4.233 4.182 7.662 4.182h.83c4.209 0 6.494-2.234 7.637-4a9.5 9.5 0 0 0 1.091-2.338C21.792 14.688 24 12.22 24 9.208v-.415c0-3.247-2.13-5.507-5.792-5.87-1.558-.156-2.65-.208-6.857-.208m0 1.947c4.208 0 5.09.052 6.571.182 2.624.311 4.13 1.584 4.13 4v.39c0 2.156-1.792 3.844-3.87 3.844h-.935l-.156.649c-.208 1.013-.597 1.818-1.039 2.546-.909 1.428-2.545 3.064-5.922 3.064h-.805c-2.571 0-4.831-.883-6.078-3.195-1.09-2-1.298-4.155-1.298-7.506 0-2.181.857-3.402 3.012-3.714 1.533-.233 3.559-.26 6.39-.26m6.547 2.287c-.416 0-.65.234-.65.546v2.935c0 .311.234.545.65.545 1.324 0 2.051-.754 2.051-2s-.727-2.026-2.052-2.026m-10.39.182c-1.818 0-3.013 1.48-3.013 3.142 0 1.533.858 2.857 1.949 3.897.727.701 1.87 1.429 2.649 1.896a1.47 1.47 0 0 0 1.507 0c.78-.467 1.922-1.195 2.623-1.896 1.117-1.039 1.974-2.364 1.974-3.897 0-1.662-1.247-3.142-3.039-3.142-1.065 0-1.792.545-2.338 1.298-.493-.753-1.246-1.298-2.312-1.298',
+  figma: 'M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z',
+  claude: 'm4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z',
+  cursor: 'M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23',
+  codex: 'M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z',
+  react: 'M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z'
+};
+const PROMO_CARDS = [
+  { logo: 'patreon', title: 'Support Us on Patreon', weight: 2,
+    text: 'Iconoteka is free and open source under the MIT License, and it grows icon by icon. A monthly subscription pays for the drawing time behind every new weight, style and category.',
+    cta: 'Subscribe on Patreon', href: 'https://www.patreon.com/c/iconoteka' },
+  { logo: 'kofi', title: 'Support Us on Ko-fi', weight: 2,
+    text: 'Every icon in the library is free to use, in any project, commercial or not. A one-time tip is the shortest way to say it was useful and to pay for the next batch.',
+    cta: 'Tip on Ko-fi', href: 'https://ko-fi.com/iconoteka' },
+  { logo: 'claude', title: 'MCP for Claude Code',
+    text: 'One command adds the Iconoteka MCP server to Claude Code for all your projects. Ask for an icon by name and weight, and it arrives in your files as an SVG, no download and no hunting through a grid.',
+    cta: 'Set Up Claude Code', href: 'about.html#mcp-claude-code' },
+  { logo: 'claude', title: 'MCP for Claude',
+    text: 'Add one server entry to the Claude desktop app and the whole library is available in conversation. All 1,300 icons, 7 weights and 2 styles, searchable by keyword without leaving the chat.',
+    cta: 'Set Up Claude', href: 'about.html#mcp-claude' },
+  { logo: 'cursor', title: 'MCP for Cursor',
+    text: 'Install the Iconoteka MCP server in Cursor with a single click, or one line in your project config. The agent searches the library and writes the icon straight into the component it is building.',
+    cta: 'Set Up Cursor', href: 'about.html#mcp-cursor' },
+  { logo: 'codex', title: 'MCP for Codex',
+    text: 'Codex adds Iconoteka with one command and loads it in every new session. The library becomes a tool it can search, so icons stop being a separate errand in the middle of a task.',
+    cta: 'Set Up Codex', href: 'about.html#mcp-codex' },
+  { logo: 'react', title: 'Icons for React',
+    text: 'Icon components for React, Vue and Svelte, published on npm under the MIT License. Import an icon by name, set weight, variant and size as props, and ship it without handling a single SVG file.',
+    cta: 'Get the Package', href: 'about.html#pkg-react' },
+  { icon: 'keyboard', title: 'Keyboard Shortcuts',
+    text: 'Arrow keys walk the grid and Enter copies the icon you land on. Press 1 to 7 to change weight, S for stroke and F for fill, square brackets to step one weight at a time, and slash to jump to search.',
+    noAction: true },
+  { icon: 'link', title: 'Every Icon Has an Address',
+    text: 'Add an icon name to the site address, like iconoteka.com/#bell, and the page opens with that icon selected. The shortest way to point a colleague at exactly the one you mean.',
+    noAction: true },
+  { icon: 'image', title: 'Iconoteka in Use',
+    text: 'Worked examples from the gallery: a banking app, a smart home, a reading app, a city guide, travel cards, a book cover, festival posters, wayfinding signs, recycling labels and a bus stop.',
+    cta: 'See the Gallery', href: 'about.html#gallery' },
+  { logo: 'figma', tile: true, title: 'Figma Plugin', weight: 2,
+    text: 'Search the whole library from inside Figma, change weight and style on a selection, and place icons without leaving the canvas. Everything arrives as vectors, ready to edit.',
+    cta: 'Open in Figma', href: 'https://www.figma.com/community/plugin/1675995752572535073/iconoteka' }
+];
+
+// A tip's mark comes from the library itself, by trigger, drawn Light and filled.
+function libraryPath(trigger) {
+  const ic = iconsData.find(i => i.name.split('-')[0] === trigger);
+  const v = (ic && ic.variants) || {};
+  return (v.light && (v.light.fill || v.light.stroke)) || (v.regular && (v.regular.fill || v.regular.stroke)) || '';
+}
+
+// Closing the card means "not now", not "never": the dismissal is remembered for 15 days and
+// survives the browser closing. Bumping PROMO_VER brings the card back for everyone at once,
+// whatever is left on their timer, so a real announcement is never stuck behind an old click.
+const PROMO_KEY = 'iconoteka-promo-closed';
+const PROMO_VER = 1;
+const PROMO_DAYS = 15;
+function promoClosed() {
+  try {
+    const raw = localStorage.getItem(PROMO_KEY);
+    if (!raw) return false;
+    const v = JSON.parse(raw);                       // an older flag was the string '1': treat it as expired
+    return v && v.v === PROMO_VER && +v.until > Date.now();
+  } catch (e) { return false; }
+}
+function closePromo() {
+  try { localStorage.setItem(PROMO_KEY, JSON.stringify({ v: PROMO_VER, until: Date.now() + PROMO_DAYS * 864e5 })); } catch (e) {}
+}
+
+function buildPromo() {
+  const host = document.getElementById('promo');
+  if (!host || promoClosed()) return;
+  // weighted draw: the donation cards and the plugin carry weight 2, everything else 1
+  const total = PROMO_CARDS.reduce((n, x) => n + (x.weight || 1), 0);
+  let roll = Math.random() * total, c = PROMO_CARDS[PROMO_CARDS.length - 1];
+  for (const x of PROMO_CARDS) { roll -= (x.weight || 1); if (roll < 0) { c = x; break; } }
+  const card = document.createElement('div'); card.className = 'promo-card';
+
+  const mark = document.createElement('span'); mark.className = 'promo-mark'; mark.setAttribute('aria-hidden', 'true');
+  if (c.tile) mark.classList.add('tile');
+  const d = c.logo ? PROMO_LOGOS[c.logo] : libraryPath(c.icon);
+  // xMinYMin: once the viewBox is cropped to the ink, the mark's top-left IS the ink's top-left
+  if (d) mark.innerHTML = '<svg viewBox="0 0 24 24" preserveAspectRatio="xMinYMin meet"><path d="' + d + '"/></svg>';
+
+  const text = document.createElement('div'); text.className = 'promo-text';
+  const h = document.createElement('h3'); h.textContent = c.title;
+  const p = document.createElement('p'); p.textContent = c.text;
+  text.append(h, p);
+
+  let a = null;
+  if (c.cta) {                                      // a pure tip carries no button
+    a = document.createElement('a');
+    a.className = 'action-btn promo-btn'; a.textContent = c.cta; a.href = c.href;
+    if (/^https?:/.test(c.href)) { a.target = '_blank'; a.rel = 'noopener'; }
+  }
+
+  const close = document.createElement('button');
+  close.type = 'button'; close.className = 'promo-close'; close.setAttribute('aria-label', 'Close');
+  const cross = iconsData.find(i => i.name.split('-')[0] === 'cross');
+  const cv = cross && cross.variants && cross.variants.regular;
+  const cd = cv && (cv.fill || cv.stroke);
+  close.innerHTML = cd ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + cd + '"/></svg>' : '\u2715';
+  close.addEventListener('click', () => {
+    host.hidden = true; host.innerHTML = ''; delete host.dataset.ready;
+    closePromo();
+  });
+
+  card.append(mark, text);
+  if (a) card.appendChild(a);
+  card.appendChild(close);
+  host.innerHTML = ''; host.appendChild(card); host.dataset.ready = '1'; host.hidden = !!state.search;
+  fitMarkToInk(mark);
+  alignPromoMark(mark, h);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => alignPromoMark(mark, h));
+}
+
+// A library icon sits inside a 24px frame with its own padding, a brand logo fills its box edge
+// to edge, so the two render at different optical sizes. Cropping every viewBox to the drawn ink
+// puts them on one measure and makes the mark's top edge the ink's top edge.
+function fitMarkToInk(mark) {
+  if (mark.classList.contains('tile')) return;      // the tile's own edge is the ink edge
+  const svg = mark.querySelector('svg'), path = svg && svg.querySelector('path');
+  if (!path) return;
+  let b;
+  try { b = path.getBBox(); } catch (e) { return; }
+  if (!b || !b.width || !b.height) return;
+  svg.setAttribute('viewBox', b.x + ' ' + b.y + ' ' + b.width + ' ' + b.height);
+}
+
+// The mark starts on the title's cap line, not on the line box: measure the cap with a
+// zero-width 1cap probe and shift the mark by the difference.
+function alignPromoMark(mark, title) {
+  const probe = document.createElement('span');
+  probe.style.cssText = 'display:inline-block;width:0;height:1cap;vertical-align:baseline';
+  title.appendChild(probe);
+  const r = probe.getBoundingClientRect();
+  title.removeChild(probe);
+  if (!r.height) return;
+  mark.style.marginTop = '0px';
+  const capTop = r.top, markTop = mark.getBoundingClientRect().top;
+  mark.style.marginTop = Math.round(capTop - markTop) + 'px';
+}
+
+function initFooterIcon() {
+  const fi = document.getElementById('footerIcon');
+  if (!fi || !iconsData.length) return;
+  const pathOf = (ic, w, st) => { const v = ic.variants && ic.variants[w] && ic.variants[w][st];
+    return typeof v === 'string' ? v : (v && (v.d || v.path)) || ''; };
+  const pool = iconsData.filter(i => pathOf(i, 'regular', 'fill'));
+  if (!pool.length) return;
+  const pick = () => pool[Math.floor(Math.random() * pool.length)];
+  let cur = pick();
+  const draw = ic => { fi.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + pathOf(ic, 'regular', 'fill') + '"/></svg>'; };
+  draw(cur);
+  const swap = () => { let n = pick(), guard = 0; while (n === cur && guard++ < 8) n = pick(); cur = n; draw(cur); };
+  fi.addEventListener('mouseenter', () => { if (!window.matchMedia('(max-width: 480px)').matches) swap(); });
+  fi.addEventListener('click', swap);
+}
+
+function initLogomark() {
+  const globe = iconsData.find(i => i.name.split('-')[0] === 'globe');
+  if (globe) {
+    const p = getPath(globe, WEIGHTS.indexOf('medium')) || getPath(globe);
+    if (p) {
+      LOGOMARK_PATH = p;
+      document.getElementById('logomark').querySelector('path').setAttribute('d', p);
+    }
+  }
+}
+// (the hover swap that used to live here moved to the About page's footer icon — user 2026-09-06)
+
+// Theme toggle
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const newTheme = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('iconoteka-theme', newTheme);
+  sendAnalytics({ type: 'theme', theme: newTheme, action: 'toggle' });
+});
+
+loadIcons();
+
+// Below 481px the panel is a sheet: opening an icon slides it in, and it can be closed.
+(function initPanelSheet() {
+  const panel = document.getElementById('panel');
+  const isSmall = () => window.matchMedia('(max-width: 480px)').matches;
+  const closeBtn = document.getElementById('panelSheetClose');
+  if (closeBtn) closeBtn.addEventListener('click', () => panel.classList.remove('sheet-open'));
+  document.addEventListener('click', e => {
+    if (!isSmall()) return;
+    const card = e.target.closest('.icon-card');
+    if (!card) return;
+    panel.classList.add('sheet-open');
+    // the sheet covers the lower part of the screen — lift the tapped icon above it
+    // bring the tapped icon's row to the top of the grid area, every time
+    setTimeout(() => {
+      const wrap = document.querySelector('.main-wrap');
+      if (!wrap) return;
+      const MARGIN = 12;
+      const target = () => {
+        const wrapTop = wrap.getBoundingClientRect().top;
+        const cardTop = card.getBoundingClientRect().top;
+        return Math.max(0, Math.min(wrap.scrollHeight - wrap.clientHeight,
+                                    wrap.scrollTop + (cardTop - wrapTop - MARGIN)));
+      };
+      const from = wrap.scrollTop, to = target();
+      if (Math.abs(to - from) < 2) return;
+      const DUR = 380, t0 = performance.now();
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      let done = false;
+      const settle = () => { if (done) return; done = true; wrap.scrollTop = target(); };
+      (function step(now) {
+        if (done) return;
+        const t = Math.min(1, (now - t0) / DUR);
+        wrap.scrollTop = from + (to - from) * ease(t);
+        if (t < 1) requestAnimationFrame(step); else settle();
+      })(t0);
+      setTimeout(() => { if (!done) { wrap.scrollTop = to; settle(); } }, DUR + 200);
+    }, 60);
+  }, true);
+  window.addEventListener('resize', () => { if (!isSmall()) panel.classList.remove('sheet-open'); });
+})();
+
+// Slider stops: highlight only the dot nearest the pointer (the range input sits
+// above them, so they can't be hovered directly).
+(function initSliderStopHover() {
+  document.querySelectorAll('.slider-track-wrap').forEach(function (wrap) {
+    const stops = Array.from(wrap.querySelectorAll('.slider-stop'));
+    if (!stops.length) return;
+    wrap.addEventListener('mousemove', function (e) {
+      const r = wrap.getBoundingClientRect();
+      if (!r.width) return;
+      const t = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+      const i = Math.round(t * (stops.length - 1));
+      stops.forEach(function (d, n) { d.classList.toggle('hot', n === i); });
+    });
+    wrap.addEventListener('mouseleave', function () {
+      stops.forEach(function (d) { d.classList.remove('hot'); });
+    });
+  });
+})();
+
+// Tablet (481-860): fold the right panel and the category dropdown into the left
+// column, so there is one sidebar instead of two panels.
+(function initTabletSingleColumn() {
+  const panel = document.getElementById('panel');
+  const aside = document.querySelector('aside');
+  const controls = document.querySelector('aside .sidebar-controls');
+  const catWrap = document.querySelector('.tab-cat-wrap');
+  if (!panel || !aside || !controls) return;
+  const panelHome = panel.parentNode, panelNext = panel.nextSibling;
+  const catHome = catWrap ? catWrap.parentNode : null, catNext = catWrap ? catWrap.nextSibling : null;
+  const themeBtn = document.getElementById('themeToggle');
+  const themeHome = themeBtn ? themeBtn.parentNode : null;
+  const burgerVer = document.querySelector('.burger-ver');
+  const isTablet = () => window.matchMedia('(min-width: 481px) and (max-width: 860px)').matches;
+  let folded = null;
+  function apply() {
+    const want = isTablet();
+    if (want === folded) return;
+    if (want) {
+      if (catWrap) controls.appendChild(catWrap);
+      const ver = aside.querySelector('.sidebar-ver');
+      if (ver && ver.parentNode) ver.parentNode.insertBefore(panel, ver);
+      else aside.appendChild(panel);
+    } else {
+      if (catWrap && catHome) catHome.insertBefore(catWrap, catNext);
+      if (panelHome) panelHome.insertBefore(panel, panelNext);
+    }
+    folded = want;
+  }
+  apply();
+  window.addEventListener('resize', apply);
+})();
+
+// Theme toggle lives in the burger menu at <=860 (mobile + tablet), in the sidebar above.
+(function initThemeToggleHome() {
+  const btn = document.getElementById('themeToggle');
+  const burgerVer = document.querySelector('.burger-ver');
+  if (!btn || !burgerVer) return;
+  const home = btn.parentNode;
+  const small = () => window.matchMedia('(max-width: 860px)').matches;
+  let inMenu = null;
+  function apply() {
+    const want = small();
+    if (want === inMenu) return;
+    (want ? burgerVer : home).appendChild(btn);
+    inMenu = want;
+  }
+  apply();
+  window.addEventListener('resize', apply);
+})();
+
+</script>
+<script src="support.js?v=10"></script>
+<script src="consent.js?v=1"></script>
+</body>
+</html>

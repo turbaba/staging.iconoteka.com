@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>[staging] About Iconoteka</title>
+<meta name="description" content="Iconoteka is a free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid by Oleg Turbaba. MIT licensed."/>
+<meta property="og:title" content="About Iconoteka, 1,300 open-source icons in 7 weights and 2 styles"/>
+<meta property="og:description" content="A free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+<meta property="og:image" content="https://iconoteka.com/iconoteka-preview.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:type" content="image/png"/>
+<meta property="og:image:alt" content="Iconoteka icons on a grid"/>
+<meta property="og:url" content="https://iconoteka.com/about.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Iconoteka"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="About Iconoteka, 1,300 open-source icons in 7 weights and 2 styles"/>
+<meta name="twitter:description" content="A free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+<meta name="twitter:image" content="https://iconoteka.com/iconoteka-preview.png"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/websans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="support.css?v=11">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f7f7f7;
+  --surface2: #f4f4f4;   /* grey cards (Packages, Support), lightened from #efefef (user 2026-09-15) */
+  --border: #ededed;
+  --text: #141414;
+  --text-muted: #63626d;
+  --text-dim: #8b8a94;
+  --brand: #ffc3dc;
+  --radius: 6px;
+  --panel-w: 270px;
+  --pad: 24px;
+  --panel-pad: 20px;
+  --sb: 11px;   /* native scrollbar width inside the category list */
+  /* radius scale */
+  --r-xs: 3px;      /* scrollbar thumbs, slider track */
+  --r-sm: 6px;      /* small controls: buttons, segmented, options */
+  --r-md: 10px;     /* surfaces: cards, dropdown menus */
+  --r-pill: 999px;  /* badges, tags, search */
+  /* motion */
+  --t-fast: .12s;   /* hover/colour */
+  --t-base: .2s;    /* size/position */
+  --t-slow: .28s;   /* panel + large moves */
+  /* elevation */
+  --shadow-md: 0 4px 16px rgba(20,20,20,0.12);
+  --shadow-lg: 0 8px 30px rgba(20,20,20,0.18);
+  --panel-margin: 0px;
+  --ui-surface: #f2f2f3;
+  --ui-surface-hover: #e8e8e8;
+  --ui-input: #f3f3f4;
+  --ui-input-hover: #eeeeef;
+  --ui-seg-on: #ffffff;
+  --ui-panel: #ffffff;
+  --ui-dropdown: #ffffff;
+  --ui-card-hover: rgba(242,242,243,0.7);
+  --ui-card-active: #f2f2f3;
+  --ui-slider-track: #efefef;
+  --ui-slider-stop: #cecece;
+  --logomark-color: #141414;
+}
+[data-theme="dark"] {
+  --shadow-md: 0 4px 16px rgba(20,20,20,0.45);
+  --shadow-lg: 0 8px 30px rgba(20,20,20,0.55);
+  --bg: #191919;
+  --surface: #222222;
+  --surface2: #2a2a2a;
+  --border: #333333;
+  --text: #ffffff;
+  --text-muted: #a2a2a2;
+  --text-dim: #8a8a8a;
+  --brand: #ffc3dc;
+  --ui-surface: #2a2a2a;
+  --ui-surface-hover: #363636;
+  --ui-input: #252525;
+  --ui-input-hover: #2e2e2e;
+  --ui-seg-on: #3a3a3a;
+  --ui-panel: #202020;
+  --ui-dropdown: #242424;
+  --ui-card-hover: rgba(50,50,50,0.49);
+  --ui-card-active: #232323;
+  --ui-slider-track: #2e2e2e;
+  --ui-slider-stop: #444444;
+  --logomark-color: #ffffff;
+}
+
+@font-face { font-family: 'WebSans'; src: url('fonts/websans.woff2') format('woff2'); font-weight: 400 600; font-display: swap; }   /* the page's text face: a 122-glyph subset (ASCII + the punctuation the page uses), weights 400–600 only, kern + tnum only, neutral names, no glyph names, no hinting — 11 KB */
+* { box-sizing: border-box; }
+:root { --rule: color-mix(in srgb, var(--text) 20%, transparent); --rule-solid: #d0d0d0; --bar-track: #e4e4e4; --text-soft: #75747d; }   /* every page rule: the text colour at 30%. --rule-solid is that same value FLATTENED against the page background — opaque, so lines can never double where two of them meet (user) */
+[data-theme="dark"] { --rule: color-mix(in srgb, var(--text) 30%, transparent); --rule-solid: #5e5e5e; --bar-track: #5e5e5e; --text-soft: var(--text-muted); }   /* light theme (user 2026-09-15): lines at 20% (#d0d0d0 flattened), a paler progress-bar track, and --text-soft #75747d for the small grey labels (4.6:1 on white, still AA); dark keeps its values */
+/* vertical spacing system — an 8px scale with four roles; only these tokens are used for vertical space
+   --major  hero → headline, stat rows → weight grid          130 / 96 / 64
+   --sec    section padding (top and bottom), footer padding   65 / 48 / 32  (= --major / 2)
+   --block  between blocks inside a section, text → media      48 / 40 / 32
+   --stack  label → content, title → text, text → buttons      24 / 24 / 16
+   plus two fixed steps: --sp-1 8px (small title → text, list gaps) and --sp-2 16px (large title → text, icon → title, row padding) */
+:root { --sp-1: 8px; --sp-2: 16px; --stack: 24px; --block: 48px; --sec: 65px; --major: 130px; --gut: 22px; --exc: 100px; --display: clamp(30px, 4.2vw, 60px); }   /* --display: headline statement and the stat numbers */   /* --exc: the one exception — the gap above and below the Missing-an-icon block */   /* --sec is half of --major, so every block-to-block gap is --major (130, per user) */
+@media (max-width: 860px) { :root { --stack: 24px; --block: 40px; --sec: 38px; --major: 76px; --gut: 12px; --exc: 74px; } }   /* tablet: section gaps 20px tighter than before (76 / 38, user) */
+@media (max-width: 480px) { :root { --stack: 16px; --block: 32px; --sec: 32px; --major: 64px; --gut: 8px; --exc: 50px; } }
+html { scroll-behavior: smooth; }
+/* no ligatures or contextual alternates in running text */
+html, body { margin: 0; font-family: 'WebSans', 'Inter', sans-serif; font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; font-size: 16px; line-height: 24px; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+html, body { overflow-x: clip; }   /* the flying hero tiles must never widen the page. clip, NOT hidden: overflow-x:hidden on html/body turns them into scroll containers in iOS Safari and the sticky header scrolls away for good */
+a { color: inherit; }
+
+/* ── header: same bar as the library ─────────────────────────────────────── */
+/* 500px header: the 78px bar (logo + navigation, same as the library) and a 422px band with the icon wall, on the page colour */
+header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; column-gap: 8px;
+         padding: 0 var(--panel-pad); height: 78px; border-bottom: 1px solid var(--border);
+         position: sticky; top: 0; background: var(--bg); color: var(--text); z-index: 10; transition: transform var(--t-slow) ease; }
+header.hidden { transform: translateY(-100%); }   /* slides away while scrolling down, comes back on the first scroll up (user, all breakpoints) */
+header .header-nav { grid-column: 3; }
+/* the bar is set in Inter with the library's line-height so it matches the homepage header exactly */
+header { font-family: 'Inter', sans-serif; font-size: 14px; line-height: normal; font-variant-ligatures: normal; font-feature-settings: normal; }   /* the library's body context */
+header .support-btn { font: inherit; font-size: 14px; font-weight: 600; }
+.hero-band { background: var(--bg); color: var(--text); --band-h: 422px; padding: 20px 20px 0; }   /* 20px inset left, right, top; as many full rows as fit --band-h, height follows the rows */
+/* headline under the hero */
+.row.headline { padding-top: var(--major); padding-bottom: 0; }   /* .row.headline so the generic .row padding below cannot override it */
+.headline .g { padding-bottom: var(--block); border-bottom: 1px solid var(--rule); }   /* rule under the headline, layout width only */
+.row.headline + .row { padding-top: calc(var(--major) - var(--block)); }   /* rule-terminated blocks keep a --major (128) gap to the next content, like License */
+.nobr { white-space: nowrap; }
+.ver { grid-column: 10 / 13; justify-self: end; align-self: start; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; line-height: 16px; font-weight: 500; margin-top: 4px; font-feature-settings: normal; color: var(--text-soft); }   /* small mono library version, same size as the weight-grid labels, top aligned with the headline's caps */
+.statement { grid-column: 1 / 10; margin: 0; font-size: var(--display); line-height: 1.1; letter-spacing: -.02em; font-weight: 400; }
+/* the wall: as many colour tiles as fit the band, each a random icon on a random brand colour and shape.
+   Tiles change one by one on their own, change under the pointer, and open the icon in the library on click */
+.wall { display: grid; grid-template-columns: repeat(var(--cols), var(--tile)); grid-auto-rows: var(--tile); row-gap: var(--wgap); justify-content: space-between; --tile: 76px; --wgap: 16px; }   /* columns spread edge to edge */
+.tile-w { width: var(--tile); height: var(--tile); border-radius: 10%;   /* three containers, per the blueprint: rounded 10%, soft 22%, circle 6% larger (optical) */ background: var(--c); color: var(--fg); display: flex; align-items: center; justify-content: center; }
+.tile-w { will-change: transform; position: relative; }   /* z-index during the parallax */
+.tile-w.round { border-radius: 50%; width: calc(var(--tile) * 1.06); height: calc(var(--tile) * 1.06); margin: calc(var(--tile) * -0.03); }
+.tile-w.soft { border-radius: 22%; }
+.tile-w svg { width: 66%; height: 66%; fill: currentColor; display: block; }
+.tile-w { cursor: pointer; }   /* a tile opens its icon in the library; the name chip is the only hover feedback */
+.tile-w.round svg { width: calc(66% / 1.06); height: calc(66% / 1.06); }
+.tile-chip { position: fixed; z-index: 40; pointer-events: none; color: var(--text); font-size: 12px; line-height: 16px; font-weight: 500; white-space: nowrap; text-shadow: 0 1px 3px var(--bg), 0 0 8px var(--bg); opacity: 0; transform: translate(-50%, -100%); transition: opacity var(--t-fast); }   /* plain text, no pill (user): a shadow in the page colour keeps it readable over anything */
+.tile-chip.on { opacity: 1; }
+.slider-nav button { position: relative; }   /* the circle tile is 6% wider so it does not read smaller than a square one -- that is compensation for the CONTAINER, so undo it for the glyph, which must be the same size in every shape */
+/* no clipping: flying tiles pass behind the page content (main sits above the band), under the sticky bar */
+.hero-band { position: relative; z-index: 0; }
+main, footer { position: relative; z-index: 1; }
+
+.logo-wrap { display: flex; align-items: center; gap: 8px; position: relative; top: -1px; }   /* flex like the homepage: the link is only as wide as the logo, not the whole grid column (the hover area was huge) */
+.logo-wrap a { display: flex; align-items: center; gap: 5px; text-decoration: none; color: var(--text); transition: opacity var(--t-fast); }
+.logo-wrap a:hover { opacity: .8; }
+#logomark { color: var(--logomark-color); }
+.logo { font-weight: 550; font-size: 23px; letter-spacing: -0.3px; }
+.beta-badge { font-size: 8.5px; font-weight: 700; background: var(--brand); color: #141414; height: 14px; padding: 0 6px 0 6.6px; line-height: 1;
+              border-radius: var(--r-pill); letter-spacing: .6px; text-transform: uppercase; display: inline-flex; align-items: center; position: relative; top: -2px; }
+.header-nav { display: flex; align-items: center; gap: 32px; justify-content: flex-end; position: relative; top: -1px; }
+.header-link { font-size: 14px; font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+.header-link:hover { opacity: .8; }
+/* hit area ≈ 38×(text+24)px without moving the text: padding cancelled by negative margins */
+.header-link { padding: 10px 12px; margin: -10px -12px; border-radius: var(--r-sm); }
+.header-link.current { color: var(--text-dim); }
+.burger-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; margin-right: -4px; color: var(--text); }
+.burger-btn { transition: opacity var(--t-fast); } .burger-btn:hover { opacity: .8; }
+/* pressed state for every control on the page: a deeper dim than the hover (the wall tiles have no hover by design and stay as they are) */
+.header-link:active, .logo-wrap a:active, .burger-btn:active, .burger-link:active, .button:active, .links a:active, .handle:active,
+.slider-nav button:active:not(:disabled), button.primary:active:not(:disabled), footer a:active, footer button:active, .footer-icon:active { opacity: .6; }
+.burger-menu { display: none; position: fixed; background: var(--ui-panel); border-radius: var(--r-md); box-shadow: var(--shadow-md); padding: 8px; z-index: 1000; flex-direction: column; gap: 2px; width: 272px; }
+.burger-menu.open { display: flex; }
+.burger-link { font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; padding: 14px 12px; border-radius: var(--r-sm); }
+.burger-link:hover { background: var(--surface); }
+.burger-ver { font-size: 12px; color: var(--text-muted); padding: 12px 12px 8px; line-height: 1.6; }
+.ver-num { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; font-weight: 500; }
+#toast { position: fixed; top: 92px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #141414; font-size: 12px; padding: 4px 14px; border-radius: var(--r-pill); pointer-events: none; opacity: 0; transition: opacity var(--t-base); z-index: 2100; white-space: nowrap; }
+#toast.visible { opacity: 1; }
+/* BETA badge shown again (user 2026-09-06) */
+
+/* ── page grid ────────────────────────────────────────────────────────────── */
+/* Every block is a full-width row; content sits on a 12-column grid, 22px gutters, 1252px max */
+.row { padding: var(--sec) var(--pad); }
+.row:focus, .row:focus-visible, .row:target, main:focus, main:focus-visible { outline: none; }   /* landing on #section must not draw a focus ring round the whole block: a row is a container, never something you interact with. Interactive controls keep their own rings */
+.g   { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); row-gap: 0; max-width: 1252px; margin: 0 auto; }   /* 1152 + 100: 50px off each side margin (user took half of the 100 back) */
+.g > * { min-width: 0; }
+.full { grid-column: 1 / -1; }
+.half-a { grid-column: 1 / 7; }
+.half-b { grid-column: 7 / 13; }
+.half-a p, .half-b p { margin-bottom: var(--stack); }
+/* License and Repository: larger title and text than the feature items */
+.license .half-a, .license .half-b { padding-bottom: var(--block); border-bottom: 1px solid var(--rule); }   /* two rules, one under each half; the halves stretch to one height so the lines align */
+#privacy { padding-top: 0; color: var(--text-soft); }   /* the quiet legal block: grey like the section labels, and half the usual gap above (--major down to --sec) */
+#privacy h3 { font-size: 14px; line-height: 21px; margin-bottom: var(--stack); display: flex; justify-content: space-between; align-items: baseline; }   /* section number at the right edge, like the .label rows above */   /* one title over both halves, so the two columns start at the same line */
+#privacy strong { font-weight: 600; }   /* lead-ins take the site's heading weight, not the browser's 700 */
+#privacy p { font-size: 14px; line-height: 21px; }   /* no width cap: each half fills its column, so equal copy gives equal height */
+#privacy .half-a p { padding-right: var(--gut); }   /* two gutters between the columns: at 14px one gutter reads as a word space, not a column break. Left edges stay on the grid */
+.license h3, .request h3, .support-title { font-size: 28px; line-height: 34px; margin-bottom: var(--sp-2); }   /* Support Project title = the License title (no section number, not counted) */
+.license p, .request p { font-size: 20px; line-height: 30px; max-width: 46ch; }
+/* request: a brand-Blue box, white text (the Blue card's logo-mark rule), input white at 10%, white pill button.
+   Exception to the spacing system: 100px above and below (neighbour padding --sec + own padding = --exc) */
+.row.request { padding-top: calc(var(--exc) - var(--sec)); padding-bottom: var(--exc); }   /* 100 above the box, 100 from the box to the footer rule */
+.request-box { grid-column: 1 / -1; background: #673726; color: #ffffff; padding: clamp(17px, 2vw, 28px); border-radius: var(--r-md);   /* 30% less than the first cut (24/2.8vw/40) — user */
+               display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gut); row-gap: var(--block); }   /* full width; title on the left half, text and form on the right half */
+.request-box h3 { margin: 0; }
+.request-box .request-body p { max-width: none; margin-bottom: var(--stack); }
+.request-box input[type=text] { background: rgba(255, 255, 255, .1); color: #ffffff; border: none; padding-top: 2px; }   /* white at 10% on the blue (user); the text sits 2px down (optical, user: 1px, then 1px more) */
+.request-box input[type=text]:focus { background: rgba(255, 255, 255, .16); }
+.request-box input[type=text]::placeholder { color: #ffffff; opacity: .6; }
+.request-box button.primary { background: #ffffff; color: #141414; border-radius: 999px; }   /* white pill (user) */
+
+p { margin: 0 0 var(--stack); }
+p:last-child { margin-bottom: 0; }
+.label { font-size: 14px; line-height: 21px; font-weight: 500; color: var(--text-soft); margin: 0 0 var(--stack); }   /* small captions are grey (user): section labels, their numbers, the version, the grid-cell texts — same grey as the footer titles */
+.label.full { display: flex; justify-content: space-between; align-items: baseline; }   /* section number at the right edge */
+.no { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; line-height: 16px; font-weight: 500; font-feature-settings: normal; color: var(--text-soft); }   /* section numbers 01–04: the version's mono style */
+.ver .no { margin-left: 16px; }   /* 01 sits after the version, at the right edge */
+h2.huge { font-size: var(--display); line-height: 1; letter-spacing: -.02em; font-weight: 600; margin: 0 0 var(--block) -0.04em; }   /* same size as the headline statement */
+h3 { font-size: 19px; line-height: 28px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 var(--sp-1); }
+
+/* universal reveal on scroll: every content block starts faded and 24px low, and eases in the first time it
+   enters the viewport; siblings inside one row follow each other with a short delay (set inline by JS) */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal.now { transition: none; }   /* shown at once: blocks that are already above the viewport, or come in from the top while scrolling up */
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* layout-grid overlay, toggled with the G key: the same .g columns, tinted */
+.grid-overlay { position: fixed; inset: 0; padding: 0 var(--pad); pointer-events: none; z-index: 5000; }
+.grid-overlay .g { height: 100%; }
+.grid-overlay span { display: block; height: 100vh; background: rgba(255, 195, 220, .18); }
+
+/* buttons (Inter-style: plain filled block, no chrome) */
+.button, .links a { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 2px 18px 0; border-radius: var(--r-sm);   /* 18px sides; 2px top padding moves the centred label down by 1px (optical) */
+          background: var(--text); color: var(--bg); text-decoration: none; font-size: 15px; font-weight: 500; letter-spacing: .01em;
+          transition: opacity var(--t-fast); white-space: nowrap; }
+.button:hover, .links a:hover { opacity: .82; }
+.links { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
+.links a.ghost { background: var(--ui-surface); color: var(--text); }
+.links a.ghost:hover { background: var(--text); color: var(--bg); opacity: 1; }   /* hover = inverted: white on the dark theme, black on light */
+
+
+/* stat blocks: one row each — title on the left half, text on the right half */
+.stat-block { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); align-items: start; margin-bottom: var(--block); }
+.stat-block:nth-of-type(4) { margin-bottom: var(--major); }   /* the weight grid gets a major gap */
+.stat-block h2 { grid-column: 1 / 7; margin: 0; white-space: nowrap; }   /* size comes from h2.huge (--display, same as the headline); no font-size here or it would win by source order */
+.stat-block h2, .stat-block p { grid-row: 1; }
+/* right half: a 1px rule aligned with the cap height of the number on the left, the small text below it
+   (measured in the render: the caps of the 66px title start 3px below its box top) */
+.stat-block p { grid-column: 7 / 13; align-self: start; margin: 3px 0 0; padding-top: var(--sp-2); border-top: 1px solid var(--rule); font-size: 20px; line-height: 30px; }   /* same large body size as License / Repository */
+
+/* weight grid: 7×2 stroked cells (1px lines, shared): number top-left, code (TS, RF…) top-right, name bottom-left, icon in a dealt palette colour */
+.cards { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }   /* no border on the grid itself: when a row is short (4-3-4-3 on narrow screens) a container border would box in the empty cells and read as one big rectangle. Each cell closes itself instead. */
+.card { position: relative; aspect-ratio: 1; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; border: 1px solid var(--rule-solid); margin: 0 -1px -1px 0; }   /* every cell is a complete square; the -1px margins overlap neighbouring borders so shared lines stay 1px and are drawn once, and an empty grid area is simply empty */
+.card svg { width: 54%; height: 54%; fill: var(--ic, currentColor); display: block; position: relative; top: -3px; }   /* was -5px; moved 2px down (user) */   /* --ic: a brand colour dealt at random (light palette), re-dealt on hover with the icon; switches instantly, no fade (user) */
+.card small { position: absolute; font-size: 12px; line-height: 16px; font-weight: 500; }   /* text colour (the grey try was reverted for the grid — user) */
+.card .n { left: 10px; top: 8px; font-feature-settings: "liga" 0, "calt" 0, "tnum" 1; }
+.card .code { right: 10px; top: 8px; }
+.card .cap { left: 10px; bottom: 8px; }
+
+/* support section: the menu's intro (large body) on the left half, the three brand cards full width; reachable at about.html#support */
+/* Support sits after Author now (user 2026-09-09); the License/Support grouping is gone */
+.row[id] { scroll-margin-top: 90px; }   /* anchors land below the sticky header */
+#gallery { scroll-margin-top: 138px; }   /* /gallery/ and #gallery land on the slider itself (its row has no label), with the same 48px of air a section label gets */
+.support-title { grid-column: 1 / 5; margin: 0; }   /* title in the left third … */
+.support-lead { grid-column: 5 / 13; font-size: 20px; line-height: 30px; margin: 0 0 calc(var(--block) - 10px); max-width: none; }   /* … text in the right two thirds (user); cards 38px below (--block − 10, user) */
+#supportCards { max-width: none; justify-self: stretch; gap: var(--gut); --col: calc((100% - 2 * var(--gut)) / 3); grid-template-columns: repeat(3, minmax(0, 1fr)); }   /* three equal cards on the page grid (the panel's pill-width trick is not used here) */
+#supportCards .support-card { border-radius: var(--r-md); padding: 24px; gap: 0; min-height: 0; align-items: stretch; text-align: left; margin: 0; }   /* compact (user) */
+/* on the page the three cards are DARK GREY, the same surface as the framework package cards (user); the header
+   panel keeps its brand colours. --line/--line-hover mirror the .pkg tints so buttons and rules match. */
+#supportCards .support-card[data-way] { --line: color-mix(in srgb, var(--text) 12%, transparent); --line-hover: color-mix(in srgb, var(--text) 20%, transparent); background: var(--surface2); }
+#supportCards .support-card[data-way] h4, #supportCards .support-card[data-way] h4 small, #supportCards .support-card[data-way] p { color: var(--text); }
+#supportCards .support-card[data-way] .support-cta, #supportCards .support-list button { background: var(--line); color: var(--text); }
+#supportCards .support-card[data-way] .support-cta:hover, #supportCards .support-list button:hover { background: var(--text); color: var(--bg); }
+@media (min-width: 1280px) { #supportCards .support-card { aspect-ratio: 4 / 5; } }   /* 4:5 portrait cards (user). Measured floor: at 1200 and below the content no longer fits a 4:5 box */
+@media (min-width: 1400px) { #supportCards .support-card { aspect-ratio: 1; } }   /* once the column is wide enough that a square still holds the content, stop growing taller -- a 4:5 card reaches ~700px of mostly empty space on a big screen (user). max-height cannot do this: with an aspect-ratio set, capping the height just makes the card narrower */
+#supportCards .support-card h4 { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -.01em; justify-content: flex-start; margin: 0 0 var(--sp-1); }
+#supportCards .support-card p { font-size: 16px; line-height: 24px; margin: 0 0 var(--block); }   /* the page's body text; a block gap down to the tier / address table (user) */
+#supportCards .support-cta { margin-top: auto; padding-top: 0; }
+#supportCards .support-card[data-way="patreon"] .support-cta { margin-top: 0; }   /* the button follows its table (whose own 16px bottom margin is the gap) instead of being pushed to the floor on its own */
+#supportCards .support-tiers, #supportCards .support-list { list-style: none; margin: auto 0 var(--stack); padding: 0; font-size: 16px; line-height: 24px; }   /* margin-top auto: the table sits at the BOTTOM, so the card's spare height falls between the description and the table (user); 24px down to the button */   /* margin-top auto: the table sits at the BOTTOM, so the card's spare height falls between the description and the table (user) */
+#supportCards .support-tiers li { display: grid; grid-template-columns: 1fr auto; column-gap: var(--sp-2); padding: 6px 0; border-top: 1px solid var(--rule); }   /* the page's rule colour, as on the timeline and stat rows (white 25% belonged to the panel's coloured cards) */
+#supportCards .support-tiers li:last-child { border-bottom: 1px solid var(--rule); }
+#supportCards .support-tiers .t-price { white-space: nowrap; }   /* no tnum: it widens the spaces around the slash in this face */
+#supportCards .support-tiers .t-note { grid-column: 1 / -1; font-size: 14px; line-height: 21px; opacity: .8; }
+#supportCards .support-list { margin-bottom: 0; }
+#supportCards .support-list li { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "net btn" "addr btn"; column-gap: var(--sp-2); align-items: center; padding: 8px 0; border-top: 1px solid var(--rule); }
+#supportCards .support-list li:last-child { border-bottom: 1px solid var(--rule); }
+#supportCards .support-list .a-net { grid-area: net; } #supportCards .support-list .a-net b { font-weight: 600; }
+#supportCards .support-list .a-addr { grid-area: addr; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 20px; opacity: .6; }   /* semi-transparent (user) */
+#supportCards .support-list button { grid-area: btn; height: 32px; padding: 0 14px; border: none; border-radius: var(--r-sm); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: background var(--t-fast), color var(--t-fast); }
+#supportCards .p-short, #supportCards .a-short { display: none; }   /* the narrow-column forms ("$1/mo", 5…4 address) switch on ≤1100 */
+#supportCards .support-list button.copied { background: var(--brand); color: #141414; }   /* copied still flashes brand pink here (the support panel's own signal) */
+/* packages: MCP card dark blue, three grey cards, install command with Copy, npm + GitHub links */
+.packages .support-title { grid-column: 1 / 7; } .packages .support-lead { grid-column: 7 / 13; margin-bottom: calc(var(--block) - 10px); }
+.packages .support-title, .packages .support-lead { align-self: baseline; }   /* "Packages" and the first line of the text share one baseline (user) */   /* title over the MCP card, text over the Components card: each half the width, like the cards (user) */
+.packages-cards { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gut); }   /* two cards side by side, MCP and Components, the same structure (user) */
+.pkg { --ink: var(--text); --field: color-mix(in srgb, var(--text) 3.5%, transparent); --line: color-mix(in srgb, var(--text) 6%, transparent); --line-hover: color-mix(in srgb, var(--text) 10%, transparent); --btn: color-mix(in srgb, var(--text) 12%, transparent); background: var(--surface2); color: var(--text); border-radius: var(--r-md); padding: 24px; display: flex; flex-direction: column; min-width: 0; }   /* grey cards (user) */
+.pkg.pkg-dark { --ink: #ffffff; --field: rgba(255, 255, 255, .045); --line: rgba(255, 255, 255, .08); --line-hover: rgba(255, 255, 255, .13); --btn: rgba(255, 255, 255, .16); background: #061584; color: #ffffff; }   /* the MCP card, first: brand Dark Blue (user: a dark colour, MCP is the priority) */
+.mcp-mark { display: flex; align-items: center; }   /* hidden source marks, cloned into the tabs */
+/* MCP section: a tab per assistant (mark + name), then three steps on the card grid — copy, where it goes, what to ask */
+.mcp-card { grid-column: span 6; scroll-margin-top: 110px; }   /* /mcp/ and #mcp land on the card */
+.mcp-card { display: flex; flex-direction: column; gap: var(--stack); }
+.mcp-head { display: flex; justify-content: space-between; align-items: center; gap: var(--gut); margin-top: var(--sp-2); }   /* 40px under the tab row on desktop (card gap 24 + 16, user) */ .pkg .mcp-head h4 { font-size: 28px; line-height: 34px; margin: 0; }   /* title only, npm and GitHub at the right (user) */
+.mcp-head .pkg-links { margin-top: 0; flex: none; }
+
+.pkg-dark .mcp-list .no { color: #ffffff; }
+.mcp-tabs { position: relative; display: flex; gap: var(--tab-gap, 34px); box-shadow: inset 0 -1px 0 var(--btn); margin-top: -8px; }   /* a tab row on one baseline rule; always fits: tabRow() tightens the gap, then the text and marks, when the card is narrow (user: no scrolling) */
+.mcp-tabs.wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; } .mcp-tabs.wrap .mcp-tab { width: 100%; }   /* last resort on the narrowest phones: a tidy 3-column grid instead of hidden tabs */
+.mcp-tabs.names2 .mcp-tab { flex: 0 1 min-content; white-space: normal; text-align: center; line-height: 1.15; }   /* two-line names set tighter than the 20px single line, and proportional so it holds as the step shrinks the font (user) */   /* tight: each tab as wide as its longest word, so two-word names take two lines (user) */
+.mcp-tab { flex: none; padding: 12px 0 14px; display: inline-flex; flex-direction: column; align-items: center; gap: 8px; border: none; border-radius: 0; background: none; color: var(--ink); opacity: .6; font: inherit; font-size: var(--tab-font, 16px); line-height: 20px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: opacity var(--t-fast), box-shadow var(--t-fast); }   /* the mark above the name (user) */
+.mcp-tab-mark { width: var(--tab-mark, 24px); height: var(--tab-mark, 24px); display: flex; align-items: center; justify-content: center; } .mcp-tab-mark svg { width: var(--tab-mark, 24px); height: var(--tab-mark, 24px); fill: currentColor; display: block; } .mcp-tab-mark svg.mark-lg { width: calc(var(--tab-mark, 24px) + 2px); height: calc(var(--tab-mark, 24px) + 2px); }   /* the slot stays for every tab, so the names share one line */
+.mcp-title { display: flex; align-items: center; } .mcp-title-mark { display: none; }   /* title text on the step text's left edge; the marks live in the tabs again (user) */
+
+.mcp-tab:hover { opacity: .85; }
+.mcp-tab[aria-selected="true"] { opacity: 1; box-shadow: inset 0 -2px 0 var(--ink); }   /* the chosen tab: full colour, underlined */
+.mcp-tab:active { opacity: .6; } .mcp-tab:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+.mcp-body { display: flex; flex-direction: column; gap: var(--sp-2); } .mcp-list { display: contents; }   /* half-width card: the steps and the snippet share one column */
+.mcp-list li:nth-child(1) { order: 1; } .mcp-body .step-box-1 { order: 2; } .mcp-list li:nth-child(2) { order: 3; } .mcp-body .step-box-2 { order: 4; } .mcp-list li:nth-child(3) { order: 5; }   /* each snippet follows the step it belongs to */
+.mcp-list { list-style: none; margin: 0; padding: 0; gap: var(--sp-2); }
+.mcp-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr); }   /* number, then the step text (user: closer) */
+.mcp-list .no { font-size: 12px; line-height: 24px; color: var(--ink); }   /* 01 02 03 on the step title's line, in the text colour (user) */
+.pkg .mcp-list h4 { font-size: 16px; line-height: 24px; margin: 0; }
+.pkg .mcp-list p { font-size: 16px; line-height: 24px; margin: 0; }
+.mcp-list p code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 14px; overflow-wrap: anywhere; }   /* file paths inside the step text */
+.mcp-list .pkg-links { margin-top: var(--sp-1); } .mcp-list .pkg-links[hidden] { display: none; }   /* .pkg-links is a flex row, which would otherwise override hidden */
+.pkg .mcp-body .cmd { width: auto; margin: 0 0 0 28px; min-height: 0; align-content: flex-start; padding-right: 36px; }   /* the copy icon keeps its own corner */   /* snippets line up with the step text, not the 01 02 03 numbers (user) */
+.pkg .mcp-body .cmd code { font-size: 12px; }
+.inline-copy { cursor: pointer; color: var(--ink); background: var(--line); border-radius: var(--r-xs); padding: 3px 5px 3px 6px; margin: 0 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background var(--t-fast); }   /* a soft rectangle under the icon and text; each wrapped line gets its own */   /* the example request, copyable right inside the sentence: copy icon + text in the card's own colour on a soft rectangle (user) */
+.inline-copy:hover { background: var(--btn); } .inline-copy:active { opacity: .6; } .inline-copy:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }
+.inline-copy-icon { display: inline-block; vertical-align: -1.92px; margin-left: 5px; } .inline-copy-icon svg { width: 15.36px; height: 15.36px; fill: currentColor; display: block; }   /* after the text; the copy glyph's ink (y 3–21 of 24) equals the 16px face's cap height, 11.52px, and sits on the baseline (user) */
+.inline-copy-icon .i-done { display: none; } .inline-copy.copied .inline-copy-icon .i-copy { display: none; } .inline-copy.copied .inline-copy-icon .i-done { display: block; }   /* snippets at 12px: the Claude Code command stays on one line under the indented text */
+.pkg h4 { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 var(--sp-1); overflow-wrap: anywhere; }
+.support-title .pkg-beta { display: inline-flex; vertical-align: middle; margin-left: 10px; top: -3px; will-change: transform; font-family: 'Inter', sans-serif; font-feature-settings: normal; font-variant-ligatures: normal; }   /* the header's BETA badge itself (user: same as the one by the logo) — .beta-badge carries every other value; display overrides its display:none, and Inter matches the header's letterforms (the title would pass the page face down) */   /* will-change: its own compositor layer, so the pill rasterises at its own origin instead of snapping to whatever sub-pixel row the heading lands on. Measured: the gap to the baseline is 3.188px at every width, so the wobble was rounding, not layout. Trade-off: composited text loses sub-pixel antialiasing, so watch whether BETA looks thinner */
+.pkg p { font-size: 16px; line-height: 24px; margin: 0 0 var(--stack); }
+.pkg .cmd { position: relative; margin-top: auto; min-height: 80px; display: flex; flex-wrap: wrap; align-content: space-between; align-items: center; justify-content: space-between; gap: 4px var(--sp-2); width: 100%; text-align: left; border: none; background: var(--field); color: inherit; border-radius: var(--r-sm); padding: 8px 12px; cursor: pointer; font: inherit; transition: background var(--t-fast); }   /* the whole row copies the command */
+.pkg .cmd:hover { background: var(--line-hover); } .pkg .cmd:active { opacity: .6; }
+.pkg .cmd code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 20px; overflow-wrap: anywhere; white-space: pre-wrap; }   /* wraps rather than clips; pre-wrap keeps the JSON snippets' line breaks and indent */
+.pkg .cmd .cmd-hint { position: absolute; right: 10px; bottom: 9px; display: flex; opacity: .7; transition: opacity var(--t-fast); }   /* always the bottom-right corner, never beside a short command (user) */
+.pkg .cmd .cmd-hint svg { width: 18px; height: 18px; fill: currentColor; display: block; }   /* Iconoteka's own copy and checkmark icons, regular stroke */
+.pkg .cmd .cmd-hint .i-done { display: none; } .pkg .cmd.copied .cmd-hint .i-copy { display: none; } .pkg .cmd.copied .cmd-hint .i-done { display: block; }
+.pkg .cmd:hover .cmd-hint { opacity: 1; }
+.pkg .cmd.copied { background: var(--line-hover); } .pkg .cmd.copied .cmd-hint { opacity: 1; }   /* copied: the hover tint and a checkmark in place of the copy icon, no brand colour (user) */
+.pkg-links a { height: 32px; padding: 0 14px; border: none; border-radius: var(--r-sm); background: var(--btn); color: var(--ink); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: background var(--t-fast), color var(--t-fast); }
+.pkg-links a:hover { background: var(--ink); color: var(--bg); } .pkg.pkg-dark .pkg-links a:hover { color: #061584; } .pkg-links a:active { opacity: .6; }
+.pkg-links { display: flex; align-items: center; gap: var(--sp-1); margin-top: var(--sp-2); }
+/* features 3×2 */
+.facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--block) var(--gut); }
+.facts h3, .facts p { padding-right: 30px; }   /* the text stops 30px short of its column, so with the smaller gutters the columns of copy stay well apart (user) */   /* 3 × 2, full width; the label's own --stack is the only gap above, as for Author and the timeline */
+.facts .f-icon { width: 64px; height: 64px; fill: var(--fc, currentColor); display: block; margin-bottom: var(--sp-2); position: relative; left: -8px; }   /* brand colour per feature; 8px LEFT = optical compensation (user, 2026-09-06 — an 8px-right try was reversed) */
+.facts [data-icon="grid"] { --fc: #a25624; }   /* Transparent Ox (user swapped it from Blue) */
+.facts [data-icon="eye"] { --fc: #febd32; }   /* Yellow */
+.facts [data-icon="circle"] { --fc: #12ab57; }   /* Green */
+.facts [data-icon="bar_chart"] { --fc: #f04c1a; }   /* Red */
+.facts [data-icon="user"] { --fc: #673726; }   /* Warm Sepia on the light theme … */
+[data-theme="dark"] .facts [data-icon="user"] { --fc: #ffc3dc; }   /* … Pink on dark, where it reads */
+.facts [data-icon="cube"] { --fc: #979c1a; }   /* Moss Olive */
+
+/* in use: one 16:9 slide at content width, the next peeking past the right edge; arrows above */
+.inuse-text { grid-column: 1 / 9; margin: var(--block) 0 0; font-size: 20px; line-height: 30px; letter-spacing: 0; max-width: 60ch; padding-right: var(--block); }   /* large body size. The padding keeps a line that nearly fills its column away from the marks beside it: the gap depended on where the text happened to wrap, and fell to 50px at some widths (user) */
+.handle { font-weight: inherit; text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; text-decoration-skip-ink: none; transition: opacity var(--t-fast); }   /* inline links: same weight and colour as the copy; a 1px underline set low, in the text colour (palette colours were tried and removed — user) */
+.handle:hover { opacity: .8; }   /* same hover as the header links — no colour */
+.slider-nav { grid-column: 9 / 13; align-self: start; display: flex; justify-content: flex-end; gap: 28px; margin-top: var(--block); }   /* level with the first line of the text beside it, not under the whole block (user) */
+#slideFull { margin-right: 28px; }   /* the same mark size as the arrows, set twice their gap away from them (user) */
+.lightbox { position: fixed; inset: 0; z-index: 3000; background: #000; display: flex; align-items: center; justify-content: center; }
+.lightbox img, .lightbox video { width: 100%; height: 100%; object-fit: cover; display: block; }   /* fills the screen rather than sitting in bars (user) */
+.lightbox .lb-stage { position: absolute; inset: 0; }
+.lightbox .lb-stage img, .lightbox .lb-stage video { position: absolute; inset: 0; opacity: 0; transition: opacity var(--t-slow, .4s) ease; }
+.lightbox .lb-stage .on { opacity: 1; }   /* one fades up over the one before it */
+.lightbox .lb-half { position: absolute; top: 0; bottom: 0; width: 50%; }   /* the screen itself turns the page, and the pointer is the library's own arrow (user) */
+.lightbox .lb-half.l { left: 0; } .lightbox .lb-half.r { right: 0; }
+.lightbox .lb-top { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; transition: opacity var(--t-fast); }
+.lightbox button { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--bg) 55%, transparent); backdrop-filter: blur(8px); color: var(--text); border: none; border-radius: 999px; cursor: pointer; transition: opacity var(--t-fast), background var(--t-fast); }   /* the page's own pair -- black circle and white cross in the dark, reversed in the light -- held semi-transparent over the picture (user) */
+.lightbox button:hover:not(:disabled) { background: color-mix(in srgb, var(--bg) 80%, transparent); }
+.lightbox button svg { width: 26px; height: 26px; fill: currentColor; display: block; }
+.lightbox button:disabled { opacity: .25; cursor: default; }
+.lightbox.idle .lb-top { opacity: 0; pointer-events: none; }   /* a second without the mouse moving and the controls step out of the picture (user) */
+.lightbox.idle .lb-half { cursor: none !important; }   /* !important because the arrow cursor is set inline from JS, and an inline style would otherwise win */
+.lightbox button:hover { background: rgba(255,255,255,.24); }
+.lightbox button svg { width: 26px; height: 26px; fill: currentColor; display: block; }
+.slider-nav button { font: inherit; background: none; border: none; padding: 0; cursor: pointer; color: var(--text); display: flex; transition: opacity var(--t-fast); }
+.slider-nav button:hover:not(:disabled) { opacity: .7; }
+.slider-nav button svg { width: 28px; height: 28px; fill: currentColor; display: block; }
+.slider-nav button:disabled { opacity: .3; cursor: default; }
+.slider { display: flex; align-items: flex-start; gap: var(--gut); overflow-x: auto; scrollbar-width: none; cursor: grab; user-select: none;
+          margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-left: calc(50vw - 50%); padding-right: calc(50vw - 50%); }   /* runs edge to edge, so slides leave the screen on the left too; snapping is done in JS */
+.slider.dragging { cursor: grabbing; }
+.slider:focus, .slider:focus-visible { outline: none; }   /* Chrome makes a scroll container keyboard-focusable, so landing on #gallery drew a ring round the whole strip. The arrows are the visible control here, and they keep their own focus ring */
+.slider::-webkit-scrollbar { display: none; }
+.slider .slot { flex: 0 0 100%; aspect-ratio: 16 / 9; height: auto; border-radius: 8px; background: var(--ui-surface); overflow: hidden; }
+.slider .slot img, .slider .slot video { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; user-drag: none; }   /* dragging a shot pans the strip; without this the browser lifts the picture out instead */
+
+/* author: 4:3 portrait on the left half, text and links on the right half */
+.photo { aspect-ratio: 4 / 3; border-radius: 8px; background: var(--ui-surface); overflow: hidden; }
+.author .half-a, .author .half-b { margin-top: 0; }   /* the label's --stack already separates them */
+.author .half-b { display: flex; flex-direction: column; justify-content: space-between; margin-top: -6px; }   /* the bio's CAP HEIGHT lines up with the photo's top edge (measured in a render, not derived: -9 overshot by 3px) */   /* text at the top, links at the bottom */
+.author .bio, .author-contact { font-size: 24px; line-height: 32px; letter-spacing: -.01em; }   /* author copy: one step above the large body (a 20% larger try was reverted) */
+.author .bio { margin: 0 0 var(--stack); }
+.half-b .author-contact { margin: 0 0 var(--block); }   /* .half-b prefix: outranks the generic `.half-b p` margin */
+.author .half-b .links { margin-top: auto; align-items: center; }   /* links stay at the bottom */
+.author-links .site { margin-left: auto; border-radius: 999px; }   /* the website button sits at the right edge, fully rounded */
+.author-links.site-wrapped .site { margin-left: 0; }   /* when it drops to its own line it starts at the left, under Instagram (user) */
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* request form */
+form { display: flex; gap: var(--sp-1); }
+input[type=text] { flex: 1; min-width: 0; height: 44px; padding: 0 var(--sp-2); border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--ui-input); color: var(--text); font: inherit; font-size: 16px; outline: none; }
+input[type=text]:focus { background: var(--ui-input-hover); border-color: var(--text); }
+input[type=text]::placeholder { color: var(--text); opacity: .5; }
+button.primary { height: 44px; padding: 2px 18px 0; border: none; border-radius: var(--r-sm); background: var(--text); color: var(--bg); font: inherit; font-size: 15px; font-weight: 500; cursor: pointer; transition: opacity var(--t-fast); }
+button.primary:hover { opacity: .82; }
+button.primary:disabled { cursor: default; opacity: 1; }   /* while it shows a status */
+
+
+/* timeline: date, version, count, weights/styles, note, on the page's 12 columns */
+.tl { list-style: none; margin: 0; padding: 0; grid-column: 1 / -1; border-top: 1px solid var(--rule); }
+.tl li { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut);   /* the page's 12 columns, so the cells sit on the grid lines */ padding: var(--sp-2) 0; border-bottom: 1px solid var(--rule); font-size: 16px; line-height: 24px; }
+.tl li:last-child { border-bottom: none; }   /* no rule under the last timeline row */
+.tl time { grid-column: 1 / 3; color: var(--text); }
+.tl time .m-short { display: none; }   /* wide screens spell the month out; the 3-letter form takes over when the column gets tight (user) */
+.tl b { grid-column: 3 / 5; }
+.tl .n { grid-column: 5 / 7; }
+.tl .w { grid-column: 7 / 9; }
+.tl .d { grid-column: 9 / 13; }
+.tl b { font-weight: inherit; }
+.tl b .v { font-feature-settings: "liga" 0, "calt" 0, "tnum" 1; }
+.tl .d strong { font-weight: inherit; }
+.tl .n { color: var(--text); }
+/* the weights numbers also read as a dot matrix — one column per weight, one row per style. It lives in the
+   COUNT cell, right-aligned, so it ends on the line that closes column 6 and leads into the weights text;
+   every cell's text keeps its own grid line (user) */
+.tl .n { display: flex; align-items: flex-start; gap: 10px; }   /* flex-start: the count sits on the row's first line like every other cell (centring dropped it to the middle of tall rows) */
+.tl .n .dots { display: inline-grid; grid-auto-flow: column; grid-template-rows: repeat(var(--rows), 3px); grid-auto-columns: 3px; gap: 2px; flex: none; margin-left: auto; height: 24px; align-content: center; }   /* one line tall, matrix centred on it */
+.tl .n .dots i { display: block; width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+/* the icon count also reads as a progress bar in the VERSION cell, right-aligned so it ends on the line
+   closing column 4 and leads into the count text; the largest count in the timeline = full */
+.tl b { display: flex; align-items: flex-start; }   /* no gap: the "v" and the number are separate flex items and a gap would split them */
+.tl b .bar { flex: none; margin-left: auto; padding-left: 10px; box-sizing: content-box; width: 33px; height: 24px; display: flex; align-items: center; }   /* 33px = the 7×2 dot matrix's width (7×3 + 6×2), so bar and matrix read as one family */
+.tl b .bar span { display: block; height: 8px; width: 100%; border-radius: 1.5px; background: var(--bar-track); }   /* 8px = the matrix's height (2×3 + 2); 1.5px radius = ONE DOT's radius (user) */
+.tl b .bar span i { display: block; height: 100%; width: var(--pct); min-width: 2px; border-radius: 1.5px; background: currentColor; }
+
+footer { border-top: 1px solid var(--border);   /* same line as the header */ padding: var(--sec) var(--pad) calc(var(--sec) + 20px);   /* double space before the footer: one --major above its rule, then the usual padding */ font-size: 14px; line-height: 21px; color: var(--text); }
+footer .g { row-gap: var(--block); align-items: start; }
+/* footer on the 12 page columns, one row: icon top-left and © bottom-left (1–2), columns 3–4 empty, Library (5–6), Support (7–8), Follow (9–10), Contact (11–12) */
+.footer-icon { grid-column: 1 / 3; grid-row: 1; align-self: start; justify-self: start; width: 48px; color: var(--text); height: 48px; position: relative; left: -6px; top: -3px; }   /* 48px box = the hover target is the mark itself, not the whole cell */   /* optical compensation: the glyph's own side bearings make it look inset */
+.footer-icon svg { width: 48px; height: 48px; fill: currentColor; display: block; }
+.footer-icon { cursor: pointer; }   /* it reacts to a click / tap; the weight grid cells are not clickable (user), they only react to hover */
+.f-lib { grid-column: 5 / 7; } .f-sup { grid-column: 7 / 9; } .f-fol { grid-column: 9 / 11; } .f-contact { grid-column: 11 / 13; }   /* icon + © in 1–4, groups from column 5, Contact two columns (user) */
+.f-contact p { margin: 0; font-size: 14px; line-height: 21px; }
+.footer-group h4 { font-size: 14px; line-height: 21px; font-weight: 500; color: var(--text-soft); margin: 0 0 var(--sp-2); }   /* grey titles, 16px to the links (links are 8px apart) */
+.footer-group nav { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-1); }
+.footer-crypto-label { color: var(--text-soft); position: relative; top: 3px; }   /* "Crypto:" — plain grey text, not a link; nudged 4px down visually, the next line does not move */
+.footer-crypto { display: flex; gap: 10px; }   /* BTC ETH USDT a little closer (user) */
+footer a { text-decoration: none; }
+footer a:hover, footer button:hover { opacity: .8; }
+footer button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; text-align: left; }
+footer button.copied { color: var(--brand); }
+.footer-copy { grid-column: 1 / 3; grid-row: 1; white-space: nowrap; color: var(--text-muted); align-self: end; }
+.footer-copy a { color: inherit; text-decoration: none; }   /* the name links out, but the line reads as plain copy: no underline, no colour change (user) */   /* grey ©, on the groups' row, its baseline on the last links (Download Press Kit, X) */
+
+/* wide screens: the column widens in two more steps past 1600 / 2000 (user) */
+@media (min-width: 1600px) {
+  .g { max-width: 1540px; }
+  :root { --gut: 32px; --display: clamp(30px, 4.2vw, 72px); }
+  .wall { --tile: 88px; --wgap: 18px; }
+  .hero-band { --band-h: 480px; }
+}
+@media (min-width: 2000px) {
+  .g { max-width: 1780px; }
+  :root { --gut: 40px; --display: clamp(30px, 4.2vw, 84px); }
+  .wall { --tile: 100px; --wgap: 20px; }
+  .hero-band { --band-h: 540px; }
+}
+@media (max-width: 1200px) {
+  .tl time .m-long { display: none; } .tl time .m-short { display: inline; }   /* "26 September 2026" no longer fits the two-column date cell */
+}
+@media (max-width: 1100px) {
+  .packages .support-title { grid-column: 1 / 7; } .packages .support-lead { grid-column: 7 / 13; }
+}
+@media (max-width: 1100px) {
+  .tl .n .dots, .tl b .bar { display: none; }   /* no room for the matrix or the bar once the columns narrow (user) */
+  .tl .w { grid-column: 7 / 10; } .tl .d { grid-column: 10 / 13; }   /* "7 weights, 2 styles" no longer wraps; the note keeps three columns */
+  #supportCards .p-long, #supportCards .a-long, #supportCards .a-net .net { display: none; } #supportCards .p-short, #supportCards .a-short { display: inline; }   /* narrow cards: "$1/mo", a 5…4 address and the ticker only, so every row stays on one line (user) */
+}
+@media (max-width: 700px) {
+  .card .cap .st { display: none; }   /* cells are ~80px: caption = weight name only (the S/F code carries the style) */
+}
+@media (max-width: 640px) {
+  .request-box { grid-template-columns: 1fr; row-gap: var(--stack); }   /* title above the text and form */
+  .facts { grid-template-columns: 1fr; }   /* one feature per row: two 200px text columns were too narrow */
+}
+/* header ≤860: the homepage's tablet bar — navigation folds into the burger (support.js fills its Support group) */
+@media (min-width: 481px) and (max-width: 860px) {
+  header { grid-template-columns: auto 1fr auto; height: 78px; padding: 0 var(--panel-pad); column-gap: 20px; }   /* stays sticky (the homepage makes it relative here — user wants it to stay while scrolling) */
+  .header-nav { display: none; }
+  .burger-btn { display: flex; align-items: center; justify-content: center; grid-column: 3; grid-row: 1; }
+  /* tablet-only layout (user 2026-09-06): */
+  :root { --display: clamp(36px, 5vw, 60px); }   /* intro statement (and the stat numbers that share its size) bigger on tablet: 43px at 860, 38px at 768, 36px floor */
+  .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* weight grid 4-3-4-3: the stroke row breaks after Regular, the fill row starts a new line */
+  .card:nth-child(8) { grid-column-start: 1; }
+  .license .half-a, .license .half-b { grid-column: 1 / -1; }   /* License above Repository, each with its own rule */
+  .license .half-a { margin-bottom: var(--block); }
+  #privacy .half-a, #privacy .half-b { grid-column: 1 / -1; }   /* same as License: this much prose is too narrow in a tablet half */
+  #privacy .half-a { margin-bottom: var(--block); }
+  #supportCards { grid-template-columns: 1fr; } #supportCards .support-card:last-child { grid-column: auto; }
+  .packages-cards { grid-template-columns: 1fr; } .mcp-card { grid-column: auto; }   /* tablet: one card under the other */
+  .packages .support-title { grid-column: 1 / 4; } .packages .support-lead { grid-column: 4 / 7; }
+  .mcp-head { flex-direction: column; align-items: flex-start; } 
+  .tl li { grid-template-columns: 1fr 2fr; grid-template-areas: "t d" "n d" "v d"; row-gap: 0; align-content: start; }   /* timeline: date, count, version stacked on the left; the note on the right; no weights cell */
+  .tl time { grid-area: t; } .tl .n { grid-area: n; } .tl b { grid-area: v; } .tl .d { grid-area: d; } .tl .w { display: none; }
+  .f-lib { grid-column: 1 / 4; } .f-sup { grid-column: 4 / 7; } .f-fol { grid-column: 1 / 4; } .f-contact { grid-column: 4 / 7; }   /* footer 2 × 2: Library | Support, Follow | Contact */
+}
+@media (max-width: 860px) {
+  .burger-ver { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+  .g { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .full, .facts { grid-column: 1 / -1; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .stat-block { grid-template-columns: 1fr; row-gap: var(--sp-2); border-top: 1px solid var(--rule); padding-top: var(--sp-2); }   /* stacked: the text sits UNDER the number, the rule ABOVE the number (user) */
+  .stat-block h2, .stat-block p { grid-column: 1 / -1; }
+  .stat-block h2 { grid-row: 1; } .stat-block p { grid-row: 2; margin-top: 0; border-top: none; padding-top: 0; }
+  .headline .g { border-bottom: none; padding-bottom: 0; }   /* no rule under the intro — the first stat row brings its own line */
+  .row.headline + .row { padding-top: var(--major); }
+  .author-links .site { margin-left: 0; }   /* all four author buttons in one row (user) */
+  .half-a { grid-column: 1 / 4; }
+  .half-b { grid-column: 4 / 7; }
+  .author .half-a, .author .half-b { grid-column: 1 / -1; }   /* portrait above the text: the 24px bio is too narrow in half the width */
+  .author .half-b { margin-top: 0; }   /* stacked: there is no photo edge beside the bio to align its cap height to */
+  .author .photo { margin-bottom: var(--block); }
+  .statement { grid-column: 1 / -1; grid-row: 2; }
+  .ver { grid-column: 1 / -1; grid-row: 1; justify-self: stretch; display: flex; justify-content: space-between; margin: 0 0 var(--stack); }   /* above the intro: version at the LEFT, 01 at the right (user) */
+  .ver .no { margin-left: 0; }
+  .inuse-text { grid-column: 1 / 5; }
+  .support-title { grid-column: 1 / 3; } .support-lead { grid-column: 3 / 7; }   /* tablet: 1/3 + 2/3 of the 6-col grid */
+  .slider-nav { grid-column: 5 / 7; }
+  #slideFull { margin-right: 0; }   /* tight against the arrows here, so it sits away from the text beside it (user) */
+  .hero-band { --band-h: 360px; }
+  .wall { --tile: 68px; --wgap: 14px; }
+  .slider-nav button svg { width: 24px; height: 24px; }
+  .footer-icon { grid-column: 1 / -1; grid-row: auto; }
+  .footer-copy { grid-column: 1 / -1; grid-row: auto; }
+}
+@media (max-width: 480px) {
+  /* header: the homepage's phone bar */
+  header { grid-template-columns: 1fr auto; height: auto; padding: 18px var(--panel-pad) 16px; column-gap: 0; }   /* stays sticky on the phone too (user) */
+  .header-nav { display: none; }
+  .burger-btn { display: flex; align-items: center; justify-content: center; }
+  .logo { font-size: 18.9px; }
+  .beta-badge { top: -3px; }
+  .hero-band { --band-h: 300px; }
+  .wall { --tile: 60px; --wgap: 12px; }
+  .g { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .full, .facts, .stat-block, .inuse-text, .half-a, .half-b, .support-lead, .support-title { grid-column: 1 / -1; }
+  .packages .support-title, .packages .support-lead { grid-column: 1 / -1; } .mcp-head { flex-direction: column; align-items: flex-start; }   /* .packages specificity: without this the ≤1100 rule (cols 7–13) still applies here and grows the 4-column phone grid to 12, squeezing the cards to 60px */
+ .pkg.mcp-card { padding: 16px; } .pkg #mcpSetupCmd { padding: 8px 32px 8px 10px; }   /* phone: 8px more width, so the settings block keeps its lines */
+  #mcpSetupCmd code { font-size: 12px; }   /* the settings block keeps its lines on a phone-width card */
+  .support-title { margin-bottom: var(--sp-2); }
+  #supportCards { grid-template-columns: 1fr; } #supportCards .support-card:last-child { grid-column: auto; }
+  #supportCards .support-card { padding: 20px; }
+  .packages-cards { grid-template-columns: 1fr; } .mcp-card { grid-column: auto; } .pkg { padding: 20px; }
+  .footer-icon { grid-column: 1 / -1; grid-row: auto; }
+  .footer-copy { grid-column: 1 / -1; grid-row: auto; }
+  .footer-copy br { display: none; }   /* © on one line on the phone (user) */
+  .half-a { margin-bottom: var(--block); }
+  .slider-nav { grid-column: 1 / -1; }
+  .facts { grid-template-columns: 1fr; row-gap: var(--block); }
+  .facts h3, .facts p { padding-right: 0; }   /* one column on the phone: no inset */
+  .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* 4-3-4-3 on the phone too (user) */
+  .card:nth-child(8) { grid-column-start: 1; }
+  .card small { font-size: 10px; line-height: 13px; }   /* smaller cell texts on the phone (user) */
+  .card .n { left: 6px; top: 5px; } .card .code { right: 6px; top: 5px; } .card .cap { left: 6px; bottom: 5px; }
+  .author .bio, .author-contact, .inuse-text, .request-box .request-body p, .license p, .support-lead { font-size: 16px; line-height: 24px; letter-spacing: 0; }   /* phone: the standard body size for the author, gallery, License/Repository and request copy (user) */
+  .request-box h3 { font-size: 22px; line-height: 28px; }   /* smaller request title on the phone (user) */
+  .slider { grid-row: 1; } .slider-nav { grid-row: 2; justify-content: flex-start; margin-top: var(--block); } .inuse-text { grid-row: 3; margin-top: var(--stack); }   /* arrows above the text, at the LEFT on the phone (user 2026-09-20; they were right-aligned) */
+  #slideFull { display: none; }   /* no full screen on the phone: it is the whole screen already, and the controls need a pointer (user) */
+  .tl li { display: block; }   /* phone: a small title (date + version) with the note under it; count and weights skipped (user) */
+  .tl time, .tl b { display: inline; font-weight: 500; }
+  .tl b { margin-left: var(--sp-1); }
+  .tl .n, .tl .w { display: none; }
+  .tl .d { display: block; margin-top: 2px; }
+  form { flex-direction: column; }
+  input[type=text] { flex: none; }   /* in the column the flex basis would squash the 44px input */
+  .links a, .button { width: 100%; justify-content: center; height: 44px; }   /* full width and 44px tall: the touch-target minimum (Apple HIG 44pt) */
+  .half-b .author-contact { margin-bottom: calc(var(--block) * 1.5); }   /* 48px between the author text and the buttons (user) */
+  .row.headline + .row { padding-top: calc(var(--major) - 20px); }   /* intro → first stat row 20px closer on the phone (user): 44px */
+  .f-lib, .f-fol { grid-column: 1 / 3; } .f-sup, .f-contact { grid-column: 3 / 5; }   /* two groups per row: Library | Support, Follow | Contact */
+}
+/* ─── Partners ──────────────────────────────────────────────────────────────
+   Three equal cards in one row, three columns each, leaving the last three columns
+   of the grid free. Each carries its own brand colour and its full logo. */
+.partners-cards { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+                  column-gap: var(--gut); row-gap: var(--gut); }
+.partner { display: flex; flex-direction: column; gap: 6px; padding: 28px 28px 20px; border-radius: var(--r-md);
+           text-decoration: none; min-height: 260px; }
+.partner:nth-child(1) { grid-column: 1 / 4; }
+.partner:nth-child(2) { grid-column: 4 / 7; }
+.partner:nth-child(3) { grid-column: 7 / 10; }   /* columns 10 to 13 stay free */
+a.partner { transition: filter var(--t-fast); }
+a.partner:hover { filter: brightness(1.08); }
+.partner-mark { height: 56px; display: flex; align-items: center; margin-bottom: var(--block); }
+.partner-mark svg { height: 100%; width: auto; display: block; fill: currentColor; }
+.partner h4 { font-size: 19px; line-height: 28px; font-weight: 600; margin: 0; }
+.partner p { font-size: 15px; line-height: 23px; margin: 0; opacity: .78; }
+.partner .partner-go { margin-top: auto; padding-top: var(--sp-1); font-size: 15px; font-weight: 600; opacity: .9; }
+/* only the two link cards: the open card's "Get in touch" already carries the .handle underline */
+a.partner .partner-go { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a.partner:hover .partner-go { opacity: 1; }
+.partner.open { background: #242424; color: #ffffff; }
+.partner.open a { color: inherit; }
+@media (max-width: 1100px) {
+  .partner:nth-child(1) { grid-column: 1 / 5; }
+  .partner:nth-child(2) { grid-column: 5 / 9; }
+  .partner:nth-child(3) { grid-column: 9 / 13; }
+}
+@media (max-width: 860px) {
+  .partner:nth-child(1), .partner:nth-child(2), .partner:nth-child(3) { grid-column: 1 / -1; }
+  .partner-mark { height: 48px; }
+  /* stacked, so nothing needs aligning: the empty mark box on the last card is just a hole */
+  .partner.open .partner-mark { display: none; }
+}
+
+</style>
+<script>
+// Theme init — runs immediately before page renders
+(function() {
+  const saved = new URLSearchParams(location.search).get('theme') || localStorage.getItem('iconoteka-theme');   // ?theme=light|dark: dev switch for renders
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://iconoteka.com/#website",
+      "url": "https://iconoteka.com/",
+      "name": "Iconoteka",
+      "description": "A free, open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://iconoteka.com/#author"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://iconoteka.com/#author",
+      "name": "Oleg Turbaba",
+      "url": "https://turbaba.com",
+      "sameAs": [
+        "https://www.behance.net/turbaba",
+        "https://www.linkedin.com/in/turbaba/",
+        "https://www.instagram.com/turbaba/"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://iconoteka.com/#library",
+      "name": "Iconoteka",
+      "url": "https://iconoteka.com/",
+      "description": "A free, open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any",
+      "image": "https://iconoteka.com/iconoteka-preview.png",
+      "author": {
+        "@id": "https://iconoteka.com/#author"
+      },
+      "license": "https://github.com/iconoteka/iconoteka/blob/main/LICENSE",
+      "codeRepository": "https://github.com/iconoteka/iconoteka",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "sameAs": [
+        "https://www.figma.com/community/plugin/1675995752572535073/iconoteka",
+        "https://www.npmjs.com/package/iconoteka-react",
+        "https://www.npmjs.com/package/iconoteka-mcp"
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://iconoteka.com/about.html#page",
+      "url": "https://iconoteka.com/about.html",
+      "name": "About Iconoteka, 1,300 open-source icons in 7 weights and 2 styles",
+      "description": "A free, open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://iconoteka.com/#website"
+      },
+      "about": {
+        "@id": "https://iconoteka.com/#library"
+      },
+      "primaryImageOfPage": "https://iconoteka.com/iconoteka-preview.png"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <a href="./">
+      <svg id="logomark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.0005 22C10.1672 22 8.48382 21.5583 6.95049 20.675C5.41716 19.7917 4.20882 18.5833 3.32549 17.05C2.44216 15.5167 2.00049 13.8333 2.00049 12C2.00049 10.1667 2.44216 8.48333 3.32549 6.95C4.20882 5.41667 5.41716 4.20833 6.95049 3.325C8.48382 2.44167 10.1672 2 12.0005 2C13.8338 2 15.5172 2.44167 17.0505 3.325C18.5838 4.20833 19.7922 5.41667 20.6755 6.95C21.5588 8.48333 22.0005 10.1667 22.0005 12C22.0005 13.8333 21.5588 15.5167 20.6755 17.05C19.7922 18.5833 18.5838 19.7917 17.0505 20.675C15.5172 21.5583 13.8338 22 12.0005 22ZM12.0005 19.925C13.4505 19.925 14.7755 19.575 15.9755 18.875C17.1755 18.175 18.1255 17.225 18.8255 16.025C19.5255 14.8083 19.8755 13.4667 19.8755 12C19.8755 10.55 19.5255 9.21667 18.8255 8C18.1255 6.78333 17.1755 5.825 15.9755 5.125C14.7755 4.425 13.4505 4.075 12.0005 4.075C10.5505 4.075 9.22549 4.425 8.02549 5.125C6.82549 5.825 5.87549 6.78333 5.17549 8C4.47549 9.2 4.12549 10.5333 4.12549 12C4.12549 13.45 4.47549 14.7833 5.17549 16C5.87549 17.2167 6.82549 18.175 8.02549 18.875C9.22549 19.575 10.5505 19.925 12.0005 19.925ZM12.0005 21.525C11.0005 21.525 10.1672 21.1333 9.50049 20.35C8.83382 19.5667 8.33382 18.4583 8.00049 17.025C7.68382 15.5917 7.52549 13.9167 7.52549 12C7.52549 10.0833 7.68382 8.41667 8.00049 7C8.33382 5.56667 8.83382 4.45833 9.50049 3.675C10.1672 2.89167 11.0005 2.5 12.0005 2.5C13.0005 2.5 13.8338 2.9 14.5005 3.7C15.1672 4.48333 15.6588 5.58333 15.9755 7C16.3088 8.41667 16.4755 10.0833 16.4755 12C16.4755 13.9167 16.3088 15.5917 15.9755 17.025C15.6588 18.4583 15.1672 19.5667 14.5005 20.35C13.8338 21.1333 13.0005 21.525 12.0005 21.525ZM12.0005 19.925C12.5005 19.925 12.9255 19.6 13.2755 18.95C13.6255 18.3 13.8838 17.3833 14.0505 16.2C14.2338 15.0167 14.3255 13.6167 14.3255 12C14.3255 10.4 14.2338 9.00833 14.0505 7.825C13.8838 6.625 13.6255 5.7 13.2755 5.05C12.9255 4.4 12.5005 4.075 12.0005 4.075C11.5005 4.075 11.0755 4.4 10.7255 5.05C10.3755 5.7 10.1088 6.625 9.92549 7.825C9.75882 9.00833 9.67549 10.4 9.67549 12C9.67549 13.6167 9.75882 15.0167 9.92549 16.2C10.1088 17.3833 10.3755 18.3 10.7255 18.95C11.0755 19.6 11.5005 19.925 12.0005 19.925ZM3.00049 13.8H21.0005V15.85H3.00049V13.8ZM3.00049 8.175H21.0005V10.225H3.00049V8.175Z"/></svg>
+      <span class="logo">Iconoteka</span>
+    </a>
+  </div>
+  <nav class="header-nav">
+      <div class="support-wrap">
+        <button class="header-link support-btn" id="supportBtn" aria-haspopup="true" aria-expanded="false">Support Project</button>
+      </div>
+    <a class="header-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+    <a class="header-link current" href="about.html">About</a>
+  </nav>
+  <!-- Mobile burger (same as the homepage) -->
+  <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 6h18M3 12h18M3 18h18"/>
+    </svg>
+  </button>
+  <!-- Burger dropdown -->
+  <div class="burger-menu" id="burgerMenu">
+    <div class="burger-group" id="burgerSupport"><div class="burger-label">Support Project</div></div>
+    <hr class="burger-sep">
+    <a class="burger-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+    <a class="burger-link" href="about.html">About</a>
+    <hr class="burger-sep">
+    <div class="burger-ver"><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></div>
+  </div>
+</header>
+<div class="hero-band">
+  <div class="wall" id="wall" aria-hidden="true"></div>
+</div>
+
+<main>
+
+<!-- headline -->
+<div class="row headline">
+  <div class="g">
+    <h1 class="statement">Iconoteka is a universal, <span class="nobr">open-source</span> library of precisely designed pictograms.</h1>
+    <span class="ver"><span id="libVer" aria-label="Library version"></span><span class="no" aria-hidden="true">01</span></span>
+  </div>
+</div>
+
+<!-- weights: 14 cards, one per weight × style, drawn live from icons.json -->
+<div class="row weights">
+  <div class="g">
+    <div class="stat-block">
+      <h2 class="huge"><span class="num" id="iconCount" data-target="1300" data-from="1250">1,300</span> Icons</h2>
+      <p>Iconoteka's extensive icon library supports a wide range of use cases, from rapid prototyping to real-world wayfinding systems.</p>
+    </div>
+    <div class="stat-block">
+      <h2 class="huge"><span class="num" data-target="7">7</span> Weights</h2>
+      <p>Icon portfolio covers all extremes, featuring seven distinct weights: Thin, Ultralight, Light, Regular, Medium, Semibold, and Bold. More than enough to meet any design need.</p>
+    </div>
+    <div class="stat-block">
+      <h2 class="huge"><span class="num" data-target="2">2</span> Styles</h2>
+      <p>Stroke and fill styles work seamlessly together, allowing instant switches from lightweight outline icons to heavy filled variants across all seven weights.</p>
+    </div>
+    <div class="stat-block">
+      <h2 class="huge"><span class="num" id="shapeCount" data-target="14970" data-from="13500">14,970</span> Shapes</h2>
+      <p>Combining a wide range of icons multiplied by 7 weights in both fill and stroke styles, Iconoteka offers a massive library to choose from. This enables complete coverage for almost any use case, whether for personal projects, UX/UI design, or software development.</p>
+    </div>
+    <div class="cards full" id="cards"></div>
+  </div>
+</div>
+
+<!-- license (left) + repository (right) -->
+<div class="row license">
+  <div class="g">
+    <div class="half-a">
+      <h3>License</h3>
+      <p>Iconoteka icon library is released under the MIT License. You're free to use them in personal and commercial projects, ship them in closed-source products, no permission needed and no fee. Crediting Iconoteka isn't required, though it's always appreciated.</p>
+      <div class="links">
+        <a class="ghost" href="https://github.com/iconoteka/iconoteka/blob/main/LICENSE" target="_blank" rel="noopener">Read the License</a>
+      </div>
+    </div>
+    <div class="half-b">
+      <h3>Repository</h3>
+      <p>Available directly on GitHub, the repository provides open access to the complete vector source files and updates. This allows developers and designers to easily integrate the icon system, track changelogs, or contribute to its ongoing development.</p>
+      <div class="links">
+        <a class="ghost" href="https://github.com/iconoteka/iconoteka" target="_blank" rel="noopener">GitHub Repository</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- packages: the four npm packages, one card each; reachable at about.html#packages -->
+<div class="row packages" id="packages">
+  <div class="g">
+    <h3 class="support-title">Packages<span class="beta-badge pkg-beta">Beta</span></h3>
+    <p class="support-lead">An MCP server for AI assistants and icon components for React, Vue and Svelte, all on npm under the MIT license. For bug reports or integration help, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
+    <div class="packages-cards" id="packagesCards">
+      <div class="pkg pkg-dark mcp-card" id="mcp">
+        <div class="mcp-tabs" id="mcpTabs" role="tablist" aria-label="Choose your AI assistant"></div>
+        <div hidden id="mcpMarks"><span class="mcp-mark" data-client="claude"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg></span><span class="mcp-mark" data-client="cursor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></svg></span><span class="mcp-mark" data-client="codex"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span><span class="mcp-mark" data-client="copilot"><svg class="mark-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></svg></span></div>
+        <div class="mcp-head">
+          <h4 class="mcp-title"><span class="mcp-title-mark" id="mcpTitleMark" aria-hidden="true"></span><span id="mcpTitleText">MCP for Claude Code</span></h4>
+          <div class="pkg-links"><a href="https://www.npmjs.com/package/iconoteka-mcp" target="_blank" rel="noopener">npm</a><a href="https://github.com/iconoteka/iconoteka/tree/main/packages/iconoteka-mcp" target="_blank" rel="noopener">GitHub</a></div>
+        </div>
+        <div class="mcp-body" id="mcpPanel" role="tabpanel" aria-label="Setup for Claude Code">
+          <ol class="mcp-list">
+            <li><span class="no" aria-hidden="true">01</span><div><h4 id="mcpS1t">Copy the Command</h4><p id="mcpS1d">One command adds Iconoteka to Claude Code for all your projects.</p></div></li>
+            <li><span class="no" aria-hidden="true">02</span><div><h4 id="mcpS2t">Run It in Your Terminal</h4><p id="mcpS2d">Then start a new Claude Code session, and the Iconoteka tools are ready.</p><div class="pkg-links" id="mcpInstallWrap" hidden><a id="mcpInstall" href="#">Install</a></div></div></li>
+            <li><span class="no" aria-hidden="true">03</span><div><h4>Ask for an Icon</h4><p>Try <span class="inline-copy" role="button" tabindex="0" data-copy="Add a notification bell icon in medium weight to the header." aria-label="Copy the example request: Add a notification bell icon in medium weight to the header.">Add a notification bell icon in medium weight to the header.<span class="inline-copy-icon" aria-hidden="true"><svg class="i-copy" viewBox="0 0 24 24"><path d="M9.35 4.8V14.7H19.15V4.8H9.35ZM7.5 3H21V16.5H7.5V3ZM4.85 19.2H16.5V21H3V7.5H4.85V19.2Z"/></svg><svg class="i-done" viewBox="0 0 24 24"><path d="M9.50078 19.3749L0.925781 10.7999L2.30078 9.3999L9.50078 16.6749L21.7008 4.3999L23.0758 5.7999L9.50078 19.3749Z"/></svg></span></span> Your assistant finds the icon in Iconoteka and pastes the SVG, which takes the colour of your text.</p></div></li>
+          </ol>
+          <button type="button" class="cmd step-box-1" id="mcpSetupCmd" data-copy="claude mcp add --scope user iconoteka -- npx -y iconoteka-mcp" aria-label="Copy setup for Claude Code"><code>claude mcp add --scope user iconoteka -- npx -y iconoteka-mcp</code><span class="cmd-hint" aria-hidden="true"><svg class="i-copy" viewBox="0 0 24 24"><path d="M9.35 4.8V14.7H19.15V4.8H9.35ZM7.5 3H21V16.5H7.5V3ZM4.85 19.2H16.5V21H3V7.5H4.85V19.2Z"/></svg><svg class="i-done" viewBox="0 0 24 24"><path d="M9.50078 19.3749L0.925781 10.7999L2.30078 9.3999L9.50078 16.6749L21.7008 4.3999L23.0758 5.7999L9.50078 19.3749Z"/></svg></span></button>
+        </div>
+      </div>
+      <div class="pkg mcp-card" id="components">
+        <div class="mcp-tabs" id="wrapTabs" role="tablist" aria-label="Choose your framework"></div>
+        <div hidden id="wrapMarks"><span class="mcp-mark" data-client="react"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/></svg></span><span class="mcp-mark" data-client="vue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24,1.61H14.06L12,5.16,9.94,1.61H0L12,22.39ZM12,14.08,5.16,2.23H9.59L12,6.41l2.41-4.18h4.43Z"/></svg></span><span class="mcp-mark" data-client="svelte"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.354 21.125a4.44 4.44 0 0 1-4.765-1.767 4.109 4.109 0 0 1-.703-3.107 3.898 3.898 0 0 1 .134-.522l.105-.321.287.21a7.21 7.21 0 0 0 2.186 1.092l.208.063-.02.208a1.253 1.253 0 0 0 .226.83 1.337 1.337 0 0 0 1.435.533 1.231 1.231 0 0 0 .343-.15l5.59-3.562a1.164 1.164 0 0 0 .524-.778 1.242 1.242 0 0 0-.211-.937 1.338 1.338 0 0 0-1.435-.533 1.23 1.23 0 0 0-.343.15l-2.133 1.36a4.078 4.078 0 0 1-1.135.499 4.44 4.44 0 0 1-4.765-1.766 4.108 4.108 0 0 1-.702-3.108 3.855 3.855 0 0 1 1.742-2.582l5.589-3.563a4.072 4.072 0 0 1 1.135-.499 4.44 4.44 0 0 1 4.765 1.767 4.109 4.109 0 0 1 .703 3.107 3.943 3.943 0 0 1-.134.522l-.105.321-.286-.21a7.204 7.204 0 0 0-2.187-1.093l-.208-.063.02-.207a1.255 1.255 0 0 0-.226-.831 1.337 1.337 0 0 0-1.435-.532 1.231 1.231 0 0 0-.343.15L8.62 9.368a1.162 1.162 0 0 0-.524.778 1.24 1.24 0 0 0 .211.937 1.338 1.338 0 0 0 1.435.533 1.235 1.235 0 0 0 .344-.151l2.132-1.36a4.067 4.067 0 0 1 1.135-.498 4.44 4.44 0 0 1 4.765 1.766 4.108 4.108 0 0 1 .702 3.108 3.857 3.857 0 0 1-1.742 2.583l-5.589 3.562a4.072 4.072 0 0 1-1.135.499m10.358-17.95C18.484-.015 14.082-.96 10.9 1.068L5.31 4.63a6.412 6.412 0 0 0-2.896 4.295 6.753 6.753 0 0 0 .666 4.336 6.43 6.43 0 0 0-.96 2.396 6.833 6.833 0 0 0 1.168 5.167c2.229 3.19 6.63 4.135 9.812 2.108l5.59-3.562a6.41 6.41 0 0 0 2.896-4.295 6.756 6.756 0 0 0-.665-4.336 6.429 6.429 0 0 0 .958-2.396 6.831 6.831 0 0 0-1.167-5.168Z"/></svg></span></div>
+        <div class="mcp-head">
+          <h4 class="mcp-title"><span class="mcp-title-mark" id="wrapTitleMark" aria-hidden="true"></span><span id="wrapTitleText">Components for React</span></h4>
+          <div class="pkg-links"><a id="wrapNpm" href="https://www.npmjs.com/package/iconoteka-react" target="_blank" rel="noopener">npm</a><a id="wrapGit" href="https://github.com/iconoteka/iconoteka/tree/main/packages/iconoteka-react" target="_blank" rel="noopener">GitHub</a></div>
+        </div>
+        <div class="mcp-body" id="wrapPanel" role="tabpanel" aria-label="Setup for React">
+          <ol class="mcp-list">
+            <li><span class="no" aria-hidden="true">01</span><div><h4>Install the Package</h4><p id="wrapS1d">Add <code>iconoteka-react</code> to your project.</p></div></li>
+            <li><span class="no" aria-hidden="true">02</span><div><h4>Import an Icon</h4><p>Each icon is a component named after it, like <code>Bell</code>, <code>Settings</code> or <code>Close</code>.</p></div></li>
+            <li><span class="no" aria-hidden="true">03</span><div><h4>Set Weight, Style and Size</h4><p>Pass <code>weight</code> from thin to bold, <code>variant</code> stroke or fill, and <code>size</code>. Icons take the colour of your text.</p></div></li>
+          </ol>
+          <button type="button" class="cmd step-box-1" id="wrapInstallCmd" data-copy="npm install iconoteka-react" aria-label="Copy npm install iconoteka-react"><code>npm install iconoteka-react</code><span class="cmd-hint" aria-hidden="true"><svg class="i-copy" viewBox="0 0 24 24"><path d="M9.35 4.8V14.7H19.15V4.8H9.35ZM7.5 3H21V16.5H7.5V3ZM4.85 19.2H16.5V21H3V7.5H4.85V19.2Z"/></svg><svg class="i-done" viewBox="0 0 24 24"><path d="M9.50078 19.3749L0.925781 10.7999L2.30078 9.3999L9.50078 16.6749L21.7008 4.3999L23.0758 5.7999L9.50078 19.3749Z"/></svg></span></button>
+          <button type="button" class="cmd step-box-2" id="wrapUsageCmd" data-copy="" aria-label="Copy the React example"><code></code><span class="cmd-hint" aria-hidden="true"><svg class="i-copy" viewBox="0 0 24 24"><path d="M9.35 4.8V14.7H19.15V4.8H9.35ZM7.5 3H21V16.5H7.5V3ZM4.85 19.2H16.5V21H3V7.5H4.85V19.2Z"/></svg><svg class="i-done" viewBox="0 0 24 24"><path d="M9.50078 19.3749L0.925781 10.7999L2.30078 9.3999L9.50078 16.6749L21.7008 4.3999L23.0758 5.7999L9.50078 19.3749Z"/></svg></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- facts -->
+<div class="row" id="features">
+  <div class="g">
+    <p class="label full">Features<span class="no" aria-hidden="true">02</span></p>
+    <div class="facts">
+      <div data-icon="circle"><h3>Universality</h3><p>Built around geometric principles and high visual clarity, Iconoteka integrates effortlessly into varied digital environments. Its universal design language preserves legibility across products and industries that require high contrast and structural consistency.</p></div>
+      <div data-icon="eye"><h3>Advanced Optics</h3><p>Advanced optical compensation is applied throughout Iconoteka. Principles such as deliberate overshoots, density-based weight modularity, and optical stroke compensations give the system its refined execution and set it apart from conventional icon sets.</p></div>
+      <div data-icon="grid"><h3>24-Point Grid</h3><p>All icons are constructed on a 24px grid system, ensuring crisp pixel alignment for straight lines at 24px, 48px, 96px, and larger multiples. This baseline structure guarantees smooth integration alongside other popular icon libraries.</p></div>
+      <div data-icon="bar_chart"><h3>Analytics</h3><p>To improve the quality of the library, Iconoteka products collect a small set of anonymous signals: activated icons, searches that return no results, icon requests, and the interface theme. This information helps clarify usage patterns, detect coverage gaps, and continuously refine the system.</p></div>
+      <div data-icon="user"><h3>Design Approach</h3><p>Iconoteka is built upon years of multidisciplinary practice across graphic design, iconography, and typeface design. The result is an adaptable, highly organized icon system crafted with meticulous attention to optical balance and long-term utility.</p></div>
+      <div data-icon="cube"><h3>System Architecture</h3><p>Through a structured metaphor hierarchy, 5° geometric angle rule, tiered corner rounding, and modular component architecture, Iconoteka guarantees complete structural consistency. This rigor yields a scalable, adaptable library for large-scale production.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- author -->
+<div class="row author" id="author">
+  <div class="g">
+    <p class="label full">Author<span class="no" aria-hidden="true">03</span></p>
+    <div class="photo half-a" id="authorPhoto"><img src="media/iconoteka-author-oleg-turbaba.jpg" alt="Oleg Turbaba" width="800" height="600" loading="lazy" decoding="async"></div>
+    <div class="half-b">
+      <p class="bio">Oleg Turbaba is a multidisciplinary designer specializing in the intersection of brand identity, digital products, and visual experiences. Brand Design Director at <a class="handle nobr" href="https://clay.global" target="_blank" rel="noopener">Clay Global</a> and author of Iconoteka.</p>
+      <p class="author-contact">For enquiries, collaborations, interviews, or sponsorships, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
+      <div class="links author-links">
+        <a class="ghost" href="https://www.instagram.com/turbaba/" target="_blank" rel="noopener">Instagram</a>
+        <a class="ghost" href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="ghost" href="https://www.behance.net/turbaba" target="_blank" rel="noopener">Behance</a>
+        <a class="ghost site" href="https://turbaba.com" target="_blank" rel="noopener">turbaba.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- partners: three equal cards, each in its own brand colour, with three columns left free -->
+<div class="row partners" id="partners">
+  <div class="g">
+    <p class="label full">Partners<span class="no" aria-hidden="true">04</span></p>
+    <div class="partners-cards">
+      <a class="partner" href="https://clay.global/" target="_blank" rel="noopener" style="background: #1e39c9; color: #ffffff;">
+        <span class="partner-mark"><svg class="logo-clay" aria-hidden="true" viewBox="0 0 320 125" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M235.365 68.2C235.365 71.2 234.665 74.0001 233.367 76.6001C231.968 79.2001 230.07 81.1001 227.672 82.7001C225.275 84.1001 222.378 84.8 219.281 84.8C215.984 84.8 213.287 83.9001 211.189 82.2001C209.091 80.5 207.892 78.2 207.892 75.4C207.892 72.1 209.291 69.7 211.988 68C214.685 66.3 218.482 65.4 223.576 65.4H235.365V68.2ZM236.364 32.6001C232.567 30.8001 227.972 29.8 222.777 29.8C217.982 29.8 213.686 30.7 209.89 32.4C206.094 34.1 202.897 36.5001 200.499 39.6001C198.202 42.7001 196.803 46.6001 196.404 51.1001H209.291C209.69 48.0001 210.989 45.6001 213.287 43.6001C215.584 41.8001 218.681 40.9 222.677 40.9C226.673 40.9 229.77 41.9 232.068 44C234.366 46 235.465 48.7 235.465 51.9V57.3H221.379C213.187 57.3 206.793 59 202.198 62.4C197.502 65.8 195.205 70.5 195.205 76.5C195.205 79.9 196.104 83 197.602 85.9C199.301 88.7 201.698 91.0001 204.795 92.7001C207.892 94.3001 211.588 95.1001 215.984 95.1001C220.38 95.1001 224.176 94.1 227.473 92C230.869 90 233.467 87.3 235.265 83.9V93.7001H248.052V52C248.052 47.6 247.053 43.8 245.055 40.5C243.257 37 240.26 34.5001 236.364 32.6001ZM306.493 31.8L288.212 78.4L269.73 31.8H256.444L281.518 93.3L271.828 116.9H285.315L319.78 31.9H306.493V31.8ZM118.981 44C121.578 42 124.775 41 128.372 41C132.368 41 135.465 42.1 138.062 44.4C140.46 46.7 142.158 49.7 142.857 53.2H156.144C155.544 48.5 154.046 44.4 151.449 40.8C149.051 37.4 145.754 34.7 141.758 32.7C137.762 30.7 133.267 29.7 128.272 29.7C122.178 29.7 116.683 31.1 112.088 34C107.393 36.8 103.696 40.8 101.199 45.9C98.6014 50.9 97.4026 56.5 97.4026 62.8C97.4026 69 98.7013 74.7001 101.199 79.7001C103.896 84.5001 107.393 88.4001 112.088 91.2001C116.783 94.0001 122.278 95.5 128.372 95.5C133.467 95.5 138.062 94.5001 141.958 92.7001C145.954 90.7001 149.051 88.0001 151.449 84.6001C153.846 81.2001 155.445 77.2 155.944 72.8H142.757C141.858 76.2 140.16 78.9 137.662 81C135.265 83.1 131.968 84.1001 128.172 84.1001C124.675 84.1001 121.379 83.1 118.781 81.3C116.084 79.5 114.086 76.9001 112.687 73.6001C111.289 70.3001 110.589 66.8 110.589 62.7C110.589 58.7 111.289 55 112.687 51.8C114.086 48.6 116.284 46 118.981 44ZM168.631 93.7001H181.718V5.09998H168.631V93.7001ZM0 62.1001C0 96.9001 27.3726 124.3 62.1379 124.3V0C27.3726 0 0 27.4001 0 62.1001Z" fill="currentColor"/> </svg></span>
+        <h4>Clay Global</h4>
+        <p>A global branding and UX design agency, creating digital products, websites, design systems and brand identities.</p>
+        <span class="partner-go">clay.global</span>
+      </a>
+      <a class="partner" href="https://d1s1.com/" target="_blank" rel="noopener" style="background: #12ab57; color: #141414;">
+        <span class="partner-mark"><svg class="logo-d1s1" aria-hidden="true" viewBox="13.2 69.0 213.6 102.6" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M226.667 169.689H216.639V91.9743C214.335 94.6845 211.241 97.4625 207.356 100.308C203.472 103.109 199.903 105.232 196.651 106.677V94.8878C202.162 91.7259 207.018 87.8639 211.219 83.3017C215.464 78.7395 218.446 74.2903 220.162 69.954H226.667V169.689Z" fill="currentColor"/> <path d="M126.706 137.777L136.87 136.693C137.412 142.158 138.631 146.427 140.528 149.498C142.471 152.525 145.226 154.964 148.795 156.816C152.363 158.668 156.383 159.594 160.855 159.594C167.269 159.594 172.238 158.035 175.761 154.919C179.329 151.757 181.114 147.669 181.114 142.655C181.114 139.719 180.459 137.167 179.149 134.999C177.884 132.785 175.942 130.979 173.322 129.578C170.747 128.178 165.146 126.213 156.519 123.684C148.84 121.425 143.374 119.144 140.122 116.84C136.87 114.537 134.34 111.623 132.533 108.1C130.727 104.532 129.823 100.511 129.823 96.0396C129.823 87.9994 132.42 81.4271 137.615 76.3229C142.81 71.2187 149.811 68.6666 158.619 68.6666C164.672 68.6666 169.957 69.8636 174.474 72.2576C179.036 74.6517 182.559 78.0846 185.043 82.5564C187.573 87.0282 188.928 92.2905 189.109 98.3433L178.742 99.2919C178.2 92.8326 176.258 88.0446 172.915 84.9278C169.618 81.8111 164.965 80.2527 158.958 80.2527C152.86 80.2527 148.207 81.6304 145 84.3858C141.793 87.096 140.19 90.6192 140.19 94.9556C140.19 98.9757 141.364 102.092 143.713 104.306C146.062 106.519 151.347 108.755 159.568 111.013C167.608 113.227 173.254 115.147 176.506 116.773C181.475 119.302 185.224 122.645 187.754 126.8C190.283 130.911 191.548 135.834 191.548 141.571C191.548 147.262 190.215 152.457 187.55 157.155C184.885 161.807 181.249 165.353 176.642 167.792C172.08 170.231 166.569 171.451 160.11 171.451C150.037 171.451 141.996 168.425 135.989 162.372C130.026 156.319 126.932 148.121 126.706 137.777Z" fill="currentColor"/> <path d="M115.917 169.689H105.889V91.9743C103.586 94.6845 100.491 97.4625 96.6069 100.308C92.7222 103.109 89.1538 105.232 85.9016 106.677V94.8878C91.4123 91.7259 96.2681 87.8639 100.469 83.3017C104.715 78.7395 107.696 74.2903 109.413 69.954H115.917V169.689Z" fill="currentColor"/> <path d="M13.3333 169.689V70.3606H41.4517C48.4078 70.3606 53.6927 70.9704 57.3063 72.19C62.0492 73.7709 66.1596 76.6618 69.6377 80.8626C73.1158 85.0634 75.826 90.3709 77.7683 96.785C79.7106 103.154 80.6818 110.72 80.6818 119.483C80.6818 130.73 79.0331 140.284 75.7357 148.143C72.4383 155.958 68.1923 161.514 62.9977 164.811C57.8484 168.063 51.0955 169.689 42.739 169.689H13.3333ZM24.1064 157.968H41.4517C48.453 157.968 53.7605 156.839 57.3741 154.58C60.9877 152.276 63.7656 148.595 65.7079 143.536C68.2826 136.806 69.57 128.743 69.57 119.347C69.57 109.275 68.1923 101.37 65.4369 95.6332C62.7267 89.8514 59.2261 85.9894 54.9349 84.0471C52.044 82.7372 47.4593 82.0822 41.1806 82.0822H24.1064V157.968Z" fill="currentColor"/> </svg></span>
+        <h4>Design Spotlight</h4>
+        <p>A design research library: the work, studio, client and context behind an idea, across 22,000 curated cases.</p>
+        <span class="partner-go">d1s1.com</span>
+      </a>
+      <div class="partner open">
+        <span class="partner-mark" aria-hidden="true"></span>
+        <h4>Become a Partner</h4>
+        <p>Iconoteka is open to sponsorship, partnership and collaborations.</p>
+        <span class="partner-go"><a class="handle nobr" href="mailto:olegturbaba@gmail.com">Get in touch</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- support: the Support Project menu's content as a page section, shareable at #support -->
+<div class="row support" id="support">
+  <div class="g">
+    <h3 class="support-title">Support Project</h3>
+    <p class="support-lead" id="supportLead"></p>
+    <div class="support-cards full" id="supportCards"></div>
+  </div>
+</div>
+
+<!-- in use: 16:9 slides of Iconoteka in the wild, shuffled on every load -->
+<div class="row inuse">
+  <div class="g">
+    <div class="slider full" id="gallery"></div>
+    <p class="inuse-text">Share your work, mention <a class="handle" href="https://www.instagram.com/iconoteka/" target="_blank" rel="noopener">@iconoteka</a> on LinkedIn, X, or Instagram when presenting your projects.</p>
+    <div class="slider-nav">
+      <button type="button" id="slideFull" aria-label="View full screen"></button>
+      <button type="button" id="slidePrev" aria-label="Previous"></button>
+      <button type="button" id="slideNext" aria-label="Next"></button>
+    </div>
+  </div>
+</div>
+
+<!-- timeline -->
+<div class="row" id="timeline">
+  <div class="g">
+    <p class="label full">Project Timeline<span class="no" aria-hidden="true">05</span></p>
+    <ol class="tl">
+      <li><time><span class="m-long">21 September 2026</span><span class="m-short">21 Sep 2026</span></time><b>v<span class="v">2.0.1</span></b><span class="n">1,300 icons</span><span class="w">7 weights, 2 styles</span><span class="d"><strong>Version 2 release.</strong> Fully reworked icon library, 7 weights in 2 styles, MIT license, GitHub repository, new website, Figma plugin, npm packages and an MCP server.</span></li>
+      <li><time><span class="m-long">26 August 2026</span><span class="m-short">26 Aug 2026</span></time><b></b><span class="n">1,298 icons</span><span class="w">7 weights, 2 styles</span><span class="d">Every icon redrawn from scratch as clean vectors: seven weights, stroke and fill.</span></li>
+      <li><time><span class="m-long">15 March 2021</span><span class="m-short">15 Mar 2021</span></time><b>v<span class="v">1.0.2</span></b><span class="n">1,040 icons</span><span class="w">4 weights, 2 styles</span><span class="d">Updated icons.</span></li>
+      <li><time><span class="m-long">17 June 2019</span><span class="m-short">17 Jun 2019</span></time><b>v<span class="v">1.0.1</span></b><span class="n">388 icons</span><span class="w">4 weights, 2 styles</span><span class="d">iconoteka.com launched.</span></li>
+      <li><time><span class="m-long">14 June 2019</span><span class="m-short">14 Jun 2019</span></time><b></b><span class="n">388 icons</span><span class="w">4 weights, 2 styles</span><span class="d">Public beta released.</span></li>
+      <li><time><span class="m-long">9 March 2019</span><span class="m-short">9 Mar 2019</span></time><b>v<span class="v">1.0.0</span></b><span class="n">237 icons</span><span class="w">4 weights, 2 styles</span><span class="d">8 styles, global rework, revisions, Figures and Organizations categories added.</span></li>
+      <li><time><span class="m-long">28 July 2018</span><span class="m-short">28 Jul 2018</span></time><b>v<span class="v">0.2.0</span></b><span class="n">716 icons</span><span class="w">4 weights, 2 styles</span><span class="d">Bold stroke and fill, rework.</span></li>
+      <li><time><span class="m-long">3 June 2018</span><span class="m-short">3 Jun 2018</span></time><b>v<span class="v">0.1.4</span></b><span class="n">715 icons</span><span class="w">4 weights, 2 styles</span><span class="d">Bold stroke and fill styles.</span></li>
+      <li><time><span class="m-long">24 April 2018</span><span class="m-short">24 Apr 2018</span></time><b>v<span class="v">0.1.3</span></b><span class="n">309 icons</span><span class="w">2 weights</span><span class="d">New categories added.</span></li>
+      <li><time><span class="m-long">4 March 2018</span><span class="m-short">4 Mar 2018</span></time><b>v<span class="v">0.1.2</span></b><span class="n">227 icons</span><span class="w">2 weights</span><span class="d">All icons categorised.</span></li>
+      <li><time><span class="m-long">3 March 2018</span><span class="m-short">3 Mar 2018</span></time><b>v<span class="v">0.1.1</span></b><span class="n">226 icons</span><span class="w">2 weights</span><span class="d">First public version.</span></li>
+      <li><time><span class="m-long">20 September 2017</span><span class="m-short">20 Sep 2017</span></time><b></b><span class="n">13 icons</span><span class="w"></span><span class="d">Started the project.</span></li>
+      <li><time><span class="m-long">24 May 2016</span><span class="m-short">24 May 2016</span></time><b></b><span class="n">3 icons</span><span class="w"></span><span class="d">Idea was born.</span></li>
+    </ol>
+  </div>
+</div>
+
+<!-- request: full width, above the footer -->
+<div class="row request">
+  <div class="g">
+    <div class="request-box">
+      <h3>Request an Icon</h3>
+      <div class="request-body">
+        <p>If you haven’t found what you were looking for or need a specific icon for your project, enter the icon name below. It goes into the production queue.</p>
+        <form id="requestForm" autocomplete="off">
+          <input type="text" id="requestInput" placeholder="Icon name" aria-label="Icon name" maxlength="80"/>
+          <button class="primary" type="submit" id="requestBtn">Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- privacy: what the site records and how to change the cookie choice, shareable at #privacy -->
+<div class="row" id="privacy">
+  <div class="g">
+    <h3 class="full">Privacy<span class="no" aria-hidden="true">06</span></h3>
+    <div class="half-a">
+      <p><strong>What's Recorded:</strong> Google Analytics counts visits and stores a cookie to do it, recording the pages you open, the site you arrived from, your country, and your browser and device type. It runs only after you accept, and what it gathers is anonymous. Separately, and without a cookie, Iconoteka logs which icons get downloaded and which searches come up empty, together with your browser's user-agent string.</p>
+    </div>
+    <div class="half-b">
+      <p>The cookie runs on your consent, and you can <a class="handle" href="#privacy" data-consent-reopen>change your choice</a> at any time; the download log runs on legitimate interest. Google LLC processes both, on servers in the United States under Google's standard contractual clauses, and analytics data is kept for 14 months. You can ask what is held about you, have it deleted, object to it being collected, or complain to your data protection authority, so <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="g">
+    <div class="footer-icon" id="footerIcon" aria-hidden="true"></div>   <!-- one random icon, text colour, new on every load -->
+    <div class="footer-group f-lib">
+      <h4>Library</h4>
+      <nav>
+        <a href="https://github.com/iconoteka/iconoteka/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+        <a href="https://github.com/iconoteka/iconoteka" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+        <a href="press.html">Press Kit</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-group f-sup">
+      <h4>Support</h4>
+      <nav id="footerSupport"></nav>
+    </div>
+    <div class="footer-group f-fol">
+      <h4>Follow</h4>
+      <nav>
+        <a href="https://www.instagram.com/iconoteka/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.pinterest.com/turbaba/iconoteka/" target="_blank" rel="noopener">Pinterest</a>
+        <a href="https://www.are.na/oleg-turbaba/iconoteka" target="_blank" rel="noopener">Are.na</a>
+        <a href="https://x.com/iconoteka" target="_blank" rel="noopener">X</a>
+      </nav>
+    </div>
+    <div class="footer-group f-contact">
+      <h4>Contact</h4>
+      <p>For enquiries, collaborations, interviews, or sponsorships, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
+    </div>
+    <div class="footer-copy">© 2016–2026 <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">Oleg Turbaba</a>.<br> All rights reserved.</div>
+  </div>
+</footer>
+<div id="toast"></div>
+<div class="grid-overlay" id="gridOverlay" hidden aria-hidden="true"><div class="g"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+
+<script>
+// Deep links (about.html#packages, /packages/, /support/): the hero wall, the weight grid and the feature icons are
+// built after icons.json loads, which pushes the target section down after the browser has already jumped to it.
+// Land on the hash again once that content exists — unless the visitor has already started scrolling.
+let userScrolled = false;
+['wheel', 'touchmove', 'keydown', 'mousedown'].forEach(ev => addEventListener(ev, () => { userScrolled = true; }, { passive: true, once: true }));
+function landOnHash() {
+  if (userScrolled || !location.hash) return;
+  const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (el) el.scrollIntoView({ block: 'start', behavior: 'instant' });   // instant: html has scroll-behavior:smooth
+}
+addEventListener('load', landOnHash);   // images and fonts can still shift layout after the data arrives
+let toastTimer = null;
+function showToast(msg) { const t = document.getElementById('toast'); if (!t) return; t.textContent = msg; t.classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('visible'), 1800); }
+
+
+// Reveal on scroll: every direct child of a content row (labels, texts, stat rows, the weight grid, the slider,
+// the timeline…) and every footer group fades in and rises the first time it comes into view. Siblings in the
+// same row are staggered by 90 ms. The hero wall is left alone — it has its own motion.
+(() => {
+  // the timeline reveals ROW BY ROW, the weight grid CELL BY CELL and Features ITEM BY ITEM (each li / .card / feature is its own target; the containers are not)
+  const targets = [...document.querySelectorAll('main .row .g > *:not(.tl):not(.cards):not(.facts):not(.packages-cards), .tl li, .facts > *, .packages-cards > *, footer .footer-icon, footer .footer-group, footer .footer-copy')];
+  const prep = el => { el.classList.add('reveal'); const i = [...el.parentElement.children].indexOf(el); el.style.transitionDelay = (el.matches('.tl li, .card, .facts > *, .pkg') ? 0 : i * 90) + 'ms'; };
+  targets.forEach(prep);
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches || /noreveal/.test(location.search);   // ?noreveal = dev switch for screenshots
+  window.revealMore = els => { els.forEach(prep); targets.push(...els); if (still) els.forEach(el => el.classList.add('in')); else els.forEach(el => io.observe(el)); };   // targets built after load (the weight grid cells)
+  if (still) { targets.forEach(el => el.classList.add('in')); return; }
+  // anything already above the viewport (page restored mid-scroll, anchor jump) is shown without animation
+  targets.forEach(el => { if (el.getBoundingClientRect().bottom < 0) el.classList.add('now', 'in'); });
+  // blocks entering from the top edge (scrolling up) appear at once; only blocks rising from below animate
+  const io = new IntersectionObserver(entries => { let row = 0; entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    if (e.boundingClientRect.top < 0) e.target.classList.add('now');
+    if (e.target.matches('.tl li, .facts > *, .pkg')) e.target.style.transitionDelay = (row++ * 90) + 'ms';   // rows / feature items that come into view together cascade 90 ms apart; one arriving alone shows at once
+    if (e.target.matches('.card')) e.target.style.transitionDelay = (row++ * 60) + 'ms';     // grid cells: 60 ms apart, left to right, top row then bottom
+    e.target.classList.add('in'); io.unobserve(e.target);
+  }); }, { threshold: 0.05 });
+  const footerEls = targets.filter(el => el.closest('footer'));
+  targets.forEach(el => { if (!el.classList.contains('stat-block') && !footerEls.includes(el)) io.observe(el); });   // stat rows reveal with their counters
+  // the footer reveals as one unit — icon, groups and © staggered together — when the footer itself comes into view
+  const fio = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { footerEls.forEach(el => el.classList.add('in')); fio.disconnect(); } }, { threshold: 0.05 });
+  fio.observe(document.querySelector('footer'));
+  // safety net: at the very bottom of the page everything left is shown
+  window.addEventListener('scroll', () => { if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) targets.forEach(el => el.classList.add('in')); }, { passive: true });
+})();
+
+// Counters: the four stat numbers count up ONE AFTER ANOTHER the first time the block scrolls into
+// view (1.4 s each, eased, staggered by 1 s; instant under prefers-reduced-motion). data-from sets the
+// starting value: the two large counts run their last stretch instead of spinning up from zero (user).
+const fmt = n => Math.round(n).toLocaleString('en-US');   /* comma as the thousands separator, matching the page copy (user) */
+const nums = [...document.querySelectorAll('.stat-block .num')];
+let countersData = false, countersSeen = false, countersDone = false;
+const runCounters = () => {
+  if (countersDone || !countersData || !countersSeen) return; countersDone = true;
+  const targets = nums.map(n => +n.dataset.target);
+  const froms = nums.map(n => +n.dataset.from || 0);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { nums.forEach((n, i) => n.textContent = fmt(targets[i])); document.querySelectorAll('.stat-block').forEach(b => b.classList.add('in')); return; }
+  const dur = 1400, stagger = 1000;   // each number takes 1.4 s; the next one starts 1 s after the previous began
+  const blocks = [...document.querySelectorAll('.stat-block')];
+  blocks.forEach((b, i) => { b.style.transitionDelay = (i * stagger) + 'ms'; b.classList.add('in'); });   // each row fades in as its number starts counting
+  const t0 = performance.now();
+  const tick = now => {
+    let running = false;
+    nums.forEach((n, i) => {
+      const p = Math.min(1, Math.max(0, (now - t0 - i * stagger) / dur)), e = 1 - Math.pow(1 - p, 3);   // ease-out cubic
+      n.textContent = fmt(froms[i] + (targets[i] - froms[i]) * e);
+      if (p < 1) running = true;
+    });
+    if (running) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+const countersReady = () => { countersData = true; runCounters(); };
+nums.forEach(n => n.textContent = fmt(+n.dataset.from || 0));   // show the starting value before the flight begins
+new IntersectionObserver((entries, obs) => { if (entries.some(e => e.isIntersecting)) { countersSeen = true; runCounters(); if (countersDone) obs.disconnect(); } }, { threshold: 0 })
+  .observe(document.querySelector('.stat-block'));   // fires as soon as the first row shows
+
+// Header: hides while scrolling down, reappears as soon as the user scrolls up (every breakpoint)
+(() => {
+  const hdr = document.querySelector('header'); let last = scrollY, down = 0;
+  const show = () => { hdr.classList.remove('hidden'); down = 0; };
+  window.addEventListener('scroll', () => {
+    const y = Math.max(0, scrollY), dy = y - last; last = y;   // Math.max: iOS rubber-banding reports negative values
+    if (dy < 0 || y <= hdr.offsetHeight) return show();          // ANY upward movement, or being near the top, shows the header at once (user: always, every breakpoint)
+    down += dy;
+    if (down > 12) { hdr.classList.add('hidden'); document.getElementById('burgerMenu').classList.remove('open'); }
+  }, { passive: true });
+  window.addEventListener('resize', show);                       // orientation change / iOS toolbar collapse: never leave it hidden
+  window.addEventListener('touchstart', () => { last = Math.max(0, scrollY); }, { passive: true });   // a new touch starts a fresh measurement
+})();
+
+// Tab rows (MCP and Components cards) always fit their card: when a row is too wide, the gap tightens first,
+// then two-word names (Claude Code, VS Code, Other Apps) break onto two lines (user), then the names and marks shrink; both rows always use the same step so the cards match.
+// Only if the smallest step still overflows (narrow phones) does that row become a 3-column grid. No scrolling (user).
+const TAB_STEPS = [[34, 16, 24, 0], [30, 16, 24, 0], [26, 16, 24, 0], [22, 16, 24, 0], [22, 16, 24, 1], [18, 16, 24, 1], [14, 16, 24, 1], [14, 15, 22, 1], [12, 14, 20, 1], [10, 13, 18, 1], [8, 12, 18, 1]];   // gap, name size, mark size, two-line names
+const tabRows = [];
+let tabRowsW = '';
+const setTabStep = (row, i) => { const [g, f, m, two] = TAB_STEPS[i]; row.style.setProperty('--tab-gap', g + 'px'); row.style.setProperty('--tab-font', f + 'px'); row.style.setProperty('--tab-mark', m + 'px'); row.classList.toggle('names2', !!two); };
+const tabsFit = row => { const r = row.getBoundingClientRect().right; return [...row.children].every(t => t.getBoundingClientRect().right <= r + .5); };
+// Once the step is chosen, hand the leftover width back to the gaps so a full row reaches both edges --
+// but never open a gap wider than this, or a short row (React / Vue / Svelte) ends up stranded at the corners.
+const GAP_MAX = 40;
+const spreadGap = row => {
+  if (row.classList.contains('wrap')) return;
+  const kids = [...row.children]; if (kids.length < 2) return;
+  const base = parseFloat(getComputedStyle(row).columnGap) || 0;
+  const content = kids.reduce((w, t) => w + t.getBoundingClientRect().width, 0);
+  const gap = Math.max(base, Math.min(GAP_MAX, (row.clientWidth - content) / (kids.length - 1)));
+  row.style.setProperty('--tab-gap', Math.floor(gap) + 'px');
+};
+function fitTabRows(force) {
+  const key = tabRows.map(r => r.clientWidth).join(); if (!force && key === tabRowsW) return; tabRowsW = key;
+  let need = 0; const wraps = new Set();
+  tabRows.forEach(row => {
+    row.classList.remove('wrap');
+    let i = 0; for (; i < TAB_STEPS.length; i++) { setTabStep(row, i); if (tabsFit(row)) break; }
+    if (i === TAB_STEPS.length) { wraps.add(row); i = TAB_STEPS.length - 1; }
+    need = Math.max(need, i);
+  });
+  tabRows.forEach(row => { setTabStep(row, need); row.classList.toggle('wrap', wraps.has(row)); });
+  tabRows.forEach(spreadGap);
+}
+function tabRow(row) {
+  tabRows.push(row);
+  if (tabRows.length === 1) {
+    if ('ResizeObserver' in window) { const ro = new ResizeObserver(() => fitTabRows()); ro.observe(document.body); } else addEventListener('resize', () => fitTabRows());
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitTabRows(true));
+  }
+  fitTabRows(true);
+}
+
+// MCP section: one tab per assistant, each with its own three steps. Snippets are verbatim from the iconoteka-mcp
+// README; the marks are cloned from the Packages card. The copy handler reads data-copy at click time, so a tab
+// switch only swaps text. Cursor and VS Code also get their official one-click install links.
+(() => {
+  const tabsEl = document.getElementById('mcpTabs'), panel = document.getElementById('mcpPanel'), box = document.getElementById('mcpSetupCmd');
+  if (!tabsEl || !panel || !box) return;
+  const CFG = { command: 'npx', args: ['-y', 'iconoteka-mcp'] };
+  const JSON_SERVERS = '{\n  "mcpServers": {\n    "iconoteka": {\n      "command": "npx",\n      "args": ["-y", "iconoteka-mcp"]\n    }\n  }\n}';
+  const CMD = 'Copy the Command', SET = 'Copy the Settings', TERM = 'Run It in Your Terminal';   // titles in title case (user)
+  const MCP = [
+    { id: 'claude-code', name: 'Claude Code', mark: 'claude', t1: CMD, d1: 'One command adds Iconoteka to Claude Code for all your projects.', cmd: 'claude mcp add --scope user iconoteka -- npx -y iconoteka-mcp',
+      t2: TERM, d2: 'Then start a new Claude Code session, and the Iconoteka tools are ready.' },
+    { id: 'claude', name: 'Claude', mark: 'claude', t1: SET, d1: 'The server entry for the Claude desktop app.', cmd: JSON_SERVERS,
+      t2: 'Add It to Claude', d2: 'In the Claude desktop app, open Settings, Developer, Edit Config. Paste the block into <code>claude_desktop_config.json</code> (next to any servers already there), save, and restart Claude.' },
+    { id: 'cursor', name: 'Cursor', mark: 'cursor', t1: SET, d1: 'The server entry for Cursor.', cmd: JSON_SERVERS,
+      t2: 'Add It to Cursor', d2: 'Paste the block into <code>~/.cursor/mcp.json</code>, or <code>.cursor/mcp.json</code> in a project. Or install it in one click.',
+      install: { label: 'Add to Cursor', href: 'cursor://anysphere.cursor-deeplink/mcp/install?name=iconoteka&config=' + btoa(JSON.stringify(CFG)) } },
+    { id: 'vscode', name: 'VS Code', mark: 'copilot', t1: CMD, d1: 'One command adds Iconoteka to VS Code for GitHub Copilot.', cmd: `code --add-mcp '{"name":"iconoteka","command":"npx","args":["-y","iconoteka-mcp"]}'`,
+      t2: TERM, d2: 'Copilot uses Iconoteka in agent mode. Or install it in one click.',
+      install: { label: 'Add to VS Code', href: 'vscode:mcp/install?' + encodeURIComponent(JSON.stringify({ name: 'iconoteka', ...CFG })) } },
+    { id: 'codex', name: 'Codex', mark: 'codex', t1: CMD, d1: 'One command adds Iconoteka to Codex.', cmd: 'codex mcp add iconoteka -- npx -y iconoteka-mcp',
+      t2: TERM, d2: 'Codex saves it to <code>~/.codex/config.toml</code> and loads it in every new session.' },
+    { id: 'other', name: 'Other Apps', mark: null, t1: SET, d1: 'Most MCP apps read this same entry.', cmd: JSON_SERVERS,
+      t2: 'Add It to Your App', d2: 'Gemini CLI reads it from <code>~/.gemini/settings.json</code>, Windsurf from <code>~/.codeium/windsurf/mcp_config.json</code>. Zed keeps servers under <code>context_servers</code> in its <code>settings.json</code>. Other apps: paste it into their MCP settings.' },
+  ];
+  const $ = id => document.getElementById(id), code = box.querySelector('code'), wrap = $('mcpInstallWrap'), inst = $('mcpInstall');
+  tabsEl.innerHTML = MCP.map((c, i) => '<button type="button" role="tab" class="mcp-tab" id="mcp-tab-' + c.id + '" data-client="' + c.id + '" aria-controls="mcpPanel" aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '"><span class="mcp-tab-mark" data-mark="' + (c.mark || '') + '" aria-hidden="true"></span>' + c.name + '</button>').join('');
+  const tabs = [...tabsEl.children]; tabRow(tabsEl);
+  tabs.forEach(t => {   // each tab shows its assistant's mark above the name; Other Apps keeps an empty slot (user)
+    const holder = t.querySelector('.mcp-tab-mark'), src = holder.dataset.mark && document.querySelector('#mcpMarks .mcp-mark[data-client="' + holder.dataset.mark + '"] svg');
+    if (src) holder.appendChild(src.cloneNode(true));
+  });
+  const show = (id, focus) => {
+    const c = MCP.find(x => x.id === id); if (!c) return;
+    tabs.forEach(t => { const on = t.dataset.client === id; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
+    panel.setAttribute('aria-labelledby', 'mcp-tab-' + id); panel.removeAttribute('aria-label');
+    const mk = c.mark && document.querySelector('#mcpMarks .mcp-mark[data-client="' + c.mark + '"] svg');
+    $('mcpTitleMark').replaceChildren(...(mk ? [mk.cloneNode(true)] : [])); $('mcpTitleText').textContent = 'MCP for ' + c.name;
+    $('mcpS1t').textContent = c.t1; $('mcpS1d').textContent = c.d1; $('mcpS2t').textContent = c.t2; $('mcpS2d').innerHTML = c.d2;
+    code.textContent = c.cmd; box.dataset.copy = c.cmd; box.setAttribute('aria-label', 'Copy setup for ' + c.name); box.classList.remove('copied');
+    wrap.hidden = !c.install; if (c.install) { inst.textContent = c.install.label; inst.href = c.install.href; }
+  };
+  // Keep the page still when switching (wider than 860px, where the cards share a row): the body gets the min-height of its tallest version at this width
+  // (texts and snippets differ per assistant). Re-measured when the width changes; the fonts settle first.
+  let lockedW = 0;
+  const lockHeights = () => {
+    const w = panel.clientWidth; if (!w || w === lockedW) return; lockedW = w;
+    if (matchMedia('(max-width: 860px)').matches) { panel.style.minHeight = panel.closest('.mcp-card').querySelector('.mcp-head').style.minHeight = ''; return; }   // stacked (≤860): the tabs sit above the content, so nothing they touch moves, and a lock would leave a tall empty card
+    const current = (tabs.find(t => t.getAttribute('aria-selected') === 'true') || tabs[0]).dataset.client;
+    const head = $('mcpTitleText').closest('.mcp-head'); panel.style.minHeight = head.style.minHeight = ''; let max = 0, maxH = 0;
+    MCP.forEach(c => { show(c.id); max = Math.max(max, panel.offsetHeight); maxH = Math.max(maxH, head.offsetHeight); });
+    show(current); panel.style.minHeight = max + 'px'; head.style.minHeight = maxH + 'px';   // the title row too: a longer name can wrap in a narrow card
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t.dataset.client));
+    t.addEventListener('keydown', e => {   // arrow keys move between assistants, as tabs should
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+      e.preventDefault(); show(tabs[(i + d + tabs.length) % tabs.length].dataset.client, true);
+    });
+  });
+  show('claude-code');   // fills the title mark (tablet and phone never run the height lock, which also renders it)
+  // a link may name an assistant: about.html#mcp-cursor opens the Cursor tab
+  const fromHashMcp = () => {
+    const m = /^#mcp-(.+)$/.exec(location.hash);
+    if (!m) return;
+    const c = MCP.find(x => x.id === decodeURIComponent(m[1]));
+    if (!c) return;
+    show(c.id);
+    const card = document.getElementById('mcp');
+    if (card) card.scrollIntoView({ block: 'start', behavior: 'auto' });
+  };
+  addEventListener('hashchange', fromHashMcp);
+  addEventListener('load', fromHashMcp);
+  lockHeights();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { lockedW = 0; lockHeights(); });
+  if ('ResizeObserver' in window) new ResizeObserver(lockHeights).observe(panel); else addEventListener('resize', lockHeights);
+})();
+
+// Components card: the same structure as the MCP card, one tab per framework. Install and usage snippets are verbatim
+// from each package's README; npm and GitHub follow the chosen framework.
+(() => {
+  const tabsEl = document.getElementById('wrapTabs'), panel = document.getElementById('wrapPanel');
+  if (!tabsEl || !panel) return;
+  const FW = [   // <\/script> is escaped: a literal closing tag would end this inline script
+    { id: 'react', name: 'React', usage: 'import { Bell } from "iconoteka-react";\n\n<Bell weight="bold" variant="fill" size={32} />' },
+    { id: 'vue', name: 'Vue', usage: '<script setup>\nimport { Bell } from "iconoteka-vue";\n<\/script>\n\n<template>\n  <Bell weight="bold" variant="fill" :size="32" />\n</template>' },
+    { id: 'svelte', name: 'Svelte', usage: '<script>\n  import { Bell } from "iconoteka-svelte";\n<\/script>\n\n<Bell weight="bold" variant="fill" size={32} />' },
+  ];
+  const $ = id => document.getElementById(id), inst = $('wrapInstallCmd'), use = $('wrapUsageCmd');
+  tabsEl.innerHTML = FW.map((c, i) => '<button type="button" role="tab" class="mcp-tab" id="wrap-tab-' + c.id + '" data-client="' + c.id + '" aria-controls="wrapPanel" aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '"><span class="mcp-tab-mark" aria-hidden="true"></span>' + c.name + '</button>').join('');
+  const tabs = [...tabsEl.children]; tabRow(tabsEl);
+  tabs.forEach(t => { const src = document.querySelector('#wrapMarks .mcp-mark[data-client="' + t.dataset.client + '"] svg'); if (src) t.querySelector('.mcp-tab-mark').appendChild(src.cloneNode(true)); });   // marks above the names (user)
+  const show = (id, focus) => {
+    const c = FW.find(x => x.id === id); if (!c) return; const pkg = 'iconoteka-' + id, cmd = 'npm install ' + pkg;
+    tabs.forEach(t => { const on = t.dataset.client === id; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
+    panel.setAttribute('aria-labelledby', 'wrap-tab-' + id); panel.removeAttribute('aria-label');
+    const mk = document.querySelector('#wrapMarks .mcp-mark[data-client="' + id + '"] svg');
+    $('wrapTitleMark').replaceChildren(...(mk ? [mk.cloneNode(true)] : [])); $('wrapTitleText').textContent = 'Components for ' + c.name;
+    $('wrapS1d').innerHTML = 'Add <code>' + pkg + '</code> to your project.';
+    inst.querySelector('code').textContent = cmd; inst.dataset.copy = cmd; inst.setAttribute('aria-label', 'Copy ' + cmd); inst.classList.remove('copied');
+    use.querySelector('code').textContent = c.usage; use.dataset.copy = c.usage; use.setAttribute('aria-label', 'Copy the ' + c.name + ' example'); use.classList.remove('copied');
+    $('wrapNpm').href = 'https://www.npmjs.com/package/' + pkg; $('wrapGit').href = 'https://github.com/iconoteka/iconoteka/tree/main/packages/' + pkg;
+  };
+  let lockedW = 0;   // same height lock as the MCP card
+  const lockHeights = () => {
+    const w = panel.clientWidth; if (!w || w === lockedW) return; lockedW = w;
+    if (matchMedia('(max-width: 860px)').matches) { panel.style.minHeight = panel.closest('.mcp-card').querySelector('.mcp-head').style.minHeight = ''; return; }
+    const current = (tabs.find(t => t.getAttribute('aria-selected') === 'true') || tabs[0]).dataset.client;
+    const head = $('wrapTitleText').closest('.mcp-head'); panel.style.minHeight = head.style.minHeight = ''; let max = 0, maxH = 0;
+    FW.forEach(c => { show(c.id); max = Math.max(max, panel.offsetHeight); maxH = Math.max(maxH, head.offsetHeight); });
+    show(current); panel.style.minHeight = max + 'px'; head.style.minHeight = maxH + 'px';   // the title row too: a longer name can wrap in a narrow card
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t.dataset.client));
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+      e.preventDefault(); show(tabs[(i + d + tabs.length) % tabs.length].dataset.client, true);
+    });
+  });
+  show('react');
+  // and a link may name a framework: about.html#pkg-vue opens the Vue tab
+  const fromHashPkg = () => {
+    const m = /^#pkg-(.+)$/.exec(location.hash);
+    if (!m) return;
+    const c = FW.find(x => x.id === decodeURIComponent(m[1]));
+    if (!c) return;
+    show(c.id);
+    const card = document.getElementById('components');
+    if (card) card.scrollIntoView({ block: 'start', behavior: 'auto' });
+  };
+  addEventListener('hashchange', fromHashPkg);
+  addEventListener('load', fromHashPkg);
+  lockHeights();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { lockedW = 0; lockHeights(); });
+  if ('ResizeObserver' in window) new ResizeObserver(lockHeights).observe(panel); else addEventListener('resize', lockHeights);
+})();
+
+// Author links: turbaba.com sits at the right end of the row, but when the row breaks and it drops to a line of its
+// own, it moves to the left edge. Flexbox cannot tell a wrapped item from a first-line one, so measure it.
+(() => {
+  const box = document.querySelector('.author-links'), site = box && box.querySelector('.site');
+  if (!site) return;
+  const check = () => box.classList.toggle('site-wrapped', site.offsetTop > box.firstElementChild.offsetTop + 2);   // the auto margin never changes where the row breaks, so no loop
+  check();
+  if ('ResizeObserver' in window) new ResizeObserver(check).observe(box); else addEventListener('resize', check);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(check);
+})();
+
+// Inline copy (the example request in the MCP card's step 03)
+document.querySelectorAll('.inline-copy').forEach(b => {   // a span with role=button, so the request wraps with the sentence (a real button would break onto its own line)
+  const copy = () => navigator.clipboard.writeText(b.dataset.copy).then(() => { b.classList.add('copied'); setTimeout(() => b.classList.remove('copied'), 1600); }).catch(() => showToast('Copy failed'));
+  b.addEventListener('click', copy);
+  b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copy(); } });
+});
+
+// Packages: copy the install command
+document.querySelectorAll('.pkg button.cmd').forEach(b => b.addEventListener('click', () => {
+  const hint = b.querySelector('.cmd-hint');
+  navigator.clipboard.writeText(b.dataset.copy).then(() => { const label = b.getAttribute('aria-label'); b.classList.add('copied'); b.setAttribute('aria-label', 'Copied'); setTimeout(() => { b.classList.remove('copied'); if (b.getAttribute('aria-label') === 'Copied') b.setAttribute('aria-label', label); }, 1600); })
+    .catch(() => showToast('Copy failed'));
+}));
+
+// Timeline: draw the weights cell's numbers as a dot matrix — columns = weights, rows = styles
+document.querySelectorAll('.tl li').forEach(li => {
+  const w = li.querySelector('.w'), n = li.querySelector('.n');
+  const m = w && n && w.textContent.match(/(\d+)\s*weights?(?:,\s*(\d+)\s*styles?)?/);
+  if (!m) return;
+  const weights = +m[1], styles = m[2] ? +m[2] : 1;
+  const dots = document.createElement('span');
+  dots.className = 'dots'; dots.style.setProperty('--rows', styles); dots.setAttribute('aria-hidden', 'true');
+  dots.innerHTML = '<i></i>'.repeat(weights * styles);
+  n.appendChild(dots);   // the count cell ends at column 6, so the matrix lands just before the weights text
+});
+// …and the icon count as a progress bar in the version cell, which ends on the line closing column 4
+const tlCount = li => +((li.querySelector('.n') || {}).textContent || '').replace(/[^0-9]/g, '');
+const tlFull = Math.max(...[...document.querySelectorAll('.tl li')].map(tlCount));   // the newest release = a full bar
+document.querySelectorAll('.tl li').forEach(li => {
+  const n = li.querySelector('.n'), b = li.querySelector('b');
+  if (!n || !b) return;
+  const count = tlCount(li);
+  if (!count) return;
+  const bar = document.createElement('span');
+  bar.className = 'bar'; bar.setAttribute('aria-hidden', 'true');
+  bar.innerHTML = '<span><i style="--pct:' + (Math.min(1, count / tlFull) * 100).toFixed(1) + '%"></i></span>';
+  b.appendChild(bar);
+});
+
+// Mobile burger (same as the homepage)
+const burgerBtn = document.getElementById('burgerBtn');
+const burgerMenu = document.getElementById('burgerMenu');
+burgerBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const rect = burgerBtn.querySelector('svg').getBoundingClientRect();   // align to the glyph, not the padded button
+  burgerMenu.style.top = (rect.bottom + 6) + 'px';
+  burgerMenu.style.left = 'auto';
+  burgerMenu.style.right = (document.documentElement.clientWidth - rect.right) + 'px';
+  burgerMenu.classList.toggle('open');
+});
+document.addEventListener('click', () => burgerMenu.classList.remove('open'));
+
+// G toggles the layout-grid overlay (ignored while typing in a field); Escape closes the burger
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') burgerMenu.classList.remove('open');
+  if (e.key !== 'g' && e.key !== 'G') return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const t = e.target; if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+  const o = document.getElementById('gridOverlay'); o.hidden = !o.hidden;
+});
+
+// Weight cards: one icon in every weight × style. Numbering is
+// the library's frame convention (1x = stroke, 2x = fill, x = weight 1–7).
+const WEIGHTS = ['thin','ultralight','light','regular','medium','semibold','bold'];
+const LABELS  = ['Thin','Ultralight','Light','Regular','Medium','Semibold','Bold'];
+const SAMPLE = 'arrow_in_circle_up_right';
+fetch('icons.json').then(r => r.json()).then(data => {   // no cache-buster: Pages serves max-age=600 + ETag, so repeat visits get a 304 instead of the 8 MB file again
+  const icons = data.icons || [];
+  const ver = data.meta && data.meta.version ? 'v' + data.meta.version.split('.').map(x => String(+x)).join('.') : '';   // 02.00.05 → v2.0.5, the timeline's form
+  if (ver) document.getElementById('libVer').textContent = ver;
+  const bv = document.querySelector('.burger-ver'); if (bv) bv.innerHTML = '<span><span class="ver-num">' + ver + '</span><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></span>';   // the burger's footer line, as on the homepage
+  const uniq = new Set(icons.map(i => i.name.split('-')[0])).size;
+  document.getElementById('iconCount').dataset.target = uniq;   // the counter below writes the text
+  const icon = icons.find(i => i.name.split('-')[0] === SAMPLE) || icons.find(i => WEIGHTS.every(w => i.variants[w] && i.variants[w].stroke && i.variants[w].fill));
+  if (!icon) return;
+  const pathOf = (ic, w, style) => { const v = ic.variants[w] && ic.variants[w][style]; return typeof v === 'string' ? v : (v && (v.d || v.path)) || ''; };
+  // shapes = every drawn variant of every unique icon (weights × styles that exist), summed
+  const seen = new Set(); let shapes = 0;
+  icons.forEach(i => { const b = i.name.split('-')[0]; if (seen.has(b)) return; seen.add(b); WEIGHTS.forEach(w => ['stroke', 'fill'].forEach(st => { if (pathOf(i, w, st)) shapes++; })); });
+  document.getElementById('shapeCount').dataset.target = shapes;
+  countersReady();
+  const card = (w, i, style, n) =>
+    '<div class="card" data-w="' + w + '" data-style="' + style + '"><small class="n">' + n + '</small>' +
+    '<small class="code">' + LABELS[i].charAt(0) + (style === 'stroke' ? 'S' : 'F') + '</small>' +
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + pathOf(icon, w, style) + '"/></svg>' +
+    '<small class="cap">' + LABELS[i] + '<span class="st"> ' + (style === 'stroke' ? 'Stroke' : 'Fill') + '</span></small></div>';
+  const arrow = (name, fallback) => { const ic = icons.find(i => i.name.split('-')[0] === name); return ic ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + pathOf(ic, 'regular', 'stroke') + '"/></svg>' : fallback; };
+  document.getElementById('slideFull').innerHTML = arrow('fullscreen', '\u26f6');
+  window.CLOSE_MARK = arrow('cross', '\u00d7');   // the lightbox is built outside this scope, so keep its marks here
+  window.PREV_MARK = arrow('arrow_left', '\u2190');
+  window.NEXT_MARK = arrow('arrow_right', '\u2192');
+  const arrowLight = n => { const ic = icons.find(i => i.name.split('-')[0] === n); return ic ? '<svg viewBox="0 0 24 24"><path d="' + pathOf(ic, 'light', 'stroke') + '"/></svg>' : ''; };
+  window.PREV_CURSOR = arrowLight('arrow_left');   // the pointer is drawn from the light weight (user)
+  window.NEXT_CURSOR = arrowLight('arrow_right');
+  window.PLAY_MARK = arrow('triangle_right', '\u25b6');
+  window.PAUSE_MARK = arrow('pause', '\u23f8');
+  document.getElementById('slidePrev').innerHTML = arrow('arrow_left', '←');
+  document.getElementById('slideNext').innerHTML = arrow('arrow_right', '→');
+  const otherMark = document.querySelector('#mcp-tab-other .mcp-tab-mark'); if (otherMark && !otherMark.firstChild) otherMark.innerHTML = arrow('more', '');   // Other Apps: Iconoteka's own "more" icon in its mark slot (user)
+  // Header wall of tiles — the Brand file's "icons grid rules":
+  //   colours: the 13 starred palette colours; Beige 1.5× as often as the rest, Transparent Ox only three times
+  //   in the whole grid, everything else about equally; no same colour up / down / left / right;
+  //   icons: no similar icons touching, diagonals included ("similar" = same icon or same family, e.g. arrow_*).
+  //   Foreground follows each colour's logo-mark rule. Black is skipped on this page (user's call, 2026-09-05).
+  //   No hover behaviour on the tiles (user's call); click opens the icon in the library.
+  const WALL_COLORS = [
+    { bg: '#ffc3dc', fg: '#141414', w: 1,   name: 'Pink' },
+    { bg: '#f7f2e9', fg: '#141414', w: 1.5, name: 'Beige' },
+    { bg: '#1e39c9', fg: '#ffffff', w: 1,   name: 'Blue' },
+    { bg: '#061584', fg: '#ffffff', w: 1,   name: 'Dark Blue' },
+    { bg: '#12ab57', fg: '#141414', w: 1,   name: 'Green' },
+    { bg: '#979c1a', fg: '#141414', w: 1,   name: 'Moss Olive' },
+    { bg: '#cfbc13', fg: '#141414', w: 1,   name: 'Golden Olive' },
+    { bg: '#febd32', fg: '#141414', w: 1,   name: 'Yellow' },
+    { bg: '#f04c1a', fg: '#ffffff', w: 1,   name: 'Red' },
+    { bg: '#673726', fg: '#ffffff', w: 1,   name: 'Warm Sepia' },
+    { bg: '#a25624', fg: '#ffffff', w: 1,   name: 'Transparent Ox', max: 3 },
+    { bg: '#81808b', fg: '#ffffff', w: 1,   name: 'Cool Pewter' },
+  ];
+  const wall = document.getElementById('wall');
+  const wallPool = icons.filter(i => WEIGHTS.every(w => pathOf(i, w, 'stroke') && pathOf(i, w, 'fill')));   // any weight, any style
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+  const nameOf = ic => { const b = ic.name.split('-')[0]; return b.charAt(0).toUpperCase() + b.slice(1).replace(/_/g, ' '); };
+  const familyOf = ic => ic.name.split('-')[0].split('_')[0];   // arrow_in_circle → arrow
+  let wallCols = 1;
+  const tiles = () => [...wall.children];
+  const neighbours = (i, diagonal) => {
+    const ts = tiles(), r = Math.floor(i / wallCols), c = i % wallCols, out = [];
+    for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) {
+      if (!dr && !dc) continue;
+      if (!diagonal && dr && dc) continue;
+      const rr = r + dr, cc = c + dc;
+      if (rr < 0 || cc < 0 || cc >= wallCols) continue;
+      const t = ts[rr * wallCols + cc]; if (t) out.push(t);
+    }
+    return out;
+  };
+  const weightedPick = list => { const total = list.reduce((a, c) => a + c.w, 0); let x = Math.random() * total; for (const c of list) { x -= c.w; if (x <= 0) return c; } return list[list.length - 1]; };
+  const roll = (t, i, iconOnly) => {   // iconOnly: keep the tile's colour and shape (used while the page is scrolled, so the parallax blend is not reset)
+    const sides = neighbours(i, false).map(n => n.dataset.color);
+    const used = tiles().filter(n => n !== t && n.dataset.color === 'Transparent Ox').length;
+    const colours = WALL_COLORS.filter(c => !sides.includes(c.name) && !(c.max && used >= c.max));
+    const col = weightedPick(colours.length ? colours : WALL_COLORS);
+    const around = neighbours(i, true);
+    const bases = around.map(n => n.dataset.base), fams = around.map(n => n.dataset.fam);
+    let ic, tries = 0;
+    do { ic = pick(wallPool); tries++; } while (tries < 40 && (bases.includes(ic.name.split('-')[0]) || fams.includes(familyOf(ic))));
+    const shape = pick(['', 'round', 'soft']), style = pick(['stroke', 'fill']), weight = pick(WEIGHTS);   // all seven weights
+    if (!iconOnly) {
+      t.className = 'tile-w' + (shape ? ' ' + shape : ''); t.style.setProperty('--c', col.bg); t.style.setProperty('--fg', col.fg); t._keep = 100;
+      t.dataset.bg = col.bg; t.dataset.fg = col.fg; t.dataset.color = col.name;
+    }
+    t.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + pathOf(ic, weight, style) + '"/></svg>';
+    t.dataset.base = ic.name.split('-')[0]; t.dataset.fam = familyOf(ic);   // no title: nothing happens on hover
+  };
+  const wallGeometry = () => {
+    const cs = getComputedStyle(wall), tile = parseFloat(cs.getPropertyValue('--tile')), gap = parseFloat(cs.getPropertyValue('--wgap'));
+    const band = wall.parentElement, bandH = parseFloat(getComputedStyle(band).getPropertyValue('--band-h'));
+    return { cols: Math.max(1, Math.floor((band.getBoundingClientRect().width - 40 + gap) / (tile + gap))),   // 20px inset each side
+             rows: Math.max(1, Math.floor((bandH - 20 + gap) / (tile + gap))) };                             // full rows that fit the target height
+  };
+  let wallRows = 0;
+  // The wall arrives tile by tile in a random order rather than all at once. Opacity only: the parallax
+  // owns each tile's transform, so animating that here would fight it. First build only -- a resize that
+  // changes the column count rebuilds the wall, and replaying the entrance there would look like a glitch.
+  let wallEntered = false;
+  const enterWall = () => {
+    if (wallEntered) return;
+    wallEntered = true;
+    const ts = tiles();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const order = ts.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    const SPAN = 420;   // the whole entrance, start to last tile
+    // Each tile simply appears -- no fade, so arriving looks the same as the random swap that
+    // keeps running afterwards (user). Squared delays rather than evenly spaced: most of the wall
+    // lands in the first moment, then the stragglers arrive further and further apart.
+    ts.forEach(t => { t.style.opacity = '0'; });
+    order.forEach((idx, n) => {
+      const x = order.length > 1 ? n / (order.length - 1) : 0;
+      setTimeout(() => { ts[idx].style.opacity = ''; }, 30 + Math.round(SPAN * x * x));   // '' drops the inline style entirely
+    });
+  };
+
+  const buildWall = () => {
+    const g = wallGeometry(); wallCols = g.cols; const rows = g.rows; wallRows = rows;
+    wall.style.setProperty('--cols', wallCols);
+    wall.innerHTML = '';
+    for (let i = 0; i < wallCols * rows; i++) wall.appendChild(document.createElement('div'));
+    tiles().forEach((t, i) => {
+      roll(t, i);
+      t.addEventListener('click', () => { location.href = './#' + encodeURIComponent(t.dataset.base); });   // open it in the library
+    });
+    enterWall();
+  };
+  // Scroll parallax: every tile has its own random depth, sideways drift, spin and fate (grow or shrink).
+  // As the page scrolls the wall drifts DOWN and apart: tiles lag behind the scroll, sink toward the headline and
+  // some overlap it (behind the text), while they spin and grow or shrink. Fully opaque throughout. Off under prefers-reduced-motion.
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motionOf = t => {
+    if (!t._m) t._m = { d: 0.6 + Math.random(), x: (Math.random() * 2 - 1) * 1.4, r: (Math.random() * 2 - 1), grow: Math.random() < 0.3, fast: Math.random() < 0.4 };   // fast: some shrinkers go three times quicker
+    return t._m;
+  };
+  let bandH = 0;   // the band's height only changes on resize; reading it every frame forced a layout
+  const flightLen = () => ((bandH || (bandH = wall.parentElement.offsetHeight)) + 78) * 6;   // six band-heights of scroll
+  const parallax = pos => {
+    const h = flightLen();
+    const sy = Math.min(pos, h) / 6 * 0.9;                               // a sixth of the speed, less 10%; frozen once the flight is complete (tiles used to keep drifting sideways for the whole page)
+    const p = Math.min(1, Math.max(0, pos / h));                         // 0 at the top, 1 when the flight is complete
+    // pass 1: every tile's intended motion
+    const ts = [...wall.children], items = ts.map(t => {
+      const m = motionOf(t), k = Math.min(1, p * m.d * 2.5);   // size changes faster than position
+      const ty = sy * (0.5 + 0.9 * m.d), tx = sy * 0.9 * m.x, rot = sy * 0.12 * m.r;   // tiles sink with the scroll — the deep ones reach the headline
+      const sc = m.grow ? 1 + k * 0.45 : Math.max(0, 1 - k * 1.1 * (m.fast ? 3 : 1));   // growers stay modest (≤1.45×); the rest shrink away, some 3× faster
+      const a = rot * Math.PI / 180, f = Math.abs(Math.cos(a)) + Math.abs(Math.sin(a));   // a rotated square reaches f× its half-size
+      const g = t._g || (t._g = { ox: t.offsetLeft + t.offsetWidth / 2, oy: t.offsetTop + t.offsetHeight / 2, h: t.offsetWidth / 2 });   /* cached: transforms do not move the layout box, so this is the same every frame */
+      return { t, tx, ty, rot, sc, f, cx: g.ox + tx, cy: g.oy + ty, h: g.h };
+    });
+    // pass 2: no two neighbouring tiles may intersect (user: "icons intersecting each other" is a bug) — where their
+    // boxes would touch, both shrink just enough to keep a hair of space; two rounds settle chains
+    for (let round = 0; round < 2; round++) for (let i = 0; i < items.length; i++) {
+      const a = items[i], r = Math.floor(i / wallCols), c = i % wallCols;
+      for (const [dr, dc] of [[0, 1], [1, -1], [1, 0], [1, 1]]) {   // each pair once: right, and the three below
+        const rr = r + dr, cc = c + dc; if (cc < 0 || cc >= wallCols) continue;
+        const b = items[rr * wallCols + cc]; if (!b) continue;
+        const ea = a.h * a.sc * a.f, eb = b.h * b.sc * b.f, dx = Math.abs(a.cx - b.cx), dy = Math.abs(a.cy - b.cy);
+        if (dx < ea + eb && dy < ea + eb) { const q = Math.max(0, (Math.max(dx, dy) - 2) / (ea + eb)); a.sc *= q; b.sc *= q; }
+      }
+    }
+    for (const it of items) {
+      const t = it.t, sc = it.sc;
+      const tf = 'translate(' + it.tx.toFixed(1) + 'px,' + it.ty.toFixed(1) + 'px) rotate(' + it.rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
+      if (t._tf !== tf) { t.style.transform = tf; t._tf = tf; }
+      // shrinking tiles blend into the page colour as they go: full colour at scale 1, page colour at scale 0.
+      // keep is a whole percent, so most frames leave most tiles unchanged -- skipping those saves a
+      // color-mix() parse per tile per frame, which is what made the flight stutter in Safari.
+      const keep = Math.round(Math.max(0, Math.min(1, sc)) * 100);
+      if (t._keep !== keep) {
+        t._keep = keep;
+        t.style.setProperty('--c', keep >= 100 ? t.dataset.bg : 'color-mix(in srgb, ' + t.dataset.bg + ' ' + keep + '%, var(--bg))');
+        t.style.setProperty('--fg', keep >= 100 ? t.dataset.fg : 'color-mix(in srgb, ' + t.dataset.fg + ' ' + keep + '%, var(--bg))');
+      }
+      const z = Math.round(sc * 100);   // bigger tiles pass over smaller ones; no shadows (user)
+      if (t._z !== z) { t.style.zIndex = z; t._z = z; }
+    }
+  };
+  // Safari scrolls on the compositor while this runs on the main thread, so reading scrollY per event and
+  // jumping straight to it steps visibly -- worst with a wheel mouse, whose scroll arrives in big discrete
+  // chunks. Ease a carried position toward the scroll instead: the wall glides to each new position over a
+  // few frames rather than snapping, and the loop stops as soon as it has caught up.
+  let raf = 0, cur = 0;
+  const loop = () => {
+    raf = 0;
+    const target = Math.min(scrollY, flightLen());
+    const d = target - cur;
+    cur = Math.abs(d) < 0.5 ? target : cur + d * 0.22;
+    parallax(cur);
+    if (cur !== target) raf = requestAnimationFrame(loop);
+  };
+  if (!reduced) window.addEventListener('scroll', () => {
+    if (document.hidden) { cur = Math.min(scrollY, flightLen()); return parallax(cur); }
+    if (!raf) raf = requestAnimationFrame(loop);
+  }, { passive: true });
+  buildWall();
+  // Resize: the grid's space-between absorbs small width changes on its own. Only when the number of columns or rows
+  // actually changes do we rebuild — and then once, after the resize has settled — so the wall doesn't flicker.
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { bandH = 0; const g = wallGeometry(); if (g.cols !== wallCols || g.rows !== wallRows) buildWall(); }, 150);
+  });
+  let wallSeen = true; new IntersectionObserver(es => es.forEach(e => { wallSeen = e.isIntersecting; })).observe(wall.parentElement);
+  // The swapping eases off: it starts three times quicker than it settles, then stretches out over two
+  // seconds to one swap every 400ms, so the wall is busy as it arrives and calm once you are reading (user).
+  const SWAP_FAST = 133, SWAP_SLOW = 400, SWAP_RAMP = 2000;
+  const swapStart = performance.now();
+  const swapOne = () => {
+    if (wallSeen && !document.hidden) {
+      const n = wall.children.length;
+      if (n) { const i = Math.floor(Math.random() * n); roll(wall.children[i], i, scrollY > 0); }
+    }
+    const p = Math.min(1, (performance.now() - swapStart) / SWAP_RAMP);
+    setTimeout(swapOne, SWAP_FAST + (SWAP_SLOW - SWAP_FAST) * p);
+  };
+  setTimeout(swapOne, SWAP_FAST);;   // the wall keeps changing on its own — only while on screen; once scrolled only the ICON changes, the colour stays (user: a re-roll reset the blended background)
+  // feature icons: one library icon in regular FILL above each feature title (pick icons that have a fill variant)
+  document.querySelectorAll('.facts [data-icon]').forEach(f => {
+    if (f.dataset.icon === 'circle') { f.insertAdjacentHTML('afterbegin', '<svg class="f-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>'); return; }   // a plain filled disc (the library's circle is a ring)
+    const ic = icons.find(i => i.name.split('-')[0] === f.dataset.icon); if (!ic) return;
+    // the library's fill shape: Regular, or whichever weight carries it (the eye's fill is stored under Thin in this build)
+    const d = pathOf(ic, 'regular', 'fill') || WEIGHTS.map(w => pathOf(ic, w, 'fill')).find(Boolean) || '';
+    f.insertAdjacentHTML('afterbegin', '<svg class="f-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="' + d + '"/></svg>');
+  });
+  // footer: one random icon in the FILL style (regular), top-left of the footer
+  const fi = document.getElementById('footerIcon'), fIcon = pick(icons.filter(i => pathOf(i, 'regular', 'fill')));
+  if (fi && fIcon) fi.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + pathOf(fIcon, 'regular', 'fill') + '"/></svg>';   // no title: a tooltip would pop up mid-hover
+  // hover: swap to another random fill icon and KEEP it (no return to the load icon — user)
+  if (fi && fIcon) {
+    const fillPool = icons.filter(i => pathOf(i, 'regular', 'fill')); let current = fIcon;
+    fi.addEventListener('mouseenter', () => {
+      if (window.matchMedia('(max-width: 480px)').matches) return;   // the phone uses the tap below (touch fires mouseenter first)
+      swap();
+    });
+    fi.addEventListener('click', () => { if (window.matchMedia('(max-width: 480px)').matches) swap(); });   // phone: a random icon on tap (user)
+    function swap() { const ic = pick(fillPool.filter(i => i !== current)); if (!ic) return; current = ic; fi.querySelector('path').setAttribute('d', pathOf(ic, 'regular', 'fill')); }
+  }
+  const grid = document.getElementById('cards');
+  grid.innerHTML =
+    WEIGHTS.map((w, i) => card(w, i, 'stroke', 11 + i)).join('') +
+    WEIGHTS.map((w, i) => card(w, i, 'fill', 21 + i)).join('');
+  // Entering the grid picks one random icon for this visit. Each cell you hover switches to that icon in the cell's
+  // own weight and style and stays switched, so sweeping left to right repaints the row cell by cell. Half a second
+  // after the pointer LEAVES the grid the arrow comes back everywhere; the next visit picks a new icon.
+  const pool = icons.filter(i => i !== icon && WEIGHTS.every(w => pathOf(i, w, 'stroke') && pathOf(i, w, 'fill')));   // only icons with all 14 variants
+  const cells = [...grid.querySelectorAll('.card')];
+  if (window.revealMore) revealMore(cells);   // the cells reveal one by one
+  const phone = () => window.matchMedia('(max-width: 480px)').matches;   // on the phone a tap just re-rolls that one cell (user); no visit logic, no reset
+  // Icon colour follows the icon: the whole grid shares ONE colour at rest (dealt at load from the light half of the
+  // brand palette — no Black, Dark Blue, Warm Sepia, Transparent Ox, Cool Pewter; no Beige on the light theme),
+  // and each visit deals ONE new colour with its icon, so every cell showing the visit icon shows the visit colour.
+  const CARD_COLORS = WALL_COLORS.filter(c => ['Pink', 'Beige', 'Blue', 'Green', 'Moss Olive', 'Golden Olive', 'Yellow', 'Red'].includes(c.name));
+  const usable = () => CARD_COLORS.filter(c => !(c.name === 'Beige' && document.documentElement.getAttribute('data-theme') === 'light'));
+  const dealColour = avoid => { const free = usable().filter(c => c !== avoid); return pick(free.length ? free : usable()); };
+  const restColour = dealColour(null);
+  let visitColour = null;
+  const tint = (c, col) => c.style.setProperty('--ic', col.bg);
+  cells.forEach(c => tint(c, restColour));
+  const paint = (c, ic) => c.querySelector('path').setAttribute('d', pathOf(ic, c.dataset.w, c.dataset.style));
+  let visitIcon = null, resetTimer = null;
+  const pickVisit = () => { if (!visitIcon && pool.length) { visitIcon = pool[Math.floor(Math.random() * pool.length)]; visitColour = dealColour(restColour); } return visitIcon; };   // one icon + one colour per visit
+  const resetAll = () => { visitIcon = null; visitColour = null; cells.forEach(c => { paint(c, icon); tint(c, restColour); }); };   // the arrow and its colour come back together
+  const armReset = () => { clearTimeout(resetTimer); resetTimer = setTimeout(resetAll, 500); };   // 0.5 s after the pointer leaves the grid
+  cells.forEach(c => {
+    c.addEventListener('mouseenter', () => { if (phone()) return; clearTimeout(resetTimer); paint(c, pickVisit()); tint(c, visitColour); });   // back inside within the second: same icon and colour, no reset
+    c.addEventListener('click', () => { if (!phone()) return; paint(c, pick(pool)); tint(c, dealColour(null)); jackpot(); });   // phone only: a tap re-rolls this cell for the colour game (user); on larger screens the cells are not clickable (user), hover does the work
+  });
+  grid.addEventListener('mouseleave', armReset);
+
+  // Hovering a wall tile names it. The wall carries no captions, so without this the icons are anonymous.
+  (() => {
+    const chip = document.createElement('div');
+    chip.className = 'tile-chip';
+    document.body.appendChild(chip);
+    const HOVER_WAIT = 450;   // long enough that sweeping the wall stays quiet
+    const pretty = n => n.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const place = t => {
+      const r = t.getBoundingClientRect();
+      chip.style.left = Math.round(r.left + r.width / 2) + 'px';
+      chip.style.top = Math.round(r.top - 10) + 'px';
+    };
+    let hold = null;
+    wall.addEventListener('pointerover', e => {
+      const t = e.target.closest('.tile-w');
+      if (!t || !t.dataset.base) return;
+      clearTimeout(hold);
+      hold = setTimeout(() => { chip.textContent = pretty(t.dataset.base); place(t); chip.classList.add('on'); }, HOVER_WAIT);
+    });
+    wall.addEventListener('pointerout', e => {
+      if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.tile-w')) return;
+      clearTimeout(hold);
+      chip.classList.remove('on');
+    });
+    addEventListener('scroll', () => chip.classList.remove('on'), { passive: true });   // the tiles fly on scroll
+
+    // The same chip names the icon-only controls: under the gallery, and inside full screen.
+    const naming = '.slider-nav button, .lightbox button';
+    let wait = null;
+    document.addEventListener('pointerover', e => {
+      const b = e.target.closest && e.target.closest(naming);
+      if (!b || !b.getAttribute('aria-label')) return;
+      clearTimeout(wait);
+      wait = setTimeout(() => {                                  // a pause first, so passing over says nothing
+        chip.textContent = b.getAttribute('aria-label');
+        place(b);
+        chip.classList.add('on');
+      }, HOVER_WAIT);
+    });
+    document.addEventListener('pointerout', e => {
+      if (!e.target.closest || !e.target.closest(naming)) return;
+      if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(naming)) return;
+      clearTimeout(wait);
+      chip.classList.remove('on');
+    });
+  })();
+  // Phone game: tap the cells until all 14 share one colour — confetti in the palette colours bursts from the grid (once per
+  // all-same state; it re-arms when the colours differ again). Off under prefers-reduced-motion.
+  let celebrated = true;   // the load state is already all one colour — it only counts once the colours have differed and come back together
+  function jackpot() {
+    const set = new Set(cells.map(c => c.style.getPropertyValue('--ic'))), same = set.size === 1 && !set.has(restColour.bg);   // all one colour, and NOT the colour the page loaded with (user)
+    if (!same) { celebrated = false; return; }
+    if (celebrated || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    celebrated = true;
+    const r = grid.getBoundingClientRect(), ox = r.left + r.width / 2, oy = r.top + r.height / 2;
+    const layer = document.createElement('div');
+    layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden';
+    document.body.appendChild(layer);
+    for (let i = 0; i < 110; i++) {
+      const d = document.createElement('i'), col = pick(WALL_COLORS).bg, w = 5 + Math.random() * 5, h = w * (1 + Math.random());
+      d.style.cssText = 'position:absolute;left:' + ox + 'px;top:' + oy + 'px;width:' + w + 'px;height:' + h + 'px;background:' + col + ';border-radius:' + (Math.random() < 0.3 ? '50%' : '1px') + ';will-change:transform';
+      layer.appendChild(d);
+      const a = Math.random() * Math.PI * 2, v = 160 + Math.random() * 260, dx = Math.cos(a) * v, dy = Math.sin(a) * v - 120, fall = 360 + Math.random() * 300, spin = (Math.random() * 2 - 1) * 720;
+      d.animate([
+        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+        { transform: 'translate(' + dx * 0.7 + 'px,' + dy * 0.7 + 'px) rotate(' + spin * 0.5 + 'deg)', opacity: 1, offset: 0.45 },
+        { transform: 'translate(' + dx + 'px,' + (dy + fall) + 'px) rotate(' + spin + 'deg)', opacity: 0 }
+      ], { duration: 1500 + Math.random() * 900, easing: 'cubic-bezier(.2,.7,.4,1)', fill: 'forwards' });
+    }
+    setTimeout(() => layer.remove(), 2600);
+  }
+  landOnHash();   // the wall, grid and feature icons now exist above the linked section
+}).catch(() => countersReady());   // without the data the stat rows still count up from their static targets and reveal
+
+// In use — one slide per GALLERY entry { type: 'image' | 'video', src, alt, poster }, in a new random order on every
+// load (user). Images come from the Gallery section of the Iconoteka Brand file in Figma.
+const GALLERY = [   // image src = base name, the slider builds a 960 / 1440 / 1920 srcset from it; video src = the .mp4 itself, with a poster frame
+  { type: 'image', src: 'media/iconoteka-gallery-bank-app', alt: 'Three phone screens of a banking app with balance, cards and savings goals using category and action icons' },
+  { type: 'image', src: 'media/iconoteka-gallery-book-cover', alt: 'Yellow book cover with a globe icon' },
+  { type: 'image', src: 'media/iconoteka-gallery-reading-app', alt: 'Hand holding a phone showing a reading app onboarding screen, book genres as coloured pills with icons' },
+  { type: 'image', src: 'media/iconoteka-gallery-painted-wall', alt: 'Hand-painted wall of condensed capitals with icons set among the words' },
+  { type: 'image', src: 'media/iconoteka-gallery-festival-cyclist', alt: 'Cargo bike rider passing a festival hoarding with a large bicycle pictogram' },
+  { type: 'image', src: 'media/iconoteka-gallery-smart-home-app', alt: 'Smart home app on a phone with lights, security and energy tiles' },
+  { type: 'image', src: 'media/iconoteka-gallery-wayfinding-signs', alt: 'Museum wayfinding signs with a coat hanger icon and directional arrows' },
+  { type: 'image', src: 'media/iconoteka-gallery-city-guide', alt: 'Colourful city guide tiles for museums, food, coffee, parks and more' },
+  { type: 'video', src: 'media/iconoteka-gallery-recycling.mp4', poster: 'media/iconoteka-gallery-recycling-poster.jpg', alt: 'Waste sorting bins labelled with icons for residual waste, food and plastic' },
+  { type: 'video', src: 'media/iconoteka-gallery-ui-kit.mp4', poster: 'media/iconoteka-gallery-ui-kit-poster.jpg', alt: 'Interface components animating through the icon set' },
+  { type: 'image', src: 'media/iconoteka-gallery-icon-pillows', alt: 'Soft blue and orange pillows stitched with a user icon and a headphones icon' },
+  { type: 'video', src: 'media/iconoteka-gallery-automation.mp4', poster: 'media/iconoteka-gallery-automation-poster.jpg', alt: 'An automation running: icon nodes for an email trigger, an AI agent, a condition, approval, an action and a notification complete one after another' },
+  { type: 'image', src: 'media/iconoteka-gallery-project-app', alt: 'Dark project management app with sidebar navigation, board tabs and task icons' },
+  { type: 'video', src: 'media/iconoteka-gallery-bus-stop.mp4', poster: 'media/iconoteka-gallery-bus-stop-poster.jpg', alt: 'Street bus stop sign with a bus pictogram, route numbers and an accessibility icon' },
+  { type: 'image', src: 'media/iconoteka-gallery-travel-cards', alt: 'Travel story cards with large droplet, crescent, wine glass and tulip artwork' },
+];
+for (let i = GALLERY.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [GALLERY[i], GALLERY[j]] = [GALLERY[j], GALLERY[i]]; }   // Fisher–Yates shuffle
+const slider = document.getElementById('gallery'), lastSlide = GALLERY.length - 1;
+slider.innerHTML = GALLERY.map(g => {
+  const media = g.type === 'video'
+    ? '<video src="' + g.src + '" muted loop playsinline preload="none"' + (g.poster ? ' poster="' + g.poster + '"' : '') + ' aria-label="' + (g.alt || '') + '"></video>'   // no autoplay attribute: it would download at page load; the observer below plays it near the viewport
+    : '<img src="' + g.src + '-1440.jpg" srcset="' + g.src + '-960.jpg 960w, ' + g.src + '-1440.jpg 1440w, ' + g.src + '-1920.jpg 1920w" sizes="(min-width: 2000px) 1780px, (min-width: 1600px) 1540px, (min-width: 1300px) 1252px, calc(100vw - 48px)" alt="' + (g.alt || '') + '" loading="lazy" decoding="async">';   // the browser picks the size it needs; sizes = the real slide width (the old min(1152px) sent retina screens an upscaled 1920); quality 90, 4:4:4. No 2880 step: those files were enlarged from a 1920 Figma export, so they carried no extra detail
+  return '<div class="slot">' + media + '</div>';
+}).join('');
+// Videos load and play only while the gallery is near the screen, and pause when it leaves; with reduced motion they keep the poster
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+  const videos = [...slider.querySelectorAll('video')];
+  if (videos.length) new IntersectionObserver(([e]) => videos.forEach(v => e.isIntersecting ? v.play().catch(() => {}) : v.pause()), { rootMargin: '300px 0px' }).observe(slider);
+}
+// Lazy loading alone leaves the next slide's peeking edge blank: a slide to the right is off-screen, so the browser
+// waits. Keep the current slide and its two neighbours ready, so a slide is already there when it arrives.
+const slots = [...slider.children];
+const warm = i => { for (let k = Math.max(0, i - 1); k <= Math.min(slots.length - 1, i + 2); k++) { const img = slots[k].querySelector('img[loading="lazy"]'); if (img) img.loading = 'eager'; } };
+const prevBtn = document.getElementById('slidePrev'), nextBtn = document.getElementById('slideNext');
+let dragX = null, dragLeft = 0, dragged = false, lastX = 0, lastT = 0, vel = 0;
+const slideStep = () => slider.querySelector('.slot').getBoundingClientRect().width + parseFloat(getComputedStyle(slider).columnGap || getComputedStyle(slider).gap || 32);
+// snap after a touch or wheel scroll settles (drag has its own release handler)
+let settle = null; slider.addEventListener('scroll', () => { if (dragX !== null) return; clearTimeout(settle); settle = setTimeout(() => goTo(slideIndex()), 140); }, { passive: true });
+const slideIndex = () => Math.round(slider.scrollLeft / slideStep());
+const goTo = i => slider.scrollTo({ left: Math.max(0, Math.min(lastSlide, i)) * slideStep(), behavior: 'smooth' });
+prevBtn.addEventListener('click', () => { const i = slideIndex() - 1; warm(i); goTo(i); });
+nextBtn.addEventListener('click', () => { const i = slideIndex() + 1; warm(i); goTo(i); });
+const syncArrows = () => { const i = slideIndex(); prevBtn.disabled = i <= 0; nextBtn.disabled = i >= lastSlide; warm(i); };
+slider.addEventListener('scroll', syncArrows, { passive: true }); syncArrows();
+if ('IntersectionObserver' in window) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { warm(slideIndex()); o.disconnect(); } }, { rootMargin: '600px 0px' }).observe(slider);   // the first slides load as the gallery comes up the page, before anyone swipes
+else warm(0);
+// drag to scroll with the mouse; snapping is suspended while dragging and re-applied on release
+const DRAG_GAIN = 1.4;   // the slides move further than the hand, so a short pull is enough
+slider.addEventListener('mousedown', e => { if (!e.target.closest('.slot')) return;   // the gap between shots is not a handle (user)
+  dragX = e.clientX; dragLeft = slider.scrollLeft; dragged = false; lastX = e.clientX; lastT = performance.now(); vel = 0; slider.classList.add('dragging'); e.preventDefault(); });
+window.addEventListener('mousemove', e => {
+  if (dragX === null) return;
+  const dx = e.clientX - dragX; if (Math.abs(dx) > 3) dragged = true;
+  slider.scrollLeft = dragLeft - dx * DRAG_GAIN;
+  const now = performance.now(); if (now - lastT > 0) vel = (e.clientX - lastX) / (now - lastT); lastX = e.clientX; lastT = now;   // px per ms
+});
+window.addEventListener('mouseup', () => {
+  if (dragX === null) return; dragX = null; slider.classList.remove('dragging');
+  const start = Math.round(dragLeft / slideStep()), moved = slider.scrollLeft - dragLeft;   // + = pulled left = next
+  if (Math.abs(vel) > 0.25) goTo(start + (vel < 0 ? 1 : -1));        // a flick: one slide in the direction of the hand
+  else if (Math.abs(moved) > 40) goTo(start + (moved > 0 ? 1 : -1));   // any real pull (40px of travel) turns one slide, no need to drag half a slide
+  else goTo(start);                                                    // a nudge: stay
+});
+// Full screen: the slide in view opens on a black field, the browser's own full screen if it will have it.
+// It loops, crossfades, turns the page when either half of the screen is clicked, and can play itself.
+// A copy is shown rather than the slide itself, so the strip keeps its scroll position underneath.
+(() => {
+  const btn = document.getElementById('slideFull');
+  if (!btn) return;
+  const STEP = 4000;   // how long a slide holds while playing
+  let box = null, stage = null, playBtn = null, at = 0, timer = null, idle = null;
+
+  const stop = () => { clearInterval(timer); timer = null; if (playBtn) playBtn.innerHTML = window.PLAY_MARK || '▶'; };
+  const start = () => {
+    stop();
+    timer = setInterval(() => show(at + 1), STEP);
+    if (playBtn) playBtn.innerHTML = window.PAUSE_MARK || '⏸';
+  };
+  const shut = () => {
+    if (!box) return;
+    const b = box; box = null;
+    stop(); clearTimeout(idle);
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    b.remove();
+    removeEventListener('keydown', onKey);
+    warm(at);
+    // The strip lands on the slide full screen ended on, but WITHOUT the smooth scroll: animating it as the
+    // overlay disappears is the travel that read as a strange transition on the way out (user).
+    slider.scrollTo({ left: Math.max(0, Math.min(lastSlide, at)) * slideStep(), behavior: 'instant' });
+    // Leave the visitor at the gallery rather than on a hash that would reopen this on the next reload.
+    if (location.hash.startsWith('#gallery-full')) history.replaceState(null, '', '#gallery');
+  };
+  // wraps at both ends, so the set never dead-ends
+  const show = i => {
+    const n = slots.length;
+    at = ((i % n) + n) % n;
+    const media = slots[at] && slots[at].querySelector('img, video');
+    if (!media || !stage) return;
+    const copy = media.cloneNode(true);
+    copy.removeAttribute('loading');
+    if (copy.tagName === 'VIDEO') { copy.controls = false; copy.muted = true; copy.loop = true; copy.autoplay = true; }
+    stage.appendChild(copy);
+    requestAnimationFrame(() => copy.classList.add('on'));               // one frame at zero, then it fades up
+    if (copy.tagName === 'VIDEO') copy.play().catch(() => {});
+    [...stage.children].forEach(el => {
+      if (el === copy) return;
+      el.classList.remove('on');
+      setTimeout(() => el.remove(), 500);                                 // gone once it has faded out
+    });
+    warm(at);
+  };
+  const onKey = e => {
+    if (e.key === 'Escape') return shut();
+    if (e.key === 'ArrowRight') { e.preventDefault(); stir(); stop(); show(at + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stir(); stop(); show(at - 1); }
+    if (e.key === ' ') { e.preventDefault(); stir(); timer ? stop() : start(); }
+  };
+  const stir = () => {
+    if (!box) return;
+    box.classList.remove('idle');
+    clearTimeout(idle);
+    idle = setTimeout(() => { if (box) box.classList.add('idle'); }, 1000);
+  };
+  // The library's own arrow, drawn as the pointer: white with a dark halo so it reads on any picture.
+  const cursorFrom = markup => {
+    const m = /d="([^"]+)"/.exec(markup || '');
+    if (!m) return 'pointer';
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">'
+      + '<path d="' + m[1] + '" fill="#fff"/></svg>';   // white glyph, nothing behind it (user)
+    return 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '") 20 20, pointer';
+  };
+
+  const mark = (cls, label, html, go) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = cls; b.setAttribute('aria-label', label);
+    b.innerHTML = html; b.addEventListener('click', e => { e.stopPropagation(); stir(); go(); });
+    return b;
+  };
+
+  const open = i => {
+    if (box) return shut();
+    box = document.createElement('div');
+    box.className = 'lightbox';
+    stage = document.createElement('div'); stage.className = 'lb-stage';
+
+    const left = document.createElement('div'); left.className = 'lb-half l';
+    const right = document.createElement('div'); right.className = 'lb-half r';
+    // A link opens the overlay without a click, and no browser will go truly full screen without one,
+    // so the first click inside asks again -- by then the visitor has gestured (see the hash handler below).
+    const turn = step => { stir(); stop(); show(at + step); if (box && !document.fullscreenElement && box.requestFullscreen) box.requestFullscreen().catch(() => {}); };
+    left.addEventListener('click', () => turn(-1));
+    right.addEventListener('click', () => turn(1));
+
+    left.style.cursor = cursorFrom(window.PREV_CURSOR || window.PREV_MARK);   // the pointer IS the arrow, so no buttons over the picture
+    right.style.cursor = cursorFrom(window.NEXT_CURSOR || window.NEXT_MARK);
+    playBtn = null;                                          // no button: the slideshow runs from the space bar (user)
+    const close = mark('lb-close', 'Close', window.CLOSE_MARK || '×', shut);
+    const top = document.createElement('div'); top.className = 'lb-top';
+    top.append(close);
+
+    box.append(stage, left, right, top);
+    document.body.appendChild(box);
+    show(i);
+    addEventListener('keydown', onKey);
+    box.addEventListener('mousemove', stir);
+    stir();
+    if (box.requestFullscreen) box.requestFullscreen().catch(() => {});      // a plain overlay if the browser refuses
+  };
+  btn.addEventListener('click', () => open(slideIndex()));
+  document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && box) shut(); });
+
+  // about.html#gallery-full opens the full screen view, and #gallery-full=automation opens it on that slide.
+  // The name is whatever follows iconoteka-gallery- in the file, so a link survives the shuffle the strip does on load.
+  // The phone has no full screen view (the button is hidden there), so the link just leaves the visitor at the gallery.
+  const indexOf = name => slots.findIndex(sl => {
+    const m = sl.querySelector('img, video');
+    return m && (m.getAttribute('src') || '').includes('iconoteka-gallery-' + name);
+  });
+  const fromHash = () => {
+    const m = /^#gallery-full(?:=(.*))?$/.exec(location.hash);
+    if (!m || !btn.offsetParent) return;
+    const i = Math.max(0, m[1] ? indexOf(decodeURIComponent(m[1])) : 0);   // a name that no longer exists opens the first slide
+    box ? show(i) : open(i);                                               // already open: a second link just turns to its slide
+  };
+  addEventListener('hashchange', fromHash);
+  addEventListener('load', fromHash);   // after the slides exist
+})();
+
+slider.addEventListener('click', e => {
+  if (dragged) { e.preventDefault(); e.stopPropagation(); return; }   // a drag is not a click
+  const slot = e.target.closest('.slot');                             // clicking a neighbour turns to it (user)
+  if (!slot) return;
+  const i = slots.indexOf(slot);
+  if (i < 0 || i === slideIndex()) return;                            // the slide in view keeps its own clicks (video play/pause)
+  e.preventDefault(); e.stopPropagation(); warm(i); goTo(i);
+}, true);
+
+// Request an icon — same endpoint the library uses for requests
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbypc8jSM4yoJzqBXbdo05pxNupgwz7h4k8ypMtaIFGeCpUvm0tUlAWVy7qIOkdwtGm-sA/exec';
+document.getElementById('requestForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const input = document.getElementById('requestInput'), btn = document.getElementById('requestBtn');
+  const q = input.value.trim().toLowerCase(); if (!q || btn.disabled) return;
+  // the status shows INSIDE the button (user): Sending… → Sent / Failed, then the default label after 2 s
+  const status = (t, done) => { btn.textContent = t; btn.disabled = true; if (done) setTimeout(() => { btn.textContent = 'Request'; btn.disabled = false; }, 2000); };
+  status('Sending…', false);
+  fetch(SHEET_URL, { method: 'POST', body: JSON.stringify({ type: 'request', query: q, source: 'about', userAgent: navigator.userAgent }) })
+    .then(() => { status('Sent', true); input.value = ''; })
+    .catch(() => status('Failed, try again', true));
+});
+</script>
+<script src="support.js?v=10"></script>
+<script src="consent.js?v=1"></script>
+</body>
+</html>

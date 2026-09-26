@@ -114,3 +114,13 @@ header.support-open { border-bottom-color: transparent; }   /* no line between h
 .burger-networks button:hover, .burger-networks button.copied { color: var(--text); }
 /* pressed state (2026-09-06) */
 .support-cta:active, .support-addr button:active, .burger-networks button:active, .burger-crypto-word:active, .burger-group .burger-link:active { opacity: .6; }
+
+/* the footer entry for the page you are on: present, but not an offer to go there */
+footer .is-here { opacity: .45; cursor: default; text-decoration: none; }
+footer .is-here:hover { opacity: .45; }
+
+/* Reveal, line by line (reveal.js, every page). A unit starts faded and 24px low (on `translate`, not
+   `transform`) with NO transition, so it hides at once; reveal.js then plays the rise with the Web
+   Animations API. Nothing here touches a unit's own transform or transition, so hovers keep their timing. */
+.rv-pending main:not([data-reveal="off"]), .rv-pending footer { opacity: 0; }
+.reveal:not(.in) { opacity: 0 !important; translate: 0 24px !important; transition: none !important; }

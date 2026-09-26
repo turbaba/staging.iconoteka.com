@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<script>document.documentElement.classList.add('rv-pending'); setTimeout(() => document.documentElement.classList.remove('rv-pending'), 2500);</script>   <!-- reveal.js lifts this once the line-by-line units are set; the timeout is a safety net -->
 <meta name="robots" content="noindex, nofollow"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>[staging] Iconoteka Press Kit</title>
@@ -27,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 <link rel="preload" href="fonts/websans.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="support.css?v=11">
+<link rel="stylesheet" href="support.css?v=14">
 <style>
 :root {
   --bg: #ffffff;
@@ -104,7 +105,7 @@
    --block  between blocks inside a section, text → media      48 / 40 / 32
    --stack  label → content, title → text, text → buttons      24 / 24 / 16
    plus two fixed steps: --sp-1 8px (small title → text, list gaps) and --sp-2 16px (large title → text, icon → title, row padding) */
-:root { --sp-1: 8px; --sp-2: 16px; --stack: 24px; --block: 48px; --sec: 65px; --major: 130px; --gut: 22px; --exc: 100px; --display: clamp(30px, 4.2vw, 60px); }   /* --display: headline statement and the stat numbers */   /* --exc: the one exception — the gap above and below the Missing-an-icon block */   /* --sec is half of --major, so every block-to-block gap is --major (130, per user) */
+:root { --sp-1: 8px; --sp-2: 16px; --stack: 24px; --block: 48px; --sec: 65px; --major: 130px; --gut: 22px; --exc: 100px; --display: clamp(36px, calc(17.8px + 2.93vw), 84px); }   /* --display: headline statement and the stat numbers */   /* --exc: the one exception — the gap above and below the Missing-an-icon block */   /* --sec is half of --major, so every block-to-block gap is --major (130, per user) */
 @media (max-width: 860px) { :root { --stack: 24px; --block: 40px; --sec: 38px; --major: 76px; --gut: 12px; --exc: 74px; } }   /* tablet: section gaps 20px tighter than before (76 / 38, user) */
 @media (max-width: 480px) { :root { --stack: 16px; --block: 32px; --sec: 32px; --major: 64px; --gut: 8px; --exc: 50px; } }
 html { scroll-behavior: smooth; }
@@ -215,12 +216,6 @@ p:last-child { margin-bottom: 0; }
 h2.huge { font-size: var(--display); line-height: 1; letter-spacing: -.02em; font-weight: 600; margin: 0 0 var(--block) -0.04em; }   /* same size as the headline statement */
 h3 { font-size: 19px; line-height: 28px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 var(--sp-1); }
 
-/* universal reveal on scroll: every content block starts faded and 24px low, and eases in the first time it
-   enters the viewport; siblings inside one row follow each other with a short delay (set inline by JS) */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1); }
-.reveal.in { opacity: 1; transform: none; }
-.reveal.now { transition: none; }   /* shown at once: blocks that are already above the viewport, or come in from the top while scrolling up */
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
 /* layout-grid overlay, toggled with the G key: the same .g columns, tinted */
 .grid-overlay { position: fixed; inset: 0; padding: 0 var(--pad); pointer-events: none; z-index: 5000; }
@@ -458,13 +453,13 @@ footer button.copied { color: var(--brand); }
 /* wide screens: the column widens in two more steps past 1600 / 2000 (user) */
 @media (min-width: 1600px) {
   .g { max-width: 1540px; }
-  :root { --gut: 32px; --display: clamp(30px, 4.2vw, 72px); }
+  :root { --gut: 32px; --display: clamp(36px, calc(17.8px + 2.93vw), 84px); }
   .wall { --tile: 88px; --wgap: 18px; }
   .hero-band { --band-h: 480px; }
 }
 @media (min-width: 2000px) {
   .g { max-width: 1780px; }
-  :root { --gut: 40px; --display: clamp(30px, 4.2vw, 84px); }
+  :root { --gut: 40px; --display: clamp(36px, calc(17.8px + 2.93vw), 84px); }
   .wall { --tile: 100px; --wgap: 20px; }
   .hero-band { --band-h: 540px; }
 }
@@ -492,7 +487,7 @@ footer button.copied { color: var(--brand); }
   .header-nav { display: none; }
   .burger-btn { display: flex; align-items: center; justify-content: center; grid-column: 3; grid-row: 1; }
   /* tablet-only layout (user 2026-09-06): */
-  :root { --display: clamp(36px, 5vw, 60px); }   /* intro statement (and the stat numbers that share its size) bigger on tablet: 43px at 860, 38px at 768, 36px floor */
+  /* the display size needs no tablet override: one continuous formula (36px floor, 43px at 860, 60px at 1440) */
   .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* weight grid 4-3-4-3: the stroke row breaks after Regular, the fill row starts a new line */
   .card:nth-child(8) { grid-column-start: 1; }
   .license .half-a, .license .half-b { grid-column: 1 / -1; }   /* License above Repository, each with its own rule */
@@ -586,23 +581,13 @@ footer button.copied { color: var(--brand); }
    whole kit is visible with little scrolling, but every type size is the About page's own. */
 .press .row { padding: var(--block) var(--pad); }            /* About's own scale, one step tighter than its --sec rows */
 .press .row:last-of-type { padding-bottom: var(--major); }   /* air before the footer */
-.press .row.headline { padding: var(--sec) var(--pad) var(--block); }
+.press .row.headline { padding: var(--major) var(--pad) var(--block); }   /* --major, the same top padding .row.headline has on Dev and Privacy */
 
-/* Wide screens keep the first three columns empty: that lane belongs to the Download button and
-   nothing else, so the button never crosses a word. Everything on the page starts at column 4. */
-@media (min-width: 1101px) {
-  .press .g > * { grid-column: 3 / -1; }
-  .press .boiler { grid-column: 1 / -1; grid-template-columns: repeat(12, minmax(0, 1fr)); }
-  .press .boiler .no { grid-column: 1 / 3; }
-  .press .boiler h3 { grid-column: 3 / 5; }
-  .press .boiler .boiler-body { grid-column: 5 / 12; }
-  .press #assets .half-a { grid-column: 3 / 8; }
-  .press #assets .half-b { grid-column: 8 / 13; }
-  .press .assets { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* the content span is 10 columns now, so 5 tiles left the pair of buttons stacking */
-  .press .headline .statement { grid-column: 3 / -1; }
-  .press .headline .social-links { grid-column: 3 / -1; }
-  .press .g > .press-dl { grid-column: 1 / 3; grid-row: 1; }
-}
+/* The fixed yellow Download button is back (user, 26 Sep). From 1281px the first two columns are its lane
+   and everything on the page starts at column 3, so the button never crosses a word; it sits level with the
+   title's cap band and stays there while the page scrolls. At 1280px and below it is the inline pill at the
+   end of the social row instead (1281 is where the lane and the float agree: below it the title ran under it). */
+
 /* nothing here draws a rule across the page: the numbered labels mark the sections, space separates them */
 .press .headline .g { padding-bottom: 0; border-bottom: none; }
 .press .row.headline + .row { padding-top: var(--block); }   /* outranks .row.headline + .row in the sheet above */
@@ -618,6 +603,9 @@ footer button.copied { color: var(--brand); }
 /* Iconoteka's own accounts, under the title */
 .social-links { margin-top: var(--block); gap: var(--sp-1); }
 .social-links a.ghost { height: 48px; padding: 2px 24px 0; font-size: 16px; border-radius: var(--r-pill); }
+@media (max-width: 860px) { .press .social-links a.ghost, .press .press-dl { height: 42px; padding: 2px 18px 0; font-size: 15px; } }
+@media (max-width: 560px) { .press .social-links a.ghost, .press .press-dl { height: 38px; padding: 1px 14px 0; font-size: 14px; }
+                            .press .press-dl { margin-left: var(--sp-1); } }
 
 /* boilerplate: three lengths, each one row of a list. Body copy is 20/30, as License and Repository. */
 .boiler { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut);
@@ -647,14 +635,48 @@ footer button.copied { color: var(--brand); }
 .asset img, .asset video, .asset .asset-mark { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r-sm); background: var(--surface2); }
 /* height:auto is required: the width/height attributes are a presentational hint, and a used height would beat aspect-ratio */
 .asset .asset-mark { display: flex; align-items: center; justify-content: center; }
-.asset .asset-mark svg { width: 28px; height: 28px; fill: var(--text); }
-.asset-name { margin: var(--sp-1) 0 0; font-size: 14px; line-height: 21px; }
+.asset .asset-mark { padding: 15% 18%; box-sizing: border-box; }   /* the artwork scales to the tile, inset like a lock-up */
+/* eleven files is a lot of tiles, so the logo row runs narrower and squarer than the others */
+.asset-logo .asset-mark { padding: 14% 16%; }   /* the shared tile size; only the inset is its own */
+.asset-logo .asset-mark[data-img] { background: #ffffff; box-shadow: inset 0 0 0 1px #e4e4e6; }   /* the badge is a colour mark: white behind it, like the SVG tiles */
+/* the tile follows the artwork, so a black file is never shown on black. Pure black and pure white,
+   because that is what the file is drawn for; the white one keeps a hairline so it never dissolves
+   into a light page. The stroke is inset, so it costs the tile no size. */
+.asset-mark.on-light { background: #ffffff; box-shadow: inset 0 0 0 1px #e4e4e6; }
+.asset-mark.on-dark  { background: #000000; }
+/* the logo group splits the full width in three, so the marks and the badges make two even rows */
+.press .assets-logo, .press .assets-use { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 480px) { .press .assets-logo, .press .assets-use { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* a product shot is a whole screen: at tile size the UI is unreadable, so the two of them
+   split the full width between themselves rather than sitting in the tile grid */
+.press .assets-product { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 860px) { .press .assets-product { grid-template-columns: 1fr; } }   /* one shot, the whole width: a screenshot at half a narrow page is unreadable */
+
+
+/* Phone: About's headline grid puts .statement in row 2 to make room for its version line.
+   The press headline has no version line, so the social chips were landing above the title.
+   Those chips and the tile buttons also keep their own width: the page's phone rule makes
+   every .links a full width, which stacked five chips and every download into a column. */
+@media (max-width: 860px) {
+  .press .headline .statement { grid-row: auto; }
+  .press .headline .social-links { grid-column: 1 / -1; flex-wrap: wrap; }
+}
+@media (max-width: 480px) {
+  .press .social-links a.ghost, .press .asset-links a.ghost { width: auto; }
+  .press .social-links a.ghost { height: 40px; padding: 2px 18px 0; font-size: 15px; }
+  .press .asset-links a.ghost { height: 32px; }
+}
+.asset .asset-mark svg { width: 100%; height: 100%; }
+.asset .asset-mark img { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; object-fit: contain; background: none; }   /* the tile supplies the backdrop, not the image box */
+.asset-name { margin: var(--sp-1) 0 0; font-size: 14px; line-height: 21px; font-weight: 600; }
 .asset { position: relative; }
 .asset-zoom { position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; padding: 0; border: none;
               display: flex; align-items: center; justify-content: center; border-radius: var(--r-sm);
               background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(6px);
               color: var(--text); cursor: pointer; opacity: 0; }
 .asset-zoom svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+.asset-zoom { transition: opacity var(--t-fast); }   /* only the reveal fades; the colour switches like the other buttons */
+.asset-zoom:hover { background: var(--text); color: var(--bg); }   /* it is a control, so it answers the pointer */
 .asset:hover .asset-zoom, .asset-zoom:focus-visible { opacity: 1; }
 @media (hover: none) { .asset-zoom { opacity: 1; } }   /* no hover to reveal it on a phone */
 
@@ -670,7 +692,7 @@ footer button.copied { color: var(--brand); }
 .big-name { margin: 0; color: #fff; font-size: 20px; line-height: 30px; }
 .big-links { gap: 6px; }
 .big-links a.ghost { background: rgba(255,255,255,.14); color: #fff; }
-.big-links a.ghost:hover { background: #fff; color: #141414; }
+.big-links a.ghost:hover, .big-links a.ghost.is-active { background: #fff; color: #141414; }
 .big-step { width: 44px; height: 44px; border: none; border-radius: var(--r-pill); cursor: pointer;
             display: flex; align-items: center; justify-content: center;
             background: rgba(255,255,255,.14); color: #fff; }
@@ -680,46 +702,99 @@ footer button.copied { color: var(--brand); }
 .big .big-close { position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; border: none; border-radius: var(--r-pill);
                   display: flex; align-items: center; justify-content: center; cursor: pointer;
                   background: rgba(255,255,255,.14); color: #fff; }
+.big .big-close:hover { background: #fff; color: #141414; }
 .big .big-close svg { width: 22px; height: 22px; fill: currentColor; }
 
-.asset-links { margin-top: var(--sp-1); gap: 6px; }
-.asset-links a.ghost { padding: 2px 14px 0; }   /* a touch tighter than the page's own buttons, so two fit one tile */
-.press .asset-group { margin: var(--block) 0 var(--sp-2); font-size: 19px; line-height: 28px; }
+.asset-links { margin-top: 6px; gap: 6px; }   /* tight to the caption: the buttons belong to the tile above them */
+.asset-links a.ghost { height: 30px; padding: 2px 12px 0; font-size: 13px; }   /* smaller than the page's own buttons: three of them fit one tile. 2px top matches the page's optical nudge */
+.asset-links a.ghost.is-active { background: var(--text); color: var(--bg); opacity: 1; }   /* the zone under the pointer lights its own button */
+
+/* ─── Press kit, one responsive ladder ──────────────────────────
+   Measured, not guessed. Below 1281 the button sits in the headline and the chips need the full
+   width to wrap; a logo tile stops being readable under ~230px, which is where three columns
+   have to become two; and the two notes columns fall to 320px by 700, so they stack. */
+/* At every width now: About keeps grid row 1 for a version line this page has not got, and the
+   button row needs the full width to wrap. These used to be inside the wide-screen lane block. */
+.press .headline .statement { grid-row: auto; }
+.press .headline .social-links { grid-column: 1 / -1; flex-wrap: wrap; }
+@media (max-width: 1280px) {
+  .press #assets .asset-group .no { margin-right: 10px; }     /* off the lane, the number was touching the label */
+}
+@media (max-width: 860px) {
+  .press .no { display: none; }                               /* the numbers live in the lane, and the lane is gone */
+  .press .assets-logo, .press .assets-use { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .press .asset-links a.ghost { padding: 2px 10px 0; }        /* three shape buttons still fit one tile */
+}
+@media (max-width: 480px) {
+  .press .assets-logo { grid-template-columns: 1fr; }         /* two columns leave a 186px tile: a wordmark cannot be read in it */
+  .press .assets-use { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .press .row .half-a, .press .row .half-b { grid-column: 1 / -1; }
+  .press .row .half-b { margin-top: var(--block); }
+}
+@media (max-width: 480px) {
+  .press .asset-name { font-size: 13px; line-height: 19px; }
+}
+/* Vertical rhythm: four steps and nothing else, so every gap on the page is one of them.
+   group  the break between Logo, Products and In Use
+   row    between two rows of tiles inside one group
+   head   a group heading down to its first row
+   tile   a tile down to its name, and the name down to its buttons */
+.press { --s-group: calc(var(--major) * .7); --s-row: calc(var(--block) * .85);   /* rows of tiles: 1.6 read too loose (user) */  --s-head: var(--sp-2); --s-tile: var(--sp-1); }
+.press .asset-group { margin: var(--s-group) 0 var(--s-head); font-size: 19px; line-height: 28px; }
+.press .assets { row-gap: var(--s-row); }
+.press .asset-name { margin-top: var(--s-tile); }
+.press .asset-links { margin-top: 6px; }
 .press .asset-group:first-of-type { margin-top: 0; }
 #assets .half-a, #assets .half-b { margin-top: var(--block); padding-top: var(--sp-2); border-top: 1px solid var(--rule); }
 /* the one rule on the page: it separates the texts from the assets, and spans the content, not the screen */
 .press #assets .asset-group:first-of-type { border-top: 1px solid var(--rule); padding-top: var(--block); margin-top: 0; }
-@media (min-width: 1101px) {
-  /* the heading spans the grid so its number can sit in column 1, but the RULE belongs to the label,
-     so it starts at column 3 with the rest of the content rather than running out to the left edge */
-  .press #assets .asset-group:first-of-type { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid;
-                                              align-items: start; border-top: none; padding-top: 0; }
-  /* the number sits level with the rule, not with the title that the rule's padding pushes down */
-  .press #assets .asset-group:first-of-type .no { grid-column: 1 / 3; }
-  .press #assets .asset-group:first-of-type .lab { grid-column: 3 / -1; border-top: 1px solid var(--rule); padding-top: var(--block); }
-}
 @media (max-width: 860px) { #assets .half-b { margin-top: var(--sp-2); } }
 
 
-/* The kit itself: fixed at the left edge of the content grid, so it is reachable from anywhere on
-   the page. Brand Yellow on near-black, the pairing the palette itself specifies for this swatch. */
-.press-dl { position: fixed; top: var(--dl-top, 96px); z-index: 1400;
-            left: var(--dl-left, var(--pad));   /* the left edge of .g, measured below: its max-width changes at 1280/1600/2000 */
-            display: inline-flex; align-items: center; justify-content: center; height: var(--dl-h, 52px); padding: 2px 30px 0;
-            border-radius: var(--r-pill); background: #febd32; color: #141414; text-decoration: none;
-            font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: -.005em; white-space: nowrap;
-            box-shadow: 0 2px 16px rgba(0, 0, 0, .2);
-            transition: filter var(--t-fast); }
-.press-dl:hover { filter: brightness(1.06); }
-.press-dl.reveal { transform: translateY(24px); }   /* it is fixed, so it animates in on its own terms */
-.press-dl.reveal.in { transform: none; }
-@media (max-width: 1100px) { .press-dl { height: 52px; } }   /* in flow it keeps its own height */
-/* Under 1101px the columns are too narrow to spare three, so the button stops floating and takes its
-   place in the headline. These rules must come after the ones above to win on source order. */
-@media (max-width: 1100px) {
-  .press-dl { position: static; grid-column: 1 / -1; justify-self: start; margin: 0 0 var(--stack); }
-}
+/* The kit closes the row of social buttons, set apart by a wider gap: it is the page's one action,
+   so it reads last and on its own. Brand Yellow on near-black, the pairing the palette specifies. */
+/* `.links a` also matches this button now that it sits in the button row, and it is one step more
+   specific than a bare class, so these carry the element too. */
+.links a.press-dl { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 2px 24px 0;
+            margin-left: var(--sp-2); border-radius: var(--r-pill); background: #febd32; color: #141414;
+            text-decoration: none; font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: -.005em; white-space: nowrap; }
+.links a.press-dl:hover { background: #ffffff; color: #141414; }   /* inverts on the spot, like every other button here */
 
+
+/* ── the social row: ONE size ladder for the chips and the yellow pill (they had drifted: the pill stayed
+   48px while the chips went 42/38/40). When the pill wraps to its own line it loses its 16px lead-in, so it
+   starts on the chips' left edge (reveal JS sets .dl-wrapped). ── */
+main.press .social-links a.ghost, main.press .social-links a.press-dl { height: 48px; padding: 2px 24px 0; font-size: 16px; }
+main.press .social-links a.press-dl.dl-wrapped { margin-left: 0; }
+@media (max-width: 860px) { main.press .social-links a.ghost, main.press .social-links a.press-dl { height: 42px; padding: 2px 18px 0; font-size: 15px; } }
+@media (max-width: 560px) { main.press .social-links a.ghost, main.press .social-links a.press-dl { height: 38px; padding: 1px 14px 0; font-size: 14px; } }
+
+/* ── floating Download button (at the end so it wins on source order) ── */
+.press-dl-float { display: none; }
+@media (min-width: 1281px) {
+  main.press .g > * { grid-column: 3 / -1; }
+  main.press .headline .statement, main.press .headline .social-links { grid-column: 3 / -1; }
+  main.press .g > .boiler { grid-column: 1 / -1; }
+  main.press .boiler h3 { grid-column: 3 / 5; }
+  main.press .boiler .boiler-body { grid-column: 5 / 12; }
+  main.press #assets .half-a { grid-column: 3 / 8; }
+  main.press #assets .half-b { grid-column: 8 / 13; }
+  main.press .links a.press-dl { display: none; }   /* the floating copy takes over */
+  /* the group headings put their number in the lane, like the boilerplate numbers; the label starts at column 3 */
+  main.press .g > .asset-group { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); align-items: baseline; }
+  main.press .asset-group .no { grid-column: 1 / 3; margin: 0; }
+  main.press .asset-group .lab { grid-column: 3 / -1; }
+  main.press #assets .asset-group:first-of-type { border-top: none;   /* the rule still starts at column 3, not in the lane */
+    background: linear-gradient(var(--rule), var(--rule)) no-repeat right top / calc((100% - 11 * var(--gut)) * 10 / 12 + 9 * var(--gut)) 1px; }
+  .press-dl-float { display: inline-flex; position: fixed; z-index: 1400; top: var(--dl-top, 96px); left: var(--dl-left, var(--pad));
+                    align-items: center; justify-content: center; height: var(--dl-h, 52px); padding: 2px 22px 0;   /* 22, not the old 30: leaves ~24px of air before the title in the 2-column lane */
+                    border-radius: var(--r-pill); background: #febd32; color: #141414; text-decoration: none;
+                    font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: -.005em; white-space: nowrap;
+                    box-shadow: 0 2px 16px rgba(0, 0, 0, .2); }
+  .press-dl-float:hover { background: #ffffff; color: #141414; }   /* the same inversion as the inline pill */
+}
 </style>
 <script>
 // Theme init — runs immediately before page renders
@@ -762,7 +837,7 @@ footer button.copied { color: var(--brand); }
         <button class="header-link support-btn" id="supportBtn" aria-haspopup="true" aria-expanded="false">Support Project</button>
       </div>
     <a class="header-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
-    <a class="header-link" href="about.html">About</a>
+    <a class="header-link" href="dev.html">Dev</a><a class="header-link" href="about.html">About</a>
   </nav>
   <!-- Mobile burger (same as the homepage) -->
   <button class="burger-btn" id="burgerBtn" aria-label="Menu">
@@ -775,12 +850,13 @@ footer button.copied { color: var(--brand); }
     <div class="burger-group" id="burgerSupport"><div class="burger-label">Support Project</div></div>
     <hr class="burger-sep">
     <a class="burger-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
-    <a class="burger-link" href="about.html">About</a>
+    <a class="burger-link" href="dev.html">Dev</a><a class="burger-link" href="about.html">About</a>
     <hr class="burger-sep">
     <div class="burger-ver"><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></div>
   </div>
 </header>
 
+<a class="press-dl-float" href="https://www.dropbox.com/scl/fi/xc8vz7go117dfcvrdqjb6/Iconoteka-Press-Kit.zip?rlkey=sjpz7p3vaxxf8neyuuee3kauv&amp;dl=1" target="_blank" rel="noopener">Download Press Kit</a>
 <main class="press">
 
 <!-- headline -->
@@ -793,10 +869,10 @@ footer button.copied { color: var(--brand); }
       <a class="ghost" href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="ghost" href="https://www.pinterest.com/turbaba/iconoteka/" target="_blank" rel="noopener">Pinterest</a>
       <a class="ghost" href="https://www.are.na/oleg-turbaba/iconoteka" target="_blank" rel="noopener">Are.na</a>
-    </div>
-    <a class="press-dl" href="https://www.dropbox.com/scl/fi/xc8vz7go117dfcvrdqjb6/Iconoteka-Press-Kit.zip?rlkey=sjpz7p3vaxxf8neyuuee3kauv&amp;dl=1" target="_blank" rel="noopener">
+      <a class="press-dl" href="https://www.dropbox.com/scl/fi/xc8vz7go117dfcvrdqjb6/Iconoteka-Press-Kit.zip?rlkey=sjpz7p3vaxxf8neyuuee3kauv&amp;dl=1" target="_blank" rel="noopener">
       Download Press Kit
     </a>
+    </div>
   </div>
 </div>
 
@@ -876,56 +952,76 @@ Iconoteka is designed by Oleg Turbaba, Brand Design Director at Clay Global.">Co
 <!-- assets: every file downloadable on its own -->
 <div class="row" id="assets">
   <div class="g">
-    <h3 class="full asset-group"><span class="no" aria-hidden="true">02</span><span class="lab">Iconoteka Brand</span></h3>
-    <div class="assets">
-      <figure class="asset">
-        <div class="asset-mark" id="pressMark" aria-hidden="true"></div>
+    <h3 class="full asset-group"><span class="no" aria-hidden="true">02</span><span class="lab">Iconoteka Logo</span></h3>
+    <div class="assets assets-logo">
+      <figure class="asset asset-logo">
+        <div class="asset-mark" data-light="media/iconoteka-logomark-black.svg" data-dark="media/iconoteka-logomark-white.svg" aria-hidden="true"></div>
         <figcaption>
           <p class="asset-name">Logomark</p>
-          <div class="links asset-links"><a class="ghost" href="media/iconoteka-logomark.svg" download>SVG black</a><a class="ghost" href="media/iconoteka-logomark-white.svg" download>SVG white</a></div>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-logomark-black.svg" data-preview="media/iconoteka-logomark-black.svg" download>Black</a><a class="ghost" href="media/iconoteka-logomark-white.svg" data-preview="media/iconoteka-logomark-white.svg" download>White</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset asset-logo">
+        <div class="asset-mark" data-light="media/iconoteka-logo-black.svg" data-dark="media/iconoteka-logo-white.svg" aria-hidden="true"></div>
+        <figcaption>
+          <p class="asset-name">Logo</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-logo-black.svg" data-preview="media/iconoteka-logo-black.svg" download>Black</a><a class="ghost" href="media/iconoteka-logo-white.svg" data-preview="media/iconoteka-logo-white.svg" download>White</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset asset-logo">
+        <div class="asset-mark" data-light="media/iconoteka_com-logo-black.svg" data-dark="media/iconoteka_com-logo-white.svg" aria-hidden="true"></div>
+        <figcaption>
+          <p class="asset-name">Logo, iconoteka.com</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka_com-logo-black.svg" data-preview="media/iconoteka_com-logo-black.svg" download>Black</a><a class="ghost" href="media/iconoteka_com-logo-white.svg" data-preview="media/iconoteka_com-logo-white.svg" download>White</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset asset-logo">
+        <div class="asset-mark" data-img="media/iconoteka-badge-rounded-square.png" aria-hidden="true"></div>
+        <figcaption>
+          <p class="asset-name">Badge</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-badge-circle.png" data-preview="media/iconoteka-badge-circle.png" download>Circle</a><a class="ghost" href="media/iconoteka-badge-rounded-square.png" data-preview="media/iconoteka-badge-rounded-square.png" download>Rounded</a><a class="ghost" href="media/iconoteka-badge-square.png" data-preview="media/iconoteka-badge-square.png" download>Square</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset asset-logo">
+        <div class="asset-mark" data-light="media/iconoteka-logo-badge-black.svg" data-dark="media/iconoteka-logo-badge-white.svg" aria-hidden="true"></div>
+        <figcaption>
+          <p class="asset-name">Logo with Badge</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka-logo-badge-black.svg" data-preview="media/iconoteka-logo-badge-black.svg" download>Black</a><a class="ghost" href="media/iconoteka-logo-badge-white.svg" data-preview="media/iconoteka-logo-badge-white.svg" download>White</a></div>
+        </figcaption>
+      </figure>
+      <figure class="asset asset-logo">
+        <div class="asset-mark" data-light="media/iconoteka_com-logo-badge-black.svg" data-dark="media/iconoteka_com-logo-badge-white.svg" aria-hidden="true"></div>
+        <figcaption>
+          <p class="asset-name">Logo with Badge, iconoteka.com</p>
+          <div class="links asset-links"><a class="ghost" href="media/iconoteka_com-logo-badge-black.svg" data-preview="media/iconoteka_com-logo-badge-black.svg" download>Black</a><a class="ghost" href="media/iconoteka_com-logo-badge-white.svg" data-preview="media/iconoteka_com-logo-badge-white.svg" download>White</a></div>
         </figcaption>
       </figure>
     </div>
     <h3 class="full asset-group"><span class="lab">Products</span></h3>
-    <div class="assets">
+    <div class="assets assets-product">
       <figure class="asset">
-        <img src="media/iconoteka-product-website-light-960.jpg" alt="Website, Light" loading="lazy" decoding="async" width="960" height="540">
-        <button type="button" class="asset-zoom" aria-label="Open Website, Light large"></button>
+        <img src="media/Iconoteka-website-dark-960.jpg" data-light="media/Iconoteka-website-light-960.jpg" data-dark="media/Iconoteka-website-dark-960.jpg"
+             data-full-light="media/Iconoteka-website-light.png" data-full-dark="media/Iconoteka-website-dark.png"
+             alt="Website" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Website large"></button>
         <figcaption>
-          <p class="asset-name">Website, Light</p>
-          <div class="links asset-links"><a class="ghost" href="media/iconoteka-product-website-light-1920.jpg" download>JPG</a></div>
+          <p class="asset-name">Website</p>
+          <div class="links asset-links"><a class="ghost" href="media/Iconoteka-website-pink.png" data-preview="media/Iconoteka-website-pink-960.jpg" download>Pink</a><a class="ghost" href="media/Iconoteka-website-light.png" data-preview="media/Iconoteka-website-light-960.jpg" download>Light</a><a class="ghost" href="media/Iconoteka-website-dark.png" data-preview="media/Iconoteka-website-dark-960.jpg" download>Dark</a></div>
         </figcaption>
       </figure>
       <figure class="asset">
-        <img src="media/iconoteka-product-website-dark-960.jpg" alt="Website, Dark" loading="lazy" decoding="async" width="960" height="540">
-        <button type="button" class="asset-zoom" aria-label="Open Website, Dark large"></button>
+        <img src="media/Iconoteka-figma-plugin-dark-960.jpg" data-light="media/Iconoteka-figma-plugin-light-960.jpg" data-dark="media/Iconoteka-figma-plugin-dark-960.jpg"
+             data-full-light="media/Iconoteka-figma-plugin-light.png" data-full-dark="media/Iconoteka-figma-plugin-dark.png"
+             alt="Figma Plugin" loading="lazy" decoding="async" width="960" height="540">
+        <button type="button" class="asset-zoom" aria-label="Open Figma Plugin large"></button>
         <figcaption>
-          <p class="asset-name">Website, Dark</p>
-          <div class="links asset-links"><a class="ghost" href="media/iconoteka-product-website-dark-1920.jpg" download>JPG</a></div>
-        </figcaption>
-      </figure>
-      <figure class="asset">
-        <img src="media/iconoteka-product-about-960.jpg" alt="About Page" loading="lazy" decoding="async" width="960" height="540">
-        <button type="button" class="asset-zoom" aria-label="Open About Page large"></button>
-        <figcaption>
-          <p class="asset-name">About Page</p>
-          <div class="links asset-links"><a class="ghost" href="media/iconoteka-product-about-1920.jpg" download>JPG</a></div>
-        </figcaption>
-      </figure>
-    </div>
-    <h3 class="full asset-group"><span class="lab">Author</span></h3>
-    <div class="assets">
-      <figure class="asset">
-        <img src="media/iconoteka-author-oleg-turbaba.jpg" alt="Oleg Turbaba" loading="lazy" decoding="async">
-        <button type="button" class="asset-zoom" aria-label="Open Oleg Turbaba large"></button>
-        <figcaption>
-          <p class="asset-name">Oleg Turbaba</p>
-          <div class="links asset-links"><a class="ghost" href="media/iconoteka-author-oleg-turbaba.png" download>PNG</a><a class="ghost" href="media/iconoteka-author-oleg-turbaba.jpg" download>JPG</a></div>
+          <p class="asset-name">Figma Plugin</p>
+          <div class="links asset-links"><a class="ghost" href="media/Iconoteka-figma-plugin-pink.png" data-preview="media/Iconoteka-figma-plugin-pink-960.jpg" download>Pink</a><a class="ghost" href="media/Iconoteka-figma-plugin-light.png" data-preview="media/Iconoteka-figma-plugin-light-960.jpg" download>Light</a><a class="ghost" href="media/Iconoteka-figma-plugin-dark.png" data-preview="media/Iconoteka-figma-plugin-dark-960.jpg" download>Dark</a></div>
         </figcaption>
       </figure>
     </div>
     <h3 class="full asset-group"><span class="lab">Iconoteka in Use</span></h3>
-    <div class="assets">
+    <div class="assets assets-use">
       <figure class="asset">
         <video src="media/iconoteka-gallery-automation.mp4" poster="media/iconoteka-gallery-automation-poster.jpg" muted loop playsinline preload="none" aria-label="Automation Workflow"></video>
         <button type="button" class="asset-zoom" aria-label="Open Automation Workflow large"></button>
@@ -1049,7 +1145,7 @@ Iconoteka is designed by Oleg Turbaba, Brand Design Director at Clay Global.">Co
     </div>
     <div class="half-a">
       <h3>Using These Assets</h3>
-      <p>The images and video show Iconoteka applied in interfaces, print and environmental graphics. They may be reproduced in articles, reviews and presentations about the library. Please credit Oleg Turbaba.</p>
+      <p>The images and video show Iconoteka applied in interfaces, print and environmental graphics. They may be reproduced in articles, reviews and presentations about the library. Please credit Oleg Turbaba. The download also carries six social cuts of the v2.0 and In Use videos, in reel, square and 3:4, which are too large to preview here.</p>
     </div>
     <div class="half-b">
       <h3>The Icons Themselves</h3>
@@ -1067,11 +1163,11 @@ Iconoteka is designed by Oleg Turbaba, Brand Design Director at Clay Global.">Co
     <div class="footer-group f-lib">
       <h4>Library</h4>
       <nav>
-        <a href="https://github.com/iconoteka/iconoteka/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+        <a href="about.html#license">License</a>
         <a href="https://github.com/iconoteka/iconoteka" target="_blank" rel="noopener">GitHub Repository</a>
         <a href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
-        <a href="press.html">Press Kit</a>
-        <a href="about.html#privacy">Privacy</a>
+        <a href="dev.html">Dev Packages</a><a href="press.html">Press Kit</a>
+        <a href="privacy.html">Privacy</a>
       </nav>
     </div>
     <div class="footer-group f-sup">
@@ -1098,9 +1194,83 @@ Iconoteka is designed by Oleg Turbaba, Brand Design Director at Clay Global.">Co
 <div class="grid-overlay" id="gridOverlay" hidden aria-hidden="true"><div class="g"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
 
 <script>
-(() => {   // the Logomark tile shows the same mark the header draws
-  const src = document.querySelector('header svg'), box = document.getElementById('pressMark');
-  if (src && box) box.innerHTML = src.outerHTML;
+// Hover previews (a button showing its file on the tile, videos playing under the pointer, the viewer
+// restaging) run only where there is a pointer AND room: narrower is simpler, in layout and interaction.
+var RICH = '(hover: hover) and (min-width: 861px)';
+(() => {   // one tile per logo: it previews whichever colourway the current theme can show
+  const cache = {};
+  const load = src => cache[src] || (cache[src] = fetch(src).then(r => r.ok ? r.text() : '').catch(() => ''));
+  const boxes = [...document.querySelectorAll('.asset-mark[data-dark]')];
+  // white artwork needs a dark tile and black artwork a light one, whatever the page theme is
+  const draw = (box, src) => {
+    if (box.dataset.shown === src) return;
+    box.dataset.shown = src;
+    box.classList.toggle('on-dark', /-white\./.test(src));
+    box.classList.toggle('on-light', !/-white\./.test(src));
+    load(src).then(t => {
+      if (!t || box.dataset.shown !== src) return;
+      box.innerHTML = t;
+      const svg = box.querySelector('svg');
+      if (!svg) return;
+      svg.removeAttribute('width'); svg.removeAttribute('height');
+      try {   // these are export artboards with wide margins: crop the viewBox to the drawn ink
+        const b = svg.getBBox();
+        if (b.width && b.height) svg.setAttribute('viewBox', b.x + ' ' + b.y + ' ' + b.width + ' ' + b.height);
+      } catch (e) {}
+    });
+  };
+  const setRaster = (box, src) => {
+    const im = box.querySelector('img');
+    if (im) im.setAttribute('src', src);
+    else box.innerHTML = '<img src="' + src + '" alt="" loading="lazy" decoding="async">';
+  };
+
+  // Every tile is its own download. The buttons choose which file it is showing, and the preview
+  // itself hands that file over: one click on the picture downloads whatever is on it. The picture
+  // does not react to the pointer moving across it, only to the click.
+  document.querySelectorAll('.asset').forEach(tile => {
+    const links = [...tile.querySelectorAll('.asset-links a')];
+    if (!links.length) return;
+    const box = tile.querySelector('.asset-mark[data-dark]');
+    const raster = tile.querySelector('.asset-mark[data-img]');
+    const im = tile.querySelector('img[data-light]');
+    const video = tile.querySelector('video');
+    const surface = tile.querySelector('.asset-mark, img, video');
+    if (!surface) return;
+
+    let current = null;                                   // the file on the preview, and so the one a click gives you
+    const mark = a => links.forEach(l => l.classList.toggle('is-active', l === a));   // the button says which file is showing
+    const show = a => {
+      mark(a);
+      if (box && a.dataset.preview) draw(box, a.dataset.preview);
+      else if (raster && a.dataset.preview) setRaster(raster, a.dataset.preview);
+      else if (im && a.dataset.preview) im.setAttribute('src', a.dataset.preview);
+      else if (video) {   // a tile nobody is pointing at must not be playing, first link or not
+        if (/\.mp4$/i.test(a.getAttribute('href') || '') && tile.matches(':hover')) video.play().catch(() => {});
+        else { video.pause(); video.currentTime = 0; }
+      }
+    };
+    // A choice holds while the visitor is working with the card, and for five seconds after they
+    // leave it, so reaching for the mouse does not lose the colourway. Then the card goes back to
+    // its first file, and every card on the page reads the same way again.
+    const peek = a => { current = a; mark(a); show(a); surface.title = 'Download ' + tile.querySelector('.asset-name').textContent + ', ' + a.textContent; };
+
+    if (matchMedia(RICH).matches) {   // narrower is simpler (user): below 861px a button just downloads its file
+      let idle = null;
+      links.forEach(a => {
+        a.addEventListener('mouseenter', () => peek(a));
+        a.addEventListener('focus', () => peek(a));
+      });
+      tile.addEventListener('mouseenter', () => clearTimeout(idle));
+      tile.addEventListener('mouseleave', () => {
+        clearTimeout(idle);
+        idle = setTimeout(() => peek(links[0]), 5000);
+      });
+    }
+    surface.addEventListener('click', e => { e.preventDefault(); (current || links[0]).click(); });
+    peek(links[0]);                                   // the resting state, and the resting download
+    surface.style.cursor = 'pointer';
+  });
 })();
 </script>
 <script>
@@ -1108,34 +1278,6 @@ let toastTimer = null;
 function showToast(msg) { const t = document.getElementById('toast'); if (!t) return; t.textContent = msg; t.classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('visible'), 1800); }
 
 
-// Reveal on load and on scroll, one ROW at a time rather than one section at a time: the title, the
-// account buttons, each boilerplate row, each asset heading and every single tile is its own target,
-// so the page assembles line by line down the screen. Items arriving together cascade 70 ms apart.
-(() => {
-  const targets = [...document.querySelectorAll(
-    '.press-dl, main .g > h1, main .g > .social-links, main .g > .label, .boiler, .asset-group, .asset,' +
-    ' #assets .half-a, #assets .half-b, footer .footer-icon, footer .footer-group, footer .footer-copy')];
-  const prep = el => { el.classList.add('reveal'); el.style.transitionDelay = '0ms'; };
-  targets.forEach(prep);
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches || /noreveal/.test(location.search);
-  if (still) { targets.forEach(el => el.classList.add('in')); return; }
-  targets.forEach(el => { if (el.getBoundingClientRect().bottom < 0) el.classList.add('now', 'in'); });
-  const io = new IntersectionObserver(entries => {
-    let n = 0;
-    entries.filter(e => e.isIntersecting)
-      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)   // always top to bottom
-      .forEach(e => {
-        if (e.boundingClientRect.top < 0) e.target.classList.add('now');
-        else e.target.style.transitionDelay = (n++ * 70) + 'ms';
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      });
-  }, { threshold: 0.02 });
-  targets.forEach(el => io.observe(el));
-  addEventListener('scroll', () => {   // safety net at the very bottom
-    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) targets.forEach(el => el.classList.add('in'));
-  }, { passive: true });
-})();
 
 // Header: hides while scrolling down, reappears as soon as the user scrolls up (every breakpoint)
 (() => {
@@ -1175,62 +1317,56 @@ document.addEventListener('keydown', e => {
 });
 
 
-// The floating Download button sits at the top, just under the header, at the left edge of the content
-// grid. Both measurements are read from the page: the header's height changes with the breakpoint, and
-// the grid's max-width steps up at 1280, 1600 and 2000.
+// The floating Download button: its top on the title's cap line and its height the cap height, measured by
+// the browser (a zero-width 1cap probe), at scroll 0; its left on the content grid's left edge.
 (() => {
-  const dl = document.querySelector('.press-dl');
+  const dl = document.querySelector('.press-dl-float');
   if (!dl) return;
   const grid = document.querySelector('main .g');
   const h1 = document.querySelector('.headline .statement');
-  const hdr = document.querySelector('header');
-  // Where the title's capitals actually start: half the leading, plus the gap between the font's
-  // ascent and its cap height. Canvas reports both for the very font in use, so this needs no constants.
-  // The title's baseline and cap height, measured by the browser rather than from font tables:
-  // a zero-width inline probe with vertical-align:baseline puts its own bottom ON the baseline,
-  // and 1cap resolves to the cap height of whatever font the h1 is actually rendering.
-  const capBox = () => {
-    if (!h1) return null;
-    const probe = document.createElement('span');
-    probe.style.cssText = 'display:inline-block;width:0;height:1cap;vertical-align:baseline';
-    h1.appendChild(probe);
-    const r = probe.getBoundingClientRect();
-    h1.removeChild(probe);
-    const cap = r.height || parseFloat(getComputedStyle(h1).fontSize) * 0.72;   // 1cap is Safari 16.4+/Chrome 111+
-    // the title reveals itself with a translateY, and a rect includes that; read it back out so the
-    // measurement is the settled position no matter when this runs
-    const t = getComputedStyle(h1).transform;
-    const ty = t && t !== 'none' ? (parseFloat(t.split(',')[5]) || 0) : 0;
-    const base = r.bottom + window.scrollY - ty;   // document-relative: --dl-top is the `top` of a FIXED
-    return { top: base - cap, cap: cap, baseline: base };   // element, i.e. its position at scroll 0
-  };
   const lift = () => {
     const root = document.documentElement.style;
-    const c = capBox();
-    if (c) {
-      const h = Math.round(c.cap);                 // as tall as the capitals beside it
-      root.setProperty('--dl-h', h + 'px');
-      // the pill occupies exactly the title's cap band: its top on the cap tops, its bottom on the baseline
-      root.setProperty('--dl-top', Math.round(c.top) + 'px');
-    } else {
-      root.setProperty('--dl-top', '96px');
+    if (h1) {
+      const probe = document.createElement('span');
+      probe.style.cssText = 'display:inline-block;width:0;height:1cap;vertical-align:baseline';
+      h1.insertBefore(probe, h1.firstChild);
+      const r = probe.getBoundingClientRect();
+      h1.removeChild(probe);
+      const cap = r.height || parseFloat(getComputedStyle(h1).fontSize) * 0.72;
+      const cs = getComputedStyle(h1);   // the title may still be rising (reveal.js animates `translate`)
+      const ty = (cs.translate && cs.translate !== 'none' ? parseFloat(cs.translate.split(' ')[1] || 0) : 0)
+               + (cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform).m42 : 0);
+      root.setProperty('--dl-h', Math.round(cap) + 'px');
+      root.setProperty('--dl-top', Math.round(r.bottom + scrollY - ty - cap) + 'px');
     }
     if (grid) root.setProperty('--dl-left', Math.round(grid.getBoundingClientRect().left) + 'px');
   };
   lift();
   addEventListener('resize', lift);
+  if (document.fonts) document.fonts.ready.then(lift);
+  setTimeout(lift, 1200);   // once the title's rise has landed
+})();
 
-  document.fonts && document.fonts.ready.then(lift);
-  if (h1) h1.addEventListener('transitionend', lift);   // belt and braces once the reveal lands
+// The inline pill keeps a 16px lead-in after the chips on their line, and drops it when it wraps to a line
+// of its own, so it starts on the chips' left edge (user: the wrapped pill was indented).
+(() => {
+  const row = document.querySelector('.social-links'), dl = row && row.querySelector('a.press-dl');
+  if (!dl) return;
+  const check = () => {
+    dl.classList.remove('dl-wrapped');
+    const first = row.querySelector('a.ghost');
+    if (first && dl.offsetTop > first.offsetTop + 2) dl.classList.add('dl-wrapped');
+  };
+  check();
+  new ResizeObserver(check).observe(row);
 })();
 
 // A video asset plays while the pointer is over its tile and rewinds when it leaves. preload="none"
 // keeps the file off the wire until someone actually hovers, so the page still costs only its posters.
-if (matchMedia('(hover: hover)').matches) {
+if (matchMedia(RICH).matches) {
   document.querySelectorAll('.asset video').forEach(v => {
     const tile = v.closest('.asset');
-    tile.addEventListener('mouseenter', () => { v.play().catch(() => {}); });
-    tile.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    tile.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });   // the zones start it; leaving the tile always stops it
   });
 }
 
@@ -1248,6 +1384,8 @@ if (matchMedia('(hover: hover)').matches) {
     if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
   };
 
+  const markBar = (list, a) => [...list.children].forEach(l => l.classList.toggle('is-active', l === a));
+
   const show = i => {
     at = ((i % tiles.length) + tiles.length) % tiles.length;   // wraps at both ends
     const tile = tiles[at], media = tile.querySelector('img, video');
@@ -1256,7 +1394,7 @@ if (matchMedia('(hover: hover)').matches) {
     copy.removeAttribute('srcset'); copy.removeAttribute('sizes');
     if (copy.tagName === 'IMG') {
       const full = tile.querySelector('.asset-links a[href$=".jpg"], .asset-links a[href$=".png"]');
-      if (full) copy.src = full.getAttribute('href');
+      if (full) copy.src = full.getAttribute('href');      // the first download, the same file the tile rests on
     } else {
       copy.muted = true; copy.loop = true; copy.autoplay = true; copy.setAttribute('preload', 'auto');
     }
@@ -1268,7 +1406,26 @@ if (matchMedia('(hover: hover)').matches) {
     label.className = 'big-name'; label.textContent = name;
     const mid = document.createElement('div'); mid.className = 'big-mid';
     mid.append(label);
-    if (links) { const l = links.cloneNode(true); l.classList.add('big-links'); mid.append(l); }
+    if (links) {
+      const l = links.cloneNode(true);
+      l.classList.add('big-links');
+      // the bar's buttons preview in the stage, exactly as the tile's own do
+      const stageFile = a => {
+        const href = a.getAttribute('href') || '';
+        if (copy.tagName === 'VIDEO') {
+          if (/\.mp4$/i.test(href)) copy.play().catch(() => {});
+          else { copy.pause(); copy.currentTime = 0; }
+        } else if (/\.(png|jpe?g)$/i.test(href)) copy.src = href;
+      };
+      const resting = [...l.children][0];
+      markBar(l, resting);                                 // the bar says which file is on the stage
+      const peek = a => { markBar(l, a); stageFile(a); };   // the stage keeps the last file too
+      if (matchMedia(RICH).matches) [...l.children].forEach(a => {
+        a.addEventListener('mouseenter', () => peek(a));
+        a.addEventListener('focus', () => peek(a));
+      });
+      mid.append(l);
+    }
     bar.replaceChildren(prev, mid, next);
   };
 
@@ -1296,9 +1453,6 @@ if (matchMedia('(hover: hover)').matches) {
   };
   tiles.forEach(tile => {
     tile.querySelector('.asset-zoom').addEventListener('click', e => open(tile, e));
-    // the picture itself opens it too, which is where people click first
-    const media = tile.querySelector('img, video');
-    if (media) media.addEventListener('click', e => open(tile, e));
   });
 })();
 
@@ -1344,7 +1498,8 @@ fetch('icons.json').then(r => r.json()).then(data => {
   }
 }).catch(() => {});
 </script>
-<script src="support.js?v=10"></script>
-<script src="consent.js?v=1"></script>
+<script src="reveal.js?v=7"></script>
+<script src="support.js?v=11"></script>
+<script src="consent.js?v=4"></script>
 </body>
 </html>

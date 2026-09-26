@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<script>document.documentElement.classList.add('rv-pending'); setTimeout(() => document.documentElement.classList.remove('rv-pending'), 2500);</script>   <!-- reveal.js lifts this once the line-by-line units are set; the timeout is a safety net -->
 <meta name="robots" content="noindex, nofollow"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>[staging] Iconoteka, 1,300 open-source icons in 7 weights and 2 styles</title>
@@ -30,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="support.css?v=11">
+<link rel="stylesheet" href="support.css?v=14">
 <style>
 :root {
   --bg: #ffffff;
@@ -518,32 +519,58 @@ main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--
    icon sections. It lives outside <main> because render() replaces its contents, and it is
    desktop only: below 861px the page is already a narrow grid with a sheet panel. */
 .promo { width: 100%; padding: 28px calc(var(--pad) + 10px) 0; }
-.promo-card { position: relative; width: 100%; max-width: 1256px; margin: 0 auto; display: flex; align-items: flex-start; gap: 28px;
-              padding: 26px 36px 26px 28px; border-radius: var(--r-md); background: var(--ui-surface); }
-.promo-mark { flex: none; width: 40px; height: 40px; color: var(--text); }   /* JS nudges it onto the title's cap line */
-.promo-mark svg { width: 100%; height: 100%; fill: currentColor; display: block; overflow: visible; }
+.promo-card { --pv: 26px; --pl: 28px; --gap: 28px;
+              position: relative; width: 100%; max-width: 1256px; margin: 0 auto; display: flex; align-items: flex-start; gap: var(--gap);
+              padding: var(--pv) 36px var(--pv) var(--pl); border-radius: var(--r-md); background: color-mix(in srgb, var(--ui-surface) 50%, var(--bg)); }   /* half-way between the page and the usual surface: quieter (user: less active) */
+/* The mark is centred ACROSS the free space left of the text (user): a slot from the card's left edge to
+   the text. Vertically its ink starts on the title's cap line (JS sets the margin). The text keeps its start. */
+.promo-slot { flex: none; align-self: stretch; width: calc(var(--pl) + 40px + var(--gap));
+              margin: calc(-1 * var(--pv)) calc(-1 * var(--gap)) calc(-1 * var(--pv)) calc(-1 * var(--pl));
+              display: flex; align-items: flex-start; justify-content: center; }
+.promo-mark { flex: none; color: var(--mark-c, var(--text)); }   /* JS sizes the glyph optically; the slot centres it */
+/* Marks in palette colours (user). A family has one tone per theme, each at least 3:1 against the card
+   (#f2f2f3 light, #2a2a2a dark): red 3.3/3.9, teal 3.3 / green 4.8, blue 7.6 / sky 5.9, ox 4.8 / yellow 8.6,
+   dark blue 13 / pink 9.6. The tile takes the colour as its ground and a black or white glyph, as the
+   brand swatches allow (pink: black, dark blue: white). */
+.promo-card { --hue-claude: #c15f3c; --hue-gray: #8b8a94; --hue-red: #f04c1a; --hue-green: #0b957e; --hue-blue: #1e39c9; --hue-yellow: #a25624; --hue-pink: #061584; --hue-pink-ink: #ffffff; }
+[data-theme="dark"] .promo-card { --hue-claude: #d97757; --hue-gray: #8a8a8a; --hue-green: #12ab57; --hue-blue: #41b1e7; --hue-yellow: #febd32; --hue-pink: #ffc3dc; --hue-pink-ink: #141414; }
+.promo-mark[data-hue="red"] { --mark-c: var(--hue-red); }
+.promo-mark[data-hue="claude"] { --mark-c: var(--hue-claude); }   /* Claude's own orange: #d97757 on dark (4.6:1); on light it is 2.8:1, so the darker brand tone #c15f3c (3.8:1) */
+.promo-mark[data-hue="gray"] { --mark-c: var(--hue-gray); }       /* the dim text gray: 3.1:1 light, 4.2:1 dark */
+.promo-mark[data-hue="green"] { --mark-c: var(--hue-green); }
+.promo-mark[data-hue="blue"] { --mark-c: var(--hue-blue); }
+.promo-mark[data-hue="yellow"] { --mark-c: var(--hue-yellow); }
+.promo-mark[data-hue="pink"] { --mark-c: var(--hue-pink); --mark-ink: var(--hue-pink-ink); }
+.promo-mark:not(.tile) { line-height: 0; }
+.promo-mark svg { width: 40px; height: 40px; fill: currentColor; display: block; overflow: visible; }
 /* a product whose mark reads as an app icon gets the tile treatment: rounded square, glyph inset */
-.promo-mark.tile { border-radius: 22%; background: var(--text); color: var(--bg);
+.promo-mark.tile { border-radius: 22%; background: var(--mark-c, var(--text)); color: var(--mark-ink, var(--bg));
                    display: flex; align-items: center; justify-content: center; }
-.promo-mark.tile svg { width: 56%; height: 56%; }
-.promo-text { min-width: 0; max-width: 780px; }
+.promo-mark.tile svg { width: 74%; height: 74%; }
+.promo-mark.tile svg:has(path[fill]) { width: 68%; height: 68%; }   /* a full-colour logo in its app-icon tile (Figma): smaller inset, the five shapes need air */   /* the glyph carries the tile: too small an inset and its strokes go hairline */
+.promo-card.clickable { cursor: pointer; }
+.promo-text { min-width: 0; max-width: 780px; margin-right: 52px; }   /* at least 80px (with the 28px gap) before the button (user: more space) */
 .promo-card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; line-height: 22px; color: var(--text); }
-.promo-card p { margin: 0; font-size: 13px; line-height: 20px; color: var(--text-muted); }
-.promo-btn { flex: none; margin-left: auto; align-self: flex-end; width: auto; padding: 0 20px 2px; text-decoration: none;
-             background: rgba(255, 255, 255, .75); color: var(--text); border: none; }   /* bottom edge on the text's last line */
-.promo-btn:hover { background: rgba(255, 255, 255, .95); }
-[data-theme="dark"] .promo-btn { background: rgba(255, 255, 255, .10); color: var(--text); }
-[data-theme="dark"] .promo-btn:hover { background: rgba(255, 255, 255, .16); }
+.promo-card p { margin: 0; font-size: 13px; line-height: 20px; color: var(--text-muted); }   /* copy is kept to two lines at 1440, the MacBook Air 13 width (user: shorten the copy, keep the size) */
+/* the action is a text button, always shown (user): the text colour, the body's 13/20 so it sits on the
+   last line of the text, bottom-right */
+.promo-btn { flex: none; margin-left: auto; align-self: flex-end; padding: 0; font-size: 13px; line-height: 20px; font-weight: 600;
+             color: var(--text); text-decoration: none; white-space: nowrap; transition: opacity var(--t-fast); }
+.promo-btn:hover { opacity: .7; }
 .promo-close { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; padding: 0; display: flex;
                align-items: center; justify-content: center; background: none; border: none; border-radius: var(--r-sm);
-               color: var(--text-dim); cursor: pointer; opacity: 0; transition: opacity var(--t-fast), color var(--t-fast), background var(--t-fast); }
-.promo-card:hover .promo-close, .promo-close:focus-visible { opacity: 1; }
-.promo-close:hover { color: var(--text); background: var(--ui-surface-hover); }
+               color: var(--text-dim); cursor: pointer; transition: color var(--t-fast); }   /* always visible (user) */
+.promo-close:hover, .promo-close:focus-visible { color: var(--text); }   /* hover only brightens the cross: no box behind it (user) */
 .promo-close svg { width: 14px; height: 14px; fill: currentColor; display: block; }
-@media (max-width: 1100px) {
-  .promo-card { flex-wrap: wrap; gap: 18px; padding: 20px 20px 20px 22px; }
-  .promo-text { flex: 1 1 260px; }
-  .promo-btn { margin-left: 0; flex: 1 0 100%; width: 100%; }
+/* Narrow CARD, whatever the window: the column between the sidebar and the panel is what decides (at 1101px
+   it is only ~470px). Below 760px of card: no logo or icon, the text takes the card, and the button goes on
+   its own line, left-aligned under the text (user). */
+.promo { container-type: inline-size; }
+@container (max-width: 760px) {
+  .promo-card { flex-wrap: wrap; --pv: 20px; --pl: 22px; --gap: 18px; padding: var(--pv) 20px var(--pv) var(--pl); }
+  .promo-slot { display: none; }
+  .promo-text { flex: 1 1 100%; margin-right: 0; }
+  .promo-btn { flex: 0 0 auto; margin-left: 0; margin-top: 6px; align-self: flex-start; }   /* its own line, on the text's left edge, 24px under it */
 }
 @media (max-width: 860px) { .promo { display: none; } }
 
@@ -553,20 +580,29 @@ main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--
    it lives at the end of .main-wrap, the pane that actually scrolls. */
 :root { --text-soft: #75747d; }
 [data-theme="dark"] { --text-soft: var(--text-muted); }
-footer { border-top: 1px solid var(--border); margin-top: 48px; padding: 20px var(--pad) 24px;
-         font-size: 14px; line-height: 21px; color: var(--text); }
-.foot-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 28px; max-width: 1252px; margin: 0 auto; }
-.foot-row nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-footer a, footer button { color: inherit; text-decoration: none; font: inherit; background: none; border: none; padding: 0; cursor: pointer; }
-footer a:hover, footer button:hover { opacity: .7; }
+footer { border-top: 1px solid var(--border); margin-top: 48px; padding: 32px var(--pad) 40px; font-size: 14px; line-height: 21px; color: var(--text); }
+/* The same four groups as every other page (Library, Support, Follow, Contact), without the random icon,
+   packed side by side at a fixed gap instead of spread over the 12 columns (user: tighter). */
+.foot-cols { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 64px; max-width: 1252px; margin: 0 auto; }
+.foot-cols .f-contact { max-width: 220px; }
+.foot-cols .f-contact p { margin: 0; }
+.footer-group h4 { font-size: 14px; line-height: 21px; font-weight: 500; color: var(--text-soft); margin: 0 0 16px; }   /* this page has no --sp tokens: the other pages' values in px */
+.footer-group nav { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.footer-crypto-label { color: var(--text-soft); position: relative; top: 3px; }
+.footer-crypto { display: flex; gap: 10px; }
+.footer-copy { margin-left: auto; align-self: flex-end; white-space: nowrap; color: var(--text-muted); }
+.footer-copy a { color: inherit; }
+footer a, footer button { color: inherit; text-decoration: none; font: inherit; background: none; border: none; padding: 0; cursor: pointer; text-align: left; }
+footer a:hover, footer button:hover { opacity: .8; }
 footer button.copied { color: var(--brand); }
-.foot-mark { width: 24px; height: 24px; flex: none; color: var(--text); cursor: pointer; }
-.foot-mark svg { width: 24px; height: 24px; fill: currentColor; display: block; }
-.foot-sep { width: 1px; height: 14px; background: var(--border); flex: none; }
-.foot-copy { margin: 0 0 0 auto; color: var(--text-muted); white-space: nowrap; }
-.foot-row .footer-crypto-label { color: var(--text-soft); }
-.foot-row .footer-crypto { display: flex; gap: 10px; }
-@media (max-width: 860px) { .foot-copy { margin-left: 0; } }
+footer .handle { text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; text-decoration-skip-ink: none; }   /* "get in touch", as on the other pages */
+footer .nobr { white-space: nowrap; }
+@media (max-width: 860px) {
+  .foot-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 16px; }
+  .foot-cols .f-contact { max-width: none; }
+  .footer-copy { grid-column: 1 / -1; margin-left: 0; }
+  .footer-copy br { display: none; }
+}
 
 
 
@@ -654,7 +690,7 @@ footer button.copied { color: var(--brand); }
         <button class="header-link support-btn" id="supportBtn" aria-haspopup="true" aria-expanded="false">Support Project</button>
       </div>
     <a class="header-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
-    <a class="header-link" href="about.html">About</a>
+    <a class="header-link" href="dev.html">Dev</a><a class="header-link" href="about.html">About</a>
   </nav>
   <!-- Mobile burger -->
   <button class="burger-btn" id="burgerBtn" aria-label="Menu">
@@ -667,7 +703,7 @@ footer button.copied { color: var(--brand); }
     <div class="burger-group" id="burgerSupport"><div class="burger-label">Support Project</div></div>
     <hr class="burger-sep">
     <a class="burger-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
-    <a class="burger-link" href="about.html">About</a>
+    <a class="burger-link" href="dev.html">Dev</a><a class="burger-link" href="about.html">About</a>
     <hr class="burger-sep">
     <div class="burger-ver"><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></div>
   </div>
@@ -775,30 +811,39 @@ footer button.copied { color: var(--brand); }
 
   <div class="main-wrap">
     <div class="promo" id="promo" hidden></div>
-    <main id="main">
+    <main id="main" data-reveal="off">
       <div id="loading"><div class="spinner"></div><span>Loading icons…</span></div>
     </main>
 <footer>
-  <div class="foot-row">
-    <div class="foot-mark" id="footerIcon" aria-hidden="true"></div>
-    <nav>
-      <a href="about.html">About</a>
-      <a href="https://github.com/iconoteka/iconoteka/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
-      <a href="https://github.com/iconoteka/iconoteka" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
-      <a href="press.html">Press Kit</a>
-      <a href="about.html#privacy">Privacy</a>
-    </nav>
-    <span class="foot-sep" aria-hidden="true"></span>
-    <nav id="footerSupport"></nav>
-    <span class="foot-sep" aria-hidden="true"></span>
-    <nav>
-      <a href="https://www.instagram.com/iconoteka/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.pinterest.com/turbaba/iconoteka/" target="_blank" rel="noopener">Pinterest</a>
-      <a href="https://www.are.na/oleg-turbaba/iconoteka" target="_blank" rel="noopener">Are.na</a>
-      <a href="https://x.com/iconoteka" target="_blank" rel="noopener">X</a>
-    </nav>
-    <p class="foot-copy">© 2016–2026 <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">Oleg Turbaba</a></p>
+  <div class="foot-cols">
+    <div class="footer-group f-lib">
+      <h4>Library</h4>
+      <nav>
+        <a href="about.html#license">License</a>
+        <a href="https://github.com/iconoteka/iconoteka" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
+        <a href="dev.html">Dev Packages</a><a href="press.html">Press Kit</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-group f-sup">
+      <h4>Support</h4>
+      <nav id="footerSupport"></nav>
+    </div>
+    <div class="footer-group f-fol">
+      <h4>Follow</h4>
+      <nav>
+        <a href="https://www.instagram.com/iconoteka/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.pinterest.com/turbaba/iconoteka/" target="_blank" rel="noopener">Pinterest</a>
+        <a href="https://www.are.na/oleg-turbaba/iconoteka" target="_blank" rel="noopener">Are.na</a>
+        <a href="https://x.com/iconoteka" target="_blank" rel="noopener">X</a>
+      </nav>
+    </div>
+    <div class="footer-group f-contact">
+      <h4>Contact</h4>
+      <p>For enquiries, collaborations, interviews, or sponsorships, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
+    </div>
+    <div class="footer-copy">© 2016–2026 <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">Oleg Turbaba</a>.<br> All rights reserved.</div>
   </div>
 </footer>
   </div>
@@ -1635,7 +1680,12 @@ function updatePanelPreview(icon) {
 const BADGE_SHAPES = ['14px'];
 
 
+// The preview colour and the chip shapes belong to the ICON: changing style or weight rebuilds the panel for
+// the same icon and must keep them (user). Only a different icon draws new ones.
+let chipShapes = {};
 function openPanel(icon) {
+  const samePanel = !!(panelIcon && panelIcon.name === icon.name);
+  if (!samePanel) chipShapes = {};
   panelIcon = icon;
   document.querySelectorAll('.icon-card').forEach(c => c.classList.remove('active-panel'));
   const active = document.querySelector('[data-name="' + icon.name + '"]');
@@ -1646,7 +1696,7 @@ function openPanel(icon) {
 
   const preview = document.getElementById('panelPreview');
   if (!firstPreviewShown) { preview._colorPair = BRAND_PAIR; firstPreviewShown = true; }
-  else { preview._colorPair = randomColorPair(); }
+  else if (!samePanel || !preview._colorPair) { preview._colorPair = randomColorPair(); }
   updatePanelPreview(icon);
 
   const body = document.getElementById('panelBody');
@@ -1669,7 +1719,7 @@ function openPanel(icon) {
     tags.forEach(t => {
       const tag = document.createElement('span');
       const tagTypes = ['tag-pill', 'tag-rect', 'tag-rounded'];
-      const tagType = tagTypes[Math.floor(Math.random() * tagTypes.length)];
+      const tagType = chipShapes[t] || (chipShapes[t] = tagTypes[Math.floor(Math.random() * tagTypes.length)]);
       tag.className = 'tag ' + tagType;
       tag.textContent = formatSegment(t);
       tag.addEventListener('click', () => {
@@ -2284,7 +2334,17 @@ let LOGOMARK_PATH = null;
 
 // The footer's mark: one random icon in the fill style, a new one on every load and on hover.
 // One card above the grid, drawn at random on each load: a brand mark, two lines and one action.
+// Full-colour marks: several paths, each with its own fill, drawn as they are (user: full colour Figma logo)
+const PROMO_COLOR_MARKS = {
+  figma: { vb: '0 0 38 57', paths: [
+    ['M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z', '#1abcfe'],
+    ['M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z', '#0acf83'],
+    ['M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z', '#ff7262'],
+    ['M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z', '#f24e1e'],
+    ['M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z', '#a259ff']] }
+};
 const PROMO_LOGOS = {
+  instagram: 'M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077',
   patreon: 'M22.957 7.21c-.004-3.064-2.391-5.576-5.191-6.482-3.478-1.125-8.064-.962-11.384.604C2.357 3.231 1.093 7.391 1.046 11.54c-.039 3.411.302 12.396 5.369 12.46 3.765.047 4.326-4.804 6.068-7.141 1.24-1.662 2.836-2.132 4.801-2.618 3.376-.836 5.678-3.501 5.673-7.031Z',
   kofi: 'M11.351 2.715c-2.7 0-4.986.025-6.83.26C2.078 3.285 0 5.154 0 8.61c0 3.506.182 6.13 1.585 8.493 1.584 2.701 4.233 4.182 7.662 4.182h.83c4.209 0 6.494-2.234 7.637-4a9.5 9.5 0 0 0 1.091-2.338C21.792 14.688 24 12.22 24 9.208v-.415c0-3.247-2.13-5.507-5.792-5.87-1.558-.156-2.65-.208-6.857-.208m0 1.947c4.208 0 5.09.052 6.571.182 2.624.311 4.13 1.584 4.13 4v.39c0 2.156-1.792 3.844-3.87 3.844h-.935l-.156.649c-.208 1.013-.597 1.818-1.039 2.546-.909 1.428-2.545 3.064-5.922 3.064h-.805c-2.571 0-4.831-.883-6.078-3.195-1.09-2-1.298-4.155-1.298-7.506 0-2.181.857-3.402 3.012-3.714 1.533-.233 3.559-.26 6.39-.26m6.547 2.287c-.416 0-.65.234-.65.546v2.935c0 .311.234.545.65.545 1.324 0 2.051-.754 2.051-2s-.727-2.026-2.052-2.026m-10.39.182c-1.818 0-3.013 1.48-3.013 3.142 0 1.533.858 2.857 1.949 3.897.727.701 1.87 1.429 2.649 1.896a1.47 1.47 0 0 0 1.507 0c.78-.467 1.922-1.195 2.623-1.896 1.117-1.039 1.974-2.364 1.974-3.897 0-1.662-1.247-3.142-3.039-3.142-1.065 0-1.792.545-2.338 1.298-.493-.753-1.246-1.298-2.312-1.298',
   figma: 'M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z',
@@ -2294,38 +2354,44 @@ const PROMO_LOGOS = {
   react: 'M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z'
 };
 const PROMO_CARDS = [
-  { logo: 'patreon', title: 'Support Us on Patreon', weight: 2,
-    text: 'Iconoteka is free and open source under the MIT License, and it grows icon by icon. A monthly subscription pays for the drawing time behind every new weight, style and category.',
+  { logo: 'patreon', donation: true, title: 'Support Us on Patreon', weight: 2,
+    text: 'Iconoteka is free and open source and grows icon by icon. A monthly subscription pays for the drawing time behind every new icon.',
     cta: 'Subscribe on Patreon', href: 'https://www.patreon.com/c/iconoteka' },
-  { logo: 'kofi', title: 'Support Us on Ko-fi', weight: 2,
-    text: 'Every icon in the library is free to use, in any project, commercial or not. A one-time tip is the shortest way to say it was useful and to pay for the next batch.',
+  { logo: 'kofi', donation: true, title: 'Support Project on Ko-fi', weight: 2,
+    text: 'Supporting the project helps it grow. A one-time tip on Ko-fi goes straight into the work on new icons, weights and categories.',
     cta: 'Tip on Ko-fi', href: 'https://ko-fi.com/iconoteka' },
   { logo: 'claude', title: 'MCP for Claude Code',
-    text: 'One command adds the Iconoteka MCP server to Claude Code for all your projects. Ask for an icon by name and weight, and it arrives in your files as an SVG, no download and no hunting through a grid.',
-    cta: 'Set Up Claude Code', href: 'about.html#mcp-claude-code' },
+    text: 'One command adds the Iconoteka MCP server to Claude Code for every project. Ask for an icon by name and weight, and it lands as SVG.',
+    cta: 'Set Up Claude Code', href: 'dev.html#mcp-claude-code' },
   { logo: 'claude', title: 'MCP for Claude',
-    text: 'Add one server entry to the Claude desktop app and the whole library is available in conversation. All 1,300 icons, 7 weights and 2 styles, searchable by keyword without leaving the chat.',
-    cta: 'Set Up Claude', href: 'about.html#mcp-claude' },
+    text: 'Add one server entry to the Claude desktop app and the whole library is there in chat: 1,300 icons in 7 weights and 2 styles.',
+    cta: 'Set Up Claude', href: 'dev.html#mcp-claude' },
   { logo: 'cursor', title: 'MCP for Cursor',
-    text: 'Install the Iconoteka MCP server in Cursor with a single click, or one line in your project config. The agent searches the library and writes the icon straight into the component it is building.',
-    cta: 'Set Up Cursor', href: 'about.html#mcp-cursor' },
+    text: 'Install the Iconoteka MCP server in Cursor with one click or one line of config. The agent finds the icon and writes it into your component.',
+    cta: 'Set Up Cursor', href: 'dev.html#mcp-cursor' },
   { logo: 'codex', title: 'MCP for Codex',
-    text: 'Codex adds Iconoteka with one command and loads it in every new session. The library becomes a tool it can search, so icons stop being a separate errand in the middle of a task.',
-    cta: 'Set Up Codex', href: 'about.html#mcp-codex' },
+    text: 'Codex adds Iconoteka with one command and loads it in every session. The library becomes a tool it can search in the middle of a task.',
+    cta: 'Set Up Codex', href: 'dev.html#mcp-codex' },
   { logo: 'react', title: 'Icons for React',
-    text: 'Icon components for React, Vue and Svelte, published on npm under the MIT License. Import an icon by name, set weight, variant and size as props, and ship it without handling a single SVG file.',
-    cta: 'Get the Package', href: 'about.html#pkg-react' },
-  { icon: 'keyboard', title: 'Keyboard Shortcuts',
-    text: 'Arrow keys walk the grid and Enter copies the icon you land on. Press 1 to 7 to change weight, S for stroke and F for fill, square brackets to step one weight at a time, and slash to jump to search.',
+    text: 'Icon components for React, Vue and Svelte on npm under the MIT License. Import an icon by name and set weight, variant and size as props.',
+    cta: 'Get the Package', href: 'dev.html#pkg-react' },
+  { icon: 's_in_square', square: true, title: 'Keyboard Shortcuts',
+    text: 'Arrow keys walk the grid and Enter copies the icon you land on. Press 1 to 7 for weight, S for stroke, F for fill, square brackets to step weights, and slash to search.',
     noAction: true },
   { icon: 'link', title: 'Every Icon Has an Address',
-    text: 'Add an icon name to the site address, like iconoteka.com/#bell, and the page opens with that icon selected. The shortest way to point a colleague at exactly the one you mean.',
+    text: 'Add an icon name to the site address, like iconoteka.com/#bell, and the page opens with that icon selected. The quickest way to share the exact icon.',
     noAction: true },
-  { icon: 'image', title: 'Iconoteka in Use',
-    text: 'Worked examples from the gallery: a banking app, a smart home, a reading app, a city guide, travel cards, a book cover, festival posters, wayfinding signs, recycling labels and a bus stop.',
+  { logo: 'instagram', square: true, title: 'Follow Iconoteka on Instagram',
+    text: 'New icons as they are drawn, work in progress from the grid and ideas for using the library. The quickest way to see what comes next.',
+    cta: 'Follow on Instagram', href: 'https://www.instagram.com/iconoteka/' },
+  { icon: 'contract', title: 'Free under MIT License',
+    text: 'Every icon is under the MIT License. Use it in personal and commercial work and closed-source products, and change it to fit your design.',
+    cta: 'Read the License', href: 'about.html#license' },
+  { icon: 'image', square: true, title: 'Iconoteka Gallery',
+    text: 'Worked examples: a banking app, a smart home, a reading app, a city guide, travel cards, a book cover, festival posters and wayfinding signs.',
     cta: 'See the Gallery', href: 'about.html#gallery' },
   { logo: 'figma', tile: true, title: 'Figma Plugin', weight: 2,
-    text: 'Search the whole library from inside Figma, change weight and style on a selection, and place icons without leaving the canvas. Everything arrives as vectors, ready to edit.',
+    text: 'Search the whole library inside Figma, change weight and style on a selection, and place icons without leaving the canvas, as editable vectors.',
     cta: 'Open in Figma', href: 'https://www.figma.com/community/plugin/1675995752572535073/iconoteka' }
 ];
 
@@ -2343,6 +2409,7 @@ const PROMO_KEY = 'iconoteka-promo-closed';
 const PROMO_VER = 1;
 const PROMO_DAYS = 15;
 function promoClosed() {
+  if (PROMO_TEST) return false;   // on localhost / staging a close lasts one visit, so a reload always shows a card
   try {
     const raw = localStorage.getItem(PROMO_KEY);
     if (!raw) return false;
@@ -2354,20 +2421,55 @@ function closePromo() {
   try { localStorage.setItem(PROMO_KEY, JSON.stringify({ v: PROMO_VER, until: Date.now() + PROMO_DAYS * 864e5 })); } catch (e) {}
 }
 
+// Local and staging builds are for looking at the card, so the daily cap stands down there.
+// Staging is identified by the noindex meta sync-staging.py injects; production never carries it.
+const PROMO_TEST = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)
+  || /^staging\./.test(location.hostname)
+  || !!document.querySelector('meta[name="robots"][content*="noindex"]');
+
+// Even undismissed, the card shows once a calendar day: a visitor who comes back three times in an
+// afternoon meets it once, and tomorrow gets a different card rather than the same one again.
+const PROMO_SEEN_KEY = 'iconoteka-promo-seen';
+function promoDay() {
+  const d = new Date();
+  return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+}
+function promoSeenToday() {
+  if (PROMO_TEST) return false;
+  try { return localStorage.getItem(PROMO_SEEN_KEY) === promoDay(); } catch (e) { return false; }
+}
+function markPromoSeen() { try { localStorage.setItem(PROMO_SEEN_KEY, promoDay()); } catch (e) {} }
+
 function buildPromo() {
   const host = document.getElementById('promo');
-  if (!host || promoClosed()) return;
+  if (!host || promoClosed() || promoSeenToday()) return;
+  // One banner at a time (user): a visit that shows the cookie banner shows no card at all, not even after the
+  // banner is answered; the card comes on the next load. consent.js loads after this script, so the check
+  // runs a tick later, when the banner exists.
+  if (!buildPromo.checked) {
+    buildPromo.checked = true;
+    setTimeout(() => { if (!(window.consentPending && window.consentPending())) buildPromo(); }, 0);
+    return;
+  }
   // weighted draw: the donation cards and the plugin carry weight 2, everything else 1
-  const total = PROMO_CARDS.reduce((n, x) => n + (x.weight || 1), 0);
-  let roll = Math.random() * total, c = PROMO_CARDS[PROMO_CARDS.length - 1];
-  for (const x of PROMO_CARDS) { roll -= (x.weight || 1); if (roll < 0) { c = x; break; } }
+  // A visitor's first card is never a donation ask (user): until one card has been shown, Patreon and Ko-fi sit out.
+  let first = true; try { first = !localStorage.getItem(PROMO_SEEN_KEY); } catch (e) {}
+  const pool = first ? PROMO_CARDS.filter(x => !x.donation) : PROMO_CARDS;
+  const total = pool.reduce((n, x) => n + (x.weight || 1), 0);
+  let roll = Math.random() * total, c = pool[pool.length - 1];
+  for (const x of pool) { roll -= (x.weight || 1); if (roll < 0) { c = x; break; } }
   const card = document.createElement('div'); card.className = 'promo-card';
 
   const mark = document.createElement('span'); mark.className = 'promo-mark'; mark.setAttribute('aria-hidden', 'true');
   if (c.tile) mark.classList.add('tile');
+  if (c.square) mark.dataset.square = '1';
+  if (c.hue) mark.dataset.hue = c.hue;
   const d = c.logo ? PROMO_LOGOS[c.logo] : libraryPath(c.icon);
-  // xMinYMin: once the viewBox is cropped to the ink, the mark's top-left IS the ink's top-left
-  if (d) mark.innerHTML = '<svg viewBox="0 0 24 24" preserveAspectRatio="xMinYMin meet"><path d="' + d + '"/></svg>';
+  // xMidYMid: once the viewBox is cropped to the ink, the ink sits in the middle of the svg box, so centring the box centres the ink
+  const cm = c.color && PROMO_COLOR_MARKS[c.color];
+  if (cm) mark.innerHTML = '<svg viewBox="' + cm.vb + '" preserveAspectRatio="xMidYMid meet">' + cm.paths.map(([pd, f]) => '<path d="' + pd + '" fill="' + f + '"/>').join('') + '</svg>';
+  else if (d) mark.innerHTML = '<svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="' + d + '"/></svg>';
+  const slot = document.createElement('span'); slot.className = 'promo-slot'; slot.appendChild(mark);
 
   const text = document.createElement('div'); text.className = 'promo-text';
   const h = document.createElement('h3'); h.textContent = c.title;
@@ -2377,7 +2479,7 @@ function buildPromo() {
   let a = null;
   if (c.cta) {                                      // a pure tip carries no button
     a = document.createElement('a');
-    a.className = 'action-btn promo-btn'; a.textContent = c.cta; a.href = c.href;
+    a.className = 'promo-btn'; a.textContent = c.cta; a.href = c.href;
     if (/^https?:/.test(c.href)) { a.target = '_blank'; a.rel = 'noopener'; }
   }
 
@@ -2392,13 +2494,34 @@ function buildPromo() {
     closePromo();
   });
 
-  card.append(mark, text);
+  card.append(slot, text);
   if (a) card.appendChild(a);
   card.appendChild(close);
+
+  // the whole card follows the button. The cross and the button handle their own clicks, and a
+  // click that ends a text selection is the visitor reading, not navigating.
+  if (c.href) {
+    card.classList.add('clickable');
+    card.addEventListener('click', e => {
+      if (e.target.closest('.promo-close, .promo-btn')) return;
+      if (window.getSelection && String(window.getSelection())) return;
+      if (/^https?:/.test(c.href)) window.open(c.href, '_blank', 'noopener');
+      else location.href = c.href;
+    });
+  }
   host.innerHTML = ''; host.appendChild(card); host.dataset.ready = '1'; host.hidden = !!state.search;
-  fitMarkToInk(mark);
-  alignPromoMark(mark, h);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => alignPromoMark(mark, h));
+  markPromoSeen();
+  // Fit, size and align the mark only while it is on screen: a card built in a narrow window hides it, every
+  // measurement comes back zero, and widening the window afterwards left it at the bottom of the card (user).
+  // The card's own size change re-runs this, so the mark is placed whenever it appears.
+  const place = () => {
+    if (!slot.offsetWidth) return;
+    if (!mark.dataset.fitted) { fitMarkToInk(mark); balanceMarkSize(mark); mark.dataset.fitted = '1'; }
+    alignPromoMark(mark, h);
+  };
+  place();
+  new ResizeObserver(place).observe(card);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
 }
 
 // A library icon sits inside a 24px frame with its own padding, a brand logo fills its box edge
@@ -2409,23 +2532,78 @@ function fitMarkToInk(mark) {
   const svg = mark.querySelector('svg'), path = svg && svg.querySelector('path');
   if (!path) return;
   let b;
-  try { b = path.getBBox(); } catch (e) { return; }
+  try { b = svg.getBBox(); } catch (e) { return; }   // the svg's box: every path, for a multi-colour mark too
   if (!b || !b.width || !b.height) return;
   svg.setAttribute('viewBox', b.x + ' ' + b.y + ' ' + b.width + ' ' + b.height);
 }
 
-// The mark starts on the title's cap line, not on the line box: measure the cap with a
-// zero-width 1cap probe and shift the mark by the difference.
+// Equal bounding boxes are not equal optical sizes. The eye reads a mark by its SILHOUETTE (the convex hull
+// of its ink), and only a little by how much of that silhouette is filled. So: rasterise the mark, take the
+// hull of the inked pixels and scale until every hull has the same area, then shrink dense marks a touch
+// (a solid square reads heavier than an outline one of the same size). Ink-area scaling, the first version,
+// blew outline marks up: Instagram read bigger than the S square and the Figma tile (user: same optical size).
+const MARK_K = 37;                   // the side a full square gets
+const MARK_E = 0.3;                  // hull exponent: 0 = equal box, 0.5 = equal hull area; the eye sits between
+const MARK_D = 0.1;                  // density correction
+const MARK_MIN = 30, MARK_MAX = 50;
+const MARK_SQUARE = 39;              // every square mark (S square, Instagram, gallery frame, Figma tile) is exactly this (user: all squares same size)
+
+function markMetrics(d, vb) {
+  const N = 120, cv = document.createElement('canvas');
+  cv.width = cv.height = N;
+  const ctx = cv.getContext('2d');
+  if (!ctx) return null;
+  const k = N / Math.max(vb[2], vb[3]);
+  ctx.setTransform(k, 0, 0, k, -vb[0] * k + (N - vb[2] * k) / 2, -vb[1] * k + (N - vb[3] * k) / 2);
+  try { ctx.fill(new Path2D(d)); } catch (e) { return null; }
+  let px; try { px = ctx.getImageData(0, 0, N, N).data; } catch (e) { return null; }
+  let ink = 0; const pts = [];
+  for (let y = 0; y < N; y++) {
+    let l = -1, r = -1;
+    for (let x = 0; x < N; x++) if (px[(y * N + x) * 4 + 3] > 100) { ink++; if (l < 0) l = x; r = x; }
+    if (l >= 0) pts.push([l, y], [r + 1, y], [l, y + 1], [r + 1, y + 1]);
+  }
+  if (!ink) return null;
+  pts.sort((a, b) => a[0] - b[0] || a[1] - b[1]);                 // monotone chain hull
+  const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lo = [], hi = [];
+  for (const q of pts) { while (lo.length > 1 && cross(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
+  for (let i = pts.length - 1; i >= 0; i--) { const q = pts[i]; while (hi.length > 1 && cross(hi[hi.length - 2], hi[hi.length - 1], q) <= 0) hi.pop(); hi.push(q); }
+  const hull = lo.slice(0, -1).concat(hi.slice(0, -1));
+  let area = 0;
+  for (let i = 0; i < hull.length; i++) { const a = hull[i], b = hull[(i + 1) % hull.length]; area += a[0] * b[1] - b[0] * a[1]; }
+  area = Math.abs(area) / 2;
+  return { hull: area / (N * N), density: Math.min(1, ink / area) };
+}
+
+function balanceMarkSize(mark) {
+  const svg = mark.querySelector('svg'), path = svg && svg.querySelector('path');
+  if (!svg) return;
+  if (mark.classList.contains('tile')) { svg.style.width = svg.style.height = ''; mark.style.width = mark.style.height = MARK_SQUARE + 'px'; return; }
+  if (mark.dataset.square) { svg.style.width = svg.style.height = MARK_SQUARE + 'px'; return; }
+  if (!path) return;
+  const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+  if (vb.length !== 4 || !vb[2] || !vb[3]) return;
+  const m = markMetrics([...svg.querySelectorAll('path')].map(q => q.getAttribute('d')).join(' '), vb);
+  if (!m) return;
+  const side = Math.min(MARK_MAX, Math.max(MARK_MIN, MARK_K * Math.pow(m.hull, -MARK_E) * Math.pow(m.density, -MARK_D)));
+  svg.style.width = svg.style.height = Math.round(side) + 'px';
+  mark.dataset.hull = m.hull.toFixed(2); mark.dataset.density = m.density.toFixed(2);
+}
+
+// The ink starts on the title's cap line: measure the cap with a zero-width 1cap probe, measure the
+// ink itself (the path's box, or the tile's edge), and move the mark by the difference.
 function alignPromoMark(mark, title) {
   const probe = document.createElement('span');
   probe.style.cssText = 'display:inline-block;width:0;height:1cap;vertical-align:baseline';
   title.appendChild(probe);
-  const r = probe.getBoundingClientRect();
+  const cap = probe.getBoundingClientRect();
   title.removeChild(probe);
-  if (!r.height) return;
+  if (!cap.height) return;
   mark.style.marginTop = '0px';
-  const capTop = r.top, markTop = mark.getBoundingClientRect().top;
-  mark.style.marginTop = Math.round(capTop - markTop) + 'px';
+  const inks = mark.classList.contains('tile') ? [mark] : [...mark.querySelectorAll('path')];
+  const top = Math.min(...(inks.length ? inks : [mark]).map(e => e.getBoundingClientRect().top));
+  mark.style.marginTop = (cap.top - top) + 'px';
 }
 
 function initFooterIcon() {
@@ -2579,7 +2757,8 @@ loadIcons();
 })();
 
 </script>
-<script src="support.js?v=10"></script>
-<script src="consent.js?v=1"></script>
+<script src="reveal.js?v=7"></script>
+<script src="support.js?v=11"></script>
+<script src="consent.js?v=4"></script>
 </body>
 </html>

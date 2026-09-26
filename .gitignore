@@ -1,1 +1,4 @@
 .DS_Store
+# gallery source PNGs (1920x1080 originals, ~9 MB) stay local; the site uses the JPG variants
+media/0*.png
+media/iconoteka-author-oleg-turbaba.png

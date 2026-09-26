@@ -5,16 +5,16 @@
 <script>document.documentElement.classList.add('rv-pending'); setTimeout(() => document.documentElement.classList.remove('rv-pending'), 2500);</script>   <!-- reveal.js lifts this once the line-by-line units are set; the timeout is a safety net -->
 <meta name="robots" content="noindex, nofollow"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>[staging] About Iconoteka</title>
-<meta name="description" content="Iconoteka is a free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid by Oleg Turbaba. MIT licensed."/>
-<meta property="og:title" content="About Iconoteka, 1,300 open-source icons in 7 weights and 2 styles"/>
-<meta property="og:description" content="A free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+<title>[staging] Iconoteka Privacy</title>
+<meta name="description" content="What Iconoteka records: Google Analytics visits behind a cookie, and anonymous counts of icon downloads and empty searches. How to change your consent."/>
+<meta property="og:title" content="Iconoteka Privacy"/>
+<meta property="og:description" content="What the site records, what runs on consent, and how to change your choice."/>
 <meta property="og:image" content="https://iconoteka.com/iconoteka-preview.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta property="og:image:type" content="image/png"/>
 <meta property="og:image:alt" content="Iconoteka icons on a grid"/>
-<meta property="og:url" content="https://iconoteka.com/about.html"/>
+<meta property="og:url" content="https://iconoteka.com/privacy.html"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Iconoteka"/>
 <meta name="twitter:card" content="summary_large_image"/>
@@ -189,11 +189,6 @@ main, footer { position: relative; z-index: 1; }
 .half-a p, .half-b p { margin-bottom: var(--stack); }
 /* License and Repository: larger title and text than the feature items */
 .license .half-a, .license .half-b { padding-bottom: var(--block); border-bottom: 1px solid var(--rule); }   /* two rules, one under each half; the halves stretch to one height so the lines align */
-#privacy { padding-top: 0; color: var(--text-soft); }   /* the quiet legal block: grey like the section labels, and half the usual gap above (--major down to --sec) */
-#privacy h3 { font-size: 14px; line-height: 21px; margin-bottom: var(--stack); display: flex; justify-content: space-between; align-items: baseline; }   /* section number at the right edge, like the .label rows above */   /* one title over both halves, so the two columns start at the same line */
-#privacy strong { font-weight: 600; }   /* lead-ins take the site's heading weight, not the browser's 700 */
-#privacy p { font-size: 14px; line-height: 21px; }   /* no width cap: each half fills its column, so equal copy gives equal height */
-#privacy .half-a p { padding-right: var(--gut); }   /* two gutters between the columns: at 14px one gutter reads as a word space, not a column break. Left edges stay on the grid */
 .license h3, .request h3, .support-title { font-size: 28px; line-height: 34px; margin-bottom: var(--sp-2); }   /* Support Project title = the License title (no section number, not counted) */
 .license p, .request p { font-size: 20px; line-height: 30px; max-width: 46ch; }
 /* request: a brand-Blue box, white text (the Blue card's logo-mark rule), input white at 10%, white pill button.
@@ -494,8 +489,6 @@ footer button.copied { color: var(--brand); }
   .card:nth-child(8) { grid-column-start: 1; }
   .license .half-a, .license .half-b { grid-column: 1 / -1; }   /* License above Repository, each with its own rule */
   .license .half-a { margin-bottom: var(--block); }
-  #privacy .half-a, #privacy .half-b { grid-column: 1 / -1; }   /* same as License: this much prose is too narrow in a tablet half */
-  #privacy .half-a { margin-bottom: var(--block); }
   #supportCards { grid-template-columns: 1fr; } #supportCards .support-card:last-child { grid-column: auto; }
   .packages-cards { grid-template-columns: 1fr; } .mcp-card { grid-column: auto; }   /* tablet: one card under the other */
   .packages .support-title { grid-column: 1 / 4; } .packages .support-lead { grid-column: 4 / 7; }
@@ -612,6 +605,35 @@ a.partner:hover .partner-go { opacity: 1; }
   .partner.open .partner-mark { display: none; }
 }
 
+
+/* Privacy: four plain two-column rows, the same measure the About page uses for its notes */
+
+/* Privacy: one structure per section, like the Dev blocks. A rule, the title on the left (28px, the Dev
+   item title), the text on the right at 18px in the text colour, in reading order. Title and first line
+   share a baseline through the grid itself. Narrower is simpler: one column below 861px. */
+.row.headline .g { padding-bottom: 0; border-bottom: none; }   /* the first section's own rule is the only line under the title (as on Dev) */
+.priv-sec { padding-top: 0; padding-bottom: calc(var(--major) / 2); }
+.priv-sec .g { padding-top: var(--block); border-top: 1px solid var(--rule); align-items: baseline; }
+.priv-title { grid-column: 1 / 5; margin: 0; font-size: 22px; line-height: 30px; font-weight: 400; letter-spacing: -.01em; }   /* smaller and regular (user) */
+.priv-body { grid-column: 6 / -1; }
+.priv-body p { margin: 0 0 var(--stack); font-size: 18px; line-height: 28px; max-width: 68ch; }
+.priv-body p:last-child { margin-bottom: 0; }
+.priv-body strong { font-weight: 600; }
+.row.headline .statement { grid-row: auto; }   /* About's template keeps row 1 for its version line; here the date must follow the title */
+.priv-updated { grid-column: 1 / -1; margin: var(--sp-2) 0 0; font-size: 14px; line-height: 21px; color: var(--text-muted); }   /* the date right under the title (d1s1) */
+.priv-body h3 { margin: var(--block) 0 var(--sp-1); font-size: 18px; line-height: 28px; font-weight: 600; }
+.priv-body h3:first-child { margin-top: 0; }
+.priv-body ul { margin: 0 0 var(--stack); padding: 0; list-style: none; }
+.priv-body li { font-size: 18px; line-height: 28px; max-width: 68ch; }   /* no markers (user): each item is its own line of text */
+.priv-body li + li { margin-top: 8px; }
+.priv-body ul:last-child { margin-bottom: 0; }
+@media (max-width: 860px) {
+  .priv-title, .priv-body { grid-column: 1 / -1; }
+  .priv-title { font-size: 20px; line-height: 28px; margin-bottom: var(--stack); }
+  .priv-body p, .priv-body li { font-size: 16px; line-height: 24px; }
+  .priv-body h3 { font-size: 16px; line-height: 24px; }
+  .priv-sec .g { align-items: start; }
+}
 </style>
 <script>
 // Theme init — runs immediately before page renders
@@ -694,21 +716,6 @@ a.partner:hover .partner-go { opacity: 1; }
 </script>
 </head>
 <body>
-<script>
-// Sections that used to live on this page now have their own: an old link, from a bookmark, a post
-// or a search result, goes straight through rather than landing on a page that no longer has them.
-(() => {
-  const MOVED = { packages: 'dev.html#packages', mcp: 'dev.html#packages', components: 'dev.html#pkg-react', privacy: 'privacy.html' };
-  const go = () => {
-    const h = decodeURIComponent(location.hash.slice(1));
-    if (!h) return;
-    if (/^(mcp|pkg)-/.test(h)) return location.replace('dev.html#' + h);
-    if (MOVED[h]) location.replace(MOVED[h]);
-  };
-  go();
-  addEventListener('hashchange', go);
-})();
-</script>
 
 <header>
   <div class="logo-wrap">
@@ -722,7 +729,7 @@ a.partner:hover .partner-go { opacity: 1; }
         <button class="header-link support-btn" id="supportBtn" aria-haspopup="true" aria-expanded="false">Support Project</button>
       </div>
     <a class="header-link" href="https://www.figma.com/community/plugin/1675995752572535073/iconoteka" target="_blank" rel="noopener">Figma Plugin</a>
-    <a class="header-link" href="dev.html">Dev</a><a class="header-link current" href="about.html">About</a>
+    <a class="header-link" href="dev.html">Dev</a><a class="header-link" href="about.html">About</a>
   </nav>
   <!-- Mobile burger (same as the homepage) -->
   <button class="burger-btn" id="burgerBtn" aria-label="Menu">
@@ -740,184 +747,107 @@ a.partner:hover .partner-go { opacity: 1; }
     <div class="burger-ver"><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></div>
   </div>
 </header>
-<div class="hero-band">
-  <div class="wall" id="wall" aria-hidden="true"></div>
-</div>
 
 <main>
 
-<!-- headline -->
 <div class="row headline">
   <div class="g">
-    <h1 class="statement">Iconoteka is a universal, <span class="nobr">open-source</span> library of precisely designed pictograms.</h1>
-    <span class="ver"><span id="libVer" aria-label="Library version"></span><span class="no" aria-hidden="true">01</span></span>
+    <h1 class="statement">Privacy</h1>
+    <p class="priv-updated">Last updated 26 September 2026</p>
   </div>
 </div>
 
-<!-- weights: 14 cards, one per weight × style, drawn live from icons.json -->
-<div class="row weights">
+<section class="row priv-sec" id="responsible">
   <div class="g">
-    <div class="stat-block" data-reveal="manual">
-      <h2 class="huge"><span class="num" id="iconCount" data-target="1300" data-from="1250">1,300</span> Icons</h2>
-      <p>Iconoteka's extensive icon library supports a wide range of use cases, from rapid prototyping to real-world wayfinding systems.</p>
+    <h2 class="priv-title">Who Is Responsible</h2>
+    <div class="priv-body">
+      <p>Iconoteka is run by Oleg Turbaba, who decides what the site records and why. For questions, requests or complaints about your data, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>. The address reaches him directly.</p>
     </div>
-    <div class="stat-block" data-reveal="manual">
-      <h2 class="huge"><span class="num" data-target="7">7</span> Weights</h2>
-      <p>Icon portfolio covers all extremes, featuring seven distinct weights: Thin, Ultralight, Light, Regular, Medium, Semibold, and Bold. More than enough to meet any design need.</p>
-    </div>
-    <div class="stat-block" data-reveal="manual">
-      <h2 class="huge"><span class="num" data-target="2">2</span> Styles</h2>
-      <p>Stroke and fill styles work seamlessly together, allowing instant switches from lightweight outline icons to heavy filled variants across all seven weights.</p>
-    </div>
-    <div class="stat-block" data-reveal="manual">
-      <h2 class="huge"><span class="num" id="shapeCount" data-target="14970" data-from="13500">14,970</span> Shapes</h2>
-      <p>Combining a wide range of icons multiplied by 7 weights in both fill and stroke styles, Iconoteka offers a massive library to choose from. This enables complete coverage for almost any use case, whether for personal projects, UX/UI design, or software development.</p>
-    </div>
-    <div class="cards full" id="cards"></div>
   </div>
-</div>
+</section>
 
-<!-- license (left) + repository (right) -->
-<div class="row license" id="license">
+<section class="row priv-sec" id="privacy">
   <div class="g">
-    <div class="half-a">
-      <h3>License</h3>
-      <p>Iconoteka icon library is released under the MIT License. You're free to use them in personal and commercial projects, ship them in closed-source products, no permission needed and no fee. Crediting Iconoteka isn't required, though it's always appreciated.</p>
-      <div class="links">
-        <a class="ghost" href="https://github.com/iconoteka/iconoteka/blob/main/LICENSE" target="_blank" rel="noopener">Read the License</a>
-      </div>
-    </div>
-    <div class="half-b">
-      <h3>Repository</h3>
-      <p>Available directly on GitHub, the repository provides open access to the complete vector source files and updates. This allows developers and designers to easily integrate the icon system, track changelogs, or contribute to its ongoing development.</p>
-      <div class="links">
-        <a class="ghost" href="https://github.com/iconoteka/iconoteka" target="_blank" rel="noopener">GitHub Repository</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- facts -->
-<div class="row" id="features">
-  <div class="g">
-    <p class="label full">Features<span class="no" aria-hidden="true">02</span></p>
-    <div class="facts">
-      <div data-icon="circle"><h3>Universality</h3><p>Built around geometric principles and high visual clarity, Iconoteka integrates effortlessly into varied digital environments. Its universal design language preserves legibility across products and industries that require high contrast and structural consistency.</p></div>
-      <div data-icon="eye"><h3>Advanced Optics</h3><p>Advanced optical compensation is applied throughout Iconoteka. Principles such as deliberate overshoots, density-based weight modularity, and optical stroke compensations give the system its refined execution and set it apart from conventional icon sets.</p></div>
-      <div data-icon="doc_code"><h3>Dev Packages</h3><p>An MCP server puts the library inside Claude, Cursor, VS Code and Codex, so an assistant can search it and place icons for you. Components for React, Vue and Svelte are on npm, all under the MIT license. <a href="dev.html">See the packages</a>.</p></div>
-      <div data-icon="bar_chart"><h3>Analytics</h3><p>To improve the quality of the library, Iconoteka products collect a small set of anonymous signals: activated icons, searches that return no results, icon requests, and the interface theme. This information helps clarify usage patterns, detect coverage gaps, and continuously refine the system.</p></div>
-      <div data-icon="user"><h3>Design Approach</h3><p>Iconoteka is built upon years of multidisciplinary practice across graphic design, iconography, and typeface design. The result is an adaptable, highly organized icon system crafted with meticulous attention to optical balance and long-term utility.</p></div>
-      <div data-icon="cube"><h3>System Architecture</h3><p>Through a structured metaphor hierarchy, 5° geometric angle rule, tiered corner rounding, and modular component architecture, Iconoteka guarantees complete structural consistency. This rigor yields a scalable, adaptable library for large-scale production.</p></div>
+    <h2 class="priv-title">What Is Recorded</h2>
+    <div class="priv-body">
+      <h3>When you browse</h3>
+      <ul>
+        <li>The pages you open, the site you arrived from, your country, and your browser and device type</li>
+        <li>Counted by Google Analytics with a cookie, only after you accept. Decline and it never loads</li>
+      </ul>
+      <h3>When you use the library</h3>
+      <ul>
+        <li>Which icons are copied or downloaded, which searches come up empty, and which icons people request</li>
+        <li>Your browser's user-agent string, sent with them</li>
+        <li>Logged without a cookie. This is what tells the library which icons are missing</li>
+      </ul>
+      <h3>On your device</h3>
+      <ul>
+        <li>Your light or dark theme, and your answer to the cookie banner, kept in your browser's own storage</li>
+        <li>Neither leaves your device</li>
+      </ul>
+      <p>That is the whole list. The site has no accounts, no advertising and no tracking across other sites, and it never asks for your name, address or payment details.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- author -->
-<div class="row author" id="author">
+<section class="row priv-sec" id="basis">
   <div class="g">
-    <p class="label full">Author<span class="no" aria-hidden="true">03</span></p>
-    <div class="photo half-a" id="authorPhoto"><img src="media/iconoteka-author-oleg-turbaba.jpg" alt="Oleg Turbaba" width="800" height="600" loading="lazy" decoding="async"></div>
-    <div class="half-b">
-      <p class="bio">Oleg Turbaba is a multidisciplinary designer specializing in the intersection of brand identity, digital products, and visual experiences. Brand Design Director at <a class="handle nobr" href="https://clay.global" target="_blank" rel="noopener">Clay Global</a> and author of Iconoteka.</p>
-      <p class="author-contact">For enquiries, collaborations, interviews, or sponsorships, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
-      <div class="links author-links">
-        <a class="ghost" href="https://www.instagram.com/turbaba/" target="_blank" rel="noopener">Instagram</a>
-        <a class="ghost" href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="ghost" href="https://www.behance.net/turbaba" target="_blank" rel="noopener">Behance</a>
-        <a class="ghost site" href="https://turbaba.com" target="_blank" rel="noopener">turbaba.com</a>
-      </div>
+    <h2 class="priv-title">Why, and on What Basis</h2>
+    <div class="priv-body">
+      <ul class="priv-defs">
+        <li><strong>Consent.</strong> Analytics runs only on your consent, which you can <a class="handle" href="#privacy" data-consent-reopen>change at any time</a>.</li>
+        <li><strong>Legitimate interest.</strong> The usage log holds no identifiers, and without it there is no way to tell which icons the library still lacks.</li>
+      </ul>
     </div>
   </div>
-</div>
+</section>
 
-<!-- partners: three equal cards, each in its own brand colour, with three columns left free -->
-<div class="row partners" id="partners">
+<section class="row priv-sec" id="third-parties">
   <div class="g">
-    <p class="label full">Partners<span class="no" aria-hidden="true">04</span></p>
-    <div class="partners-cards">
-      <a class="partner" href="https://clay.global/" target="_blank" rel="noopener" style="background: #1e39c9; color: #ffffff;">
-        <span class="partner-mark"><svg class="logo-clay" aria-hidden="true" viewBox="0 0 320 125" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M235.365 68.2C235.365 71.2 234.665 74.0001 233.367 76.6001C231.968 79.2001 230.07 81.1001 227.672 82.7001C225.275 84.1001 222.378 84.8 219.281 84.8C215.984 84.8 213.287 83.9001 211.189 82.2001C209.091 80.5 207.892 78.2 207.892 75.4C207.892 72.1 209.291 69.7 211.988 68C214.685 66.3 218.482 65.4 223.576 65.4H235.365V68.2ZM236.364 32.6001C232.567 30.8001 227.972 29.8 222.777 29.8C217.982 29.8 213.686 30.7 209.89 32.4C206.094 34.1 202.897 36.5001 200.499 39.6001C198.202 42.7001 196.803 46.6001 196.404 51.1001H209.291C209.69 48.0001 210.989 45.6001 213.287 43.6001C215.584 41.8001 218.681 40.9 222.677 40.9C226.673 40.9 229.77 41.9 232.068 44C234.366 46 235.465 48.7 235.465 51.9V57.3H221.379C213.187 57.3 206.793 59 202.198 62.4C197.502 65.8 195.205 70.5 195.205 76.5C195.205 79.9 196.104 83 197.602 85.9C199.301 88.7 201.698 91.0001 204.795 92.7001C207.892 94.3001 211.588 95.1001 215.984 95.1001C220.38 95.1001 224.176 94.1 227.473 92C230.869 90 233.467 87.3 235.265 83.9V93.7001H248.052V52C248.052 47.6 247.053 43.8 245.055 40.5C243.257 37 240.26 34.5001 236.364 32.6001ZM306.493 31.8L288.212 78.4L269.73 31.8H256.444L281.518 93.3L271.828 116.9H285.315L319.78 31.9H306.493V31.8ZM118.981 44C121.578 42 124.775 41 128.372 41C132.368 41 135.465 42.1 138.062 44.4C140.46 46.7 142.158 49.7 142.857 53.2H156.144C155.544 48.5 154.046 44.4 151.449 40.8C149.051 37.4 145.754 34.7 141.758 32.7C137.762 30.7 133.267 29.7 128.272 29.7C122.178 29.7 116.683 31.1 112.088 34C107.393 36.8 103.696 40.8 101.199 45.9C98.6014 50.9 97.4026 56.5 97.4026 62.8C97.4026 69 98.7013 74.7001 101.199 79.7001C103.896 84.5001 107.393 88.4001 112.088 91.2001C116.783 94.0001 122.278 95.5 128.372 95.5C133.467 95.5 138.062 94.5001 141.958 92.7001C145.954 90.7001 149.051 88.0001 151.449 84.6001C153.846 81.2001 155.445 77.2 155.944 72.8H142.757C141.858 76.2 140.16 78.9 137.662 81C135.265 83.1 131.968 84.1001 128.172 84.1001C124.675 84.1001 121.379 83.1 118.781 81.3C116.084 79.5 114.086 76.9001 112.687 73.6001C111.289 70.3001 110.589 66.8 110.589 62.7C110.589 58.7 111.289 55 112.687 51.8C114.086 48.6 116.284 46 118.981 44ZM168.631 93.7001H181.718V5.09998H168.631V93.7001ZM0 62.1001C0 96.9001 27.3726 124.3 62.1379 124.3V0C27.3726 0 0 27.4001 0 62.1001Z" fill="currentColor"/> </svg></span>
-        <h4>Clay Global</h4>
-        <p>A global branding and UX design agency, creating digital products, websites, design systems and brand identities.</p>
-        <span class="partner-go">clay.global</span>
-      </a>
-      <a class="partner" href="https://d1s1.com/" target="_blank" rel="noopener" style="background: #41b1e7; color: #141414;">
-        <span class="partner-mark"><svg class="logo-d1s1" aria-hidden="true" viewBox="13.2 69.0 213.6 102.6" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M226.667 169.689H216.639V91.9743C214.335 94.6845 211.241 97.4625 207.356 100.308C203.472 103.109 199.903 105.232 196.651 106.677V94.8878C202.162 91.7259 207.018 87.8639 211.219 83.3017C215.464 78.7395 218.446 74.2903 220.162 69.954H226.667V169.689Z" fill="currentColor"/> <path d="M126.706 137.777L136.87 136.693C137.412 142.158 138.631 146.427 140.528 149.498C142.471 152.525 145.226 154.964 148.795 156.816C152.363 158.668 156.383 159.594 160.855 159.594C167.269 159.594 172.238 158.035 175.761 154.919C179.329 151.757 181.114 147.669 181.114 142.655C181.114 139.719 180.459 137.167 179.149 134.999C177.884 132.785 175.942 130.979 173.322 129.578C170.747 128.178 165.146 126.213 156.519 123.684C148.84 121.425 143.374 119.144 140.122 116.84C136.87 114.537 134.34 111.623 132.533 108.1C130.727 104.532 129.823 100.511 129.823 96.0396C129.823 87.9994 132.42 81.4271 137.615 76.3229C142.81 71.2187 149.811 68.6666 158.619 68.6666C164.672 68.6666 169.957 69.8636 174.474 72.2576C179.036 74.6517 182.559 78.0846 185.043 82.5564C187.573 87.0282 188.928 92.2905 189.109 98.3433L178.742 99.2919C178.2 92.8326 176.258 88.0446 172.915 84.9278C169.618 81.8111 164.965 80.2527 158.958 80.2527C152.86 80.2527 148.207 81.6304 145 84.3858C141.793 87.096 140.19 90.6192 140.19 94.9556C140.19 98.9757 141.364 102.092 143.713 104.306C146.062 106.519 151.347 108.755 159.568 111.013C167.608 113.227 173.254 115.147 176.506 116.773C181.475 119.302 185.224 122.645 187.754 126.8C190.283 130.911 191.548 135.834 191.548 141.571C191.548 147.262 190.215 152.457 187.55 157.155C184.885 161.807 181.249 165.353 176.642 167.792C172.08 170.231 166.569 171.451 160.11 171.451C150.037 171.451 141.996 168.425 135.989 162.372C130.026 156.319 126.932 148.121 126.706 137.777Z" fill="currentColor"/> <path d="M115.917 169.689H105.889V91.9743C103.586 94.6845 100.491 97.4625 96.6069 100.308C92.7222 103.109 89.1538 105.232 85.9016 106.677V94.8878C91.4123 91.7259 96.2681 87.8639 100.469 83.3017C104.715 78.7395 107.696 74.2903 109.413 69.954H115.917V169.689Z" fill="currentColor"/> <path d="M13.3333 169.689V70.3606H41.4517C48.4078 70.3606 53.6927 70.9704 57.3063 72.19C62.0492 73.7709 66.1596 76.6618 69.6377 80.8626C73.1158 85.0634 75.826 90.3709 77.7683 96.785C79.7106 103.154 80.6818 110.72 80.6818 119.483C80.6818 130.73 79.0331 140.284 75.7357 148.143C72.4383 155.958 68.1923 161.514 62.9977 164.811C57.8484 168.063 51.0955 169.689 42.739 169.689H13.3333ZM24.1064 157.968H41.4517C48.453 157.968 53.7605 156.839 57.3741 154.58C60.9877 152.276 63.7656 148.595 65.7079 143.536C68.2826 136.806 69.57 128.743 69.57 119.347C69.57 109.275 68.1923 101.37 65.4369 95.6332C62.7267 89.8514 59.2261 85.9894 54.9349 84.0471C52.044 82.7372 47.4593 82.0822 41.1806 82.0822H24.1064V157.968Z" fill="currentColor"/> </svg></span>
-        <h4>Design Spotlight</h4>
-        <p>A design research library: the work, studio, client and context behind an idea, across 22,000 curated cases.</p>
-        <span class="partner-go">d1s1.com</span>
-      </a>
-      <div class="partner open">
-        <span class="partner-mark" aria-hidden="true"></span>
-        <h4>Become a Partner</h4>
-        <p>Iconoteka is open to sponsorship, partnership and collaborations.</p>
-        <span class="partner-go"><a class="handle nobr" href="mailto:olegturbaba@gmail.com">Get in touch</a></span>
-      </div>
+    <h2 class="priv-title">Who Else Is Involved</h2>
+    <div class="priv-body">
+      <ul class="priv-defs">
+        <li><strong>Google Analytics</strong> (Google LLC) counts visits and processes the usage log, on servers in the United States, under Google's standard contractual clauses.</li>
+        <li><strong>GitHub Pages</strong> serves the site and keeps its own short-lived server logs.</li>
+        <li><strong>Dropbox</strong> hosts the press kit, so downloading it is a visit to Dropbox under their terms.</li>
+      </ul>
+      <p>Fonts and icons are served from this site itself. The Figma plugin records the same anonymous usage signals as the site. The npm packages and the MCP server run on your own machine and send nothing anywhere.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- support: the Support Project menu's content as a page section, shareable at #support -->
-<div class="row support" id="support">
+<section class="row priv-sec" id="retention">
   <div class="g">
-    <h3 class="support-title">Support Project</h3>
-    <p class="support-lead" id="supportLead"></p>
-    <div class="support-cards full" id="supportCards"></div>
-  </div>
-</div>
-
-<!-- in use: 16:9 slides of Iconoteka in the wild, shuffled on every load -->
-<div class="row inuse">
-  <div class="g">
-    <div class="slider full" id="gallery"></div>
-    <p class="inuse-text">Share your work, mention <a class="handle" href="https://www.instagram.com/iconoteka/" target="_blank" rel="noopener">@iconoteka</a> on LinkedIn, X, or Instagram when presenting your projects.</p>
-    <div class="slider-nav">
-      <button type="button" id="slideFull" aria-label="View full screen"></button>
-      <button type="button" id="slidePrev" aria-label="Previous"></button>
-      <button type="button" id="slideNext" aria-label="Next"></button>
+    <h2 class="priv-title">How Long It Is Kept</h2>
+    <div class="priv-body">
+      <ul class="priv-defs">
+        <li><strong>Analytics</strong> is kept for 14 months.</li>
+        <li><strong>The usage log</strong> is kept as long as it is useful for deciding what to draw next.</li>
+        <li><strong>Your theme and banner answer</strong> stay in your browser until you clear them.</li>
+      </ul>
     </div>
   </div>
-</div>
+</section>
 
-<!-- timeline -->
-<div class="row" id="timeline">
+<section class="row priv-sec" id="rights">
   <div class="g">
-    <p class="label full">Project Timeline<span class="no" aria-hidden="true">05</span></p>
-    <ol class="tl">
-      <li><time><span class="m-long">21 September 2026</span><span class="m-short">21 Sep 2026</span></time><b>v<span class="v">2.0.1</span></b><span class="n">1,300 icons</span><span class="w">7 weights, 2 styles</span><span class="d"><strong>Version 2 release.</strong> Fully reworked icon library, 7 weights in 2 styles, MIT license, GitHub repository, new website, Figma plugin, npm packages and an MCP server.</span></li>
-      <li><time><span class="m-long">26 August 2026</span><span class="m-short">26 Aug 2026</span></time><b></b><span class="n">1,298 icons</span><span class="w">7 weights, 2 styles</span><span class="d">Every icon redrawn from scratch as clean vectors: seven weights, stroke and fill.</span></li>
-      <li><time><span class="m-long">15 March 2021</span><span class="m-short">15 Mar 2021</span></time><b>v<span class="v">1.0.2</span></b><span class="n">1,040 icons</span><span class="w">4 weights, 2 styles</span><span class="d">Updated icons.</span></li>
-      <li><time><span class="m-long">17 June 2019</span><span class="m-short">17 Jun 2019</span></time><b>v<span class="v">1.0.1</span></b><span class="n">388 icons</span><span class="w">4 weights, 2 styles</span><span class="d">iconoteka.com launched.</span></li>
-      <li><time><span class="m-long">14 June 2019</span><span class="m-short">14 Jun 2019</span></time><b></b><span class="n">388 icons</span><span class="w">4 weights, 2 styles</span><span class="d">Public beta released.</span></li>
-      <li><time><span class="m-long">9 March 2019</span><span class="m-short">9 Mar 2019</span></time><b>v<span class="v">1.0.0</span></b><span class="n">237 icons</span><span class="w">4 weights, 2 styles</span><span class="d">8 styles, global rework, revisions, Figures and Organizations categories added.</span></li>
-      <li><time><span class="m-long">28 July 2018</span><span class="m-short">28 Jul 2018</span></time><b>v<span class="v">0.2.0</span></b><span class="n">716 icons</span><span class="w">4 weights, 2 styles</span><span class="d">Bold stroke and fill, rework.</span></li>
-      <li><time><span class="m-long">3 June 2018</span><span class="m-short">3 Jun 2018</span></time><b>v<span class="v">0.1.4</span></b><span class="n">715 icons</span><span class="w">4 weights, 2 styles</span><span class="d">Bold stroke and fill styles.</span></li>
-      <li><time><span class="m-long">24 April 2018</span><span class="m-short">24 Apr 2018</span></time><b>v<span class="v">0.1.3</span></b><span class="n">309 icons</span><span class="w">2 weights</span><span class="d">New categories added.</span></li>
-      <li><time><span class="m-long">4 March 2018</span><span class="m-short">4 Mar 2018</span></time><b>v<span class="v">0.1.2</span></b><span class="n">227 icons</span><span class="w">2 weights</span><span class="d">All icons categorised.</span></li>
-      <li><time><span class="m-long">3 March 2018</span><span class="m-short">3 Mar 2018</span></time><b>v<span class="v">0.1.1</span></b><span class="n">226 icons</span><span class="w">2 weights</span><span class="d">First public version.</span></li>
-      <li><time><span class="m-long">20 September 2017</span><span class="m-short">20 Sep 2017</span></time><b></b><span class="n">13 icons</span><span class="w"></span><span class="d">Started the project.</span></li>
-      <li><time><span class="m-long">24 May 2016</span><span class="m-short">24 May 2016</span></time><b></b><span class="n">3 icons</span><span class="w"></span><span class="d">Idea was born.</span></li>
-    </ol>
-  </div>
-</div>
-
-<!-- request: full width, above the footer -->
-<div class="row request">
-  <div class="g">
-    <div class="request-box">
-      <h3>Request an Icon</h3>
-      <div class="request-body">
-        <p>If you haven’t found what you were looking for or need a specific icon for your project, enter the icon name below. It goes into the production queue.</p>
-        <form id="requestForm" autocomplete="off">
-          <input type="text" id="requestInput" placeholder="Icon name" aria-label="Icon name" maxlength="80"/>
-          <button class="primary" type="submit" id="requestBtn">Request</button>
-        </form>
-      </div>
+    <h2 class="priv-title">Your Rights</h2>
+    <div class="priv-body">
+      <p>You can ask what is held about you, have it deleted, object to it being collected, or complain to your data protection authority. Because none of it is tied to a name or an account, a request usually comes down to a date and a rough description of what you did.</p>
+      <p>For any of that, <a class="handle nobr" href="mailto:olegturbaba@gmail.com">get in touch</a>.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- privacy: what the site records and how to change the cookie choice, shareable at #privacy -->
+<section class="row priv-sec" id="changes">
+  <div class="g">
+    <h2 class="priv-title">Changes</h2>
+    <div class="priv-body">
+      <p>When this page changes, the date at the top changes with it, and anything significant is explained here.</p>
+    </div>
+  </div>
+</section>
 
 </main>
 

@@ -38,7 +38,7 @@
     if (!styled) { const style = document.createElement('style'); style.textContent = css; document.head.appendChild(style); styled = true; }
     box = document.createElement('div');
     box.className = 'consent'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Cookies');
-    box.innerHTML = '<div class="consent-text"><strong>Iconoteka uses cookies</strong><p>Google Analytics counts visits: the pages you open, the site you came from, your country and browser. Icon downloads and empty searches are counted separately, without cookies. <a href="/about.html#privacy">Learn more</a></p></div>'
+    box.innerHTML = '<div class="consent-text"><strong>Iconoteka uses cookies</strong><p>Google Analytics counts visits: the pages you open, the site you came from, your country and browser. Icon downloads and empty searches are counted separately, without cookies. <a href="/privacy.html">Learn more</a></p></div>'
       + '<div class="consent-row"><button type="button" class="no">Decline</button><button type="button" class="yes">Accept</button></div>';
     document.body.appendChild(box);
     sit();
@@ -46,7 +46,8 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(sit);
     addEventListener('resize', sit);
 
-    const close = choice => { set(choice); tell(choice); removeEventListener('resize', sit); box.remove(); box = null; };
+    const close = choice => { set(choice); tell(choice); removeEventListener('resize', sit); box.remove(); box = null;
+      dispatchEvent(new CustomEvent('consent-answered', { detail: choice })); };   // the homepage holds its promo card until now
     box.querySelector('.yes').addEventListener('click', () => close('granted'));
     box.querySelector('.no').addEventListener('click', () => close('denied'));
   }
@@ -75,5 +76,23 @@
     show();
   });
 
+  window.consentPending = () => !!box;   // lets a page ask whether the banner is on screen
   if (!saved) show();
+})();
+
+// A footer link to the page you are already on is not a link: it stays in place, dimmed, so the
+// footer still reads as a full map of the site while never offering to reload what is on screen.
+(() => {
+  const norm = p => p.replace(/index\.html$/, '').replace(/\/$/, '');
+  const here = norm(location.pathname);
+  document.querySelectorAll('footer a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+    if (!href || /^(https?:|mailto:|tel:|#)/.test(href) || href.includes('#')) return;   // a link to a section still scrolls there
+    let path;
+    try { path = norm(new URL(href, location.href).pathname); } catch (e) { return; }
+    if (path !== here) return;
+    a.classList.add('is-here');
+    a.setAttribute('aria-current', 'page');
+    a.removeAttribute('href');           // not focusable, not clickable, still readable
+  });
 })();

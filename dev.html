@@ -1306,6 +1306,20 @@ const LABELS  = ['Thin','Ultralight','Light','Regular','Medium','Semibold','Bold
 const SAMPLE = 'arrow_in_circle_up_right';
 fetch('icons.json').then(r => r.json()).then(data => {   // no cache-buster: Pages serves max-age=600 + ETag, so repeat visits get a 304 instead of the 8 MB file again
   const icons = data.icons || [];
+  // The footer icon first: every page with this footer draws it, and the About-only steps below (version line,
+  // counters, hero wall) throw on pages without that markup, which used to leave Dev, Privacy and 404 without it.
+  (() => {
+    const fi = document.getElementById('footerIcon'); if (!fi) return;
+    const fillOf = ic => { const v = ic.variants && ic.variants.regular && ic.variants.regular.fill; return typeof v === 'string' ? v : (v && (v.d || v.path)) || ''; };
+    const pool = icons.filter(fillOf); if (!pool.length) return;
+    const pickOne = () => pool[Math.floor(Math.random() * pool.length)];
+    let current = pickOne();
+    fi.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + fillOf(current) + '"/></svg>';
+    const swap = () => { let ic = pickOne(), g = 0; while (ic === current && g++ < 8) ic = pickOne(); current = ic; fi.querySelector('path').setAttribute('d', fillOf(ic)); };
+    fi.addEventListener('mouseenter', () => { if (!matchMedia('(max-width: 480px)').matches) swap(); });   // hover: a new icon, and it stays
+    fi.addEventListener('click', () => { if (matchMedia('(max-width: 480px)').matches) swap(); });          // phone: a new icon on tap
+    fi.dataset.done = '1';
+  })();
   const ver = data.meta && data.meta.version ? 'v' + data.meta.version.split('.').map(x => String(+x)).join('.') : '';   // 02.00.05 → v2.0.5, the timeline's form
   if (ver) document.getElementById('libVer').textContent = ver;
   const bv = document.querySelector('.burger-ver'); if (bv) bv.innerHTML = '<span><span class="ver-num">' + ver + '</span><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a></span>';   // the burger's footer line, as on the homepage
@@ -1533,9 +1547,9 @@ fetch('icons.json').then(r => r.json()).then(data => {   // no cache-buster: Pag
   });
   // footer: one random icon in the FILL style (regular), top-left of the footer
   const fi = document.getElementById('footerIcon'), fIcon = pick(icons.filter(i => pathOf(i, 'regular', 'fill')));
-  if (fi && fIcon) fi.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + pathOf(fIcon, 'regular', 'fill') + '"/></svg>';   // no title: a tooltip would pop up mid-hover
+  if (fi && fIcon && !fi.dataset.done) fi.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + pathOf(fIcon, 'regular', 'fill') + '"/></svg>';   // no title: a tooltip would pop up mid-hover
   // hover: swap to another random fill icon and KEEP it (no return to the load icon — user)
-  if (fi && fIcon) {
+  if (fi && fIcon && !fi.dataset.done) {
     const fillPool = icons.filter(i => pathOf(i, 'regular', 'fill')); let current = fIcon;
     fi.addEventListener('mouseenter', () => {
       if (window.matchMedia('(max-width: 480px)').matches) return;   // the phone uses the tap below (touch fires mouseenter first)

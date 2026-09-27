@@ -679,6 +679,7 @@ footer button.copied { color: var(--brand); }
 .asset-zoom:hover { background: var(--text); color: var(--bg); }   /* it is a control, so it answers the pointer */
 .asset:hover .asset-zoom, .asset-zoom:focus-visible { opacity: 1; }
 @media (hover: none) { .asset-zoom { opacity: 1; } }   /* no hover to reveal it on a phone */
+@media (max-width: 860px) { .asset-zoom { display: none; } }   /* no full view on mobile (user): a tap on the picture downloads it, as before */
 
 /* the overlay: the asset at its own size on a black field */
 .big { position: fixed; inset: 0; z-index: 3000; background: #000; display: flex; align-items: center; justify-content: center; }
@@ -1452,7 +1453,7 @@ if (matchMedia(RICH).matches) {
     addEventListener('keydown', onKey);
   };
   tiles.forEach(tile => {
-    tile.querySelector('.asset-zoom').addEventListener('click', e => open(tile, e));
+    tile.querySelector('.asset-zoom').addEventListener('click', e => { if (matchMedia('(max-width: 860px)').matches) return; open(tile, e); });
   });
 })();
 

@@ -226,7 +226,7 @@ main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--
 /* BETA badge shown again (user 2026-09-06) */
 
 /* TOAST */
-#toast { position: fixed; bottom: 20px; top: auto; left: 50%; transform: translateX(-50%); background: var(--brand); color: #141414; font-size: 12px; font-weight: 400; font-family: 'Inter', sans-serif; padding: 4px 14px; border-radius: var(--r-pill); pointer-events: none; opacity: 0; transition: opacity var(--t-slow); z-index: 2000; white-space: nowrap; width: auto; max-width: 400px; }
+#toast { position: fixed; bottom: 20px; top: auto; left: 50%; transform: translateX(-50%); background: var(--brand); color: #141414; font-size: 12px; font-weight: 400; font-family: 'Inter', sans-serif; padding: 4px 14px; border-radius: var(--r-pill); pointer-events: none; opacity: 0; transition: opacity var(--t-slow); z-index: 2000; white-space: nowrap; width: auto; max-width: calc(100vw - 32px); }
 #toast.visible { opacity: 1; transition: opacity var(--t-base); }
 
 @media (max-width: 480px) {
@@ -308,9 +308,10 @@ main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--
   #panel .actions-list > *:nth-child(3) .size-combobox { width: 40px; }
   #panel .actions-list > .copy-row      { grid-column: 2 / span 2; grid-row: 2; margin: 0;
                                           justify-content: flex-end; } /* Copy code, flush right */
-  .panel-sheet-close { position: absolute; top: 10px; right: 10px; z-index: 2; width: 32px; height: 32px;
-    display: flex; align-items: center; justify-content: center; background: var(--bg); border: 1px solid var(--border);
-    border-radius: var(--r-pill); color: var(--text); font-size: 15px; line-height: 1; cursor: pointer; }
+  .panel-sheet-close { position: absolute; top: 10px; right: 10px; z-index: 2; width: 40px; height: 40px; padding: 0;
+    display: flex; align-items: center; justify-content: center; background: none; border: none;
+    color: var(--text); font-size: 22px; line-height: 1; cursor: pointer; }   /* no ring, a bigger cross (user) */
+  .panel-sheet-close svg { width: 28px; height: 28px; fill: currentColor; display: block; }   /* the library's own cross, Regular */
 }
 @media (min-width: 861px) { .panel-sheet-close { display: none; } }
 .logo-wrap { position: relative; top: -1px; } /* whole logo group 1px up, every breakpoint */
@@ -1033,6 +1034,11 @@ async function loadIcons() {
     initLogomark();
     initFooterIcon();
     buildPromo();
+    { // the sheet's close button draws the library's cross instead of the ✕ character
+      const cb = document.getElementById('panelSheetClose'), cr = iconsData.find(i => i.name.split('-')[0] === 'cross');
+      const cv = cr && cr.variants && cr.variants.regular, cd = cv && (cv.stroke || cv.fill);
+      if (cb && cd) cb.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + cd + '"/></svg>';
+    }
     // Track session theme
     const sessionTheme = document.documentElement.getAttribute('data-theme') || 'light';
     sendAnalytics({ type: 'theme', theme: sessionTheme, action: 'session_start' });
@@ -1422,11 +1428,16 @@ function showToast(msg) {
   el.textContent = msg;
   // On the phone the confirmation sits just above the open sheet, beside the button that was
   // tapped. It used to appear under the toolbar at the top of the grid, far from the action.
+  // Measured from the sheet's own top edge with `top`, not from innerHeight with `bottom`: on the iPhone,
+  // innerHeight and the box a fixed element is placed in drift apart as Safari's toolbar shows and hides,
+  // and the chip landed behind the sheet or off screen (user: no chip on iPhone). A rect and a fixed `top`
+  // share one coordinate space, so this holds whatever the toolbar does.
   if (window.matchMedia('(max-width: 480px)').matches) {
     const p = document.getElementById('panel');
-    const sheet = p ? Math.max(0, Math.round(window.innerHeight - p.getBoundingClientRect().top)) : 0;
-    el.style.top = 'auto';
-    el.style.bottom = (sheet + 12) + 'px';
+    const top = p ? p.getBoundingClientRect().top : 0;
+    el.style.bottom = 'auto';
+    if (p && p.classList.contains('sheet-open') && top > 80) el.style.top = Math.round(top - el.offsetHeight - 12) + 'px';
+    else el.style.top = '';   // no sheet up: the CSS default, under the toolbar
   } else { el.style.top = ''; el.style.bottom = ''; }
   el.classList.add('visible');
   clearTimeout(toastTimer);

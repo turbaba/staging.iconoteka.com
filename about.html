@@ -367,7 +367,8 @@ h3 { font-size: 19px; line-height: 28px; font-weight: 600; letter-spacing: -.01e
 .lightbox button:hover:not(:disabled) { background: color-mix(in srgb, var(--bg) 80%, transparent); }
 .lightbox button svg { width: 26px; height: 26px; fill: currentColor; display: block; }
 .lightbox button:disabled { opacity: .25; cursor: default; }
-.lightbox.idle .lb-top { opacity: 0; pointer-events: none; }   /* a second without the mouse moving and the controls step out of the picture (user) */
+.lightbox.idle .lb-top { opacity: 0; pointer-events: none; }
+.lightbox.native-fs .lb-close { display: none; }   /* iPad full screen has Safari's own close button */   /* a second without the mouse moving and the controls step out of the picture (user) */
 .lightbox.idle .lb-half { cursor: none !important; }   /* !important because the arrow cursor is set inline from JS, and an inline style would otherwise win */
 .lightbox button:hover { background: rgba(255,255,255,.24); }
 .lightbox button svg { width: 26px; height: 26px; fill: currentColor; display: block; }
@@ -1810,7 +1811,12 @@ if (document.getElementById('gallery')) {
     fsEnter(box);      // a plain overlay if the browser refuses
   };
   btn.addEventListener('click', () => open(slideIndex()));
-  const onFs = () => { if (!fsEl() && box) shut(); };
+  // In real full screen on a touch device (iPad) Safari draws its own close button, and ours made two:
+  // hide ours then; leaving full screen still closes the view (user).
+  const onFs = () => {
+    if (!fsEl() && box) return shut();
+    if (box) box.classList.toggle('native-fs', !!fsEl() && matchMedia('(hover: none)').matches);
+  };
   document.addEventListener('fullscreenchange', onFs);
   document.addEventListener('webkitfullscreenchange', onFs);
 

@@ -1706,6 +1706,10 @@ if (document.getElementById('gallery')) {
 (() => {
   const btn = document.getElementById('slideFull');
   if (!btn) return;
+  // iPad Safari before 16.4 only has the webkit-prefixed Fullscreen API: use whichever the browser has
+  const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement || null;
+  const fsEnter = el => { const f = el.requestFullscreen || el.webkitRequestFullscreen; if (!f) return; try { const r = f.call(el); if (r && r.catch) r.catch(() => {}); } catch (e) {} };
+  const fsExit = () => { const f = document.exitFullscreen || document.webkitExitFullscreen; if (!f) return; try { const r = f.call(document); if (r && r.catch) r.catch(() => {}); } catch (e) {} };
   const STEP = 4000;   // how long a slide holds while playing
   let box = null, stage = null, playBtn = null, at = 0, timer = null, idle = null;
 
@@ -1719,7 +1723,7 @@ if (document.getElementById('gallery')) {
     if (!box) return;
     const b = box; box = null;
     stop(); clearTimeout(idle);
-    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    if (fsEl()) fsExit();
     b.remove();
     removeEventListener('keydown', onKey);
     warm(at);
@@ -1786,7 +1790,7 @@ if (document.getElementById('gallery')) {
     const right = document.createElement('div'); right.className = 'lb-half r';
     // A link opens the overlay without a click, and no browser will go truly full screen without one,
     // so the first click inside asks again -- by then the visitor has gestured (see the hash handler below).
-    const turn = step => { stir(); stop(); show(at + step); if (box && !document.fullscreenElement && box.requestFullscreen) box.requestFullscreen().catch(() => {}); };
+    const turn = step => { stir(); stop(); show(at + step); if (box && !fsEl()) fsEnter(box); };
     left.addEventListener('click', () => turn(-1));
     right.addEventListener('click', () => turn(1));
 
@@ -1802,11 +1806,14 @@ if (document.getElementById('gallery')) {
     show(i);
     addEventListener('keydown', onKey);
     box.addEventListener('mousemove', stir);
+    box.addEventListener('pointerdown', stir);   // a finger never moves a mouse: on an iPad a tap brings the controls back
     stir();
-    if (box.requestFullscreen) box.requestFullscreen().catch(() => {});      // a plain overlay if the browser refuses
+    fsEnter(box);      // a plain overlay if the browser refuses
   };
   btn.addEventListener('click', () => open(slideIndex()));
-  document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && box) shut(); });
+  const onFs = () => { if (!fsEl() && box) shut(); };
+  document.addEventListener('fullscreenchange', onFs);
+  document.addEventListener('webkitfullscreenchange', onFs);
 
   // about.html#gallery-full opens the full screen view, and #gallery-full=automation opens it on that slide.
   // The name is whatever follows iconoteka-gallery- in the file, so a link survives the shuffle the strip does on load.

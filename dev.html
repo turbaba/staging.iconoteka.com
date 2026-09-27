@@ -1164,8 +1164,6 @@ if (statBlock) new IntersectionObserver((entries, obs) => { if (entries.some(e =
     navigator.clipboard.writeText(b.dataset.copy).then(() => {
       b.classList.add('copied');
       setTimeout(() => b.classList.remove('copied'), 1600);
-      // on a phone the small checkmark is easy to miss: the pink chip confirms it too (user)
-      if (matchMedia('(max-width: 860px), (hover: none)').matches && typeof showToast === 'function') showToast('Copied');
     }).catch(() => { if (typeof showToast === 'function') showToast('Copy failed'); });
   });
 

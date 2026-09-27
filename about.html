@@ -1698,7 +1698,6 @@ if (document.getElementById('gallery')) {
     if (i < 0 || i === slideIndex()) return;                            // the slide in view keeps its own clicks (video play/pause)
     e.preventDefault(); e.stopPropagation(); warm(i); goTo(i);
   }, true);
-}
 
 // Full screen: the slide in view opens on a black field, the browser's own full screen if it will have it.
 // It loops, crossfades, turns the page when either half of the screen is clicked, and can play itself.
@@ -1831,6 +1830,7 @@ if (document.getElementById('gallery')) {
   addEventListener('hashchange', fromHash);
   addEventListener('load', fromHash);   // after the slides exist
 })();
+}   // end of the gallery block: the full screen view reads slideIndex, slots and warm, so it must live inside it
 
 // Request an icon — same endpoint the library uses for requests
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbypc8jSM4yoJzqBXbdo05pxNupgwz7h4k8ypMtaIFGeCpUvm0tUlAWVy7qIOkdwtGm-sA/exec';

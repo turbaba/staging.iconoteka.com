@@ -410,6 +410,23 @@ button.primary:disabled { cursor: default; opacity: 1; }   /* while it shows a s
 .tl { list-style: none; margin: 0; padding: 0; grid-column: 1 / -1; border-top: 1px solid var(--rule); }
 .tl li { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut);   /* the page's 12 columns, so the cells sit on the grid lines */ padding: var(--sp-2) 0; border-bottom: 1px solid var(--rule); font-size: 16px; line-height: 24px; }
 .tl li:last-child { border-bottom: none; }   /* no rule under the last timeline row */
+/* The timeline is an expandable list (user): closed, it shows the newest rows (data-keep), the last of them
+   (data-fade) fading out, and the button under it rolls the whole list out and back. Script-free pages show
+   it open. The fade is a veil in the page colour over the rows, so it can ease away as the list opens. */
+.tl-fold { grid-column: 1 / -1; position: relative; }
+.tl-fold.is-closed, .tl-fold.is-folding { overflow: hidden; }
+.tl-fold.is-folding { transition: height .6s cubic-bezier(.2,.6,.2,1); }   /* only while the button folds it: a window resize must re-fit the closed list at once */
+.tl-fold::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: var(--tl-fade, 0px); pointer-events: none; opacity: 0;
+                  background: linear-gradient(to bottom, transparent, var(--bg)); transition: opacity .6s cubic-bezier(.2,.6,.2,1); }
+.tl-fold.is-closed::after { opacity: 1; }
+/* a text button, centred under the list (user): no box, the page's text colour; 44px tall for the finger */
+.tl-toggle { grid-column: 1 / -1; justify-self: center; margin-top: var(--sp-1); padding: 10px 16px; border: none; background: none; cursor: pointer;
+             font: inherit; font-size: 15px; line-height: 24px; font-weight: 500; letter-spacing: .01em; color: var(--text); white-space: nowrap;
+             transition: margin-top .6s cubic-bezier(.2,.6,.2,1), opacity var(--t-fast); }
+.tl-toggle:hover { opacity: .7; }
+.tl-toggle:focus-visible { outline: 2px solid var(--text); outline-offset: 0; border-radius: var(--r-sm); }
+.tl-fold.is-closed[data-keep="0"] + .tl-toggle { margin-top: 0; }   /* nothing above it but the label, which brings its own gap */
+@media (prefers-reduced-motion: reduce) { .tl-fold, .tl-fold::after, .tl-toggle { transition: none; } }
 .tl time { grid-column: 1 / 3; color: var(--text); }
 .tl time .m-short { display: none; }   /* wide screens spell the month out; the 3-letter form takes over when the column gets tight (user) */
 .tl b { grid-column: 3 / 5; }
@@ -884,6 +901,7 @@ a.partner:hover .partner-go { opacity: 1; }
 <div class="row" id="timeline">
   <div class="g">
     <p class="label full">Project Timeline<span class="no" aria-hidden="true">05</span></p>
+    <div class="tl-fold" id="tlFold" data-keep="8" data-fade="3">
     <ol class="tl">
       <li><time><span class="m-long">10 October 2026</span><span class="m-short">10 Oct 2026</span></time><b>v<span class="v">2.1.0</span></b><span class="n">1,400 icons</span><span class="w">7 weights, 2 styles</span><span class="d">100 icons added: lists, Git, loaders, mirroring, speedometers, tickets and shape operations.</span></li>
       <li><time><span class="m-long">21 September 2026</span><span class="m-short">21 Sep 2026</span></time><b>v<span class="v">2.0.1</span></b><span class="n">1,300 icons</span><span class="w">7 weights, 2 styles</span><span class="d"><strong>Version 2 release.</strong> Fully reworked icon library, 7 weights in 2 styles, MIT license, GitHub repository, new website, Figma plugin, npm packages and an MCP server.</span></li>
@@ -900,6 +918,8 @@ a.partner:hover .partner-go { opacity: 1; }
       <li><time><span class="m-long">20 September 2017</span><span class="m-short">20 Sep 2017</span></time><b></b><span class="n">13 icons</span><span class="w"></span><span class="d">Started the project.</span></li>
       <li><time><span class="m-long">24 May 2016</span><span class="m-short">24 May 2016</span></time><b></b><span class="n">3 icons</span><span class="w"></span><span class="d">Idea was born.</span></li>
     </ol>
+    </div>
+    <button type="button" class="tl-toggle" id="tlToggle" aria-expanded="true" aria-controls="tlFold" hidden>Hide Timeline</button>
   </div>
 </div>
 
@@ -1248,6 +1268,48 @@ document.querySelectorAll('.tl li').forEach(li => {
   bar.innerHTML = '<span><i style="--pct:' + (Math.min(1, count / tlFull) * 100).toFixed(1) + '%"></i></span>';
   b.appendChild(bar);
 });
+
+// Timeline fold (user, 10 Oct 2026): a regular expandable list. Closed, it shows the newest data-keep rows, the
+// last data-fade of them fading out; the button rolls the whole timeline out and back.
+// The rows never leave the page, so search engines and readers still get them. A link to #timeline opens it.
+(() => {
+  const fold = document.getElementById('tlFold'), btn = document.getElementById('tlToggle');
+  if (!fold || !btn) return;
+  const rows = fold.querySelectorAll('.tl li'), keep = Math.min(+fold.dataset.keep || 0, rows.length);
+  const fade = Math.min(+fold.dataset.fade || 0, keep);
+  // offsets, not client rects: a row still waiting for its reveal sits 24px low, and that must not be measured
+  // (the fold is the rows' offset parent)
+  const bottomOf = i => rows[i].offsetTop + rows[i].offsetHeight;
+  const closedH = () => keep ? bottomOf(keep - 1) : 0;
+  // the veil covers the last `fade` kept rows, whatever their height at this width
+  const setFade = () => fold.style.setProperty('--tl-fade', (fade ? bottomOf(keep - 1) - rows[keep - fade].offsetTop : 0) + 'px');
+  let open = location.hash === '#timeline' || keep >= rows.length, timer = 0;
+  const label = () => { btn.textContent = open ? (keep ? 'Show Less' : 'Hide Timeline') : (keep ? 'Show Full Timeline' : 'Show Timeline'); btn.setAttribute('aria-expanded', open); };
+  const settle = () => { clearTimeout(timer); fold.classList.remove('is-folding'); if (open) fold.style.height = ''; };
+  fold.addEventListener('transitionend', e => { if (e.target === fold && e.propertyName === 'height') settle(); });
+  btn.addEventListener('click', () => {
+    open = !open; label();
+    setFade();
+    const from = fold.getBoundingClientRect().height, to = open ? fold.scrollHeight : closedH(), y0 = btn.getBoundingClientRect().top;
+    fold.classList.add('is-folding'); fold.classList.toggle('is-closed', !open);
+    fold.style.height = from + 'px'; void fold.offsetHeight; fold.style.height = to + 'px';
+    clearTimeout(timer); timer = setTimeout(settle, 700);   // no transition ran (reduced motion, nothing to move): settle anyway
+    if (open) return;
+    // closing: the list above the button shrinks, so hold the button where it was clicked while the rows roll up
+    const t0 = performance.now();
+    const hold = () => { if (open) return;   /* reopened mid-roll: let go */ const dy = btn.getBoundingClientRect().top - y0; if (Math.abs(dy) > .5) scrollBy({ top: dy, behavior: 'instant' });   /* instant: the page scrolls smoothly by default, which would lag behind the fold */ if (performance.now() - t0 < 700) requestAnimationFrame(hold); };
+    requestAnimationFrame(hold);
+  });
+  setFade();
+  // the rows folded away are shown by the fold itself as it opens: the page's scroll reveal must not hold them
+  // back waiting to "come into view" behind the clip (this runs before reveal.js walks the page)
+  if (!open) { fold.classList.add('is-closed'); fold.style.height = closedH() + 'px'; rows.forEach((li, i) => { if (i >= keep) li.dataset.reveal = 'off'; }); }
+  btn.hidden = keep >= rows.length; label();   // nothing folded away: no button
+  // the same link followed while already on the page (Back, an edited address) changes only the hash: open then too
+  addEventListener('hashchange', () => { if (location.hash === '#timeline' && !open) btn.click(); });
+  // a kept row changes height with the window (and when the web font lands): keep the closed fold on its edge
+  if (keep && 'ResizeObserver' in window) new ResizeObserver(() => { setFade(); if (!open && !fold.classList.contains('is-folding')) fold.style.height = closedH() + 'px'; }).observe(fold.firstElementChild);
+})();
 
 // Mobile burger (same as the homepage)
 const burgerBtn = document.getElementById('burgerBtn');

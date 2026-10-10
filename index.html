@@ -5,12 +5,12 @@
 <script>document.documentElement.classList.add('rv-pending'); setTimeout(() => document.documentElement.classList.remove('rv-pending'), 2500);</script>   <!-- reveal.js lifts this once the line-by-line units are set; the timeout is a safety net -->
 <meta name="robots" content="noindex, nofollow"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>[staging] Iconoteka, 1,300 open-source icons in 7 weights and 2 styles</title>
-<meta name="description" content="Iconoteka is a free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+<title>[staging] Iconoteka, 1,400 open-source icons in 7 weights and 2 styles</title>
+<meta name="description" content="Iconoteka is a free, open-source library of 1,400 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
 
 <!-- Open Graph -->
-<meta property="og:title" content="Iconoteka, 1,300 open-source icons in 7 weights and 2 styles"/>
-<meta property="og:description" content="Iconoteka is a free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+<meta property="og:title" content="Iconoteka, 1,400 open-source icons in 7 weights and 2 styles"/>
+<meta property="og:description" content="Iconoteka is a free, open-source library of 1,400 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
 <meta property="og:image" content="https://iconoteka.com/iconoteka-preview.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -22,8 +22,8 @@
 
 <!-- Twitter/X -->
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Iconoteka, 1,300 open-source icons in 7 weights and 2 styles"/>
-<meta name="twitter:description" content="Iconoteka is a free, open-source library of 1,300 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
+<meta name="twitter:title" content="Iconoteka, 1,400 open-source icons in 7 weights and 2 styles"/>
+<meta name="twitter:description" content="Iconoteka is a free, open-source library of 1,400 icons in 7 weights, drawn on a 24-point grid. MIT licensed."/>
 <meta name="twitter:image" content="https://iconoteka.com/iconoteka-preview.png"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
@@ -210,6 +210,9 @@ main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--
 /* ICON CARD */
 .icon-card { -webkit-user-select: none; user-select: none; width: 100%; height: 128px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 16px; gap: 8px; border-radius: var(--r-md); cursor: pointer; background: transparent; border: 1px solid transparent; transition: background var(--t-fast), border-color .1s; color: var(--text); position: relative; flex-shrink: 0; overflow: hidden; }
 .icon-card:hover { background: var(--ui-card-hover); border-color: transparent; }
+/* new in the current library version: a small green circle in the card's top-right corner (user) */
+.icon-card.is-new::after { content: ''; position: absolute; top: 10px; right: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--new-green); }
+:root { --new-green: #12ab57; }
 .icon-card.focused { background: var(--ui-card-hover); border-color: transparent; outline: none; }
 .icon-card.active-panel { background: var(--ui-surface); border-color: transparent; }
 .icon-svg-wrap { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; flex-shrink: 0; }
@@ -331,6 +334,9 @@ main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--
 .panel-body-bottom .slider-row { margin-bottom: 18px; }
 .panel-name { font-size: 27px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.1; user-select: text; -webkit-user-select: text; cursor: text; }
 .panel-style-label { font-size: 12px; color: var(--text-muted); font-weight: 400; letter-spacing: 0.2px; margin-top: 4px; user-select: none; -webkit-user-select: none; }
+.panel-new { display: inline-flex; align-items: center; justify-content: center; height: 14px; margin-left: 8px; padding: .68px 6.34px 0 6.52px; border-radius: var(--r-pill);   /* measured ON PIXELS for Inter (BETA's padding was tuned for another face: 0.66px low). The right side is larger than it looks: the last letter carries 0.6px of trailing letter-spacing */
+             background: var(--new-green); color: #141414; font-size: 8.5px; line-height: 1; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+             vertical-align: middle; position: relative; top: -1px; }   /* NEW: the site's BETA capsule in green, ink text (6.5:1) */
 .tags-wrap { display: flex; flex-wrap: wrap; gap: 8px 4px; height: 54px; overflow: hidden; flex-shrink: 0; align-content: flex-start; margin-top: 1px; }
 .tag { padding: 4px 10px; background: var(--ui-surface); font-size: 12px; color: var(--text-muted); cursor: pointer; transition: background var(--t-fast), color .15s; user-select: text !important; -webkit-user-select: text !important; }
 .tag:hover { background: var(--ui-surface-hover); color: var(--text); }
@@ -550,6 +556,11 @@ main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--
 .promo-mark.tile svg { width: 74%; height: 74%; }
 .promo-mark.tile svg:has(path[fill]) { width: 68%; height: 68%; }   /* a full-colour logo in its app-icon tile (Figma): smaller inset, the five shapes need air */   /* the glyph carries the tile: too small an inset and its strokes go hairline */
 .promo-card.clickable { cursor: pointer; }
+/* the release card is green, with ink text: the palette's Green takes black (#141414), 6.5:1 */
+.promo-card.release { background: var(--new-green); }
+.promo-card.release h3, .promo-card.release p, .promo-card.release .promo-mark, .promo-card.release .promo-btn { color: #141414; }
+.promo-card.release .promo-close { color: rgba(20, 20, 20, .55); }
+.promo-card.release .promo-close:hover, .promo-card.release .promo-close:focus-visible { color: #141414; }
 .promo-text { min-width: 0; max-width: 780px; margin-right: 52px; }   /* at least 80px (with the 28px gap) before the button (user: more space) */
 .promo-card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; line-height: 22px; color: var(--text); }
 .promo-card p { margin: 0; font-size: 13px; line-height: 20px; color: var(--text-muted); }   /* copy is kept to two lines at 1440, the MacBook Air 13 width (user: shorten the copy, keep the size) */
@@ -617,7 +628,7 @@ footer .nobr { white-space: nowrap; }
       "@id": "https://iconoteka.com/#website",
       "url": "https://iconoteka.com/",
       "name": "Iconoteka",
-      "description": "A free, open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
+      "description": "A free, open-source library of 1,400 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
       "inLanguage": "en",
       "publisher": {
         "@id": "https://iconoteka.com/#author"
@@ -639,7 +650,7 @@ footer .nobr { white-space: nowrap; }
       "@id": "https://iconoteka.com/#library",
       "name": "Iconoteka",
       "url": "https://iconoteka.com/",
-      "description": "A free, open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
+      "description": "A free, open-source library of 1,400 icons in 7 weights and 2 styles, drawn on a 24-point grid and released under the MIT license.",
       "applicationCategory": "DesignApplication",
       "operatingSystem": "Any",
       "image": "https://iconoteka.com/iconoteka-preview.png",
@@ -665,7 +676,7 @@ footer .nobr { white-space: nowrap; }
 </script>
 </head>
 <body>
-<h1 class="sr-only">Iconoteka, a free and open-source library of 1,300 icons in 7 weights and 2 styles, drawn on a 24-point grid by Oleg Turbaba and released under the MIT license.</h1>
+<h1 class="sr-only">Iconoteka, a free and open-source library of 1,400 icons in 7 weights and 2 styles, drawn on a 24-point grid by Oleg Turbaba and released under the MIT license.</h1>
 
 <header>
   <div class="logo-wrap">
@@ -951,6 +962,8 @@ function hexLuminance(hex) {
 }
 
 let state = { weightIdx: 3, style: 'stroke', search: '', category: 'All' };
+let newIds = new Set();                                   // first names of the icons added in the current library version
+const isNew = icon => newIds.has(icon.name.split('-')[0]);
 let panelIcon = null, panelSize = 24;
 let tipTimer = null, mx = 0, my = 0;
 
@@ -1022,6 +1035,14 @@ async function loadIcons() {
     iconsMap = {};
     iconsData.forEach(i => { iconsMap[i.name] = i; });
     meta = data.meta || {};
+    // New in this library version: the build writes meta.new (ids) and a 'new' tag on each icon. On the test
+    // sites ?new=a,b,c (or ?new=demo) marks icons by hand, to preview the dots and the release card.
+    newIds = new Set([...(meta.new || []), ...iconsData.filter(i => (i.tags || []).includes('new')).map(i => i.name.split('-')[0])]);
+    if (PROMO_TEST) {
+      const q = new URLSearchParams(location.search).get('new');
+      if (q) { newIds = new Set(q === 'demo' ? iconsData.filter((_, k) => k % 13 === 5).map(i => i.name.split('-')[0]) : q.split(','));
+               meta.updatedAt = new Date().toISOString(); }
+    }
     const ver = meta.version ? 'v' + meta.version.split('.').map(x => String(+x)).join('.') : '';   // 02.00.05 → v2.0.5 (conventional, same as the About page)
     document.getElementById('footerVer').innerHTML = '<span class="ver-num">' + ver + '</span><br>Made by <a href="https://www.linkedin.com/in/turbaba/" target="_blank" rel="noopener" class="footer-link">Oleg Turbaba</a>';
       const _bv = document.querySelector('.burger-ver');
@@ -1382,6 +1403,7 @@ function makeCard(icon) {
   const card = document.createElement('div');
   card.className = 'icon-card' + (panelIcon && panelIcon.name === icon.name ? ' active-panel' : '');
   card.dataset.name = icon.name;
+  if (isNew(icon)) { card.classList.add('is-new'); card.title = 'New in this version'; }   // small green dot in the corner (user)
   card.draggable = true;   // drag the icon straight out to the desktop, or into an app that takes SVG
   card.addEventListener('dragstart', e => dragIcon(e, icon));
 
@@ -1723,6 +1745,10 @@ function openPanel(icon) {
   nameEl.textContent = name; nameWrap.appendChild(nameEl);
   const styleEl = document.createElement('div'); styleEl.className = 'panel-style-label';
   styleEl.textContent = (state.style === 'stroke' ? 'Stroke' : 'Fill') + ' ' + WEIGHT_LABELS[state.weightIdx] + ' ' + panelSize + 'px';
+  if (isNew(icon)) {   // a NEW badge, green capsule, after the style line (user: "just add badge NEW in green capsule shape")
+    const nw = document.createElement('span'); nw.className = 'panel-new'; nw.textContent = 'New';
+    styleEl.appendChild(nw);
+  }
   nameWrap.appendChild(styleEl); topDiv.appendChild(nameWrap);
 
   if (tags.length) {
@@ -2365,17 +2391,17 @@ const PROMO_LOGOS = {
   react: 'M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z'
 };
 const PROMO_CARDS = [
-  { logo: 'patreon', donation: true, title: 'Support Us on Patreon', weight: 2,
+  { logo: 'patreon', donation: true, title: 'Support Us on Patreon', weight: 6,
     text: 'Iconoteka is free and open source and grows icon by icon. A monthly subscription pays for the drawing time behind every new icon.',
     cta: 'Subscribe on Patreon', href: 'https://www.patreon.com/c/iconoteka' },
-  { logo: 'kofi', donation: true, title: 'Support Project on Ko-fi', weight: 2,
+  { logo: 'kofi', donation: true, title: 'Support Project on Ko-fi', weight: 6,
     text: 'Supporting the project helps it grow. A one-time tip on Ko-fi goes straight into the work on new icons, weights and categories.',
     cta: 'Tip on Ko-fi', href: 'https://ko-fi.com/iconoteka' },
   { logo: 'claude', title: 'MCP for Claude Code',
     text: 'One command adds the Iconoteka MCP server to Claude Code for every project. Ask for an icon by name and weight, and it lands as SVG.',
     cta: 'Set Up Claude Code', href: 'dev.html#mcp-claude-code' },
   { logo: 'claude', title: 'MCP for Claude',
-    text: 'Add one server entry to the Claude desktop app and the whole library is there in chat: 1,300 icons in 7 weights and 2 styles.',
+    text: 'Add one server entry to the Claude desktop app and the whole library is there in chat: 1,400 icons in 7 weights and 2 styles.',
     cta: 'Set Up Claude', href: 'dev.html#mcp-claude' },
   { logo: 'cursor', title: 'MCP for Cursor',
     text: 'Install the Iconoteka MCP server in Cursor with one click or one line of config. The agent finds the icon and writes it into your component.',
@@ -2438,22 +2464,40 @@ const PROMO_TEST = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)
   || /^staging\./.test(location.hostname)
   || !!document.querySelector('meta[name="robots"][content*="noindex"]');
 
-// Even undismissed, the card shows once a calendar day: a visitor who comes back three times in an
-// afternoon meets it once, and tomorrow gets a different card rather than the same one again.
+// A card shows on every load now: the once-a-calendar-day limit was removed (user, 8 Oct 2026). The key is
+// still written, because "has this visitor ever seen a card" decides whether donation cards may be drawn.
 const PROMO_SEEN_KEY = 'iconoteka-promo-seen';
 function promoDay() {
   const d = new Date();
   return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
 }
-function promoSeenToday() {
-  if (PROMO_TEST) return false;
-  try { return localStorage.getItem(PROMO_SEEN_KEY) === promoDay(); } catch (e) { return false; }
-}
 function markPromoSeen() { try { localStorage.setItem(PROMO_SEEN_KEY, promoDay()); } catch (e) {} }
+
+// The release card (user, 10 Oct 2026): every new library version announces itself in a green card whose
+// mark is one of the new icons. It needs the build's list of new icons (meta.new); it replaces the random
+// card for RELEASE_DAYS after the data's date, for every visitor who has not closed this version's card,
+// and it ignores an earlier 15-day dismissal, because it is news. The other rules still hold: desktop only,
+// never with the cookie banner, hidden while searching.
+const RELEASE_KEY = 'iconoteka-release-closed', RELEASE_DAYS = 14;
+function releaseCard() {
+  if (!newIds.size || !meta.version) return null;
+  const age = (Date.now() - new Date(meta.updatedAt || 0).getTime()) / 864e5;
+  if (!(age >= 0 && age <= RELEASE_DAYS)) return null;
+  if (!PROMO_TEST) { try { if (localStorage.getItem(RELEASE_KEY) === meta.version) return null; } catch (e) {} }
+  const ver = 'v' + meta.version.split('.').map(x => String(+x)).join('.');
+  const drawable = [...newIds].filter(id => libraryPath(id));
+  const n = newIds.size, total = (meta.count || iconsData.length).toLocaleString('en-US');
+  // thanks to the supporters, and a button to Patreon (user, 10 Oct 2026)
+  return { release: true, icon: drawable[Math.floor(Math.random() * drawable.length)],
+           title: 'Iconoteka ' + ver + ' Is Here',
+           text: 'It adds ' + n.toLocaleString('en-US') + ' new icon' + (n === 1 ? '' : 's') + ', and the library now holds ' + total + '. All new icons are marked with green dots. Thank you to the supporters behind this release.',
+           cta: 'Support Project', href: 'https://www.patreon.com/c/iconoteka' };
+}
 
 function buildPromo() {
   const host = document.getElementById('promo');
-  if (!host || promoClosed() || promoSeenToday()) return;
+  const rel = releaseCard();                    // a new library version: this card comes first, whatever was closed before
+  if (!host || (!rel && promoClosed())) return;
   // One banner at a time (user): a visit that shows the cookie banner shows no card at all, not even after the
   // banner is answered; the card comes on the next load. consent.js loads after this script, so the check
   // runs a tick later, when the banner exists.
@@ -2462,14 +2506,15 @@ function buildPromo() {
     setTimeout(() => { if (!(window.consentPending && window.consentPending())) buildPromo(); }, 0);
     return;
   }
-  // weighted draw: the donation cards and the plugin carry weight 2, everything else 1
+  // weighted draw: the donation cards carry weight 6 each, half of all draws (twice the earlier quarter, user), the plugin 2, everything else 1
   // A visitor's first card is never a donation ask (user): until one card has been shown, Patreon and Ko-fi sit out.
   let first = true; try { first = !localStorage.getItem(PROMO_SEEN_KEY); } catch (e) {}
   const pool = first ? PROMO_CARDS.filter(x => !x.donation) : PROMO_CARDS;
   const total = pool.reduce((n, x) => n + (x.weight || 1), 0);
   let roll = Math.random() * total, c = pool[pool.length - 1];
   for (const x of pool) { roll -= (x.weight || 1); if (roll < 0) { c = x; break; } }
-  const card = document.createElement('div'); card.className = 'promo-card';
+  if (rel) c = rel;
+  const card = document.createElement('div'); card.className = 'promo-card' + (c.release ? ' release' : '');
 
   const mark = document.createElement('span'); mark.className = 'promo-mark'; mark.setAttribute('aria-hidden', 'true');
   if (c.tile) mark.classList.add('tile');
@@ -2502,6 +2547,7 @@ function buildPromo() {
   close.innerHTML = cd ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + cd + '"/></svg>' : '\u2715';
   close.addEventListener('click', () => {
     host.hidden = true; host.innerHTML = ''; delete host.dataset.ready;
+    if (c.release) { try { localStorage.setItem(RELEASE_KEY, meta.version || ''); } catch (e) {} }   // this version's card does not come back
     closePromo();
   });
 

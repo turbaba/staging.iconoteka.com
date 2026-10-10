@@ -2520,6 +2520,7 @@ function buildPromo() {
   if (c.tile) mark.classList.add('tile');
   if (c.square) mark.dataset.square = '1';
   if (c.hue) mark.dataset.hue = c.hue;
+  if (c.release) mark.dataset.frame = '1';        // any of the new icons can land here: one size and one place for all of them
   const d = c.logo ? PROMO_LOGOS[c.logo] : libraryPath(c.icon);
   // xMidYMid: once the viewBox is cropped to the ink, the ink sits in the middle of the svg box, so centring the box centres the ink
   const cm = c.color && PROMO_COLOR_MARKS[c.color];
@@ -2573,7 +2574,7 @@ function buildPromo() {
   // The card's own size change re-runs this, so the mark is placed whenever it appears.
   const place = () => {
     if (!slot.offsetWidth) return;
-    if (!mark.dataset.fitted) { fitMarkToInk(mark); balanceMarkSize(mark); mark.dataset.fitted = '1'; }
+    if (!mark.dataset.fitted) { if (mark.dataset.frame) frameMark(mark); else { fitMarkToInk(mark); balanceMarkSize(mark); } mark.dataset.fitted = '1'; }
     alignPromoMark(mark, h);
   };
   place();
@@ -2648,6 +2649,18 @@ function balanceMarkSize(mark) {
   mark.dataset.hull = m.hull.toFixed(2); mark.dataset.density = m.density.toFixed(2);
 }
 
+// The release card shows a different new icon on every load, so it cannot size each one by its own ink:
+// a small icon (a loader arc 7 units wide) was blown up to the same box as a full one, three times the
+// library's scale, and the mark jumped in size and place from load to load (user: same position and size).
+// Here the icon keeps its 24-unit frame, drawn at one size, the way the grid shows it: the library's own
+// proportions do the balancing. MARK_FRAME is the scale the ink-fitted icons averaged (2.2px a unit), so a
+// full-size icon looks as it did. The frame's live area (2 units in from the edge) starts on the cap line.
+const MARK_FRAME = 52.8, MARK_FRAME_PAD = 2;
+function frameMark(mark) {
+  const svg = mark.querySelector('svg');
+  if (svg) svg.style.width = svg.style.height = MARK_FRAME + 'px';
+}
+
 // The ink starts on the title's cap line: measure the cap with a zero-width 1cap probe, measure the
 // ink itself (the path's box, or the tile's edge), and move the mark by the difference.
 function alignPromoMark(mark, title) {
@@ -2659,7 +2672,9 @@ function alignPromoMark(mark, title) {
   if (!cap.height) return;
   mark.style.marginTop = '0px';
   const inks = mark.classList.contains('tile') ? [mark] : [...mark.querySelectorAll('path')];
-  const top = Math.min(...(inks.length ? inks : [mark]).map(e => e.getBoundingClientRect().top));
+  const svg = mark.querySelector('svg');
+  const top = mark.dataset.frame && svg ? svg.getBoundingClientRect().top + MARK_FRAME * MARK_FRAME_PAD / 24   // the frame's live area, the same for every icon
+            : Math.min(...(inks.length ? inks : [mark]).map(e => e.getBoundingClientRect().top));
   mark.style.marginTop = (cap.top - top) + 'px';
 }
 

@@ -525,7 +525,7 @@ main::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--
    One card above the grid, picked at random on each load, on the same 1256 measure as the
    icon sections. It lives outside <main> because render() replaces its contents, and it is
    desktop only: below 861px the page is already a narrow grid with a sheet panel. */
-.promo { width: 100%; padding: 28px calc(var(--pad) + 10px) 0; }
+.promo { width: 100%; padding: 20px calc(var(--pad) + 10px) 0; }   /* 20px: the card's top edge sits level with the right panel's preview square and the sidebar's first row (user) */
 .promo-card { --pv: 26px; --pl: 28px; --gap: 28px;
               position: relative; width: 100%; max-width: 1256px; margin: 0 auto; display: flex; align-items: flex-start; gap: var(--gap);
               padding: var(--pv) 36px var(--pv) var(--pl); border-radius: var(--r-md); background: color-mix(in srgb, var(--ui-surface) 50%, var(--bg)); }   /* half-way between the page and the usual surface: quieter (user: less active) */
@@ -2479,10 +2479,20 @@ function markPromoSeen() { try { localStorage.setItem(PROMO_SEEN_KEY, promoDay()
 // and it ignores an earlier 15-day dismissal, because it is news. The other rules still hold: desktop only,
 // never with the cookie banner, hidden while searching.
 const RELEASE_KEY = 'iconoteka-release-closed', RELEASE_DAYS = 14;
+// It is news for a few visits, not a fixture (user, 11 Oct 2026): a visitor gets this version's card on three
+// page loads, then the regular cards come back. Counted per version, once a load, and only when the card was
+// really on screen (not behind a search, not on a narrow window, not on a visit with the cookie banner).
+// A ?new= preview on a test host is never counted or limited.
+const RELEASE_SEEN_KEY = 'iconoteka-release-seen', RELEASE_SHOWS = 3;
+const RELEASE_PREVIEW = PROMO_TEST && new URLSearchParams(location.search).has('new');
+function releaseSeen() {
+  try { const [v, n] = (localStorage.getItem(RELEASE_SEEN_KEY) || '').split('|'); return v === meta.version ? (+n || 0) : 0; } catch (e) { return 0; }
+}
 function releaseCard() {
   if (!newIds.size || !meta.version) return null;
   const age = (Date.now() - new Date(meta.updatedAt || 0).getTime()) / 864e5;
   if (!(age >= 0 && age <= RELEASE_DAYS)) return null;
+  if (!RELEASE_PREVIEW && !releaseCard.counted && releaseSeen() >= RELEASE_SHOWS) return null;
   if (!PROMO_TEST) { try { if (localStorage.getItem(RELEASE_KEY) === meta.version) return null; } catch (e) {} }
   const ver = 'v' + meta.version.split('.').map(x => String(+x)).join('.');
   const drawable = [...newIds].filter(id => libraryPath(id));
@@ -2568,6 +2578,10 @@ function buildPromo() {
     });
   }
   host.innerHTML = ''; host.appendChild(card); host.dataset.ready = '1'; host.hidden = !!state.search;
+  if (c.release && !RELEASE_PREVIEW && !releaseCard.counted && card.offsetWidth) {   // one of its three showings
+    releaseCard.counted = true;
+    try { localStorage.setItem(RELEASE_SEEN_KEY, meta.version + '|' + (releaseSeen() + 1)); } catch (e) {}
+  }
   markPromoSeen();
   // Fit, size and align the mark only while it is on screen: a card built in a narrow window hides it, every
   // measurement comes back zero, and widening the window afterwards left it at the bottom of the card (user).

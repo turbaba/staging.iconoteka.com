@@ -1,0 +1,38 @@
+name: Instagram stories
+
+# Every half hour: post whatever schedule.json says is due, then keep the ledger in the repo.
+on:
+  schedule:
+    - cron: "5,35 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only say what would go out"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stories
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post what is due
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
+        run: python3 social/stories.py
+      - name: Keep the ledger
+        if: always()
+        run: |
+          git config user.name "stories bot"
+          git config user.email "stories@users.noreply.github.com"
+          git add social/posted.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "Stories: ledger" && git push)

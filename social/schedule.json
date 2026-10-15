@@ -1,0 +1,315 @@
+{
+ "note": "Written by thursday-quiz/build_stories.py. stories.py posts what is due.",
+ "stories": [
+  {
+   "id": "quiz-2026-10-15",
+   "series": "Thursday Quiz",
+   "title": "Rocket Man",
+   "at": "2026-10-15T16:00:00+02:00",
+   "shots": [
+    "social/thursday-quiz/2026-10-15-rocket-man-1-intro.mp4",
+    "social/thursday-quiz/2026-10-15-rocket-man-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-10-18-w04",
+   "series": "On This Day",
+   "title": "The Pocket Radio",
+   "at": "2026-10-18T15:00:00+02:00",
+   "shots": [
+    "social/on-this-day/w04-2026-10-18-the-pocket-radio-1-intro.mp4",
+    "social/on-this-day/w04-2026-10-18-the-pocket-radio-2-card.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-10-21-w05",
+   "series": "On This Day",
+   "title": "The Filament",
+   "at": "2026-10-21T15:00:00+02:00",
+   "shots": [
+    "social/on-this-day/w05-2026-10-21-the-filament-1-intro.mp4",
+    "social/on-this-day/w05-2026-10-21-the-filament-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-10-22",
+   "series": "Thursday Quiz",
+   "title": "Amsterdam",
+   "at": "2026-10-22T16:00:00+02:00",
+   "shots": [
+    "social/thursday-quiz/2026-10-22-amsterdam-1-intro.mp4",
+    "social/thursday-quiz/2026-10-22-amsterdam-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-10-27-w06",
+   "series": "On This Day",
+   "title": "The Subway",
+   "at": "2026-10-27T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w06-2026-10-27-the-subway-1-intro.mp4",
+    "social/on-this-day/w06-2026-10-27-the-subway-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-10-29",
+   "series": "Thursday Quiz",
+   "title": "Stranger Things",
+   "at": "2026-10-29T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-10-29-stranger-things-1-intro.mp4",
+    "social/thursday-quiz/2026-10-29-stranger-things-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-11-05",
+   "series": "Thursday Quiz",
+   "title": "Up",
+   "at": "2026-11-05T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-11-05-up-1-intro.mp4",
+    "social/thursday-quiz/2026-11-05-up-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-11-08-w07",
+   "series": "On This Day",
+   "title": "The Louvre",
+   "at": "2026-11-08T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w07-2026-11-08-the-louvre-1-intro.mp4",
+    "social/on-this-day/w07-2026-11-08-the-louvre-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-11-12",
+   "series": "Thursday Quiz",
+   "title": "Lucy in the Sky with Diamonds",
+   "at": "2026-11-12T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-11-12-lucy-in-the-sky-with-diamonds-1-intro.mp4",
+    "social/thursday-quiz/2026-11-12-lucy-in-the-sky-with-diamonds-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-11-15-w08",
+   "series": "On This Day",
+   "title": "The 4004",
+   "at": "2026-11-15T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w08-2026-11-15-the-4004-1-intro.mp4",
+    "social/on-this-day/w08-2026-11-15-the-4004-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-11-19",
+   "series": "Thursday Quiz",
+   "title": "Finding Nemo",
+   "at": "2026-11-19T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-11-19-finding-nemo-1-intro.mp4",
+    "social/thursday-quiz/2026-11-19-finding-nemo-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-11-22-w09",
+   "series": "On This Day",
+   "title": "Concorde",
+   "at": "2026-11-22T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w09-2026-11-22-concorde-1-intro.mp4",
+    "social/on-this-day/w09-2026-11-22-concorde-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-11-26",
+   "series": "Thursday Quiz",
+   "title": "Titanic",
+   "at": "2026-11-26T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-11-26-titanic-1-intro.mp4",
+    "social/thursday-quiz/2026-11-26-titanic-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-11-29-w10",
+   "series": "On This Day",
+   "title": "Pong",
+   "at": "2026-11-29T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w10-2026-11-29-pong-1-intro.mp4",
+    "social/on-this-day/w10-2026-11-29-pong-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-12-03",
+   "series": "Thursday Quiz",
+   "title": "Rain Man",
+   "at": "2026-12-03T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-12-03-rain-man-1-intro.mp4",
+    "social/thursday-quiz/2026-12-03-rain-man-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-12-06-w11",
+   "series": "On This Day",
+   "title": "The First Voice",
+   "at": "2026-12-06T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w11-2026-12-06-the-first-voice-1-intro.mp4",
+    "social/on-this-day/w11-2026-12-06-the-first-voice-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-12-10",
+   "series": "Thursday Quiz",
+   "title": "Hello",
+   "at": "2026-12-10T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-12-10-hello-1-intro.mp4",
+    "social/thursday-quiz/2026-12-10-hello-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-12-11-w12",
+   "series": "On This Day",
+   "title": "Gerd Arntz",
+   "at": "2026-12-11T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w12-2026-12-11-gerd-arntz-1-intro.mp4",
+    "social/on-this-day/w12-2026-12-11-gerd-arntz-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-12-17",
+   "series": "Thursday Quiz",
+   "title": "Harry Potter",
+   "at": "2026-12-17T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-12-17-harry-potter-1-intro.mp4",
+    "social/thursday-quiz/2026-12-17-harry-potter-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2026-12-22-w16",
+   "series": "On This Day",
+   "title": "Max Bill",
+   "at": "2026-12-22T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w16-2026-12-22-max-bill-1-intro.mp4",
+    "social/on-this-day/w16-2026-12-22-max-bill-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-12-24",
+   "series": "Thursday Quiz",
+   "title": "Home Alone",
+   "at": "2026-12-24T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-12-24-home-alone-1-intro.mp4",
+    "social/thursday-quiz/2026-12-24-home-alone-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2026-12-31",
+   "series": "Thursday Quiz",
+   "title": "Raining cats and dogs",
+   "at": "2026-12-31T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2026-12-31-raining-cats-and-dogs-1-intro.mp4",
+    "social/thursday-quiz/2026-12-31-raining-cats-and-dogs-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2027-01-07",
+   "series": "Thursday Quiz",
+   "title": "Ice Ice Baby",
+   "at": "2027-01-07T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2027-01-07-ice-ice-baby-1-intro.mp4",
+    "social/thursday-quiz/2027-01-07-ice-ice-baby-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2027-01-14",
+   "series": "Thursday Quiz",
+   "title": "One Direction",
+   "at": "2027-01-14T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2027-01-14-one-direction-1-intro.mp4",
+    "social/thursday-quiz/2027-01-14-one-direction-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2027-01-21",
+   "series": "Thursday Quiz",
+   "title": "Coldplay",
+   "at": "2027-01-21T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2027-01-21-coldplay-1-intro.mp4",
+    "social/thursday-quiz/2027-01-21-coldplay-2-question.mp4"
+   ]
+  },
+  {
+   "id": "otd-2027-01-24-w17",
+   "series": "On This Day",
+   "title": "Susan Kare",
+   "at": "2027-01-24T15:00:00+01:00",
+   "shots": [
+    "social/on-this-day/w17-2027-01-24-susan-kare-1-intro.mp4",
+    "social/on-this-day/w17-2027-01-24-susan-kare-2-card.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2027-01-28",
+   "series": "Thursday Quiz",
+   "title": "Australia, Down Under",
+   "at": "2027-01-28T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2027-01-28-australia-down-under-1-intro.mp4",
+    "social/thursday-quiz/2027-01-28-australia-down-under-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2027-02-04",
+   "series": "Thursday Quiz",
+   "title": "In the clouds",
+   "at": "2027-02-04T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2027-02-04-in-the-clouds-1-intro.mp4",
+    "social/thursday-quiz/2027-02-04-in-the-clouds-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2027-02-11",
+   "series": "Thursday Quiz",
+   "title": "Isaac Newton, gravity",
+   "at": "2027-02-11T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2027-02-11-isaac-newton-gravity-1-intro.mp4",
+    "social/thursday-quiz/2027-02-11-isaac-newton-gravity-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2027-02-18",
+   "series": "Thursday Quiz",
+   "title": "Ice Cube",
+   "at": "2027-02-18T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2027-02-18-ice-cube-1-intro.mp4",
+    "social/thursday-quiz/2027-02-18-ice-cube-2-question.mp4"
+   ]
+  },
+  {
+   "id": "quiz-2027-02-25",
+   "series": "Thursday Quiz",
+   "title": "Hotline Bling",
+   "at": "2027-02-25T16:00:00+01:00",
+   "shots": [
+    "social/thursday-quiz/2027-02-25-hotline-bling-1-intro.mp4",
+    "social/thursday-quiz/2027-02-25-hotline-bling-2-question.mp4"
+   ]
+  }
+ ]
+}

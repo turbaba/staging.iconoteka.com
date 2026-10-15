@@ -4,6 +4,13 @@ name: Instagram stories
 on:
   schedule:
     - cron: "5,35 * * * *"
+  # a new schedule (or a change to the job) is posted at once rather than at the next half hour
+  push:
+    branches: [main]
+    paths:
+      - social/schedule.json
+      - social/stories.py
+      - .github/workflows/stories.yml
   workflow_dispatch:
     inputs:
       dry_run:

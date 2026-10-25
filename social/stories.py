@@ -5,6 +5,10 @@ Run by .github/workflows/stories.yml every half hour. schedule.json lists every 
 out and the clips it is made of, in the order they play; posted.json is the ledger of what went
 out, so a run never posts anything twice and a run that failed half way picks up where it stopped.
 
+posts.json holds one-off posts beside the series (schedule.json is rebuilt from the series'
+calendars, so nothing hand-added lives there). An entry with "kind": "reel" goes to the feed as a
+video post with its "caption", the rest are stories.
+
   IG_TOKEN       a Meta system user token with instagram_basic, instagram_content_publish,
                  pages_show_list and pages_read_engagement (a GitHub secret)
   IG_USERNAME    the account to post as, iconoteka unless set
@@ -52,8 +56,23 @@ def story(ig, url):
         time.sleep(15)
     raise RuntimeError(f"{url}: still processing after ten minutes")
 
+def reel(ig, url, caption):
+    """One video to the feed (Instagram takes feed videos as reels, shown in the feed too)."""
+    box = call("POST", f"{ig}/media", media_type="REELS", video_url=url, caption=caption, share_to_feed="true")["id"]
+    for _ in range(40):
+        state = call("GET", box, fields="status_code,status")
+        if state.get("status_code") == "FINISHED":
+            return call("POST", f"{ig}/media_publish", creation_id=box)["id"]
+        if state.get("status_code") in ("ERROR", "EXPIRED"):
+            raise RuntimeError(f"{url}: {state}")
+        time.sleep(15)
+    raise RuntimeError(f"{url}: still processing after ten minutes")
+
 def main():
     sched = json.load(open(os.path.join(HERE, "schedule.json")))["stories"]
+    extra = os.path.join(HERE, "posts.json")
+    if os.path.exists(extra):
+        sched = sched + json.load(open(extra))["posts"]
     ledger_file = os.path.join(HERE, "posted.json")
     ledger = json.load(open(ledger_file)) if os.path.exists(ledger_file) else {}
     now = datetime.now(timezone.utc)
@@ -75,7 +94,7 @@ def main():
             url = HOST + shot
             if DRY:
                 print(f"{s['id']}: would post {url}"); continue
-            media = story(ig, url)
+            media = reel(ig, url, s.get("caption", "")) if s.get("kind") == "reel" else story(ig, url)
             done["media"].append(media)
             done["at"] = f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M}Z"
             json.dump(ledger, open(ledger_file, "w"), indent=1)   # saved after every clip

@@ -1,0 +1,25 @@
+{
+ "note": "One-off posts beside the series, read by stories.py with schedule.json. kind 'reel' = a feed video with its caption; otherwise a story. Times are Belgrade.",
+ "posts": [
+  {
+   "id": "chat-reply-2026-10-26-story",
+   "series": "Iconoteka in use",
+   "title": "Chat reply",
+   "at": "2026-10-26T17:00:00+01:00",
+   "shots": [
+    "social/chat-reply/chat-reply-story-9x16.mp4"
+   ]
+  },
+  {
+   "id": "chat-reply-2026-10-26-post",
+   "series": "Iconoteka in use",
+   "title": "Chat reply",
+   "kind": "reel",
+   "at": "2026-10-26T17:00:00+01:00",
+   "caption": "Iconoteka in use: icons inside a chat reply, right in the line of text. A train, a place, a date, a seat and a reminder.\n\nFree under the MIT License. Link in bio.\n\n#iconoteka #icons #icondesign #figma",
+   "shots": [
+    "social/chat-reply/chat-reply-post-4x5.mp4"
+   ]
+  }
+ ]
+}
